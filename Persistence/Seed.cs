@@ -13,7 +13,7 @@ namespace Persistence
         {
             if(context.Postimet.Any()) return;
 
-            var postimet = new List<Postimi>
+            var postimet = new List<Postimi>//test
             {
                 new Postimi
                 {
