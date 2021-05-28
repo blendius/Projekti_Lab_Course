@@ -20,14 +20,14 @@ function App() {
     <Fragment>
 
       <Container style={{ marginTop: '7em' }}>
-        <List>
+        {/* <List>
           {postimet.map((postimi: any) => (
             <li key={postimi.id}>
               {postimi.titulli}
             </li>
 
           ))}
-        </List>
+        </List> */}
         <ShowProfessors />
 
       </Container>

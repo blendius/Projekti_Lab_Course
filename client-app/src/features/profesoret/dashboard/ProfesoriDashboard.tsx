@@ -26,15 +26,16 @@ export default function ProfesoriDashboard({ profesoret, selectedProfessor, sele
 
     return (
         <Grid>
-            <Grid.Column width='8'>
+            <Grid.Column width='6'>
                 <ProfesoriList profesoret={profesoret} 
                 selectProfessor={selectProfessor} 
-                 deleteProfessor={deleteProfessor}
+                 //deleteProfessor={deleteProfessor}
                  submitting={submitting} />
                 <Button onClick={openForm2} positive content="Shto Profesorin" />
-
+ 
 
             </Grid.Column>
+            <Grid.Column width='2'></Grid.Column>
             <Grid.Column width='8'>
                 {selectedProfessor && !editMode &&
 
@@ -42,7 +43,8 @@ export default function ProfesoriDashboard({ profesoret, selectedProfessor, sele
                         profesori={selectedProfessor}
                         cancelSelectProfessor={cancelSelectProfessor}
                         openForm={openForm}
-
+                        deleteProfessor={deleteProfessor}
+                        submitting={submitting}
                     ></ProfesoriDetais>}
                 {editMode &&
                     <ProfesoriForm closeForm={closeForm} profesori={selectedProfessor} createOrEdit={createOrEdit} submitting={submitting} />}
