@@ -1,19 +1,17 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, Item, List } from 'semantic-ui-react';
-import { Profesori } from '../../../app/models/profesori';
+import { useStore } from '../../../app/stores/store';
 
-interface Props {
-    profesoret: Profesori[];
-    selectProfessor: (id: string) => void;
-  
-    submitting: boolean;
-}
 
-export default function ProfesoriList({ profesoret, selectProfessor,  submitting }: Props) {
+
+export default observer(function ProfesoriList() {
+const {profesoriStore}= useStore();
+const {profesoretByDate}=profesoriStore;
 
     return (
         <List divided relaxed inverted>
-            {profesoret.map(profesori => (
+            {profesoretByDate.map(profesori => (
                 <List.Item key={profesori.id}>
                         <List.Icon name='address card' size='large' verticalAlign='middle' />
                         <List.Content>
@@ -21,7 +19,7 @@ export default function ProfesoriList({ profesoret, selectProfessor,  submitting
                             <div><label className="data">Lenda:  </label>  {profesori.lenda}</div>
                         </List.Content>
                         <Item.Extra>
-                            <Button onClick={() => selectProfessor(profesori.id)} floated='right' content='Shiko Detajet' color='blue' />
+                            <Button onClick={() => profesoriStore.selectProfessor(profesori.id)} floated='right' content='Shiko Detajet' color='blue' />
                             
                         </Item.Extra>
 
@@ -32,4 +30,4 @@ export default function ProfesoriList({ profesoret, selectProfessor,  submitting
 
         </List>
     )
-}
+})
