@@ -36,12 +36,14 @@ export default function TerminiForm({
       <Form onSubmit={handleSubmit} autocomplete="off">
         <Form.Input
           placeholder="Data E Fillimit"
+          type="date"
           value={termini.dataFillimit}
           name="dataFillimit"
           onChange={handleInputChange}
         />
         <Form.Input
           placeholder="Data E Mbarimit"
+          type="date"
           value={termini.dataMbarimit}
           name="dataMbarimit"
           onChange={handleInputChange}
