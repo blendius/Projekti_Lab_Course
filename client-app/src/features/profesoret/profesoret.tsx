@@ -17,23 +17,23 @@ import { observer } from 'mobx-react-lite';
   }, [profesoriStore]) 
 
  
-  const [profMode, setProfMode] = useState(false);
-  function handleSetProfMode() {
-    setProfMode(true)
+  // const [profMode, setProfMode] = useState(false);
+  // function handleSetProfMode() {
+  //   setProfMode(true)
 
-  }
+  // }
   if (profesoriStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
   return (
     <Fragment>
       <div>
-        {
-           profMode &&
+        {/* {
+           profMode && */}
           <ProfesoriDashboard 
-          />}
+          />
       </div>
 
-      <NavBar showProf={handleSetProfMode} />
+     
     </Fragment>
   )
 }

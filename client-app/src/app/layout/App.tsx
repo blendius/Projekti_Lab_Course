@@ -3,6 +3,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from "axios";
 import { Container, List } from 'semantic-ui-react';
 import ShowProfessors from '../../features/profesoret/profesoret';
+import NavBar from './NavBar';
+import { Route } from 'react-router';
+import HomePage from '../../features/home/homePage';
 
 function App() {
   const [postimet, setPostimet] = useState([]);
@@ -18,7 +21,7 @@ function App() {
 
   return (
     <Fragment>
-
+  <NavBar />
       <Container style={{ marginTop: '7em' }}>
         {/* <List>
           {postimet.map((postimi: any) => (
@@ -28,7 +31,11 @@ function App() {
 
           ))}
         </List> */}
-        <ShowProfessors />
+       
+
+        {/* <ShowProfessors /> */}
+        <Route exact path='/' component={HomePage}/>
+        <Route path='/profesoret' component={ShowProfessors}/>
 
       </Container>
     </Fragment>

@@ -39,3 +39,7 @@ img {
 .ui.fluid.selection.dropdown {
   margin-bottom: 15px !important;
 }
+
+i.address.card.large.icon.middle.aligned{
+  color: white;
+}
