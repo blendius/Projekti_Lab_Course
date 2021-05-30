@@ -4,9 +4,17 @@ import { Termin } from "../../../app/models/termini";
 
 interface Props {
   terminet: Termin[];
+  selectTermin: (id: string) => void;
+  deleteTermini: (id: string) => void;
+
   openForm: () => void;
 }
-export default function TerminiList({ terminet, openForm }: Props) {
+export default function TerminiList({
+  terminet,
+  selectTermin,
+  openForm,
+  deleteTermini,
+}: Props) {
   return (
     <Segment clearing>
       <Item.Group divided>
@@ -20,10 +28,16 @@ export default function TerminiList({ terminet, openForm }: Props) {
               <Item.Meta>Salla:{termini.salla}</Item.Meta>
               <Item.Extra>
                 <Button
-                  onClick={() => openForm()}
+                  onClick={() => selectTermin(termini.id)}
                   floated="right"
-                  content="Ndrysho"
+                  content="Shiko"
                   color="twitter"
+                />
+                <Button
+                  onClick={() => deleteTermini(termini.id)}
+                  floated="right"
+                  content="Fshij"
+                  color="red"
                 />
               </Item.Extra>
             </Item.Content>
