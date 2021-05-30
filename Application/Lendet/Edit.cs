@@ -26,9 +26,9 @@ namespace Application.Lendet
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var postimi = await _context.Lendet.FindAsync(request.Lenda.LendaId);
+                var lenda = await _context.Lendet.FindAsync(request.Lenda.LendaId);
 
-                _mapper.Map(request.Lenda,postimi);
+                _mapper.Map(request.Lenda,lenda);
 
                 await _context.SaveChangesAsync();
 

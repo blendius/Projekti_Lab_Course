@@ -21,13 +21,12 @@ export default class PostimiStore {
     }
 
     loadPostimet = async () => {
+        this.loadingInitial = true;
         try {
             const postimet = await agent.Postimet.list();
 
             postimet.forEach(postimi => {
-                postimi.data = postimi.data.split('T')[0];
-                //this.postimet.push(postimi);
-                this.postimiRegistry.set(postimi.id, postimi);
+                this.setPostimi(postimi);
             })
             this.setLoadingInitial(false);
 
@@ -37,25 +36,54 @@ export default class PostimiStore {
 
         }
     }
+    loadPostimi = async (id: string) => {
+        let postimi = this.getPostimi(id);
+        if (postimi) {
+            this.selectedPostimi = postimi;
+            return postimi;
+        } else {
+            this.loadingInitial = true;
+            try {
+                postimi = await agent.Postimet.details(id);
+                this.setPostimi(postimi);
+                runInAction(() => {
+                    this.selectedPostimi = postimi;
+                })
+                this.setLoadingInitial(false);
+                return postimi;
+            } catch (error) {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }
+    }
+
+    private setPostimi = (postimi: Postimi) => {
+        postimi.data = postimi.data.split('T')[0];
+        this.postimiRegistry.set(postimi.id, postimi);
+    }
+    private getPostimi = (id: string) => {
+        return this.postimiRegistry.get(id);
+    }
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
     }
 
-    selectPostimi = (id: string) => {
-        this.selectedPostimi = this.postimiRegistry.get(id);
-    }
-    cancelSelectedPostimi = () => {
-        this.selectedPostimi = undefined;
-    }
-    openForm = (id?: string) => {
-        id ? this.selectPostimi(id) : this.cancelSelectedPostimi();
-        this.editMode = true;
+    // selectPostimi = (id: string) => {
+    //     this.selectedPostimi = this.postimiRegistry.get(id);
+    // }
+    // cancelSelectedPostimi = () => {
+    //     this.selectedPostimi = undefined;
+    // }
+    // openForm = (id?: string) => {
+    //     id ? this.selectPostimi(id) : this.cancelSelectedPostimi();
+    //     this.editMode = true;
 
-    }
-    closeForm = () => {
-        this.editMode = false;
-    }
+    // }
+    // closeForm = () => {
+    //     this.editMode = false;
+    // }
     createPostimi = async (postimi: Postimi) => {
         this.loading = true;
         postimi.id = uuid();
@@ -102,7 +130,7 @@ export default class PostimiStore {
             await agent.Postimet.delete(id);
             runInAction(() => {
                 this.postimiRegistry.delete(id);
-                if (this.selectedPostimi?.id === id) this.cancelSelectedPostimi();
+                // if (this.selectedPostimi?.id === id) this.cancelSelectedPostimi();
                 this.loading = false;
             })
         } catch (error) {

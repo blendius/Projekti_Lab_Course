@@ -19,7 +19,7 @@ namespace API.Controllers
         [HttpGet("{id}")] //postimi/id
         public async Task<ActionResult<Lenda>> GetLendet(Guid id)
         {
-            return await Mediator.Send(new Details.Query{Id = id});
+            return await Mediator.Send(new Details.Query{LendaId = id});
         }
 
         [HttpPost]

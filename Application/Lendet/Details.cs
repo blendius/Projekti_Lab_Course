@@ -11,7 +11,7 @@ namespace Application.Lendet
     {
         public class Query : IRequest<Lenda>
         {
-            public Guid Id { get; set; }
+            public Guid LendaId { get; set; }
         }
         public class Handler : IRequestHandler<Query, Lenda>
         {
@@ -25,7 +25,7 @@ namespace Application.Lendet
 
             public async Task<Lenda> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Lendet.FindAsync(request.Id);
+                return await _context.Lendet.FindAsync(request.LendaId);
             }
         }
     }

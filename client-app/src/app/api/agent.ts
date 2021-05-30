@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Lenda } from '../models/lenda';
 import { Postimi } from '../models/postimi';
 
 const sleep = (deley: number) => {
@@ -35,9 +36,18 @@ const Postimet = {
     update: (postimi: Postimi) => axios.put<void>(`/postimet/${postimi.id}`,postimi),
     delete: (id: string) => axios.delete<void>(`/postimet/${id}`)
 }
+const Lendet = {
+    list: () => requests.get<Lenda[]>('/lendet'),
+    details: (id: string) => requests.get<Lenda>(`/lendet/${id}`),
+    create: (lenda: Lenda) => axios.post<void>(`/lendet/`, lenda),
+    update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`,lenda),
+    delete: (id: string) => axios.delete<void>(`/lendet/${id}`)
+
+}
 
 const agent = {
-    Postimet
+    Postimet,
+    Lendet
 }
 
 export default agent;

@@ -8,6 +8,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Postimi,Postimi>();
+            CreateMap<Lenda,Lenda>();
             
         }
     }
