@@ -14,5 +14,7 @@ namespace Persistence
         public DbSet <Termini> Terminet { get; set; }
         
         
+        public DbSet <Profesori> Profesoret { get; set; }
+        
     }
 }

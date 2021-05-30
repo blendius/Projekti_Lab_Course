@@ -11,7 +11,7 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            if(context.Postimet.Any()) return;
+            if (context.Postimet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -34,9 +34,43 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
+
             await context.Postimet.AddRangeAsync(postimet);
+
             await context.SaveChangesAsync();
         }
-        
+        //seed data for Professor
+        public static async Task SeedDataProf(DataContext context)
+        {
+            if (context.Profesoret.Any()) return;
+
+            var profesoret = new List<Profesori>
+            {
+                new Profesori
+                {
+                    Name= "Prof 1",
+                    Email = "prof1@test.com",
+                    GradaAkademike="Prof.",
+                    Fjalkalimi="123",
+                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
+                    Lenda= "TestLenda",
+                    Roli=1
+                },
+                new Profesori
+                {
+                    Name= "Prof 2",
+                    Email = "prof2@test.com",
+                    GradaAkademike="Prof.",
+                    Fjalkalimi="123",
+                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
+                    Lenda= "TestLenda2",
+                    Roli=1
+                }
+            };
+
+            await context.Profesoret.AddRangeAsync(profesoret);
+            await context.SaveChangesAsync();
+        }
+
     }
-} 
+}

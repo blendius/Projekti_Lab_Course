@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Terminet;
+using Application.Professor;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +17,7 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using AutoMapper;
 using Application.Core;
-using API.Extensions;
+using API.Extentions;
 
 namespace API
 {
@@ -37,7 +37,7 @@ namespace API
         {
 
             services.AddControllers();
-            services.AddApplicationServices(_config);
+           services.AddApplicationServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

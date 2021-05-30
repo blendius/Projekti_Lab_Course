@@ -2,42 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210526141521_ProfUpdated")]
+    partial class ProfUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.6");
-
-            modelBuilder.Entity("Domain.Lenda", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DataKrijimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Emri")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Permbajtja")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Syllabusi")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Lendet");
-                });
 
             modelBuilder.Entity("Domain.Postimi", b =>
                 {
@@ -89,43 +68,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Profesoret");
-                });
-
-            modelBuilder.Entity("Domain.Termini", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DataFillimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DataMbarimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("KohaMbajtjes")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("LendaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Salla")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LendaId");
-
-                    b.ToTable("Terminet");
-                });
-
-            modelBuilder.Entity("Domain.Termini", b =>
-                {
-                    b.HasOne("Domain.Lenda", "Lenda")
-                        .WithMany()
-                        .HasForeignKey("LendaId");
-
-                    b.Navigation("Lenda");
                 });
 #pragma warning restore 612, 618
         }

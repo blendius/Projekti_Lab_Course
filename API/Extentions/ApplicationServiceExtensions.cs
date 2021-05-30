@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using Application.Core;
-using Application.Terminet;
+using Application.Professor;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,13 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Persistence;
 
-namespace API.Extensions
+namespace API.Extentions
 {
-    public static class AplicationServiceExtensions
+    public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config)
-        {
-            services.AddSwaggerGen(c =>
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config){
+             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
@@ -28,6 +27,7 @@ namespace API.Extensions
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
+
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             return services;

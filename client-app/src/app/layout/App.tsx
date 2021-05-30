@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+
 import axios from "axios";
-import { Container } from "semantic-ui-react";
-import { Termin } from "../models/termini";
+import { Container, List } from "semantic-ui-react";
+import ShowProfessors from "../../features/profesoret/profesoret";
 import NavBar from "./NavBar";
-import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
+import { Route } from "react-router";
+import HomePage from "../../features/home/homePage";
+import { Termin } from "../models/termini";
 
 function App() {
+  const [postimet, setPostimet] = useState([]);
   const [terminet, setTerminet] = useState<Termin[]>([]);
   const [editMode, setEditMode] = useState(false);
 
@@ -23,18 +27,32 @@ function App() {
   function handleFormClose() {
     setEditMode(false);
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/Postimet").then((response) => {
+      setPostimet(response.data);
+      console.log(response);
+    });
+  }, []);
+
   return (
-    <>
-      <NavBar openForm={handleFormOpen} />
+    <Fragment>
+      <NavBar />
       <Container style={{ marginTop: "7em" }}>
-        <TerminetDashboard
-          terminet={terminet}
-          editMode={editMode}
-          openForm={handleFormOpen}
-          closeForm={handleFormClose}
-        />
+        {/* <List>
+          {postimet.map((postimi: any) => (
+            <li key={postimi.id}>
+              {postimi.titulli}
+            </li>
+
+          ))}
+        </List> */}
+
+        {/* <ShowProfessors /> */}
+        <Route exact path="/" component={HomePage} />
+        <Route path="/profesoret" component={ShowProfessors} />
       </Container>
-    </>
+    </Fragment>
   );
 }
 
