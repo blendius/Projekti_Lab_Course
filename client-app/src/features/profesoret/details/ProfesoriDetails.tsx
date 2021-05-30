@@ -5,10 +5,10 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
 export default observer(function ProfesoriDetais() {
-    const {profesoriStore}=useStore();
-    const{deleteProfessor,  loading}=profesoriStore
+    const { profesoriStore } = useStore();
+    const { deleteProfessor, loading } = profesoriStore
 
-    const {selectedProfessor: profesori, openForm,cancelSelectedProfessor}=profesoriStore;
+    const { selectedProfessor: profesori, openForm, cancelSelectedProfessor } = profesoriStore;
 
     const [target, setTarget] = useState('');
 
@@ -17,7 +17,7 @@ export default observer(function ProfesoriDetais() {
         deleteProfessor(id)
     }
 
-    if (!profesori) return <LoadingComponent/> 
+    if (!profesori) return <LoadingComponent />
 
     return (
         <List>
@@ -26,10 +26,10 @@ export default observer(function ProfesoriDetais() {
                 <Card.Content>
                     <Card.Description className='teDhena'>
                         <Card.Header className='Emri'>{profesori.name}</Card.Header>
-                        <div><label className="data">Lenda:  </label>  {profesori.lenda}</div>
-                        <div><label className="data">Email zyrtare:  </label>  {profesori.email}</div>
-                        <div><label className="data">Grada Akademike:</label> {profesori.gradaAkademike}</div>
-                        <div><label className="data">I punesuar nga data: :</label> {profesori.dataRegjistrimit}</div>
+                        <div className="data"><label >Lenda:  </label>  {profesori.lenda}</div>
+                        <div className="data"><label >Email zyrtare:  </label>  {profesori.email}</div>
+                        <div className="data"><label >Grada Akademike:</label> {profesori.gradaAkademike}</div>
+                        <div className="data"><label>I punesuar nga data: :</label> {profesori.dataRegjistrimit}</div>
                     </Card.Description>
                 </Card.Content>
             </div>

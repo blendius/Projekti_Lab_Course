@@ -4,13 +4,16 @@ body{
 .ui.segment {
   background-color: rgb(61, 61, 61);
 }
-div {
-  color: white;
+
+
+.data {
+  color: white !important;
 }
 
-.data{
-  color: grey !important;
+.data label{
+  color: gray;
 }
+
 .detailsbtn{
   width: 32.5%;
 }
@@ -31,6 +34,7 @@ img {
 .Emri{
   font-size: 40px;
   padding-bottom: 20px;
+  color:white;
 }
 .ui.fluid.selection.dropdown {
   margin-bottom: 15px !important;

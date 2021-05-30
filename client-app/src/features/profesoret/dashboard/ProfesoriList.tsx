@@ -16,7 +16,7 @@ const {profesoretByDate}=profesoriStore;
                         <List.Icon name='address card' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='a'>{profesori.name}</List.Header>
-                            <div><label className="data">Lenda:  </label>  {profesori.lenda}</div>
+                            <div className="data" ><label>Lenda:  </label>  {profesori.lenda}</div>
                         </List.Content>
                         <Item.Extra>
                             <Button onClick={() => profesoriStore.selectProfessor(profesori.id)} floated='right' content='Shiko Detajet' color='blue' />
