@@ -10,6 +10,9 @@ namespace Persistence
 
         }
         public DbSet <Postimi> Postimet { get; set; }
+        public DbSet <Lenda> Lendet { get; set; }
+        public DbSet <Termini> Terminet { get; set; }
+        
         
     }
 }
