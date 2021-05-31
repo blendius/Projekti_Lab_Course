@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import MySelectInput from '../../../app/common/form/MySelectInput';
 import { useStore } from '../../../app/stores/store';
 
 
@@ -45,6 +46,11 @@ export default observer(function LendaForm() {
                 <Form.Input label='Pershkrimi' placeholder='Pershkrimi' value={lenda.pershkrimi} name='pershkrimi' onChange={handleInputChange} />
                 <Form.Input label='Data' type='date' placeholder='Data' value={lenda.dataEShtimit} name='dataEShtimit' onChange={handleInputChange} />
                 <Form.Input onChange={handleInputChange}  name='syllabusi'>
+                {/* <MySelectInput 
+                label='Syllabusi'
+                options={options} 
+                placeholder='Syllabusi' 
+                name='syllabusi' /> */}
                 <Form.Select
                     fluid
                     label='Syllabusi'

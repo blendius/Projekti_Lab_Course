@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useState } from "react";
 import { Button, Item, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
-import TerminiStore from "../../../app/stores/terminiStore";
 
 export default observer(function TerminiList() {
   const { terminiStore } = useStore();
