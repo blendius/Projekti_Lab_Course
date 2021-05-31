@@ -1,46 +1,60 @@
-body{
-  background-color: rgb(83, 83, 83)!important;
-}
-.ui.segment {
-  background-color:rgb(31, 30, 30) ; 
-}
-div {
-  color: white;
-}
-
-.data{
-  color: grey !important;
-}
-
-.details{
-  display: flex;
-  flex-direction: row;
-}
-
-
-.ui.items>.item>.content {
-  display: flex;
-
-}
-.buttons{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin-left: 50px;
-
-}
-.detailsbtn{
-  width: 100px !important;
-  margin-bottom: 10px !important;
-}
-.prindiData{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.item{
-  padding-left: 40px !important;
-}
+    body {
+        background-color: rgb(83, 83, 83)!important;
+    }
+    
+    .ui.segment {
+        background-color: rgb(31, 30, 30);
+    }
+    
+    div {
+        color: white;
+    }
+    
+    .data {
+        color: grey !important;
+    }
+    
+    .details {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .ui.items>.item>.content {
+        display: flex;
+    }
+    
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-left: 50px;
+    }
+    
+    .detailsbtn {
+        width: 100px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .prindiData {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    
+    .item {
+        padding-left: 40px !important;
+    }
+    
+    button.ui.positive.button {
+        margin-top: 15px;
+    }
+    
+    button.ui.right.floated.button {
+        margin-top: 15px;
+    }
+    
+    a.item.active {
+        padding-left: 15px !important;
+    }

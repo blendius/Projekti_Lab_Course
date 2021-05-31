@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Grid } from 'semantic-ui-react';
+import {  Button, Grid } from 'semantic-ui-react';
 import { Prindi } from '../../../app/models/prindi';
 import PrindiForm from '../form/PrindiForm';
 import PrindiList from './PrindiList';
@@ -11,6 +11,7 @@ interface Props {
     cancelSelectPrindi: () => void;
     editMode: boolean;
     openForm: (id: string | undefined) => void
+    openForm2: ()=>void;
     closeForm: () => void;
   
     createOrEdit: (prindi: Prindi) => void;
@@ -18,7 +19,7 @@ interface Props {
     submitting:boolean;
 }
 
-export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrindi, cancelSelectPrindi, editMode, openForm,  closeForm,  createOrEdit,deletePrindi, submitting }: Props) {
+export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrindi, cancelSelectPrindi, editMode, openForm,  closeForm,  createOrEdit,deletePrindi, submitting ,openForm2}: Props) {
 
     return (
         <Grid>
@@ -32,6 +33,8 @@ export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrind
                  openForm={openForm}
                   submitting={submitting}   
                  />
+                 
+<Button onClick={()=>openForm2()} positive content="Shto Prindin"/>
 
             </Grid.Column>
            
