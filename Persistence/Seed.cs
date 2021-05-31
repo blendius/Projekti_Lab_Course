@@ -11,7 +11,7 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            if (context.Postimet.Any()) return;
+            if(context.Postimet.Any() && context.Lendet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -70,6 +70,58 @@ namespace Persistence
 
             await context.Profesoret.AddRangeAsync(profesoret);
             await context.SaveChangesAsync();
+
+            var lendet = new List<Lenda>
+            {
+                new Lenda
+                {
+                    EmriLendes= "Postimi 1",
+                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                    Pershkrimi = "Ky eshte nje postim testues 1",
+                    Syllabusi = "Ky eshte nje postim testues 1"
+                },
+                new Lenda
+                {
+                    EmriLendes= "lenda 2",
+                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                    Pershkrimi = "Ky eshte nje postim testues 1",
+                    Syllabusi = "Ky eshte nje postim testues 1"
+                },
+                new Lenda
+                {
+                    EmriLendes= "lenda 3",
+                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                    Pershkrimi = "Ky eshte nje postim testues 1",
+                    Syllabusi = "Ky eshte nje postim testues 1"
+                }
+            };
+            await context.Lendet.AddRangeAsync(lendet);
+            await context.SaveChangesAsync();
+            // var Profesoret = new List<Profesori>
+            // {
+            //     new Profesori
+            //     {
+            //         Name= "Postimi 1",
+            //         Data = DateTime.Now.AddMinutes(-1000),
+            //         Email = "Ky eshte nje postim testues 1",
+            //         Fjalkalimi = "Ky eshte nje postim testues 1",
+            //         GradaAkademike = "Ky eshte nje postim testues 1",
+            //     },
+            //     new Profesori
+            //     {
+            //         Titulli= "Postimi 2",
+            //         Data = DateTime.Now.AddMinutes(-2000),
+            //         Permbajtja = "Ky eshte nje postim testues 2",
+            //     },
+            //     new Profesori
+            //     {
+            //         Titulli= "Postimi 3",
+            //         Data = DateTime.Now.AddMinutes(-3000),
+            //         Permbajtja = "Ky eshte nje postim testues 3",
+            //     }
+            // };
+            // await context.Postimet.AddRangeAsync(postimet);
+            // await context.SaveChangesAsync();
         }
 
     }

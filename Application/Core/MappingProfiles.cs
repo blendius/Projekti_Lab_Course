@@ -9,6 +9,9 @@ namespace Application.Core
         {
             CreateMap<Profesori, Profesori>();
             CreateMap<Termini,Termini>();
+            CreateMap<Postimi,Postimi>();
+            CreateMap<Lenda,Lenda>();
+            
         }
     }
 }

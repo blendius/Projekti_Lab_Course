@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class test : Migration
+    public partial class Merge : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,15 +11,15 @@ namespace Persistence.Migrations
                 name: "Lendet",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Emri = table.Column<string>(type: "TEXT", nullable: true),
-                    Permbajtja = table.Column<string>(type: "TEXT", nullable: true),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EmriLendes = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true),
                     Syllabusi = table.Column<string>(type: "TEXT", nullable: true),
-                    DataKrijimit = table.Column<string>(type: "TEXT", nullable: true)
+                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lendet", x => x.Id);
+                    table.PrimaryKey("PK_Lendet", x => x.LendaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +59,6 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LendaId = table.Column<Guid>(type: "TEXT", nullable: true),
                     DataFillimit = table.Column<string>(type: "TEXT", nullable: true),
                     DataMbarimit = table.Column<string>(type: "TEXT", nullable: true),
                     Salla = table.Column<string>(type: "TEXT", nullable: true),
@@ -68,22 +67,14 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Terminet", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Terminet_Lendet_LendaId",
-                        column: x => x.LendaId,
-                        principalTable: "Lendet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Terminet_LendaId",
-                table: "Terminet",
-                column: "LendaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Lendet");
+
             migrationBuilder.DropTable(
                 name: "Postimet");
 
@@ -92,9 +83,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Terminet");
-
-            migrationBuilder.DropTable(
-                name: "Lendet");
         }
     }
 }

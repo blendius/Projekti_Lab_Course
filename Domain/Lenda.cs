@@ -4,11 +4,14 @@ namespace Domain
 {
     public class Lenda
     {
-        public Guid Id { get; set; }
-        public string Emri { get; set; }
-        public string Permbajtja { get; set; }
-        public string Syllabusi { get; set; }
-        public string DataKrijimit { get; set; }
+        public Guid LendaId {get;set;}
+        public string EmriLendes{get;set;}
+        public string Pershkrimi{get;set;}
+        public string Syllabusi{get;set;}
+
+        public DateTime DataEShtimit{get;set;}
+
+        //public Profesori Profesori{get;set;}
 
     }
 }

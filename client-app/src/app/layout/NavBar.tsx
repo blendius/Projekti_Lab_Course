@@ -12,6 +12,7 @@ export default function NavBar() {
         </Menu.Item>
         <Menu.Item as={NavLink} to="/profesoret" name="Profesoret" />
         <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
+        <Menu.Item as={NavLink} to="/lendet" name="Lendet" />
         {/* <Button as={NavLink} to='/profesoret' positive content="Profesoret" className="btn" /> */}
       </Container>
     </Menu>

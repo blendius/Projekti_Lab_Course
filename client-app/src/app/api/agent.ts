@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { Profesori } from "../models/profesori";
 import { Termin } from "../models/termini";
+import { Lenda } from "../models/lenda";
+import { Postimi } from "../models/postimi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -45,10 +47,27 @@ const Terminet = {
     requests.put<void>(`/terminet/${termini.id}`, termini),
   delete: (id: string) => axios.delete<void>(`/terminet/${id}`),
 };
+const Postimet = {
+  list: () => requests.get<Postimi[]>("/Postimet"),
+  details: (id: string) => requests.get<Postimi>(`/postimet/${id}`),
+  create: (postimi: Postimi) => axios.post<void>(`/postimet/`, postimi),
+  update: (postimi: Postimi) =>
+    axios.put<void>(`/postimet/${postimi.id}`, postimi),
+  delete: (id: string) => axios.delete<void>(`/postimet/${id}`),
+};
+const Lendet = {
+  list: () => requests.get<Lenda[]>("/lendet"),
+  details: (id: string) => requests.get<Lenda>(`/lendet/${id}`),
+  create: (lenda: Lenda) => axios.post<void>(`/lendet/`, lenda),
+  update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
+  delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
+};
 
 const agent = {
   Profesoret,
   Terminet,
+  Postimet,
+  Lendet,
 };
 
 export default agent;

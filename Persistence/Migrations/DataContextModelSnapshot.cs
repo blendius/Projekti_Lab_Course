@@ -18,23 +18,23 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Lenda", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("LendaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DataKrijimit")
+                    b.Property<DateTime>("DataEShtimit")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Emri")
+                    b.Property<string>("EmriLendes")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Permbajtja")
+                    b.Property<string>("Pershkrimi")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Syllabusi")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("LendaId");
 
                     b.ToTable("Lendet");
                 });
@@ -106,26 +106,12 @@ namespace Persistence.Migrations
                     b.Property<string>("KohaMbajtjes")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("LendaId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Salla")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LendaId");
-
                     b.ToTable("Terminet");
-                });
-
-            modelBuilder.Entity("Domain.Termini", b =>
-                {
-                    b.HasOne("Domain.Lenda", "Lenda")
-                        .WithMany()
-                        .HasForeignKey("LendaId");
-
-                    b.Navigation("Lenda");
                 });
 #pragma warning restore 612, 618
         }
