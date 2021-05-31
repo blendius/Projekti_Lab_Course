@@ -1,19 +1,15 @@
+import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { Termin } from "../../../app/models/termini";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-  termini: Termin | undefined;
-  closeForm: () => void;
-  createOrEdit: (termini: Termin) => void;
-}
+export default observer(function TerminiForm() {
+  const { terminiStore } = useStore();
+  const { selectedTermin, closeForm, createTermini, updateTermini, loading } =
+    terminiStore;
 
-export default function TerminiForm({
-  termini: selectedTermini,
-  closeForm,
-  createOrEdit,
-}: Props) {
-  const initialState = selectedTermini ?? {
+  const initialState = selectedTermin ?? {
     id: "",
     dataFillimit: "",
     dataMbarimit: "",
@@ -24,7 +20,7 @@ export default function TerminiForm({
   const [termini, setTermini] = useState(initialState);
 
   function handleSubmit() {
-    createOrEdit(termini);
+    termini.id ? updateTermini(termini) : createTermini(termini);
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -63,6 +59,7 @@ export default function TerminiForm({
         <Button floated="right" positive type="submit" content="Submit" />
         <Button
           onClick={closeForm}
+          loading={loading}
           floated="right"
           positive
           type="button"
@@ -71,4 +68,4 @@ export default function TerminiForm({
       </Form>
     </Segment>
   );
-}
+});

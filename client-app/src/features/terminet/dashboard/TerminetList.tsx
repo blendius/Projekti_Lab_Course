@@ -1,24 +1,26 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
+import React, { SyntheticEvent, useState } from "react";
 import { Button, Item, Segment } from "semantic-ui-react";
-import { Termin } from "../../../app/models/termini";
+import { useStore } from "../../../app/stores/store";
+import TerminiStore from "../../../app/stores/terminiStore";
 
-interface Props {
-  terminet: Termin[];
-  selectTermin: (id: string) => void;
-  deleteTermini: (id: string) => void;
+export default observer(function TerminiList() {
+  const { terminiStore } = useStore();
+  const { terminetByDate, deleteTermini, loading } = terminiStore;
 
-  openForm: () => void;
-}
-export default function TerminiList({
-  terminet,
-  selectTermin,
-  openForm,
-  deleteTermini,
-}: Props) {
+  const [target, setTarget] = useState("");
+  function handleTerminiDelete(
+    e: SyntheticEvent<HTMLButtonElement>,
+    id: string
+  ) {
+    setTarget(e.currentTarget.name);
+    deleteTermini(id);
+  }
+
   return (
     <Segment clearing>
       <Item.Group divided>
-        {terminet.map((termini) => (
+        {terminetByDate.map((termini) => (
           <Item key={termini.id}>
             <Item.Content>
               <Item.Header>Lenda Standin</Item.Header>
@@ -28,13 +30,15 @@ export default function TerminiList({
               <Item.Meta>Salla:{termini.salla}</Item.Meta>
               <Item.Extra>
                 <Button
-                  onClick={() => selectTermin(termini.id)}
+                  onClick={() => terminiStore.selectTermini(termini.id)}
                   floated="right"
                   content="Shiko"
                   color="twitter"
                 />
                 <Button
-                  onClick={() => deleteTermini(termini.id)}
+                  name={termini.id}
+                  loading={loading && target === termini.id}
+                  onClick={(e) => handleTerminiDelete(e, termini.id)}
                   floated="right"
                   content="Fshij"
                   color="red"
@@ -46,4 +50,4 @@ export default function TerminiList({
       </Item.Group>
     </Segment>
   );
-}
+});

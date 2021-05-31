@@ -1,60 +1,24 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import { Grid, GridColumn, List } from "semantic-ui-react";
-import { Termin } from "../../../app/models/termini";
+import { useStore } from "../../../app/stores/store";
 import TerminiDetails from "../details/TerminiDetails";
 import TerminiForm from "../form/TerminiForm";
 import TerminiList from "./TerminetList";
 
-interface Props {
-  terminet: Termin[];
-  editMode: boolean;
-  openForm: () => void;
-  closeForm: () => void;
-  selectedTermin: Termin | undefined;
-  selectTermin: (id: string) => void;
-  cancelSelectTermin: () => void;
-  createOrEdit: (termini: Termin) => void;
-  deleteTermini: (id: string) => void;
-}
-
-export default function TerminetDashboard({
-  terminet,
-  selectTermin,
-  selectedTermin,
-  cancelSelectTermin,
-  editMode,
-  closeForm,
-  openForm,
-  createOrEdit,
-  deleteTermini,
-}: Props) {
+export default observer(function TerminetDashboard() {
+  const { terminiStore } = useStore();
+  const { selectedTermin, editMode } = terminiStore;
   return (
     <Grid>
       <Grid.Column floated="right" width="4">
-        <TerminiList
-          terminet={terminet}
-          openForm={openForm}
-          selectTermin={selectTermin}
-          deleteTermini={deleteTermini}
-        />
+        <TerminiList />
       </Grid.Column>
 
       <GridColumn floated="right" width="4">
-        {selectedTermin && !editMode && (
-          <TerminiDetails
-            termini={selectedTermin}
-            cancelSelectTermin={cancelSelectTermin}
-            openForm={openForm}
-          />
-        )}
-        {editMode && (
-          <TerminiForm
-            closeForm={closeForm}
-            termini={selectedTermin}
-            createOrEdit={createOrEdit}
-          />
-        )}
+        {selectedTermin && !editMode && <TerminiDetails />}
+        {editMode && <TerminiForm />}
       </GridColumn>
     </Grid>
   );
-}
+});

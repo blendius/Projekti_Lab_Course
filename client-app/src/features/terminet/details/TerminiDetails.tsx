@@ -1,18 +1,18 @@
 import React from "react";
-import { Button, ButtonGroup, Card, Icon } from "semantic-ui-react";
-import { Termin } from "../../../app/models/termini";
+import { Button, ButtonGroup, Card } from "semantic-ui-react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-  termini: Termin;
-  cancelSelectTermin: () => void;
-  openForm: (id: string) => void;
-}
+export default function TerminiDetails() {
+  const { terminiStore } = useStore();
+  const {
+    selectedTermin: termini,
+    openForm,
+    cancelSelectedTermini,
+  } = terminiStore;
 
-export default function TerminiDetails({
-  termini,
-  cancelSelectTermin,
-  openForm,
-}: Props) {
+  if (!termini) return <LoadingComponent />;
+
   return (
     <Card>
       <Card.Content>
@@ -32,7 +32,7 @@ export default function TerminiDetails({
             content="Edit"
           ></Button>
           <Button
-            onClick={cancelSelectTermin}
+            onClick={cancelSelectedTermini}
             basic
             color="grey"
             content="Cancel"
