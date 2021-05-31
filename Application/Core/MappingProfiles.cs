@@ -7,6 +7,8 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
+            CreateMap<Profesori, Profesori>();
+            CreateMap<Termini,Termini>();
             CreateMap<Postimi,Postimi>();
             CreateMap<Lenda,Lenda>();
             

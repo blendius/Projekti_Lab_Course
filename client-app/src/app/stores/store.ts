@@ -1,19 +1,24 @@
 import { createContext, useContext } from "react";
+import ProfesoriStore from "./profesoriStore";
+import TerminiStore from "./terminiStore";
 import lendaStore from "./lendaStore";
 import PostimiStore from "./postimetStore";
 
 interface Store {
-    postimiStore: PostimiStore
-    lendaStore : lendaStore
+  profesoriStore: ProfesoriStore;
+  terminiStore: TerminiStore;
+  postimiStore: PostimiStore;
+  lendaStore: lendaStore;
 }
-
 export const store: Store = {
-    postimiStore: new PostimiStore(),
-    lendaStore: new lendaStore()
-}
+  profesoriStore: new ProfesoriStore(),
+  terminiStore: new TerminiStore(),
+  postimiStore: new PostimiStore(),
+  lendaStore: new lendaStore(),
+};
 
 export const StoreContext = createContext(store);
 
-export function useStore(){
-    return useContext(StoreContext);
+export function useStore() {
+  return useContext(StoreContext);
 }

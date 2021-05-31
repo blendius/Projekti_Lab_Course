@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210529181454_AddLenda")]
-    partial class AddLenda
+    [Migration("20210531094635_Merge")]
+    partial class Merge
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,61 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Postimet");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataRegjistrimit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fjalkalimi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GradaAkademike")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Lenda")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Roli")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Profesoret");
+                });
+
+            modelBuilder.Entity("Domain.Termini", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DataFillimit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DataMbarimit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("KohaMbajtjes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Salla")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Terminet");
                 });
 #pragma warning restore 612, 618
         }
