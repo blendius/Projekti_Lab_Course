@@ -44,6 +44,7 @@ export default observer(function LendaForm() {
                 <Form.Input label='Lenda' placeholder='EmriLendes' value={lenda.emriLendes} name='emriLendes' onChange={handleInputChange} />
                 <Form.Input label='Pershkrimi' placeholder='Pershkrimi' value={lenda.pershkrimi} name='pershkrimi' onChange={handleInputChange} />
                 <Form.Input label='Data' type='date' placeholder='Data' value={lenda.dataEShtimit} name='dataEShtimit' onChange={handleInputChange} />
+                <Form.Input onChange={handleInputChange}  name='syllabusi'>
                 <Form.Select
                     fluid
                     label='Syllabusi'
@@ -51,6 +52,8 @@ export default observer(function LendaForm() {
                     name='syllabusi'
                     placeholder='Syllabusi'
                 />
+                </Form.Input>
+                
                 {/* <Form.Input placeholder='Syllabusi' value={lenda.syllabusi} name='syllabusi' onChange={handleInputChange} /> */}
 
                 <Button floated='right' positive type='submit' content='Submit' />

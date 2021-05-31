@@ -1,13 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
+import { v4 as uuid } from 'uuid';
 
 
 
 export default observer(function PostimiForm() {
+    const history = useHistory();
     const { postimiStore } = useStore();
     const {  createPostimi, updatePostimi, loading,loadPostimi ,loadingInitial} = postimiStore;
     const { id } = useParams<{ id: string }>();
@@ -26,7 +28,16 @@ export default observer(function PostimiForm() {
 
 
     function handleSubmit() {
-        postimi.id ? updatePostimi(postimi) : createPostimi(postimi);
+        if( postimi.id.length===0 ){
+            let newPostimi = {
+                ...postimi,
+                id: uuid()
+            };
+            createPostimi(newPostimi).then(()=> history.push(`/postimet/${newPostimi.id}`))
+
+        }else{
+            updatePostimi(postimi).then(()=>history.push(`/postimet/${postimi.id}`))
+        }
     }
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = event.target;
@@ -47,3 +58,5 @@ if(loadingInitial) return <LoadingComponent content='loading postimi...'/>
         </Segment>
     )
 })
+
+

@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Postimi } from "../models/postimi";
-import { v4 as uuid } from 'uuid';
 
 export default class PostimiStore {
     // postimet: Postimi[] = [];
@@ -86,7 +85,6 @@ export default class PostimiStore {
     // }
     createPostimi = async (postimi: Postimi) => {
         this.loading = true;
-        postimi.id = uuid();
         try {
             await agent.Postimet.create(postimi);
             runInAction(() => {
