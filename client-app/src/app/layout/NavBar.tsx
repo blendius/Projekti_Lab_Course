@@ -10,9 +10,9 @@ export default function NavBar() {
         <Menu.Item as={NavLink} to="/" exact header>
           Sistemi Menaxhimit
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/profesoret" name="Profesoret">
-          {/* <Button as={NavLink} to='/profesoret' positive content="Profesoret" className="btn" /> */}
-        </Menu.Item>
+        <Menu.Item as={NavLink} to="/profesoret" name="Profesoret" />
+        <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
+        {/* <Button as={NavLink} to='/profesoret' positive content="Profesoret" className="btn" /> */}
       </Container>
     </Menu>
   );

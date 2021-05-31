@@ -8,7 +8,7 @@ export default class TerminiStore {
   selectedTermin: Termin | undefined = undefined;
   editMode = false;
   loading = false;
-  loadingInitial = true;
+  loadingInitial = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -25,14 +25,12 @@ export default class TerminiStore {
       const terminet = await agent.Terminet.list();
 
       terminet.forEach((termin) => {
-        termin.dataFillimit = termin.dataFillimit.split("T")[0];
-        termin.dataMbarimit = termin.dataMbarimit.split("T")[0];
-        this.terminetRegistry.set(termin.id, termin);
+        this.setTermini(termin);
       });
       this.setLoadingInitial(false);
     } catch (error) {
       console.log(error);
-      this.setLoadingInitial(true);
+      this.setLoadingInitial(false);
     }
   };
   setLoadingInitial = (state: boolean) => {
@@ -101,5 +99,31 @@ export default class TerminiStore {
         this.loading = false;
       });
     }
+  };
+  loadTermini = async (id: string) => {
+    let termini = this.getTermini(id);
+    if (termini) {
+      this.selectedTermin = termini;
+    } else {
+      this.setLoadingInitial(true);
+      try {
+        termini = await agent.Terminet.details(id);
+        this.setTermini(termini);
+        this.setLoadingInitial(false);
+      } catch (error) {
+        console.log(error);
+        this.setLoadingInitial(false);
+      }
+    }
+  };
+
+  private setTermini = (termin: Termin) => {
+    termin.dataFillimit = termin.dataFillimit.split("T")[0];
+    termin.dataMbarimit = termin.dataMbarimit.split("T")[0];
+    this.terminetRegistry.set(termin.id, termin);
+  };
+
+  private getTermini = (id: string) => {
+    return this.terminetRegistry.get(id);
   };
 }
