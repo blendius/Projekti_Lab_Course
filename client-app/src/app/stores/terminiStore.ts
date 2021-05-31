@@ -8,7 +8,7 @@ export default class TerminiStore {
   selectedTermin: Termin | undefined = undefined;
   editMode = false;
   loading = false;
-  loadingInitial = false;
+  loadingInitial = true;
 
   constructor() {
     makeAutoObservable(this);
