@@ -17,7 +17,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Prindi>>> GetPrindi()
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(new ListP.Query());
         }
         
         [HttpGet("{id}")]   

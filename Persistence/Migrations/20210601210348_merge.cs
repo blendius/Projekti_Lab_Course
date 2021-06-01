@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class Merge : Migration
+    public partial class merge : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,22 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Postimet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Prinderit",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Emri = table.Column<string>(type: "TEXT", nullable: true),
+                    Mbiemri = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Fjalkalimi = table.Column<string>(type: "TEXT", nullable: true),
+                    nrTel = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prinderit", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,6 +93,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Postimet");
+
+            migrationBuilder.DropTable(
+                name: "Prinderit");
 
             migrationBuilder.DropTable(
                 name: "Profesoret");

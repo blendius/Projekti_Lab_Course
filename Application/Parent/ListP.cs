@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Parent
 {
-    public class List
+    public class ListP
     {
         public class Query : IRequest<List<Prindi>> { }
         public class Handler : IRequestHandler<Query, List<Prindi>>
