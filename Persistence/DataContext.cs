@@ -18,5 +18,7 @@ namespace Persistence
 
 
         
+        public DbSet <Prindi> Prinderit { get; set; }
+        
     }
 }

@@ -12,6 +12,8 @@ import LendaForm from "../../features/lendet/form/LendaForm";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import LendetDetails from "../../features/lendet/details/LendetDetails";
 import HomePage from "../../features/home/homePage";
+import ShowPrinderit from "../../features/prinderit/showPrindi";
+
 
 function App() {
   const location = useLocation();
@@ -25,6 +27,7 @@ function App() {
         <Route path="/terminet" component={TerminetDashboard} />
         <Route exact path="/postimet" component={PostimetDashboard} />
         <Route path="/postimet/:id" component={PostimetDetails} />
+        <Route path="/prinderit" component={ShowPrinderit} />
         <Route
           key={location.key}
           path={["/krijoPostime", "/managePostimi/:id"]}

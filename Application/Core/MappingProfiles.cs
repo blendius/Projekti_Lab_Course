@@ -11,7 +11,7 @@ namespace Application.Core
             CreateMap<Termini,Termini>();
             CreateMap<Postimi,Postimi>();
             CreateMap<Lenda,Lenda>();
-            
+            CreateMap<Prindi, Prindi>();
         }
     }
 }

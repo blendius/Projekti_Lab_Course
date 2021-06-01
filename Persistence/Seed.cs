@@ -123,6 +123,42 @@ namespace Persistence
             // await context.Postimet.AddRangeAsync(postimet);
             // await context.SaveChangesAsync();
         }
+        
+        public static async Task SeedDataPrind(DataContext context)
+        {
+            if (context.Prinderit.Any()) return;
+
+            var profesoret = new List<Prindi>
+            {
+                new Prindi
+                {
+                    Emri= "Prindi1",
+                    Mbiemri="Test1",
+                    Email = "Prindi1@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                },
+                  new Prindi
+                {
+                    Emri= "Prindi2",
+                    Mbiemri="Test2",
+                    Email = "Prindi2@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                },
+                  new Prindi
+                {
+                    Emri= "Prindi3",
+                    Mbiemri="Test3",
+                    Email = "Prindi3@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                }
+            };
+
+            await context.Prinderit.AddRangeAsync(profesoret);
+            await context.SaveChangesAsync();
+        }
 
     }
 }

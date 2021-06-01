@@ -1,6 +1,6 @@
 using Application.Core;
 using Application.Professor;
-using AutoMapper;
+using Application.Parent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,8 +26,8 @@ namespace API.Extentions
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
                 });
             });
+            services.AddMediatR(typeof(ListP.Handler).Assembly);
             services.AddMediatR(typeof(List.Handler).Assembly);
-
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             return services;
