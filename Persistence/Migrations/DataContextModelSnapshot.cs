@@ -85,6 +85,32 @@ namespace Persistence.Migrations
                     b.ToTable("Postimet");
                 });
 
+            modelBuilder.Entity("Domain.Prindi", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Emri")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fjalkalimi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Mbiemri")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("nrTel")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prinderit");
+                });
+
             modelBuilder.Entity("Domain.Profesori", b =>
                 {
                     b.Property<Guid>("Id")
