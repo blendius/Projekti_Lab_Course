@@ -11,7 +11,7 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            if(context.Postimet.Any() && context.Lendet.Any()) return;
+            if (context.Postimet.Any() && context.Lendet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -124,5 +124,41 @@ namespace Persistence
             // await context.SaveChangesAsync();
         }
 
+        public static async Task SeedDataKlubi(DataContext context)
+        {
+            if (context.Klubi.Any()) return;
+
+            var klubet = new List<Klubi>
+            {
+                new Klubi
+                {
+                    Lloji= "Klubi1",
+                    Name="Klubi1",
+                    Pershkrimi = "Klubi1@test.com",
+                    NrIAnetareve=123,
+                    Udheheqesi="Test"
+                },
+                  new Klubi
+                {
+                    Lloji= "Klubi2",
+                    Name="Klubi2",
+                    Pershkrimi = "Klubi1@test.com",
+                    NrIAnetareve=123,
+                    Udheheqesi="Test"
+                },
+                  new Klubi
+                {
+                    Lloji= "Klubi3",
+                    Name="Klubi3",
+                    Pershkrimi = "Klubi1@test.com",
+                    NrIAnetareve=123,
+                    Udheheqesi="Test"
+                }
+            };
+
+            await context.Klubi.AddRangeAsync(klubet);
+            await context.SaveChangesAsync();
+
+        }
     }
 }

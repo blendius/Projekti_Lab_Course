@@ -9,14 +9,13 @@ namespace Persistence
         {
 
         }
-        public DbSet <Postimi> Postimet { get; set; }
- 
-        public DbSet <Profesori> Profesoret { get; set; }
-        public DbSet<Lenda> Lendet {get;set;}
-        public DbSet<Termini> Terminet{get;set;} 
+        public DbSet<Postimi> Postimet { get; set; }
+        public DbSet<Profesori> Profesoret { get; set; }
+        public DbSet<Lenda> Lendet { get; set; }
+        public DbSet<Termini> Terminet { get; set; }
+        public DbSet<Prindi> Prinderit { get; set; }
 
+        public DbSet<Klubi> Klubi { get; set; }
 
-
-        
     }
 }
