@@ -14,7 +14,7 @@ function ShowPrinderit() {
   const [prinderit, setPrinderit] = useState<Prindi[]>([]);
   const [selectedPrindi, setSelectedPindi] = useState<Prindi | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [sumbitting, setSubmitting] = useState(false);
 
   
