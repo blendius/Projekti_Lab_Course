@@ -162,7 +162,7 @@ namespace Persistence
 
         public static async Task SeedDataKlubi(DataContext context)
         {
-            if (context.Klubi.Any()) return;
+            if (context.Klubet.Any()) return;
 
             var klubet = new List<Klubi>
             {
@@ -192,7 +192,7 @@ namespace Persistence
                 }
             };
 
-            await context.Klubi.AddRangeAsync(klubet);
+            await context.Klubet.AddRangeAsync(klubet);
             await context.SaveChangesAsync();
 
         }
