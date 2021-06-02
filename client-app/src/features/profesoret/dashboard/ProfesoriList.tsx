@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Button, Item, List } from 'semantic-ui-react';
+import { Button, Item, List, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 
 
@@ -10,7 +10,8 @@ const {profesoriStore}= useStore();
 const {profesoretByDate}=profesoriStore;
 
     return (
-        <List divided relaxed inverted>
+        <Segment clearing>
+        <List divided relaxed >
             {profesoretByDate.map(profesori => (
                 <List.Item key={profesori.id}>
                         <List.Icon name='address card' size='large' verticalAlign='middle' />
@@ -29,5 +30,6 @@ const {profesoretByDate}=profesoriStore;
             ))}
 
         </List>
+        </Segment>
     )
 })
