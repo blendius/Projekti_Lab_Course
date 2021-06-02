@@ -18,7 +18,7 @@ export default function PrindiForm({ prindi: selectedPrindi, closeForm, createOr
         fjalkalimi: '',
         nrTel: ''
     }
-console.log(initialState)
+// console.log(initialState)
     const [prindi, setPrindi] = useState(initialState);
     function handleSubmit() {
         createOrEdit(prindi);

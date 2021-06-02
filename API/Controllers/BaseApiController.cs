@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 
-using Microsoft.Extensions.DependencyInjection;
 namespace API.Controllers
 {
     [ApiController]
