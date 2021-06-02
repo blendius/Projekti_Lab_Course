@@ -159,6 +159,40 @@ namespace Persistence
             await context.Prinderit.AddRangeAsync(profesoret);
             await context.SaveChangesAsync();
         }
+        //seed for Nxenesi
+        public static async Task SeedDataNxenesit(DataContext context)
+        {
+            if (context.Nxenesit.Any()) return;
+            var nxenesit = new List<Nxenesi>
+            {
+                new Nxenesi
+                {
+                    FullName = "Mal Haziri",
+                    ParentName = "Armend",
+                    Email = "malhaziri@student.edu",
+                    Password = "Mali123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-120),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                },
+                  new Nxenesi
+                {
+                    FullName = "Erin Lekiqi",
+                    ParentName = "Naim",
+                    Email = "erinlekiqi@student.edu",
+                    Password = "Erini123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-125),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                }
+
+            };
+
+            await context.Nxenesit.AddRangeAsync(nxenesit);
+            await context.SaveChangesAsync();
+            }
 
     }
 }
