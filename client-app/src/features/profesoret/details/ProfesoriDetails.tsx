@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { SyntheticEvent, useState } from 'react';
-import { Button, Card, Image, List } from 'semantic-ui-react';
+import { Button, Card, Container, Image, List } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
@@ -34,13 +34,15 @@ export default observer(function ProfesoriDetais() {
                 </Card.Content>
             </div>
             <Card.Content extra>
+                <Container>
+                    <Button onClick={() => openForm(profesori.id)} color='blue' content='Edit' className='detailsbtn' />
+                    <Button name={profesori.id}
+                        loading={loading && target === profesori.id}
+                        onClick={(e) => handleProfessorDelete(e, profesori.id)}
+                        content='Fshije' className='detailsbtn' color='red' />
+                    <Button onClick={cancelSelectedProfessor} color='grey' content='cancel' className='detailsbtn' />
+                </Container>
 
-                <Button onClick={() => openForm(profesori.id)} primary content='Edit' className='detailsbtn' />
-                <Button name={profesori.id}
-                    loading={loading && target === profesori.id}
-                    onClick={(e) => handleProfessorDelete(e, profesori.id)}
-                    content='Fshije' className='detailsbtn' color='red' />
-                <Button onClick={cancelSelectedProfessor} color='grey' content='cancel' className='detailsbtn' />
 
             </Card.Content>
         </List>

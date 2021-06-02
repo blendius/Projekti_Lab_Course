@@ -18,9 +18,8 @@ export default observer(function LendetList() {
     
 
     return (
-
-        <Segment >
-            <Table celled   compact  >
+            
+            <Table celled compact border>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell >Emri i Lendes</Table.HeaderCell>
@@ -62,7 +61,7 @@ export default observer(function LendetList() {
             </Table>
 
 
-            {/* <Item.Group divided>
+            /* <Item.Group divided>
                 {lendetByDate.map(lendet => (
                     <Item key={lendet.lendaId}>
                         <Item.Content>
@@ -85,8 +84,8 @@ export default observer(function LendetList() {
                         </Item.Content>
                     </Item>
                 ))}
-            </Item.Group>  */}
-        </Segment>
+            </Item.Group>  */
+        
     )
 
 })
