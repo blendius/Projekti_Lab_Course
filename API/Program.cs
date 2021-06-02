@@ -28,6 +28,8 @@ namespace API
                  await context.Database.MigrateAsync();
                  await Seed.SeedData(context);
                  await Seed.SeedDataProf(context);
+                 await Seed.SeedDataPrind(context);
+                 await Seed.SeedDataNxenesit(context);
 
              }catch(Exception ex){
                  var logger = services.GetRequiredService<ILogger<Program>>();

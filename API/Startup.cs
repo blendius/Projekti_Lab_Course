@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using API.Extentions;
+using API.Extensions;
+
 
 namespace API
 {
@@ -23,7 +24,7 @@ namespace API
         {
 
             services.AddControllers();
-           services.AddApplicationServices(_config);
+           services.AddAplicationServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -123,6 +123,76 @@ namespace Persistence
             // await context.Postimet.AddRangeAsync(postimet);
             // await context.SaveChangesAsync();
         }
+        
+        public static async Task SeedDataPrind(DataContext context)
+        {
+            if (context.Prinderit.Any()) return;
+
+            var profesoret = new List<Prindi>
+            {
+                new Prindi
+                {
+                    Emri= "Prindi1",
+                    Mbiemri="Test1",
+                    Email = "Prindi1@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                },
+                  new Prindi
+                {
+                    Emri= "Prindi2",
+                    Mbiemri="Test2",
+                    Email = "Prindi2@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                },
+                  new Prindi
+                {
+                    Emri= "Prindi3",
+                    Mbiemri="Test3",
+                    Email = "Prindi3@test.com",
+                    Fjalkalimi="1234",
+                    nrTel=123456
+                }
+            };
+
+            await context.Prinderit.AddRangeAsync(profesoret);
+            await context.SaveChangesAsync();
+        }
+        //seed for Nxenesi
+        public static async Task SeedDataNxenesit(DataContext context)
+        {
+            if (context.Nxenesit.Any()) return;
+            var nxenesit = new List<Nxenesi>
+            {
+                new Nxenesi
+                {
+                    FullName = "Mal Haziri",
+                    ParentName = "Armend",
+                    Email = "malhaziri@student.edu",
+                    Password = "Mali123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-120),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                },
+                  new Nxenesi
+                {
+                    FullName = "Erin Lekiqi",
+                    ParentName = "Naim",
+                    Email = "erinlekiqi@student.edu",
+                    Password = "Erini123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-125),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                }
+
+            };
+
+            await context.Nxenesit.AddRangeAsync(nxenesit);
+            await context.SaveChangesAsync();
+            }
 
     }
 }

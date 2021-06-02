@@ -3,6 +3,7 @@ import { Profesori } from "../models/profesori";
 import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
+import { Prindi } from '../models/prindi';
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -14,7 +15,7 @@ axios.defaults.baseURL = "http://localhost:5000/api";
 
 axios.interceptors.response.use(async (response) => {
   try {
-    await sleep(200);
+    await sleep(0);
     return response;
   } catch (error) {
     console.log(error);
@@ -62,12 +63,20 @@ const Lendet = {
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
+const Prinderit = {
+  list: () => requests.get<Prindi[]>('/prindi'),
+  details: (id: string) => requests.get<Prindi>(`/prindi/${id}`),
+  create: (profesori: Prindi) => axios.post<void>('/prindi', profesori),
+  update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
+  delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
+}
 
 const agent = {
   Profesoret,
   Terminet,
   Postimet,
   Lendet,
+  Prinderit
 };
 
 export default agent;
