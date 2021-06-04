@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Header, List } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { Nxenesi } from "../models/nxenesi";
 import NavBar from "./NavBar";
-import { observer } from "mobx-react-lite";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NxenesiDashboard from "../../Features/nxenesit/dashboard/NxenesiDashboard";
 import HomePage from "../../Features/home/homePage";
 import TerminetDashboard from "../../Features/terminet/dashboard/TerminetDashboard";
