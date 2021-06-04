@@ -28,7 +28,7 @@ export default observer(function TerminiForm() {
   }
   return (
     <Segment clearing>
-      <Form onSubmit={handleSubmit} autocomplete="off">
+      <Form onSubmit={handleSubmit} autoComplete="off">
         <Form.Input
           placeholder="Data E Fillimit"
           type="date"

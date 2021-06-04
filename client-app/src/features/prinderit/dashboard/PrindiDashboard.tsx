@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Button, Grid } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 import { Prindi } from '../../../app/models/prindi';
 import PrindiForm from '../form/PrindiForm';
 import PrindiList from './PrindiList';
@@ -11,38 +11,39 @@ interface Props {
     cancelSelectPrindi: () => void;
     editMode: boolean;
     openForm: (id: string | undefined) => void
-    openForm2: ()=>void;
+    openForm2: () => void;
     closeForm: () => void;
-  
+
     createOrEdit: (prindi: Prindi) => void;
-    deletePrindi:(id:string)=>void;
-    submitting:boolean;
+    deletePrindi: (id: string) => void;
+    submitting: boolean;
 }
 
-export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrindi, cancelSelectPrindi, editMode, openForm,  closeForm,  createOrEdit,deletePrindi, submitting ,openForm2}: Props) {
+export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrindi, cancelSelectPrindi, editMode, openForm, closeForm, createOrEdit, deletePrindi, submitting, openForm2 }: Props) {
 
     return (
         <Grid>
-            <Grid.Column width='10'>
-                <PrindiList 
-                prinderit={prinderit} 
-                selectedPrindi={selectPrindi} 
-                              
-                 deletePrindi={deletePrindi}
-                 cancelSelectPrindi={cancelSelectPrindi}
-                 openForm={openForm}
-                  submitting={submitting}   
-                 />
-                 
-<Button onClick={()=>openForm2()} positive content="Shto Prindin"/>
+            <Grid.Column width='12'>
+                <PrindiList
+                    prinderit={prinderit}
+                    selectedPrindi={selectPrindi}
+
+                    deletePrindi={deletePrindi}
+                    cancelSelectPrindi={cancelSelectPrindi}
+                    openForm={openForm}
+                    submitting={submitting}
+                />
+
 
             </Grid.Column>
-           
-            <Grid.Column width='6'>
-               
+
+            <Grid.Column width='4'>
+                <Button onClick={() => openForm2()} positive content="Shto Prindin" size='big'/>
+
+
                 {editMode &&
                     <PrindiForm closeForm={closeForm} prindi={selectedPrindi} createOrEdit={createOrEdit} submitting={submitting} />}
-              
+
 
             </Grid.Column>
         </Grid>

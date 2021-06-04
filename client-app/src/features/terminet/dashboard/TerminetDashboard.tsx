@@ -21,16 +21,18 @@ export default observer(function TerminetDashboard() {
 
   return (
     <Grid>
-      <Grid.Column floated="right" width="4">
+      <Grid.Column  width="12">
         <TerminiList />
-        <Button
+        
+      </Grid.Column>
+
+      <GridColumn  width="4">
+      <Button
           onClick={() => terminiStore.openForm()}
           positive
           content="Shto Termin"
+          size='big'
         />
-      </Grid.Column>
-
-      <GridColumn floated="right" width="4">
         {selectedTermin && !editMode && <TerminiDetails />}
         {editMode && <TerminiForm />}
       </GridColumn>
