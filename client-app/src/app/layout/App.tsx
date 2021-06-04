@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
-import HomePage from "../../features/home/homePage.new";
+import HomePage from "../../features/home/homePage";
 import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
 import LendetDetails from '../../features/lendet/details/LendetDetails';
 import LendaForm from "../../features/lendet/form/LendaForm";
