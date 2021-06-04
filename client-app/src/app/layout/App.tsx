@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
+import HomePage from "../../features/home/homePage.new";
+import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
+import LendetDetails from '../../features/lendet/details/LendetDetails';
+import LendaForm from "../../features/lendet/form/LendaForm";
+import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
+import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
+import PostimetDetails from "../../features/postimet/details/PostimetDetails";
+import ShowPrinderit from "../../features/prinderit/showPrindi";
+import ShowProfessors from '../../features/profesoret/profesoret';
+import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import { Nxenesi } from "../models/nxenesi";
 import NavBar from "./NavBar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NxenesiDashboard from "../../Features/nxenesit/dashboard/NxenesiDashboard";
-import HomePage from "../../Features/home/homePage";
-import TerminetDashboard from "../../Features/terminet/dashboard/TerminetDashboard";
-import PostimetDashboard from "../../Features/postimet/dashboard/PostimetDashboard";
-import PostimetDetails from "../../Features/postimet/details/PostimetDetails";
-import ShowPrinderit from "../../Features/prinderit/showPrindi";
-import ShowProfessors from "../../Features/profesoret/profesoret";
-import LendetDashboard from "../../Features/lendet/dashboard/LendetDashboard";
-import LendetDetails from "../../Features/lendet/details/LendetDetails";
-import LendaForm from "../../Features/lendet/form/LendaForm";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);

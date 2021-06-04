@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Container, Icon, Menu } from "semantic-ui-react";
+import { Link, NavLink } from "react-router-dom";
+import { Container, Icon, Menu } from "semantic-ui-react";
 import "./styles.css";
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 
 export default function NavBar() {
   return (

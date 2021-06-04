@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Grid, List, Segment } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 import { Nxenesi } from '../../../app/models/nxenesi';
 import NxenesiList from './NxenesiList';
 import NxenesiModal from './NxenesiModal';

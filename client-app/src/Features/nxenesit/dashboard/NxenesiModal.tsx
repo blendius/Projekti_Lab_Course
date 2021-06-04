@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import SemanticDatepicker from "react-semantic-ui-datepickers";
 import { Button, Form, Input, Modal } from "semantic-ui-react";
 
-import SemanticDatepicker from "react-semantic-ui-datepickers";
 interface ModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;

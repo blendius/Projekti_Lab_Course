@@ -1,7 +1,7 @@
-import { observer } from 'mobx-react-lite';
-import { ChangeEvent, useState } from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react';
-import { useStore } from '../../../app/stores/store';
+import { observer } from "mobx-react-lite";
+import React, { ChangeEvent, useState } from "react";
+import { Button, Form } from "semantic-ui-react";
+import { useStore } from "../../../app/stores/store";
 
 
 
@@ -39,7 +39,7 @@ export default observer(function LendaForm() {
     ]
 
     return (
-        <Segment clearing>
+        //<Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off'>
                 <Form.Input label='Lenda' placeholder='EmriLendes' value={lenda.emriLendes} name='emriLendes' onChange={handleInputChange} />
                 <Form.Input label='Pershkrimi' placeholder='Pershkrimi' value={lenda.pershkrimi} name='pershkrimi' onChange={handleInputChange} />
@@ -65,6 +65,6 @@ export default observer(function LendaForm() {
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
 
             </Form>
-        </Segment>
+        //</Segment>
     )
 })
