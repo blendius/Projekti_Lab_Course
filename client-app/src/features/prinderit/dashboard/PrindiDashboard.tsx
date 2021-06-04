@@ -23,7 +23,7 @@ export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrind
 
     return (
         <Grid>
-            <Grid.Column width='7'>
+            <Grid.Column width='10'>
                 <PrindiList 
                 prinderit={prinderit} 
                 selectedPrindi={selectPrindi} 
@@ -38,7 +38,7 @@ export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrind
 
             </Grid.Column>
            
-            <Grid.Column width='8'>
+            <Grid.Column width='6'>
                
                 {editMode &&
                     <PrindiForm closeForm={closeForm} prindi={selectedPrindi} createOrEdit={createOrEdit} submitting={submitting} />}

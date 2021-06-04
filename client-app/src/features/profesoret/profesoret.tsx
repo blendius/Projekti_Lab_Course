@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../app/layout/NavBar';
-import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
+import React, { Fragment, useEffect } from 'react';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 import { observer } from 'mobx-react-lite';
+import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
 
 
  function ShowProfessors() {

@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import { Button, Container, Grid } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import LendetDetails from '../details/LendetDetails';
-import LendetList from './LendetList';
-import LendetForm from '../form/LendaForm';
 import { useLocation } from 'react-router';
+import LendetList from './LendetList';
+import LendetDetails from '../details/LendetDetails';
+import LendetForm from '../form/LendaForm';
 
 
 
