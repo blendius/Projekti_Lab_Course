@@ -12,8 +12,13 @@ import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
 import ShowProfessors from '../../features/profesoret/profesoret';
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
+import LoginForm from "../../features/users/LoginForm";
+import ModalContainer from "../common/modals/ModalContainer";
 import { Nxenesi } from "../models/nxenesi";
 import NavBar from "./NavBar";
+
+
+
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -30,6 +35,7 @@ function App() {
   return (
     <Router>
       <NavBar />
+      <ModalContainer/>
       <Container style={{ marginTop: "7em" }}>
         <Switch>
           <Route path="/Profili">
@@ -44,6 +50,7 @@ function App() {
             <Route path="/prinderit" component={ShowPrinderit} />
             <Route exact path="/lendet" component={LendetDashboard} />
             <Route path="/lendet/:id" component={LendetDetails} />
+            <Route path='/login' component={LoginForm}/>  
             <Route
               path={["/krijoLende", "/manageLenda/:id"]}
               component={LendaForm}

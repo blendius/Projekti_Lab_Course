@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -10,7 +11,16 @@ namespace Application.Lendet
     {
         public class Command : IRequest
         {
-            public Lenda Lenda { get;set;} 
+            public Lenda Lenda { get; set; }
+        }
+
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Lenda).SetValidator(new LendetValidator());
+            }
         }
         public class Handler : IRequestHandler<Command>
         {

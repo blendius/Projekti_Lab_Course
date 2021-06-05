@@ -1,3 +1,4 @@
+import { ProfesoriFormValues } from './../models/profesori';
 import axios, { AxiosResponse } from "axios";
 import { Profesori } from "../models/profesori";
 import { Termin } from "../models/termini";
@@ -67,8 +68,12 @@ const Prinderit = {
   list: () => requests.get<Prindi[]>('/prindi'),
   details: (id: string) => requests.get<Prindi>(`/prindi/${id}`),
   create: (profesori: Prindi) => axios.post<void>('/prindi', profesori),
-  update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
-  delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
+  update: (profesori: Prindi) => axios.put<void>(`/prindi/${profesori.id}`, profesori),
+  delete: (id: string) => axios.delete<void>(`/prindi/${id}`)
+}
+const Account = {
+  current: () => requests.get(Profesori)('/account'),
+  login: (user: ProfesoriFormValues) => requests.get('account/login')
 }
 
 const agent = {

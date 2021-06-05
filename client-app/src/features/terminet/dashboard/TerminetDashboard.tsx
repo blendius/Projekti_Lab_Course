@@ -5,7 +5,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import TerminiDetails from "../details/TerminiDetails";
 import TerminiForm from "../form/TerminiForm";
-import TerminiList from "../dashboard/TerminetList"
+import TerminiList from "./TerminetList"
 
 export default observer(function TerminetDashboard() {
   const { terminiStore } = useStore();
