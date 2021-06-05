@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Lendet;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,6 +18,7 @@ namespace API.Controllers
 
             return await Mediator.Send(new List.Query());
         }
+        [Authorize]
         [HttpGet("{id}")] //postimi/id
         public async Task<ActionResult<Lenda>> GetLendet(Guid id)
         {
