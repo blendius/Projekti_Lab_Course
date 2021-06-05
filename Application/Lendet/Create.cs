@@ -23,13 +23,6 @@ namespace Application.Lendet
             }
         }
 
-        public class CommandValidator : AbstractValidator<Lenda>
-        {
-            public CommandValidator()
-            {
-                RuleFor(x=> x.EmriLendes).NotEmpty();
-            }
-        }
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;

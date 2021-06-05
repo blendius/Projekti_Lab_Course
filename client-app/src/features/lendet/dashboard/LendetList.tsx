@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import { SyntheticEvent, useState } from 'react';
 import { Button, Segment, Table, TableBody, TableCell, TableRow } from 'semantic-ui-react';
@@ -41,7 +42,7 @@ export default observer(function LendetList() {
                                 <TableCell >{lendet.emriLendes}</TableCell>
                                 <TableCell>{lendet.pershkrimi}</TableCell>
                                 <TableCell>{lendet.syllabusi}</TableCell>
-                                <TableCell>{lendet.dataEShtimit}</TableCell>
+                                <TableCell>{format(lendet.dataEShtimit!, 'dd MMM yyyy ')}</TableCell>
                                 <TableCell>
                                     <Button
                                         onClick={() => lendaStore.selectLenda(lendet.lendaId)}

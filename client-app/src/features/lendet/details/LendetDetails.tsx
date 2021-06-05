@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { Button, Card } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
+import { format } from 'date-fns';
 
 
 
@@ -24,7 +25,7 @@ export default observer(function LendetDetails() {
             <Card.Content>
                 <Card.Header>{lenda.emriLendes}</Card.Header>
                 <Card.Meta>
-                    <span>{lenda.dataEShtimit}</span>
+                    <span>{format(lenda.dataEShtimit!, 'dd MMM yyyy')}</span>
                 </Card.Meta>
                 <Card.Description>
                     {lenda.pershkrimi}

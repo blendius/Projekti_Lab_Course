@@ -71,10 +71,7 @@ const Prinderit = {
   update: (profesori: Prindi) => axios.put<void>(`/prindi/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/prindi/${id}`)
 }
-const Account = {
-  current: () => requests.get(Profesori)('/account'),
-  login: (user: ProfesoriFormValues) => requests.get('account/login')
-}
+
 
 const agent = {
   Profesoret,

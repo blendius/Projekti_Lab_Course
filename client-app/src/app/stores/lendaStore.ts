@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Lenda } from "../models/lenda";
 import { v4 as uuid } from 'uuid';
+import { format } from "date-fns";
 
 export default class lendaStore {
     // postimet: lenda[] = [];
@@ -9,7 +10,7 @@ export default class lendaStore {
     selectedLenda: Lenda | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
 
 
     constructor() {
@@ -17,7 +18,16 @@ export default class lendaStore {
     }
 
     get lendetByDate() {
-        return Array.from(this.lendaRegistry.values()).sort((a, b) => Date.parse(a.dataEShtimit) - Date.parse(b.dataEShtimit));
+        return Array.from(this.lendaRegistry.values()).sort((a, b) => a.dataEShtimit!.getTime() - b.dataEShtimit!.getTime());
+    }
+    get groupedLendet(){
+        return Object.entries(
+            this.lendetByDate.reduce((lendet,lenda) =>{
+                const date = format(lenda.dataEShtimit!,'dd MMM yyyy');
+                lendet[date] = lendet[date] ? [...lendet[date],lenda] :[lenda];
+                return lendet;
+            },{} as {[key:string]:Lenda[]})
+        )
     }
 
     loadLendet = async () => {
@@ -60,7 +70,7 @@ export default class lendaStore {
     }
 
     private setLenda = (lenda:Lenda)=>{
-        lenda.dataEShtimit = lenda.dataEShtimit.split('T')[0];
+        lenda.dataEShtimit = new Date(lenda.dataEShtimit!);
         this.lendaRegistry.set(lenda.lendaId, lenda);
     }
     private getLenda = (id:string ) =>{

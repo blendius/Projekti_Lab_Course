@@ -37,7 +37,7 @@ export default observer(function ProfesoriForm() {
         email: Yup.string().email('Shkruani nje email valide')
     })
 
-    const [profesori, setProfesori] = useState(initialState);
+    const [profesori] = useState(initialState);
 
     function handleFormSubmit(profesori:Profesori) {
         profesori.id ? updateProfessor(profesori) : createProfessor(profesori); 
