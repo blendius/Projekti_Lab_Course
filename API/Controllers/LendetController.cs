@@ -11,7 +11,7 @@ namespace API.Controllers
    // [AllowAnonymous]
     public class LendetController : BaseApiController
     {
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Lenda>>> GetLendet()
         {

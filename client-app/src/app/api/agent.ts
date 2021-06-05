@@ -5,6 +5,7 @@ import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from '../models/prindi';
+import { Admin, AdminFormValues } from '../models/user';
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -71,6 +72,10 @@ const Prinderit = {
   update: (profesori: Prindi) => axios.put<void>(`/prindi/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/prindi/${id}`)
 }
+const Account ={
+  current:() =>requests.get<Admin>('/account'),
+  login:(user:AdminFormValues) =>requests.post<Admin>('/account/login',user)
+}
 
 
 const agent = {
@@ -78,7 +83,8 @@ const agent = {
   Terminet,
   Postimet,
   Lendet,
-  Prinderit
+  Prinderit,
+  Account
 };
 
 export default agent;

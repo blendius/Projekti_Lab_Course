@@ -35,32 +35,35 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <NavBar />
-      <ModalContainer/>
-      <Container style={{ marginTop: "7em" }}>
-        <Switch>
-          <Route path="/Profili">
-            <NxenesiDashboard />
-          </Route>
-          <Route path="/">
-            <Route exact path="/" component={HomePage} />
-            <Route path="/profesoret" component={ShowProfessors} />
-            <Route path="/terminet" component={TerminetDashboard} />
-            <Route exact path="/postimet" component={PostimetDashboard} />
-            <Route path="/postimet/:id" component={PostimetDetails} />
-            <Route path="/prinderit" component={ShowPrinderit} />
-            <Route exact path="/lendet" component={LendetDashboard} />
-            <Route path="/lendet/:id" component={LendetDetails} />
-            <Route path='/login' component={LoginForm}/>  
-            <Route
-              path={["/krijoLende", "/manageLenda/:id"]}
-              component={LendaForm}
-            />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+    <>
+
+      <Route exact path='/' component={HomePage} />
+      <Route
+        path={'/(.+)'}
+        render={() => (
+          <>
+            <NavBar />
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+                <Route path="/Profili" component={NxenesiDashboard} />
+
+                <Route path="/profesoret" component={ShowProfessors} />
+                <Route path="/terminet" component={TerminetDashboard} />
+                <Route exact path="/postimet" component={PostimetDashboard} />
+                <Route path="/postimet/:id" component={PostimetDetails} />
+                <Route path="/prinderit" component={ShowPrinderit} />
+                <Route exact path="/lendet" component={LendetDashboard} />
+                <Route path="/lendet/:id" component={LendetDetails} />
+                <Route path='/login' component={LoginForm} />
+                <Route
+                  path={["/krijoLende", "/manageLenda/:id"]}
+                  component={LendaForm} />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
+    </>
   );
 }
 
