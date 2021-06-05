@@ -8,3 +8,9 @@ export interface Profesori {
     lenda: string;
     roli: string;
 }
+export interface ProfesoriFormValues{
+    email:string;
+    fjalkalimi:string;
+    name:string;
+       
+}
