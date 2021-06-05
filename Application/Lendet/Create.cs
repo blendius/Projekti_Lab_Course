@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -11,6 +12,14 @@ namespace Application.Lendet
         public class Command : IRequest
         {
             public Lenda Lenda { get;set;} 
+        }
+
+        public class CommandValidator : AbstractValidator<Lenda>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x=> x.EmriLendes).NotEmpty();
+            }
         }
         public class Handler : IRequestHandler<Command>
         {

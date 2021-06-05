@@ -15,6 +15,7 @@ export default function NavBar() {
           />
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
+        <Menu.Item as={NavLink} to="/paneli" name='Paneli'/>
         <Menu.Item as={NavLink} to="/profesoret" name="Profesoret" />
         <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/lendet" name="Lendet" />

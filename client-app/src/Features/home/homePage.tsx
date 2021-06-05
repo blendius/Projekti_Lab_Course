@@ -11,7 +11,7 @@ export default function HomePage(){
                 
                 </Header>
                 <Header as='h2' content='Mire se vini'/>
-                <Button as={Link} to='/profesoret' size='huge' inverted>
+                <Button as={Link} to='/paneli' size='huge' inverted>
                     Vazhdo Tek Kryefaqja!
                 </Button>
             </Container>
