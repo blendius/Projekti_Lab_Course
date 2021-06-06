@@ -1,6 +1,8 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import { history } from '../../index';
 import agent from "../api/agent";
 import { Admin, AdminFormValues } from "../models/user";
+import { store } from "./store";
 
 export default class AdminStore {
   user: Admin | null = null;
@@ -15,9 +17,26 @@ export default class AdminStore {
   login = async (creds: AdminFormValues) => {
     try {
       const user = await agent.Account.login(creds);
-      console.log(user);
+      store.commonStore.setToken(user.token);
+      runInAction(() => this.user = user);
+      history.push('/paneli')
+      store.modalStore.closeModal();
     } catch (error) {
       throw error;
     }
   };
+  logout = () => {
+    store.commonStore.setToken(null);
+    window.localStorage.removeItem('jwt');
+    this.user = null;
+    history.push('/');
+  }
+  getUser = async () => {
+    try {
+      const user = await agent.Account.current();
+      runInAction(() => this.user = user);
+    }catch(error){
+      console.log(error);
+    }
+  }
 }

@@ -22,7 +22,7 @@ export default observer (function LendetDashboard() {
         
       }, [lendaStore])
     
-      if (lendaStore.loadingInitial) return <LoadingComponent content='Loading app' />
+      if (lendaStore.loadingInitial) return <LoadingComponent content='Lendet duke u Ngarkuar...' />
 
     return (
         <Grid>

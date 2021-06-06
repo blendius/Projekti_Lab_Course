@@ -1,4 +1,5 @@
 import axios from "axios";
+import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -23,11 +24,27 @@ import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboa
 import LoginForm from "../../features/users/LoginForm";
 import ModalContainer from "../common/modals/ModalContainer";
 import { Nxenesi } from "../models/nxenesi";
+import { useStore } from "../stores/store";
+import LoadingComponent from "./LoadingComponent";
 import NavBar from "./NavBar";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
+  const { commonStore, adminStore } = useStore();
+
+
+  useEffect(() => {
+    if (commonStore.token) {
+      adminStore.getUser().finally(() => commonStore.setAppLoaded())
+    } else {
+      commonStore.setAppLoaded();
+    }
+
+  }, [commonStore, adminStore])
+
+
+
   useEffect(() => {
     axios
       .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
@@ -36,10 +53,13 @@ function App() {
         console.log(response);
       });
   }, []);
+  
+  if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
   return (
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer/>
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -71,4 +91,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
