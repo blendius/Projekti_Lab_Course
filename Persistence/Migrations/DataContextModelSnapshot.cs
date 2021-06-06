@@ -39,7 +39,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Klubi");
+                    b.ToTable("Klubet");
                 });
 
             modelBuilder.Entity("Domain.Lenda", b =>

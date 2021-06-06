@@ -13,6 +13,7 @@ import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import LendetDetails from "../../features/lendet/details/LendetDetails";
 import HomePage from "../../features/home/homePage";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
+import KlubiDashboard from "../../features/klubet/dashboard/KlubiDashboard";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           path={["/krijoPostime", "/managePostimi/:id"]}
           component={PostimiForm}
         />
-
+        <Route path='/klubet' component={KlubiDashboard}/>
         <Route exact path="/lendet" component={LendetDashboard} />
         <Route path="/lendet/:id" component={LendetDetails} />
         <Route

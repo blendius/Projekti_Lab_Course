@@ -3,7 +3,7 @@ export interface Klubi {
     llojiKlubit: string;
     emriKlubit: string;
     pershkrimi: string;
-    nrAntareve: string;
+    nrAntareve: number;
     udheheqesi: string;
     dataRregjistrimit: string;
 }

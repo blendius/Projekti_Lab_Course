@@ -4,6 +4,7 @@ import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from '../models/prindi';
+import { Klubi } from "../models/klubi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -70,13 +71,21 @@ const Prinderit = {
   update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
   delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
 }
+const Klubet = {
+  list: () => requests.get<Klubi[]>('/klubet'),
+  details: (id: string) => requests.get<Klubi>(`/klubet/${id}`),
+  create: (klubi: Klubi) => axios.post<void>('/klubet', klubi),
+  update: (klubi: Klubi)=> axios.put<void>(`/klubet/${klubi.id}`, klubi), 
+  delete: (id:string)=> axios.delete<void> (`/klubet/${id}`)
+}
 
 const agent = {
   Profesoret,
   Terminet,
   Postimet,
   Lendet,
-  Prinderit
+  Prinderit,
+  Klubet
 };
 
 export default agent;

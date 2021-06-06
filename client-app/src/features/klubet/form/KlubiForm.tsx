@@ -19,7 +19,7 @@ export default observer(function KlubiForm() {
         emriKlubit: '',
         llojiKlubit: '',
         pershkrimi: '',
-        nrAntareve: '',
+        nrAntareve: 0,
         udheheqesi: '',
         dataRregjistrimit: '', 
      
