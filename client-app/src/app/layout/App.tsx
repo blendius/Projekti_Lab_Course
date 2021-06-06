@@ -1,26 +1,29 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  useHistory,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Container } from "semantic-ui-react";
 
-import HomePage from '../../features/home/homePage';
-import LendetDashboard from '../../features/lendet/dashboard/LendetDashboard';
-import LendetDetails from '../../features/lendet/details/LendetDetails';
-import LendaForm from '../../features/lendet/form/LendaForm';
-import NxenesiDashboard from '../../features/nxenesit/dashboard/NxenesiDashboard';
-import Paneli from '../../features/paneli/Paneli';
-import PostimetDashboard from '../../features/postimet/dashboard/PostimetDashboard';
-import PostimetDetails from '../../features/postimet/details/PostimetDetails';
-import ShowPrinderit from '../../features/prinderit/showPrindi';
-import ShowProfessors from '../../features/profesoret/profesoret';
+import HomePage from "../../features/home/homePage";
+import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
+import LendetDetails from "../../features/lendet/details/LendetDetails";
+import LendaForm from "../../features/lendet/form/LendaForm";
+import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
+import Paneli from "../../features/paneli/Paneli";
+import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
+import PostimetDetails from "../../features/postimet/details/PostimetDetails";
+import ShowPrinderit from "../../features/prinderit/showPrindi";
+import ShowProfessors from "../../features/profesoret/profesoret";
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import LoginForm from "../../features/users/LoginForm";
 import ModalContainer from "../common/modals/ModalContainer";
 import { Nxenesi } from "../models/nxenesi";
 import NavBar from "./NavBar";
-
-
-
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -36,10 +39,10 @@ function App() {
 
   return (
     <>
-
-      <Route exact path='/' component={HomePage} />
+      <ToastContainer position="bottom-right" hideProgressBar />
+      <Route exact path="/" component={HomePage} />
       <Route
-        path={'/(.+)'}
+        path={"/(.+)"}
         render={() => (
           <>
             <NavBar />
@@ -54,10 +57,11 @@ function App() {
                 <Route path="/prinderit" component={ShowPrinderit} />
                 <Route exact path="/lendet" component={LendetDashboard} />
                 <Route path="/lendet/:id" component={LendetDetails} />
-                <Route path='/login' component={LoginForm} />
+                <Route path="/login" component={LoginForm} />
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
-                  component={LendaForm} />
+                  component={LendaForm}
+                />
               </Switch>
             </Container>
           </>

@@ -5,6 +5,7 @@ import lendaStore from "./lendaStore";
 import PostimiStore from "./postimetStore";
 import ModalStore from "./modalStore";
 import AdminStore from "./adminStore";
+import CommonStore from "./commonStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -12,7 +13,8 @@ interface Store {
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
   modalStore: ModalStore;
-  adminStore:AdminStore;
+  adminStore: AdminStore;
+  commonStore: CommonStore;
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
@@ -20,7 +22,8 @@ export const store: Store = {
   postimiStore: new PostimiStore(),
   lendaStore: new lendaStore(),
   modalStore: new ModalStore(),
-  adminStore:new AdminStore()
+  adminStore: new AdminStore(),
+  commonStore: new CommonStore(),
 };
 
 export const StoreContext = createContext(store);
