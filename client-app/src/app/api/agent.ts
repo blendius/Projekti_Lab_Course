@@ -1,4 +1,3 @@
-import { ProfesoriFormValues } from "./../models/profesori";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Profesori } from "../models/profesori";
 import { Termin } from "../models/termini";
@@ -6,10 +5,8 @@ import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from "../models/prindi";
 import { Admin, AdminFormValues } from "../models/user";
-import { ToastsStore } from "react-toasts";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
-import { config } from "process";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {

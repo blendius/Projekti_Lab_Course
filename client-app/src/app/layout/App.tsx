@@ -1,9 +1,7 @@
 import axios from "axios";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  BrowserRouter as Router,
-  useHistory,
   Route,
   Switch,
 } from "react-router-dom";
@@ -15,7 +13,6 @@ import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
 import LendetDetails from "../../features/lendet/details/LendetDetails";
 import LendaForm from "../../features/lendet/form/LendaForm";
 import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
-import Paneli from "../../features/paneli/Paneli";
 import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import ShowPrinderit from "../../features/prinderit/showPrindi";

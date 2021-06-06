@@ -18,7 +18,7 @@ export default observer(function TerminiList() {
 
   return (
     <Segment clearing>
-      <Item.Group divided relaxed inverted>
+      <Item.Group divided relaxed >
         {terminetByDate.map((termini) => (
           <Item key={termini.id}>
             <Item.Content>
