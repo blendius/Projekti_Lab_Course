@@ -29,3 +29,7 @@ p {
 i.icon:before{
     vertical-align: middle;
 }
+
+.profileData{
+    margin-bottom: 20px !important;
+}

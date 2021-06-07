@@ -9,14 +9,17 @@ import MySelectInput from '../../../app/common/form/MySelectInput';
 import { Profesori } from '../../../app/models/profesori';
 import { gradaOptions, lendaOptions } from '../../../app/common/form/options';
 
+interface Props{
+    Profesori: Profesori |undefined;
+}
 
 
-export default observer(function ProfesoriForm() {
+export default observer(function ProfesoriForm({Profesori}:Props) {
 
     const { profesoriStore } = useStore();
-    const { selectedProfessor, closeForm, loading,updateProfessor,createProfessor } = profesoriStore;
+    const {  closeForm, loading,updateProfessor,createProfessor } = profesoriStore;
 
-    const initialState = selectedProfessor ?? {
+    const initialState = Profesori ?? {
         id: '',
         name: '',
         email: '',

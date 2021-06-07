@@ -19,6 +19,8 @@ export default function NavBar() {
         <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/prinderit" name="Prinderit" />
+        
+        <Menu.Item as={NavLink} to="/profProfile" name="prof profile" />
         <Menu.Item style={{ marginInlineStart: "auto" }}>
           <Link to="/Profili">
             <div className="ui vertical animated button">

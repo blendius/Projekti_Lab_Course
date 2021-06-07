@@ -15,6 +15,7 @@ import ShowProfessors from "../../Features/profesoret/profesoret";
 import LendetDashboard from "../../Features/lendet/dashboard/LendetDashboard";
 import LendetDetails from "../../Features/lendet/details/LendetDetails";
 import LendaForm from "../../Features/lendet/form/LendaForm";
+import ProfProfileDashboard from "../../Features/profesoret/profProfile/ProfProfileDashboard";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -49,7 +50,9 @@ function App() {
               path={["/krijoLende", "/manageLenda/:id"]}
               component={LendaForm}
             />
+          <Route path="/profProfile" component={ProfProfileDashboard} />
           </Route>
+          
         </Switch>
       </Container>
     </Router>

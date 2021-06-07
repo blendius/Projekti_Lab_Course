@@ -4,8 +4,8 @@ import { Profesori } from "../models/profesori";
 import { v4 as uuid } from 'uuid';
 
 export default class ProfesoriStore {
-   
-    professorRegistry= new Map<string, Profesori>();
+
+    professorRegistry = new Map<string, Profesori>();
     selectedProfessor: Profesori | undefined = undefined;
     editMode = false;
     loading = false;
@@ -16,9 +16,9 @@ export default class ProfesoriStore {
         makeAutoObservable(this)
     }
 
-    get profesoretByDate(){
-        return Array.from(this.professorRegistry.values()).sort((a,b)=>Date.parse(a.dataRegjistrimit)- Date.parse(b.dataRegjistrimit))
-        }
+    get profesoretByDate() {
+        return Array.from(this.professorRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
+    }
 
     loadProfesoret = async () => {
         try {
@@ -26,7 +26,7 @@ export default class ProfesoriStore {
 
             profesoret.forEach(profesori => {
                 profesori.dataRegjistrimit = profesori.dataRegjistrimit.split('T')[0];
-                this.professorRegistry.set(profesori.id,profesori);
+                this.professorRegistry.set(profesori.id, profesori);
             })
             this.setLoadingInitial(false);
         }
@@ -63,7 +63,7 @@ export default class ProfesoriStore {
         try {
             await agent.Profesoret.create(profesori);
             runInAction(() => {
-                this.professorRegistry.set(profesori.id,profesori)
+                this.professorRegistry.set(profesori.id, profesori)
                 this.selectedProfessor = profesori;
                 this.editMode = false;
                 this.loading = false
@@ -82,10 +82,12 @@ export default class ProfesoriStore {
         try {
             await agent.Profesoret.update(profesori);
             runInAction(() => {
-               this.professorRegistry.set(profesori.id,profesori);
+                this.professorRegistry.set(profesori.id, profesori);
                 this.selectedProfessor = profesori;
                 this.editMode = false;
-                this.loading = false
+                this.loading = false;
+
+                window.location.reload();
 
             })
         } catch (error) {
@@ -100,15 +102,15 @@ export default class ProfesoriStore {
         this.loading = true;
         try {
             await agent.Profesoret.delete(id);
-            runInAction(()=>{
-               this.professorRegistry.delete(id);
-                if (this.selectedProfessor?.id===id) this.cancelSelectedProfessor();
-                this.loading=false;
+            runInAction(() => {
+                this.professorRegistry.delete(id);
+                if (this.selectedProfessor?.id === id) this.cancelSelectedProfessor();
+                this.loading = false;
             })
         } catch (error) {
             console.log(error);
-            runInAction(()=>{
-                this.loading=false;
+            runInAction(() => {
+                this.loading = false;
             })
         }
     }

@@ -13,19 +13,18 @@ export default observer( function ProfesoriDashboard() {
     const { selectedProfessor, editMode } = profesoriStore
     return (
         <Grid>
-            <Grid.Column width='12'>
+            <Grid.Column width='6'>
                 <ProfesoriList />
- 
+                <Button onClick={() => profesoriStore.openForm()} positive content="Shto Profesorin" />
+
 
             </Grid.Column>
-            
-            <Grid.Column width='4'>
-             <Button onClick={() => profesoriStore.openForm()} positive content="Shto Profesorin" size='big' />
-
+            <Grid.Column width='2'></Grid.Column>
+            <Grid.Column width='8'>
                 {selectedProfessor && !editMode &&
                     <ProfesoriDetais />}
                 {editMode &&
-                    <ProfesoriForm />}
+                    <ProfesoriForm Profesori={selectedProfessor} />}
                 
 
             </Grid.Column>

@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../app/layout/NavBar';
+import React, { Fragment, useEffect } from 'react';
 import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
