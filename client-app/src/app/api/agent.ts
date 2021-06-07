@@ -64,11 +64,11 @@ const Lendet = {
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
 const Prinderit = {
-  list: () => requests.get<Prindi[]>('/prindi'),
-  details: (id: string) => requests.get<Prindi>(`/prindi/${id}`),
-  create: (profesori: Prindi) => axios.post<void>('/prindi', profesori),
-  update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
-  delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
+  list: () => requests.get<Prindi[]>('/prinderit'),
+  details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
+  create: (profesori: Prindi) => axios.post<void>('/prinderit', profesori),
+  update: (profesori: Prindi)=> axios.put<void>(`/prinderit/${profesori.id}`, profesori), 
+  delete: (id:string)=> axios.delete<void> (`/prinderit/${id}`)
 }
 
 const agent = {
