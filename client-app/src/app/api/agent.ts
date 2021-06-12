@@ -4,6 +4,8 @@ import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from '../models/prindi';
+import { Nxenesi } from "../models/nxenesi";
+import { CustomNxenesi } from "../models/customNxenesi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -70,13 +72,21 @@ const Prinderit = {
   update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
   delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
 }
+const Nxenesit = {
+  list: () => requests.get<Nxenesi[]>('/nxenesi'),
+  details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
+  create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
+  update: (nxenesi: CustomNxenesi) => axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi),
+  delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`)
+}
 
 const agent = {
   Profesoret,
   Terminet,
   Postimet,
   Lendet,
-  Prinderit
+  Prinderit,
+  Nxenesit
 };
 
 export default agent;

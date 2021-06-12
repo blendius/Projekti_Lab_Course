@@ -68,8 +68,9 @@ namespace API.Controllers
             
             //checking if the user wrote their old password correctly
             bool samePassword = nxenesi.CurrentPassword == nxenesiAktual.Password;
-            bool passwordValid = nxenesi.CurrentPassword.Trim() != "" && nxenesi.NewPassword.Trim() != "" && 
-                                    nxenesi.ConfirmPassword.Trim() != "" && nxenesi.ConfirmPassword == nxenesi.NewPassword 
+            
+            bool passwordValid = nxenesi.CurrentPassword != "" && nxenesi.NewPassword != "" && 
+                                    nxenesi.ConfirmPassword != "" && nxenesi.ConfirmPassword == nxenesi.NewPassword 
                                     && samePassword;
         
             //to do: store hashed passwords 

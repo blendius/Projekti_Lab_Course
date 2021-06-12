@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Icon, Menu } from "semantic-ui-react";
+import { Button, Container, Icon, Menu, MenuItem } from "semantic-ui-react";
 import "./styles.css";
 import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 
@@ -19,6 +19,7 @@ export default function NavBar() {
         <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/prinderit" name="Prinderit" />
+        <Menu.Item as={NavLink} to="/nxenesit" name="Nxenesit" />
         <Menu.Item style={{ marginInlineStart: "auto" }}>
           <Link to="/Profili">
             <div className="ui vertical animated button">
