@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using Application.Professor;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace API.Controllers
 {
+
     public class ProfesoriController : BaseApiController
     {
       
@@ -33,13 +35,13 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-         public async Task <IActionResult> EditProfessor(Guid id ,Profesori profesori)
+         public async Task <IActionResult> EditProfessor(string id ,Profesori profesori)
         {
             profesori.Id=id;
             return Ok(await Mediator.Send(new Edit.Command{Profesori=profesori}));
         }
         [HttpDelete("{id}")]
-        public async Task <IActionResult> DeleteProfessor(Guid id)
+        public async Task <IActionResult> DeleteProfessor(string id)
         {
             return Ok(await Mediator.Send(new Delete.Command{Id=id}));
         }

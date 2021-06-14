@@ -3,9 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Header, Image, Segment } from 'semantic-ui-react';
 import { useStore } from '../../app/stores/store';
+import LoginFormProf from '../profesoret/form/LoginFormProf';
+import RegisterFormProf from '../profesoret/form/RegisterFormProf';
 import LoginForm from '../users/LoginForm';
 export default observer(function HomePage() {
-    const { adminStore, modalStore } = useStore();
+    const { adminStore, modalStore, profesoriStore } = useStore();
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
@@ -23,10 +25,27 @@ export default observer(function HomePage() {
                     </>
                 ) : (<>
                     <Button onClick={() => modalStore.openModal(<LoginForm />)} to='/login' size='huge' inverted>
-                        Kyqu!
+                        Kyqu si admin!
                     </Button>
                 </>
                 )}
+                {profesoriStore.isLoggedIn ? (
+                    <>
+                        <Header as='h2' content='Mire se vini' />
+                        <Button as={Link} to='/paneli' size='huge' inverted>
+                            Vazhdo Tek Profili!
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                    <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
+                        Kyqu si Profesor!
+                    </Button>
+                    <Button onClick={()=>modalStore.openModal(<RegisterFormProf />)} size='huge' inverted>
+                       regjistro nje profesor!
+                    </Button>
+                    </>
+                )} 
 
 
             </Container>

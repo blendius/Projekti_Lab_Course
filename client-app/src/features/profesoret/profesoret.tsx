@@ -7,7 +7,18 @@ import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
 
  function ShowProfessors() {
 
-  const{profesoriStore}=useStore();
+  const{profesoriStore, commonStore}=useStore();
+
+    
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+  //   } else {
+  //     commonStore.setAppLoaded();
+  //   }
+
+  // }, [commonStore, profesoriStore])
+
 
  
 

@@ -25,7 +25,7 @@ export default observer(function LendetList() {
 
         <Segment.Group>
             <Segment className='lendetlist'>
-                <Table celled compact border>
+                <Table celled compact >
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell >Emri i Lendes</Table.HeaderCell>

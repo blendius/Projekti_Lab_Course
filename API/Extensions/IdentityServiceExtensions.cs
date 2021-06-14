@@ -20,6 +20,12 @@ namespace API.Extensions
             }).AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppAdmin>>();
 
+            services.AddIdentityCore<Profesori>(opt =>
+          {
+              opt.Password.RequireNonAlphanumeric = false;
+          }).AddEntityFrameworkStores<DataContext>()
+          .AddSignInManager<SignInManager<Profesori>>();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -16,6 +16,7 @@ import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard
 import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
+import LoginFormProf from "../../features/profesoret/form/LoginFormProf";
 import ShowProfessors from "../../features/profesoret/profesoret";
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import LoginForm from "../../features/users/LoginForm";
@@ -28,17 +29,26 @@ import NavBar from "./NavBar";
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const { commonStore, adminStore } = useStore();
+  const { commonStore, adminStore , profesoriStore } = useStore();
 
-
+  
   useEffect(() => {
     if (commonStore.token) {
       adminStore.getUser().finally(() => commonStore.setAppLoaded())
-    } else {
+      profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+    }  else {
       commonStore.setAppLoaded();
     }
+  }, [commonStore, adminStore, profesoriStore])
 
-  }, [commonStore, adminStore])
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+  //   } else {
+  //     commonStore.setAppLoaded();
+  //   }
+
+  // }, [commonStore, profesoriStore])
 
 
 
@@ -75,6 +85,7 @@ function App() {
                 <Route exact path="/lendet" component={LendetDashboard} />
                 <Route path="/lendet/:id" component={LendetDetails} />
                 <Route path="/login" component={LoginForm} />
+                <Route path="/loginProf" component={LoginFormProf} />
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
                   component={LendaForm}

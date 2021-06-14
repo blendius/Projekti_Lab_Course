@@ -7,6 +7,7 @@ import { Prindi } from "../models/prindi";
 import { Admin, AdminFormValues } from "../models/user";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
+import { Professor, ProfFormValues } from "../models/professor";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -96,9 +97,19 @@ const Prinderit = {
   delete: (id: string) => axios.delete<void>(`/prindi/${id}`),
 };
 const Account = {
-  current: () => requests.get<Admin>("/account"),
+  current: () => requests.get<Admin>("/account") ,
   login: (user: AdminFormValues) =>
     requests.post<Admin>("/account/login", user),
+};
+
+const AccountProf = {
+  currentProf: () => requests.get<Professor>("/account/currentProf"),
+
+  login: (prof: ProfFormValues) =>
+    requests.post<Professor>("/account/loginProf", prof),
+  register: (prof: ProfFormValues) =>
+    requests.post<Professor>("/account/registerProf", prof),
+
 };
 
 const agent = {
@@ -108,6 +119,7 @@ const agent = {
   Lendet,
   Prinderit,
   Account,
+  AccountProf 
 };
 
 export default agent;
