@@ -41,9 +41,7 @@ export default observer(function HomePage() {
                     <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
                         Kyqu si Profesor!
                     </Button>
-                    <Button onClick={()=>modalStore.openModal(<RegisterFormProf />)} size='huge' inverted>
-                       regjistro nje profesor!
-                    </Button>
+                    
                     </>
                 )} 
 

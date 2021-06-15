@@ -13,6 +13,7 @@ import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
 import LendetDetails from "../../features/lendet/details/LendetDetails";
 import LendaForm from "../../features/lendet/form/LendaForm";
 import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
+import Paneli from "../../features/paneli/Paneli";
 import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
@@ -29,17 +30,17 @@ import NavBar from "./NavBar";
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const { commonStore, adminStore , profesoriStore } = useStore();
+  const { commonStore, adminStore, profesoriStore } = useStore();
 
-  
-  useEffect(() => {
-    if (commonStore.token) {
-      adminStore.getUser().finally(() => commonStore.setAppLoaded())
-      profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-    }  else {
-      commonStore.setAppLoaded();
-    }
-  }, [commonStore, adminStore, profesoriStore])
+
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
+  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+  //   }  else {
+  //     commonStore.setAppLoaded();
+  //   }
+  // }, [commonStore, adminStore, profesoriStore])
 
   // useEffect(() => {
   //   if (commonStore.token) {
@@ -49,6 +50,7 @@ function App() {
   //   }
 
   // }, [commonStore, profesoriStore])
+  commonStore.setAppLoaded();
 
 
 
@@ -60,13 +62,13 @@ function App() {
         console.log(response);
       });
   }, []);
-  
+
   if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
   return (
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
-      <ModalContainer/>
+      <ModalContainer />
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -86,6 +88,8 @@ function App() {
                 <Route path="/lendet/:id" component={LendetDetails} />
                 <Route path="/login" component={LoginForm} />
                 <Route path="/loginProf" component={LoginFormProf} />
+                <Route path="/paneli" component={Paneli} />
+
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
                   component={LendaForm}

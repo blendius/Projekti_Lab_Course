@@ -12,7 +12,7 @@ export default observer(function RegisterFormProf() {
 
     return (
         <Formik
-            initialValues={{ displayName: '', username: '', email: '', password: '', error: null }}
+            initialValues={{ displayName: '', username: '', email: '', password: '',GradaAkademike:'',DataRegjistrimit:'', error: null }}
             onSubmit={(values, { setErrors }) => profesoriStore.register(values).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
                 displayName: Yup.string().required(),
@@ -28,7 +28,8 @@ export default observer(function RegisterFormProf() {
                     <MyTextInput name='displayName' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
-                    <MyTextInput name='roli' placeholder='roli' />
+                    <MyTextInput name='GradaAkademike' placeholder='GradaAkademike' />
+                    <MyTextInput name='DataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
                     <Button disabled={!isValid|| !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
                 </Form>

@@ -3,6 +3,8 @@ export interface Professor{
     displayName: string;
     token: string;
     image?:string;
+    GradaAkademike?:string;
+    DataRegjistrimit?:string;
 }
 
 export interface ProfFormValues{
@@ -10,5 +12,6 @@ export interface ProfFormValues{
     password:string;
     displayName?: string;
     username?:string;
-    roli?:number;
+    GradaAkademike?:string;
+    DataRegjistrimit?:string;
 }

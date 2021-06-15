@@ -10,5 +10,6 @@ namespace Domain
         public DateTime DataRegjistrimit { get; set; }
         public string Lenda {get; set; } //later to be referenced from table Lenda
         public int Roli { get; set; }
+        
     }
 }

@@ -1,3 +1,4 @@
+using System;
 namespace API.DTOs
 {
     public class ProfDto
@@ -6,5 +7,7 @@ namespace API.DTOs
         public string Token { get; set; }
         public string Username { get; set; }
         public string Image { get; set; }
+        public DateTime DataRegjistrimit { get; set; }
+        public string GradaAkademike { get; set; }
     }
 }

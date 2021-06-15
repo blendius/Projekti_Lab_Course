@@ -76,7 +76,9 @@ namespace API.Controllers
             {
                 Name = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Username
+                UserName = registerDto.Username,
+                GradaAkademike=registerDto.GradaAkademike,
+                DataRegjistrimit=registerDto.DataRegjistrimit
             };
 
             var result = await _userManagerProf.CreateAsync(prof, registerDto.Password);
@@ -125,7 +127,9 @@ namespace API.Controllers
                 DisplayName = prof.Name,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
-                Username = prof.UserName
+                Username = prof.UserName,
+                GradaAkademike=prof.GradaAkademike,
+                DataRegjistrimit=prof.DataRegjistrimit
             };
         }
     }
