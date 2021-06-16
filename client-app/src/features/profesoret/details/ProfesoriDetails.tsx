@@ -22,11 +22,11 @@ export default observer(function ProfesoriDetais() {
     return (
         <List>
             <div className='details'>
-                <Image src={`/images/ProfImg/${profesori.name}.jpg`} />
+                <Image src={`/images/ProfImg/${profesori.displayName}.jpg`} />
                 <Card.Content>
                     <Card.Description className='teDhena'>
-                        <Card.Header className='Emri'>{profesori.name}</Card.Header>
-                        <div className="data"><label >Lenda:  </label>  {profesori.lenda}</div>
+                        <Card.Header className='Emri'>{profesori.email}</Card.Header>
+                        <div className="data"><label >Lenda:  </label>  </div>
                         <div className="data"><label >Email zyrtare:  </label>  {profesori.email}</div>
                         <div className="data"><label >Grada Akademike:</label> {profesori.gradaAkademike}</div>
                         <div className="data"><label>I punesuar nga data: :</label> {profesori.dataRegjistrimit}</div>

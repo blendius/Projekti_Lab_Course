@@ -58,10 +58,10 @@ const requests = {
 };
 
 const Profesoret = {
-  list: () => requests.get<Profesori[]>("/profesori"),
-  details: (id: string) => requests.get<Profesori>(`/profesori/${id}`),
+  list: () => requests.get<Professor[]>("/profesori"),
+  details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
   create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
-  update: (profesori: Profesori) =>
+  update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
 };

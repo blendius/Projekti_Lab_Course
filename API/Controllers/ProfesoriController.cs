@@ -23,7 +23,7 @@ namespace API.Controllers
         }
         
         [HttpGet("{id}")]   
-        public async Task<ActionResult<Profesori>> GetProfessor(Guid id)
+        public async Task<ActionResult<Profesori>> GetProfessor(string id)
         {
             return await Mediator.Send(new Details.Query{Id=id});
         }

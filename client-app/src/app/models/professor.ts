@@ -1,17 +1,20 @@
-export interface Professor{
+export interface Professor {
+    id:string;
     username: string;
     displayName: string;
+    email: string;
     token: string;
-    image?:string;
-    GradaAkademike?:string;
-    DataRegjistrimit?:string;
+    image?: string;
+    gradaAkademike: string;
+    dataRegjistrimit: string;
 }
 
-export interface ProfFormValues{
+export interface ProfFormValues {
+    id: string;
     email: string;
-    password:string;
+    password: string;
     displayName?: string;
-    username?:string;
-    GradaAkademike?:string;
-    DataRegjistrimit?:string;
+    username?: string;
+    gradaAkademike?: string;
+    dataRegjistrimit?: string;
 }

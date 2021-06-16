@@ -8,6 +8,7 @@ import MySelectInput from '../../../app/common/form/MySelectInput';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { gradaOptions, lendaOptions } from '../../../app/common/form/options';
 import { Profesori } from '../../../app/models/profesori';
+import { Professor } from '../../../app/models/professor';
 import { useStore } from '../../../app/stores/store';
 
 
@@ -15,50 +16,48 @@ import { useStore } from '../../../app/stores/store';
 export default observer(function ProfesoriForm() {
 
     const { profesoriStore } = useStore();
-    const { selectedProfessor, closeForm, loading,updateProfessor,createProfessor } = profesoriStore;
+    const { selectedProfessor, closeForm, loading, updateProfessor } = profesoriStore;
 
     const initialState = selectedProfessor ?? {
         id: '',
         name: '',
         email: '',
-        fjalkalimi: '',
+        username: '',
+        displayName: '',
+        password: '',
         gradaAkademike: '',
         dataRegjistrimit: '',
-        lenda: '',
-        roli: ''
+        token: ''
+
     }
     const validationSchema = Yup.object({
-        name: Yup.string().required('Emri duhet te plotesohet !'),
-        lenda: Yup.string().required('Lenda duhet te plotesohet!'),
-        fjalkalimi: Yup.string().required('Fjalkalimi duhet te plotesohet!'),
-        gradaAkademike: Yup.string().required('GradaAkademike duhet te plotesohet!'),
-        dataRegjistrimit: Yup.string().required('Data duhet te plotesohet!'),
-        roli: Yup.string().required('Roli duhet te plotesohet!'),
-        email: Yup.string().email('Shkruani nje email valide')
+        displayName: Yup.string().required(),
+        username: Yup.string().required(),
+        email: Yup.string().required().email(),
+        password: Yup.string().required(),
     })
 
     const [profesori] = useState(initialState);
 
-    function handleFormSubmit(profesori:Profesori) {
-        profesori.id ? updateProfessor(profesori) : createProfessor(profesori); 
+    function handleFormSubmit(profesori: Professor) {
+        updateProfessor(profesori);
     }
-   
+
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
-                enableReinitialize initialValues={profesori}
+                enableReinitialize initialValues={initialState}
                 onSubmit={values => handleFormSubmit(values)}>
-                {({ handleSubmit, isValid, isSubmitting,dirty }) => (
+                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MyTextInput type='text' name='name' placeholder='Emri'></MyTextInput>
-                        <MyTextInput type='text' placeholder='Email' name='email' />
-                        <MySelectInput options={gradaOptions} placeholder='Grada Akademike' name='gradaAkademike' />
-                        <MyTextInput type='date' placeholder='Data e Regjistrimit' name='dataRegjistrimit' />
-                        <MySelectInput options={lendaOptions} placeholder='Lenda' name='lenda' />
-                        <MyTextInput type='password' placeholder='Fjalkalimi' name='fjalkalimi' />
-                        <MyTextInput type='text' placeholder='roli' name='roli' />
-                        <Button disabled={isSubmitting || !dirty|| !isValid}
-                        loading={loading} floated='right' positive type='submit' content='Submit' />
+                        <MyTextInput name='email' placeholder='Email' />
+                        <MyTextInput name='displayName' placeholder='Display Name' />
+                        <MyTextInput name='username' placeholder='Username' />
+                        <MyTextInput name='password' placeholder='Password' type='password' />
+                        <MyTextInput name='GradaAkademike' placeholder='GradaAkademike' />
+                        <MyTextInput name='DataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
+                        <Button disabled={isSubmitting || !dirty || !isValid}
+                            loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
