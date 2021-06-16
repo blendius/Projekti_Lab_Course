@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction, reaction } from "mobx";
 import agent from "../api/agent";
-import { Profesori } from "../models/profesori";
 import { v4 as uuid } from 'uuid';
 import { Professor, ProfFormValues } from "../models/professor";
 import { store } from "./store";
@@ -56,10 +55,10 @@ export default class ProfesoriStore {
 
     register = async (creds: ProfFormValues) => {
         try {
-            const prof = await agent.AccountProf.register(creds);
-            store.commonStore.setToken(prof.token)
-            runInAction(() => this.prof = prof);
-            history.push('/lendet')
+            await agent.AccountProf.register(creds);
+            // store.commonStore.setToken(prof.token)
+            // runInAction(() => this.prof = prof);
+            // history.push('/lendet')
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

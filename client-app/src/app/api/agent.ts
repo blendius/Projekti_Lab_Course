@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Profesori } from "../models/profesori";
 import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
@@ -60,7 +59,7 @@ const requests = {
 const Profesoret = {
   list: () => requests.get<Professor[]>("/profesori"),
   details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
-  create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
+  // create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
   update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
