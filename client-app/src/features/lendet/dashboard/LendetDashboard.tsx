@@ -12,17 +12,10 @@ import LendetList from './LendetList';
 
 
 export default observer(function LendetDashboard() {
-    const { lendaStore, commonStore, profesoriStore } = useStore();
+    const { lendaStore } = useStore();
     const { selectedLenda, editMode, openForm } = lendaStore;
 
-    useEffect(() => {
-        if (commonStore.token) {
-            profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-        } else {
-            commonStore.setAppLoaded();
-        }
-
-    }, [commonStore, profesoriStore])
+   
 
 
 

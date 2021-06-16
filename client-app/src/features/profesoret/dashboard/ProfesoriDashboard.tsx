@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import ProfesoriDetais from '../details/ProfesoriDetails';
@@ -10,8 +10,16 @@ import ProfesoriList from './ProfesoriList';
 
 
 export default observer(function ProfesoriDashboard() {
-    const { profesoriStore, modalStore } = useStore();
+    const { profesoriStore, modalStore ,commonStore} = useStore();
     const { selectedProfessor, editMode } = profesoriStore
+    useEffect(() => {
+        if (commonStore.token) {
+            profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+        } else {
+            commonStore.setAppLoaded();
+        }
+
+    }, [commonStore, profesoriStore])
     return (
         <Grid>
             <Grid.Column width='12'>
