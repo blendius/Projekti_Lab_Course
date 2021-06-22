@@ -24,7 +24,6 @@ function App() {
       .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
       .then((response) => {
         setNxenesit(response.data);
-        console.log(response);
       });
   }, []);
 

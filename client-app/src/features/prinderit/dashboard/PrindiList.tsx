@@ -1,28 +1,23 @@
+import { observer } from 'mobx-react-lite';
 import React, { SyntheticEvent, useState } from 'react';
 import { Button,  Item, Segment } from 'semantic-ui-react';
-import { Prindi } from '../../../app/models/prindi';
+import { useStore } from '../../../app/stores/store';
 
-interface Props {
-    prinderit: Prindi[];
-    selectedPrindi: (id: string) => void;
-    deletePrindi: (id: string) => void;
-    cancelSelectPrindi: () => void;
-    openForm: (id: string) => void;
-    submitting: boolean;
-}
+export default observer(function PrindiList() {
+    const {prindiStore} = useStore();
+    const {deletePrindi, prinderitByName, loading} = prindiStore;
 
-export default function PrindiList({ prinderit, selectedPrindi, deletePrindi, cancelSelectPrindi, openForm, submitting }: Props) {
     const [target, setTarget] = useState('');
 
     function handlePrindiDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name);
-        deletePrindi(id)
+        deletePrindi(id);
     }
 
     return (
         <Segment clearing>
             <Item.Group divided >
-                {prinderit.map(prindi => (
+                {prinderitByName.map(prindi => (
                     <Item key={prindi.id}>
                         <Item.Content>
                             <div className="prindiData">
@@ -32,9 +27,9 @@ export default function PrindiList({ prinderit, selectedPrindi, deletePrindi, ca
                                 <div><label className="data">Nr. telefonit:</label> {prindi.nrTel}</div>
                             </div>
                             <div className='buttons'>
-                                <Button onClick={() => openForm(prindi.id)} primary content='Edit' className='detailsbtn' inverted />
+                                <Button onClick={() => prindiStore.openForm(prindi.id)} primary content='Edit' className='detailsbtn' inverted />
                                 <Button name={prindi.id}
-                                    loading={submitting && target === prindi.id}
+                                    loading={loading && target === prindi.id}
                                     onClick={(e) => handlePrindiDelete(e, prindi.id)}
                                     content='Fshije' className='detailsbtn' color='red' inverted />
                             </div>
@@ -48,4 +43,4 @@ export default function PrindiList({ prinderit, selectedPrindi, deletePrindi, ca
             </Item.Group>
         </Segment>
     )
-}
+})
