@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
-import { Termin } from "../../../app/models/termini";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function TerminiForm() {
@@ -29,7 +28,7 @@ export default observer(function TerminiForm() {
   }
   return (
     <Segment clearing>
-      <Form onSubmit={handleSubmit} autocomplete="off">
+      <Form onSubmit={handleSubmit} autoComplete="off">
         <Form.Input
           placeholder="Data E Fillimit"
           type="date"

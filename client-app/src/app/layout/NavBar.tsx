@@ -1,9 +1,12 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
-import { Button, Container, Icon, Menu } from "semantic-ui-react";
+import { Link, NavLink } from "react-router-dom";
+import { Container, Dropdown, Image, Menu } from "semantic-ui-react";
+import { useStore } from "../stores/store";
 import "./styles.css";
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 
-export default function NavBar() {
+export default observer(function NavBar() {
+  const { adminStore: { user, logout } , profesoriStore:{prof,logoutProf}} = useStore();
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -15,13 +18,31 @@ export default function NavBar() {
           />
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
+        <Menu.Item as={NavLink} to="/paneli" name='Paneli' />
         <Menu.Item as={NavLink} to="/profesoret" name="Profesoret" />
         <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/prinderit" name="Prinderit" />
-        
-        <Menu.Item as={NavLink} to="/profProfile" name="prof profile" />
-        <Menu.Item style={{ marginInlineStart: "auto" }}>
+        <Menu.Item position='right'>
+          <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
+          <Dropdown pointing='top right' text={user?.displayName}>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to={`/profili/${user?.username}`} text="Profili Im" icon='user' />
+              <Dropdown.Item onClick={logout} text='Ckycu' icon='power' />
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Item>
+        <Menu.Item position='right'>
+          <Image src={prof?.image || '/assets/user.png'} avatar spaced='right' />
+          <Dropdown pointing='top right' text={prof?.displayName}>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to={'/ProfProfili'} text="Profili Im" icon='user' />
+              <Dropdown.Item onClick={logoutProf} text='Ckycu' icon='power' />
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Item>
+
+        {/* <Menu.Item style={{ marginInlineStart: "auto" }}>
           <Link to="/Profili">
             <div className="ui vertical animated button">
               <div className="hidden content">Profili</div>
@@ -30,8 +51,8 @@ export default function NavBar() {
               </div>
             </div>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
       </Container>
     </Menu>
   );
-}
+})

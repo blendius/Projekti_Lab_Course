@@ -1,6 +1,7 @@
-using System;
+   using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using MediatR;
 using Persistence;
@@ -9,11 +10,11 @@ namespace Application.Terminet
 {
     public class Details
     {
-        public class Query : IRequest<Termini>
+        public class Query : IRequest<Result<Termini>>
         {
             public Guid Id { get; set; }
         }
-        public class Handler : IRequestHandler<Query, Termini>
+        public class Handler : IRequestHandler<Query, Result<Termini>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -21,9 +22,10 @@ namespace Application.Terminet
                 _context = context;
 
             }
-            public async Task<Termini> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Termini>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Terminet.FindAsync(request.Id);
+                var termini = await _context.Terminet.FindAsync(request.Id);
+                return Result<Termini>.Success(termini);
             }
         }
     }

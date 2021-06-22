@@ -1,9 +1,12 @@
-import axios, { AxiosResponse } from "axios";
-import { Profesori } from "../models/profesori";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
-import { Prindi } from '../models/prindi';
+import { Prindi } from "../models/prindi";
+import { Admin, AdminFormValues } from "../models/user";
+import { toast } from "react-toastify";
+import { store } from "../stores/store";
+import { Professor, ProfFormValues } from "../models/professor";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -13,15 +16,36 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.response.use(async (response) => {
-  try {
+axios.interceptors.request.use(config => {
+  const token = store.commonStore.token;
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+
+axios.interceptors.response.use(
+  async (response) => {
     await sleep(0);
     return response;
-  } catch (error) {
-    console.log(error);
-    return await Promise.reject(error);
+  },
+  (error: AxiosError) => {
+    const { data, status } = error.response!;
+    switch (status) {
+      case 400:
+        toast.error("bad request");
+        break;
+      case 401:
+        toast.error("unauthorized");
+        break;
+      case 404:
+        toast.error("not found");
+        break;
+      case 500:
+        toast.error("server error");
+        break;
+    }
+    return Promise.reject(error);
   }
-});
+);
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 const requests = {
@@ -33,10 +57,10 @@ const requests = {
 };
 
 const Profesoret = {
-  list: () => requests.get<Profesori[]>("/profesori"),
-  details: (id: string) => requests.get<Profesori>(`/profesori/${id}`),
-  create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
-  update: (profesori: Profesori) =>
+  list: () => requests.get<Professor[]>("/profesori"),
+  details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
+  // create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
+  update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
 };
@@ -64,19 +88,37 @@ const Lendet = {
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
 const Prinderit = {
-  list: () => requests.get<Prindi[]>('/prindi'),
+  list: () => requests.get<Prindi[]>("/prindi"),
   details: (id: string) => requests.get<Prindi>(`/prindi/${id}`),
-  create: (profesori: Prindi) => axios.post<void>('/prindi', profesori),
-  update: (profesori: Prindi)=> axios.put<void>(`/prindi/${profesori.id}`, profesori), 
-  delete: (id:string)=> axios.delete<void> (`/prindi/${id}`)
-}
+  create: (profesori: Prindi) => axios.post<void>("/prindi", profesori),
+  update: (profesori: Prindi) =>
+    axios.put<void>(`/prindi/${profesori.id}`, profesori),
+  delete: (id: string) => axios.delete<void>(`/prindi/${id}`),
+};
+const Account = {
+  current: () => requests.get<Admin>("/account") ,
+  login: (user: AdminFormValues) =>
+    requests.post<Admin>("/account/login", user),
+};
+
+const AccountProf = {
+  currentProf: () => requests.get<Professor>("/account/currentProf"),
+
+  login: (prof: ProfFormValues) =>
+    requests.post<Professor>("/account/loginProf", prof),
+  register: (prof: ProfFormValues) =>
+    requests.post<Professor>("/account/registerProf", prof),
+
+};
 
 const agent = {
   Profesoret,
   Terminet,
   Postimet,
   Lendet,
-  Prinderit
+  Prinderit,
+  Account,
+  AccountProf 
 };
 
 export default agent;

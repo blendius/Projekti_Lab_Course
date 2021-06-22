@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context,UserManager<AppAdmin> userManager)
         {
-            if(context.Postimet.Any() && context.Lendet.Any()) return;
+            if(!userManager.Users.Any()){
+                var users = new List<AppAdmin>{
+                    new AppAdmin{DisplayName = "Bob",UserName="bob",Email="bob@test.com"},
+                    new AppAdmin{DisplayName = "Jerry",UserName="Jerry",Email="Jerry@test.com"},
+                    new AppAdmin{DisplayName = "Test",UserName="Test",Email="Test@test.com"}
+                    
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user,"Pa$$w0rd");
+                }
+            }
+
+            if(context.Postimet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -34,44 +49,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
-
-            await context.Postimet.AddRangeAsync(postimet);
-
-            await context.SaveChangesAsync();
-        }
-        //seed data for Professor
-        public static async Task SeedDataProf(DataContext context)
-        {
-            if (context.Profesoret.Any()) return;
-
-            var profesoret = new List<Profesori>
-            {
-                new Profesori
-                {
-                    Name= "Prof 1",
-                    Email = "prof1@test.com",
-                    GradaAkademike="Prof.",
-                    Fjalkalimi="123",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
-                    Lenda= "TestLenda",
-                    Roli=1
-                },
-                new Profesori
-                {
-                    Name= "Prof 2",
-                    Email = "prof2@test.com",
-                    GradaAkademike="Prof.",
-                    Fjalkalimi="123",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
-                    Lenda= "TestLenda2",
-                    Roli=1
-                }
-            };
-
-            await context.Profesoret.AddRangeAsync(profesoret);
-            await context.SaveChangesAsync();
-
-            var lendet = new List<Lenda>
+ var lendet = new List<Lenda>
             {
                 new Lenda
                 {
@@ -96,7 +74,32 @@ namespace Persistence
                 }
             };
             await context.Lendet.AddRangeAsync(lendet);
+            await context.Postimet.AddRangeAsync(postimet);
+
             await context.SaveChangesAsync();
+        }
+        //seed data for Professor
+        public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
+        {
+            if (userManager.Users.Any()) return;
+
+            var profesoret = new List<Profesori>
+            {
+               new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
+               new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
+               new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
+
+            };
+            foreach (var prof in profesoret)
+            {
+                await userManager.CreateAsync(prof,"Pa$$w0rd");
+            }
+
+            // await context.Profesoret.AddRangeAsync(profesoret);
+            // await context.SaveChangesAsync();
+
+           
+          //  await context.SaveChangesAsync();
             // var Profesoret = new List<Profesori>
             // {
             //     new Profesori

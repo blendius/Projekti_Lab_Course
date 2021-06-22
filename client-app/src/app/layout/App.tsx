@@ -1,25 +1,60 @@
-import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Header, List } from "semantic-ui-react";
-import { Nxenesi } from "../models/nxenesi";
-import NavBar from "./NavBar";
 import { observer } from "mobx-react-lite";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import NxenesiDashboard from "../../Features/nxenesit/dashboard/NxenesiDashboard";
-import HomePage from "../../Features/home/homePage";
-import TerminetDashboard from "../../Features/terminet/dashboard/TerminetDashboard";
-import PostimetDashboard from "../../Features/postimet/dashboard/PostimetDashboard";
-import PostimetDetails from "../../Features/postimet/details/PostimetDetails";
-import ShowPrinderit from "../../Features/prinderit/showPrindi";
-import ShowProfessors from "../../Features/profesoret/profesoret";
-import LendetDashboard from "../../Features/lendet/dashboard/LendetDashboard";
-import LendetDetails from "../../Features/lendet/details/LendetDetails";
-import LendaForm from "../../Features/lendet/form/LendaForm";
-import ProfProfileDashboard from "../../Features/profesoret/profProfile/ProfProfileDashboard";
+import { useEffect, useState } from "react";
+import {
+  Route,
+  Switch,
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Container } from "semantic-ui-react";
+
+import HomePage from "../../features/home/homePage";
+import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
+import LendetDetails from "../../features/lendet/details/LendetDetails";
+import LendaForm from "../../features/lendet/form/LendaForm";
+import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
+import Paneli from "../../features/paneli/Paneli";
+import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
+import PostimetDetails from "../../features/postimet/details/PostimetDetails";
+import ShowPrinderit from "../../features/prinderit/showPrindi";
+import LoginFormProf from "../../features/profesoret/form/LoginFormProf";
+import ShowProfessors from "../../features/profesoret/profesoret";
+import ProfProfileDashboard from "../../features/profesoret/profProfile/ProfProfileDashboard";
+import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
+import LoginForm from "../../features/users/LoginForm";
+import ModalContainer from "../common/modals/ModalContainer";
+import { Nxenesi } from "../models/nxenesi";
+import { useStore } from "../stores/store";
+import LoadingComponent from "./LoadingComponent";
+import NavBar from "./NavBar";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
+  const { commonStore, adminStore, profesoriStore } = useStore();
+
+
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
+  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+  //   }  else {
+  //     commonStore.setAppLoaded();
+  //   }
+  // }, [commonStore, adminStore, profesoriStore])
+
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+  //   } else {
+  //     commonStore.setAppLoaded();
+  //   }
+
+  // }, [commonStore, profesoriStore])
+  commonStore.setAppLoaded();
+
+
+
   useEffect(() => {
     axios
       .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
@@ -29,37 +64,45 @@ function App() {
       });
   }, []);
 
+  if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
+
   return (
-    <Router>
-      <NavBar />
-      <Container style={{ marginTop: "7em" }}>
-        <Switch>
-          <Route path="/Profili">
-            <NxenesiDashboard />
-          </Route>
-          <Route path="/">
-            <Route exact path="/" component={HomePage} />
-            <Route path="/profesoret" component={ShowProfessors} />
-            <Route path="/terminet" component={TerminetDashboard} />
-            <Route exact path="/postimet" component={PostimetDashboard} />
-            <Route path="/postimet/:id" component={PostimetDetails} />
-            <Route path="/prinderit" component={ShowPrinderit} />
-            <Route exact path="/lendet" component={LendetDashboard} />
-            <Route path="/lendet/:id" component={LendetDetails} />
-            <Route
-              path={["/krijoLende", "/manageLenda/:id"]}
-              component={LendaForm}
-            />
-          <Route path="/profProfile" component={ProfProfileDashboard} />
-          </Route>
-          
-        </Switch>
-      </Container>
-    </Router>
+    <>
+      <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer />
+      <Route exact path="/" component={HomePage} />
+      <Route
+        path={"/(.+)"}
+        render={() => (
+          <>
+            <NavBar />
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+                <Route exact path="/Profili" component={NxenesiDashboard} />
+                <Route path="/ProfProfili" component={ProfProfileDashboard} />
+
+                <Route path="/profesoret" component={ShowProfessors} />
+                <Route path="/terminet" component={TerminetDashboard} />
+                <Route exact path="/postimet" component={PostimetDashboard} />
+                <Route path="/postimet/:id" component={PostimetDetails} />
+                <Route path="/prinderit" component={ShowPrinderit} />
+                <Route exact path="/lendet" component={LendetDashboard} />
+                <Route path="/lendet/:id" component={LendetDetails} />
+                <Route path="/login" component={LoginForm} />
+                <Route path="/loginProf" component={LoginFormProf} />
+                <Route path="/paneli" component={Paneli} />
+
+                <Route
+                  path={["/krijoLende", "/manageLenda/:id"]}
+                  component={LendaForm}
+                />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
+    </>
   );
 }
 
-export default App;
-function setEditMode(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
+export default observer(App);

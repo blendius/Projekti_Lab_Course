@@ -1,31 +1,41 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import ProfesoriDetais from '../details/ProfesoriDetails';
 import ProfesoriForm from '../form/ProfesoriForm';
 import ProfesoriList from './ProfesoriList';
+import RegisterFormProf from '../form/RegisterFormProf';
 
 
-
-export default observer( function ProfesoriDashboard() {
-    const { profesoriStore } = useStore();
+export default observer(function ProfesoriDashboard() {
+    const { profesoriStore, modalStore ,commonStore} = useStore();
     const { selectedProfessor, editMode } = profesoriStore
+    useEffect(() => {
+        if (commonStore.token) {
+            profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
+        } else {
+            commonStore.setAppLoaded();
+        }
+
+    }, [commonStore, profesoriStore])
     return (
         <Grid>
             <Grid.Column width='6'>
                 <ProfesoriList />
-                <Button onClick={() => profesoriStore.openForm()} positive content="Shto Profesorin" />
 
 
             </Grid.Column>
-            <Grid.Column width='2'></Grid.Column>
-            <Grid.Column width='8'>
+
+            <Grid.Column width='4'>
+                <Button onClick={() => modalStore.openModal(<RegisterFormProf />)} size='small' >
+                    regjistro nje profesor!
+                </Button>
                 {selectedProfessor && !editMode &&
                     <ProfesoriDetais />}
                 {editMode &&
-                    <ProfesoriForm Profesori={selectedProfessor} />}
-                
+                    <ProfesoriForm />}
+
 
             </Grid.Column>
         </Grid>

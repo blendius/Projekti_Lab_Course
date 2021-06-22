@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect } from 'react';
-import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 import { observer } from 'mobx-react-lite';
+import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
 
 
  function ShowProfessors() {
 
-  const{profesoriStore}=useStore();
+  const{profesoriStore,commonStore}=useStore();
+
+    
 
  
 

@@ -4,11 +4,11 @@ import ProfesoriForm from "../form/ProfesoriForm";
 interface ModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  Profesori: any;
+  //Profesori: any;
 }
 
 function ProfModal(props: ModalProps) {
-  const { open, setOpen, Profesori } = props;
+  const { open, setOpen } = props;
 
  
   return (
@@ -23,7 +23,7 @@ function ProfModal(props: ModalProps) {
       <Modal.Header>Edito te dhenat</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-         <ProfesoriForm Profesori ={Profesori} />
+         <ProfesoriForm  />
 
         </Modal.Description>
       </Modal.Content>

@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import NavBar from '../../app/layout/NavBar';
-import axios from "axios";
 import { Prindi } from '../../app/models/prindi';
 import { v4 as uuid } from 'uuid';
-import { Button, Container, List } from 'semantic-ui-react';
+import {  Container } from 'semantic-ui-react';
 
-import PrindiDashboard from './dashboard/PrindiDashboard';
 import agent from '../../app/api/agent';
 import LoadingComponent from '../../app/layout/LoadingComponent';
+import PrindiDashboard from './dashboard/PrindiDashboard';
 
 function ShowPrinderit() {
 
