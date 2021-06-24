@@ -13,6 +13,7 @@ namespace Application.Core
             CreateMap<Lenda,Lenda>();
             CreateMap<Prindi, Prindi>();
             CreateMap<Klubi, Klubi>();
+            CreateMap<Nxenesi, Nxenesi>();
         }
     }
 }

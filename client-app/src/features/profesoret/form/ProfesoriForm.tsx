@@ -1,13 +1,14 @@
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import { Button, Segment } from 'semantic-ui-react';
-import { useStore } from '../../../app/stores/store';
 import * as Yup from 'yup';
-import MyTextInput from '../../../app/common/form/MyTextInput';
+
 import MySelectInput from '../../../app/common/form/MySelectInput';
-import { Profesori } from '../../../app/models/profesori';
+import MyTextInput from '../../../app/common/form/MyTextInput';
 import { gradaOptions, lendaOptions } from '../../../app/common/form/options';
+import { Profesori } from '../../../app/models/profesori';
+import { useStore } from '../../../app/stores/store';
 
 
 
@@ -36,7 +37,7 @@ export default observer(function ProfesoriForm() {
         email: Yup.string().email('Shkruani nje email valide')
     })
 
-    const [profesori, setProfesori] = useState(initialState);
+    const [profesori] = useState(initialState);
 
     function handleFormSubmit(profesori:Profesori) {
         profesori.id ? updateProfessor(profesori) : createProfessor(profesori); 

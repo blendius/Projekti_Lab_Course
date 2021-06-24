@@ -1,48 +1,93 @@
-import React, { Fragment } from "react";
-import { Container } from "semantic-ui-react";
-import ShowProfessors from "../../features/profesoret/profesoret";
-import NavBar from "./NavBar";
-import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
-import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
+import axios from "axios";
 import { observer } from "mobx-react-lite";
-import { Route, useLocation } from "react-router";
-import PostimiForm from "../../features/postimet/form/PostimiForm";
-import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
-import LendaForm from "../../features/lendet/form/LendaForm";
-import PostimetDetails from "../../features/postimet/details/PostimetDetails";
-import LendetDetails from "../../features/lendet/details/LendetDetails";
+import { useEffect, useState } from "react";
+import {
+  Route,
+  Switch,
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Container } from "semantic-ui-react";
+
 import HomePage from "../../features/home/homePage";
+import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
+import LendetDetails from "../../features/lendet/details/LendetDetails";
+import LendaForm from "../../features/lendet/form/LendaForm";
+import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
+import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
+import PostimetDetails from "../../features/postimet/details/PostimetDetails";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
 import KlubiDashboard from "../../features/klubet/dashboard/KlubiDashboard";
 
+import ShowProfessors from "../../features/profesoret/profesoret";
+import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
+import LoginForm from "../../features/users/LoginForm";
+import ModalContainer from "../common/modals/ModalContainer";
+import { Nxenesi } from "../models/nxenesi";
+import { useStore } from "../stores/store";
+import LoadingComponent from "./LoadingComponent";
+import NavBar from "./NavBar";
 
 function App() {
-  const location = useLocation();
+  const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
+  const [editMode, setEditMode] = useState(false);
+  const { commonStore, adminStore } = useStore();
+
+
+  useEffect(() => {
+    if (commonStore.token) {
+      adminStore.getUser().finally(() => commonStore.setAppLoaded())
+    } else {
+      commonStore.setAppLoaded();
+    }
+
+  }, [commonStore, adminStore])
+
+
+
+  useEffect(() => {
+    axios
+      .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
+      .then((response) => {
+        setNxenesit(response.data);
+        console.log(response);
+      });
+  }, []);
+  
+  if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
   return (
-    <Fragment>
-      <NavBar />
-      <Container style={{ marginTop: "7em" }}>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/profesoret" component={ShowProfessors} />
-        <Route path="/terminet" component={TerminetDashboard} />
-        <Route exact path="/postimet" component={PostimetDashboard} />
-        <Route path="/postimet/:id" component={PostimetDetails} />
-        <Route path="/prinderit" component={ShowPrinderit} />
-        <Route
-          key={location.key}
-          path={["/krijoPostime", "/managePostimi/:id"]}
-          component={PostimiForm}
-        />
-        <Route path='/klubet' component={KlubiDashboard}/>
-        <Route exact path="/lendet" component={LendetDashboard} />
-        <Route path="/lendet/:id" component={LendetDetails} />
-        <Route
-          path={["/krijoLende", "/manageLenda/:id"]}
-          component={LendaForm}
-        />
-      </Container>
-    </Fragment>
+    <>
+      <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer/>
+      <Route exact path="/" component={HomePage} />
+      <Route
+        path={"/(.+)"}
+        render={() => (
+          <>
+            <NavBar />
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+                <Route path="/Profili" component={NxenesiDashboard} />
+
+                <Route path="/profesoret" component={ShowProfessors} />
+                <Route path="/terminet" component={TerminetDashboard} />
+                <Route exact path="/postimet" component={PostimetDashboard} />
+                <Route path="/postimet/:id" component={PostimetDetails} />
+                <Route path="/prinderit" component={ShowPrinderit} />
+                <Route exact path="/lendet" component={LendetDashboard} />
+                <Route path="/lendet/:id" component={LendetDetails} />
+                <Route path='/klubet' component={KlubiDashboard}/>
+                <Route path="/login" component={LoginForm} />
+                <Route
+                  path={["/krijoLende", "/manageLenda/:id"]}
+                  component={LendaForm}
+                />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
+    </>
   );
 }
 

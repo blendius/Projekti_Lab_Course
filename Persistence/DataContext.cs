@@ -1,9 +1,10 @@
 using Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppAdmin>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -16,5 +17,7 @@ namespace Persistence
         public DbSet<Prindi> Prinderit { get; set; }
         public DbSet<Klubi> Klubet { get; set; }
 
+
+        public DbSet<Nxenesi> Nxenesit { get; set; }
     }
 }

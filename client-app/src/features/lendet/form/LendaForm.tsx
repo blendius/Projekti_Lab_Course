@@ -1,13 +1,20 @@
+import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, useState } from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Header, Segment } from 'semantic-ui-react';
+import * as Yup from 'yup';
+
+import MyDataInput from '../../../app/common/form/MyDateInput';
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import MyTextInput from '../../../app/common/form/MyTextInput';
+import { Lenda } from '../../../app/models/lenda';
 import { useStore } from '../../../app/stores/store';
 
 
 
 export default observer(function LendaForm() {
     const { lendaStore } = useStore();
-    const { selectedLenda, createLenda, updateLenda, closeForm } = lendaStore;
+    const { selectedLenda, createLenda, updateLenda, closeForm ,loading} = lendaStore;
     //const { id } = useParams<{ id: string }>();
 
     const initialState = selectedLenda ?? ({
@@ -15,51 +22,57 @@ export default observer(function LendaForm() {
         emriLendes: '',
         pershkrimi: '',
         syllabusi: '',
-        dataEShtimit: ''
+        dataEShtimit: null
     });
-    const [lenda, setLenda] = useState(initialState);
+    const validationSchema = Yup.object({
+        emriLendes: Yup.string().required('Emri i lendes eshte i nevojeshem').min(3),
+        pershkrimi: Yup.string().required('pershkrimi i lendes eshte i nevojshem').min(3),
+        dataEShtimit: Yup.string().required('dataEShtimit i lendes eshte i nevojshem').nullable(),
+        syllabusi: Yup.string().required('syllabusi i lendes eshte i nevojshem'),
+    })
+    const [lenda] = useState(initialState);
+    // useEffect(() =>{
+    //     if(id) loadLenda(lendaId).then(lenda=>setLenda(lenda!))
+    // },[id,loadLenda])
 
-    // useEffect(()=>{
-    //     if(id) loadLenda(id).then(lenda => setLenda(lenda!))
-    // },[id,loadLenda]);
-
-    function handleSubmit() {
-        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda);
+    function handleFormSubmit(lenda:Lenda){
+        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda); 
     }
-    function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-        const { name, value } = event.target;
-        setLenda({ ...lenda, [name]: value })
-    }
-    //if(loadingInitial) return <LoadingComponent content='Lenda duke u ngarkuar....'/>
 
     const options = [
-        { key: 1, text: 'Syllabusi 1', value: 1 },
-        { key: 2, text: 'Syllabusi 2', value: 2 },
-        { key: 3, text: 'Syllabusi 3', value: 3 },
+        { key: 1, text: 'Syllabusi 1', value: 'test' },
+        { key: 2, text: 'Syllabusi 2', value: 'Syllabusi 2' },
+        { key: 3, text: 'Syllabusi 3', value: 'Syllabusi 3' },
     ]
-
     return (
         <Segment clearing>
-            <Form onSubmit={handleSubmit} autoComplete='off'>
-                <Form.Input label='Lenda' placeholder='EmriLendes' value={lenda.emriLendes} name='emriLendes' onChange={handleInputChange} />
-                <Form.Input label='Pershkrimi' placeholder='Pershkrimi' value={lenda.pershkrimi} name='pershkrimi' onChange={handleInputChange} />
-                <Form.Input label='Data' type='date' placeholder='Data' value={lenda.dataEShtimit} name='dataEShtimit' onChange={handleInputChange} />
-                <Form.Input onChange={handleInputChange}  name='syllabusi'>
-                <Form.Select
-                    fluid
-                    label='Syllabusi'
-                    options={options}
-                    name='syllabusi'
-                    placeholder='Syllabusi'
-                />
-                </Form.Input>
-                
-                {/* <Form.Input placeholder='Syllabusi' value={lenda.syllabusi} name='syllabusi' onChange={handleInputChange} /> */}
+            <Header content='Lendet Detajet' sub color='teal'/>
+            <Formik validationSchema={validationSchema} enableReinitialize initialValues={lenda} onSubmit={values => handleFormSubmit(values)}>
+                {({ handleSubmit,isValid,isSubmitting,dirty }) => (
+                    <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                        <MyTextInput name='emriLendes' placeholder='EmriLendes' />
 
-                <Button floated='right' positive type='submit' content='Submit' />
-                <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
+                        <MyTextInput label='Pershkrimi' placeholder='Pershkrimi' name='pershkrimi' />
+                        <MyDataInput
+                            placeholderText='Data'
+                            name='dataEShtimit'
+                            dateFormat='MMMM d, yyyy '
 
-            </Form>
+                        />
+                        <MySelectInput
+                            label='Syllabusi'
+                            options={options}
+                            placeholder='Syllabusi'
+                            name='syllabusi' />
+
+
+                        <Button disabled={isSubmitting||!dirty||!isValid} loading={loading} floated='right' positive type='submit' content='Submit' />
+                        <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
+
+                    </Form>
+                )}
+            </Formik>
+
         </Segment>
     )
 })

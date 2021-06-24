@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import { Button, Grid, GridColumn, List } from "semantic-ui-react";
+import { Button, Grid, GridColumn } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import TerminiDetails from "../details/TerminiDetails";
 import TerminiForm from "../form/TerminiForm";
-import TerminiList from "./TerminetList";
+import TerminiList from "./TerminetList"
 
 export default observer(function TerminetDashboard() {
   const { terminiStore } = useStore();
@@ -21,16 +21,18 @@ export default observer(function TerminetDashboard() {
 
   return (
     <Grid>
-      <Grid.Column floated="right" width="4">
+      <Grid.Column  width="12">
         <TerminiList />
-        <Button
+        
+      </Grid.Column>
+
+      <GridColumn  width="4">
+      <Button
           onClick={() => terminiStore.openForm()}
           positive
           content="Shto Termin"
+          size='big'
         />
-      </Grid.Column>
-
-      <GridColumn floated="right" width="4">
         {selectedTermin && !editMode && <TerminiDetails />}
         {editMode && <TerminiForm />}
       </GridColumn>

@@ -3,15 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context,UserManager<AppAdmin> userManager)
         {
+            if(!userManager.Users.Any()){
+                var users = new List<AppAdmin>{
+                    new AppAdmin{DisplayName = "Bob",UserName="bob",Email="bob@test.com"},
+                    new AppAdmin{DisplayName = "Jerry",UserName="Jerry",Email="Jerry@test.com"},
+                    new AppAdmin{DisplayName = "Test",UserName="Test",Email="Test@test.com"}
+                    
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user,"Pa$$w0rd");
+                }
+            }
             if (context.Postimet.Any() && context.Lendet.Any()) return;
+            
+
+            if(context.Postimet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -159,6 +176,40 @@ namespace Persistence
             await context.Prinderit.AddRangeAsync(profesoret);
             await context.SaveChangesAsync();
         }
+        //seed for Nxenesi
+        public static async Task SeedDataNxenesit(DataContext context)
+        {
+            if (context.Nxenesit.Any()) return;
+            var nxenesit = new List<Nxenesi>
+            {
+                new Nxenesi
+                {
+                    FullName = "Mal Haziri",
+                    ParentName = "Armend",
+                    Email = "malhaziri@student.edu",
+                    Password = "Mali123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-120),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                },
+                  new Nxenesi
+                {
+                    FullName = "Erin Lekiqi",
+                    ParentName = "Naim",
+                    Email = "erinlekiqi@student.edu",
+                    Password = "Erini123.",
+                    DateOfBirth = DateTime.Now.AddMonths(-125),
+                    YearOfRegistration = 2020,
+                    Class = "X1",
+                    PhoneNumber = "044-458-885"
+                }
+
+            };
+
+            await context.Nxenesit.AddRangeAsync(nxenesit);
+            await context.SaveChangesAsync();
+            }
 
         public static async Task SeedDataKlubi(DataContext context)
         {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Item, Segment, Label, Grid } from 'semantic-ui-react';
+import {  Grid } from 'semantic-ui-react';
 import { Nxenesi } from '../../../app/models/nxenesi';
 import './style.css';
 interface Props {
