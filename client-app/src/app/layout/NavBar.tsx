@@ -6,7 +6,7 @@ import { useStore } from "../stores/store";
 import "./styles.css";
 
 export default observer(function NavBar() {
-  const { adminStore: { user, logout } , profesoriStore:{prof,logoutProf}} = useStore();
+  const { adminStore: { user, logout } , profesoriStore:{prof,logoutProf},  prindStoreAccount: { prindi, logoutPrindi }} = useStore();
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -38,6 +38,16 @@ export default observer(function NavBar() {
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to={'/ProfProfili'} text="Profili Im" icon='user' />
               <Dropdown.Item onClick={logoutProf} text='Ckycu' icon='power' />
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Item>
+
+        <Menu.Item position='right'>
+          <Image src={prindi?.image || '/assets/user.png'} avatar spaced='right' />
+          <Dropdown pointing='top right' text={prindi?.displayName}>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to={`/profili/${prindi?.username}`} text="Profili Im" icon='user' />
+              <Dropdown.Item onClick={logoutPrindi} text='Ckycu' icon='power' />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>

@@ -16,6 +16,7 @@ import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard
 import Paneli from "../../features/paneli/Paneli";
 import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
+import LoginFormPrindi from "../../features/prinderit/form/LoginFormPrindi";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
 import LoginFormProf from "../../features/profesoret/form/LoginFormProf";
 import ShowProfessors from "../../features/profesoret/profesoret";
@@ -54,15 +55,14 @@ function App() {
   commonStore.setAppLoaded();
 
 
-
-  useEffect(() => {
-    axios
-      .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
-      .then((response) => {
-        setNxenesit(response.data);
-      });
-  }, []);
-
+  // useEffect(() => {
+  //   axios
+  //     .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
+  //     .then((response) => {
+  //       setNxenesit(response.data);
+  //     });
+  // }, []);
+  
   if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
   return (
@@ -91,6 +91,7 @@ function App() {
                 <Route path="/loginProf" component={LoginFormProf} />
                 <Route path="/paneli" component={Paneli} />
 
+                <Route path="/loginPrindi" component={LoginFormPrindi}  />
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
                   component={LendaForm}

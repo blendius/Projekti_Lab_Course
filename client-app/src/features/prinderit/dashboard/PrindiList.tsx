@@ -21,10 +21,12 @@ export default observer(function PrindiList() {
                     <Item key={prindi.id}>
                         <Item.Content>
                             <div className="prindiData">
-                                <Item.Header as='a'>{prindi.emri} {prindi.mbiemri}</Item.Header>
+                                <Item.Header as='a'>{prindi.displayName} </Item.Header>
                                
+                                <div><label className="data">Data e lindjes:  </label>  {prindi.dataLindjes}</div>
                                 <div><label className="data">Email zyrtare:  </label>  {prindi.email}</div>
                                 <div><label className="data">Nr. telefonit:</label> {prindi.nrTel}</div>
+                                <div><label className="data">Username:</label> {prindi.username}</div>
                             </div>
                             <div className='buttons'>
                                 <Button onClick={() => prindiStore.openForm(prindi.id)} primary content='Edit' className='detailsbtn' inverted />

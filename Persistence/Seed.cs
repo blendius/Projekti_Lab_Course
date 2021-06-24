@@ -10,23 +10,24 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context,UserManager<AppAdmin> userManager)
+        public static async Task SeedData(DataContext context, UserManager<AppAdmin> userManager)
         {
-            if(!userManager.Users.Any()){
+            if (!userManager.Users.Any())
+            {
                 var users = new List<AppAdmin>{
                     new AppAdmin{DisplayName = "Bob",UserName="bob",Email="bob@test.com"},
                     new AppAdmin{DisplayName = "Jerry",UserName="Jerry",Email="Jerry@test.com"},
                     new AppAdmin{DisplayName = "Test",UserName="Test",Email="Test@test.com"}
-                    
+
                 };
 
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user,"Pa$$w0rd");
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
             }
 
-            if(context.Postimet.Any()) return;
+            if (context.Postimet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -126,41 +127,22 @@ namespace Persistence
             // await context.Postimet.AddRangeAsync(postimet);
             // await context.SaveChangesAsync();
         }
-        
-        public static async Task SeedDataPrind(DataContext context)
+
+        public static async Task SeedDataPrind(DataContext context, UserManager<Prindi> userManager)
         {
-            if (context.Prinderit.Any()) return;
-
-            var profesoret = new List<Prindi>
+            if (!userManager.Users.Any())
             {
-                new Prindi
+                var prinderit = new List<Prindi>
                 {
-                    Emri= "Prindi1",
-                    Mbiemri="Test1",
-                    Email = "Prindi1@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                },
-                  new Prindi
-                {
-                    Emri= "Prindi2",
-                    Mbiemri="Test2",
-                    Email = "Prindi2@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                },
-                  new Prindi
-                {
-                    Emri= "Prindi3",
-                    Mbiemri="Test3",
-                    Email = "Prindi3@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                }
-            };
+                    new Prindi{DisplayName = "prind1", UserName="p1", Email = "prind1@gmail.com"},
+                    new Prindi{DisplayName = "prind2", UserName="p2", Email = "prind2@gmail.com"},
+                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}                        
+                };
 
-            await context.Prinderit.AddRangeAsync(profesoret);
-            await context.SaveChangesAsync();
+                foreach (var prindi in prinderit){
+                    await userManager.CreateAsync(prindi, "Pa$$w0rd");
+                }
+            }
         }
         //seed for Nxenesi
         public static async Task SeedDataNxenesit(DataContext context)
@@ -195,7 +177,7 @@ namespace Persistence
 
             await context.Nxenesit.AddRangeAsync(nxenesit);
             await context.SaveChangesAsync();
-            }
+        }
 
     }
 }

@@ -1,14 +1,11 @@
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain
 {
-    public class Prindi
+    public class Prindi: IdentityUser
     {
-        public Guid Id { get; set; }
-        public string Emri { get; set; }
-        public string Mbiemri {get; set; } 
-        public string Email { get; set; }
-        public string Fjalkalimi { get; set; }
-        public int nrTel { get; set; }
+        public string DisplayName { get; set; }
+        public DateTime DataLindjes {get; set;}
     }
 }

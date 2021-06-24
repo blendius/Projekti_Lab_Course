@@ -1,8 +1,9 @@
 export interface Prindi {
     id: string;
-    emri: string;
-    mbiemri: string;
+    displayName: string;
     email: string;
-    fjalkalimi: string;
-    nrTel: string;
+    password: string;
+    dataLindjes: string;
+    username: string;
+    nrTel: number;
 }

@@ -1,14 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useEffect } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import PrindiForm from '../form/PrindiForm';
+import RegisterFormPrindi from '../form/RegisterFormPrindi';
 import PrindiList from './PrindiList';
 
 export default observer(function PrindiDashboard() {
 
-    const {prindiStore} = useStore();
+    const {prindiStore, modalStore} = useStore();
     const {selectedPrindi, editMode, closeForm, openForm} = prindiStore;
+
 
     return (
         <Grid>
@@ -17,7 +20,9 @@ export default observer(function PrindiDashboard() {
             </Grid.Column>
 
             <Grid.Column width='4'>
-                <Button onClick={() => prindiStore.openForm()} positive content="Shto Prindin" size='big'/>
+                    <Button onClick={() => modalStore.openModal(<RegisterFormPrindi />)} size='huge' inverted>
+                        Regjistro Prind!
+                    </Button>
                 {editMode &&
                     <PrindiForm />}
             </Grid.Column>

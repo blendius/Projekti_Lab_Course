@@ -5,7 +5,10 @@ import { Button, Container, Header, Image, Segment } from 'semantic-ui-react';
 import { useStore } from '../../app/stores/store';
 import LoginFormProf from '../profesoret/form/LoginFormProf';
 import RegisterFormProf from '../profesoret/form/RegisterFormProf';
+import LoginFormPrindi from '../prinderit/form/LoginFormPrindi';
+import RegisterFormPrindi from '../prinderit/form/RegisterFormPrindi';
 import LoginForm from '../users/LoginForm';
+
 export default observer(function HomePage() {
     const { adminStore, modalStore, profesoriStore } = useStore();
     return (
@@ -25,8 +28,12 @@ export default observer(function HomePage() {
                     </>
                 ) : (<>
                     <Button onClick={() => modalStore.openModal(<LoginForm />)} to='/login' size='huge' inverted>
-                        Kyqu si admin!
+                        Kycu si Admin!
                     </Button>
+                    <Button onClick={() => modalStore.openModal(<LoginFormPrindi />)} size='huge' inverted>
+                        Kycu si Prind!
+                    </Button>
+                    
                 </>
                 )}
                 {profesoriStore.isLoggedIn ? (
