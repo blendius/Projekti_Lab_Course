@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Parent;
+using Application.Prinderit;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +10,14 @@ using Persistence;
 
 namespace API.Controllers
 {
-    public class PrindiController : BaseApiController
+    public class PrinderitController : BaseApiController
     {
       
 
         [HttpGet]
-        public async Task<ActionResult<List<Prindi>>> GetPrindi()
+        public async Task<ActionResult<List<Prindi>>> GetPrinderit()
         {
-            return await Mediator.Send(new ListP.Query());
+            return await Mediator.Send(new List.Query());
         }
         
         [HttpGet("{id}")]   
