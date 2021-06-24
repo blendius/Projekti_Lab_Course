@@ -20,7 +20,7 @@ export default class PrindStoreAccount {
             const prindi = await agent.AccountPrindi.login(creds);
             store.commonStore.setToken(prindi.token);
             runInAction(() => this.prindi = prindi);
-            history.push('./profesoret');
+            history.push('./prinderit');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

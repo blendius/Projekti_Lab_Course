@@ -9,20 +9,28 @@ import PrindiList from './PrindiList';
 
 export default observer(function PrindiDashboard() {
 
-    const {prindiStore, modalStore} = useStore();
-    const {selectedPrindi, editMode, closeForm, openForm} = prindiStore;
+    const { prindiStore, modalStore, commonStore, prindStoreAccount } = useStore();
+    const { selectedPrindi, editMode, closeForm, openForm } = prindiStore;
+
+    useEffect(() => {
+        if (commonStore.token) {
+            prindStoreAccount.getPrindi().finally(() => commonStore.setAppLoaded());
+        } else {
+            commonStore.setAppLoaded();
+        }
+    }, [commonStore, prindStoreAccount])
 
 
     return (
         <Grid>
             <Grid.Column width='12'>
-                <PrindiList/>
+                <PrindiList />
             </Grid.Column>
 
             <Grid.Column width='4'>
-                    <Button onClick={() => modalStore.openModal(<RegisterFormPrindi />)} size='huge' inverted>
-                        Regjistro Prind!
-                    </Button>
+                <Button onClick={() => modalStore.openModal(<RegisterFormPrindi />)} size='small' >
+                    Regjistro Prind!
+                </Button>
                 {editMode &&
                     <PrindiForm />}
             </Grid.Column>
