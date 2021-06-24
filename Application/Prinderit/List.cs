@@ -6,9 +6,9 @@ using System.Threading;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Parent
+namespace Application.Prinderit
 {
-    public class ListP
+    public class List
     {
         public class Query : IRequest<List<Prindi>> { }
         public class Handler : IRequestHandler<Query, List<Prindi>>

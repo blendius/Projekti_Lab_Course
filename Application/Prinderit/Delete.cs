@@ -1,16 +1,16 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Parent
+namespace Application.Prinderit
 {
-    public class Create
+    public class Delete
     {
         public class Command : IRequest
         {
-            public Prindi Prindi { get; set; }
+            public Guid Id { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -22,11 +22,12 @@ namespace Application.Parent
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Prinderit.Add(request.Prindi);
-                await _context.SaveChangesAsync();
-                return Unit.Value;
+               var prindi = await _context.Prinderit.FindAsync(request.Id);
+               _context.Remove(prindi);
+
+               await _context.SaveChangesAsync();
+               return Unit.Value;
             }
         }
-
     }
 }

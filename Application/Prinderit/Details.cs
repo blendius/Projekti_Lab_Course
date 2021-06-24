@@ -5,7 +5,7 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Parent
+namespace Application.Prinderit
 {
     public class Details
     {
