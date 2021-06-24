@@ -15,6 +15,7 @@ import LendaForm from "../../features/lendet/form/LendaForm";
 import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard";
 import PostimetDashboard from "../../features/postimet/dashboard/PostimetDashboard";
 import PostimetDetails from "../../features/postimet/details/PostimetDetails";
+import LoginFormPrindi from "../../features/prinderit/form/LoginFormPrindi";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
 import ShowProfessors from "../../features/profesoret/profesoret";
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
@@ -31,24 +32,24 @@ function App() {
   const { commonStore, adminStore } = useStore();
 
 
-  useEffect(() => {
-    if (commonStore.token) {
-      adminStore.getUser().finally(() => commonStore.setAppLoaded())
-    } else {
-      commonStore.setAppLoaded();
-    }
+  // useEffect(() => {
+  //   if (commonStore.token) {
+  //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
+  //   } else {
+  //     commonStore.setAppLoaded();
+  //   }
 
-  }, [commonStore, adminStore])
+  // }, [commonStore, adminStore])
 
+  commonStore.setAppLoaded();
 
-
-  useEffect(() => {
-    axios
-      .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
-      .then((response) => {
-        setNxenesit(response.data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
+  //     .then((response) => {
+  //       setNxenesit(response.data);
+  //     });
+  // }, []);
   
   if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
@@ -74,6 +75,7 @@ function App() {
                 <Route exact path="/lendet" component={LendetDashboard} />
                 <Route path="/lendet/:id" component={LendetDetails} />
                 <Route path="/login" component={LoginForm} />
+                <Route path="/loginPrindi" component={LoginFormPrindi}  />
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
                   component={LendaForm}

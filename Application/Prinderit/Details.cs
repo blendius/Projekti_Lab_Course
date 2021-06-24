@@ -11,7 +11,7 @@ namespace Application.Prinderit
     {
         public class Query : IRequest<Prindi>
         {
-            public Guid Id { get; set; }
+            public string Id { get; set; }
         }
         public class Handler : IRequestHandler<Query, Prindi>
         {

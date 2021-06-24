@@ -16,7 +16,7 @@ export default class PrindiStore {
 
     get prinderitByName() {
         // return Array.from(this.prindiRegistry.values()).sort(function (p1, p2) { if (p1.emri < p2.emri) { return -1; } if (p1.emri > p2.emri) { return 1 } return 0; });
-        return Array.from(this.prindiRegistry.values()).sort((p1, p2) =>p1.emri.localeCompare(p2.emri));
+        return Array.from(this.prindiRegistry.values()).sort((p1, p2) =>p1.displayName.localeCompare(p2.displayName));
     }
 
     loadPrinderit = async () => {

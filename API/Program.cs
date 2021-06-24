@@ -28,10 +28,11 @@ namespace API
 
                  var context = services.GetRequiredService<DataContext>();
                  var userManager = services.GetRequiredService<UserManager<AppAdmin>>();
+                 var prindiManager = services.GetRequiredService<UserManager<Prindi>>();
                  await context.Database.MigrateAsync();
                  await Seed.SeedData(context,userManager);
                  await Seed.SeedDataProf(context);
-                 await Seed.SeedDataPrind(context);
+                 await Seed.SeedDataPrind(context, prindiManager);
                  await Seed.SeedDataNxenesit(context);
 
              }catch(Exception ex){

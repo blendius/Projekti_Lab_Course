@@ -10,7 +10,7 @@ namespace Application.Prinderit
     {
         public class Command : IRequest
         {
-            public Guid Id { get; set; }
+            public string Id { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {

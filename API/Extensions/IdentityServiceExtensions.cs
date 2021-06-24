@@ -20,6 +20,12 @@ namespace API.Extensions
             }).AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppAdmin>>();
 
+             services.AddIdentityCore<Prindi>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<DataContext>()
+            .AddSignInManager<SignInManager<Prindi>>();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -15,7 +15,6 @@ namespace Persistence
         public DbSet<Lenda> Lendet { get; set; }
         public DbSet<Termini> Terminet { get; set; }
         public DbSet<Prindi> Prinderit { get; set; }
-
         public DbSet<Nxenesi> Nxenesit { get; set; }
     }
 }

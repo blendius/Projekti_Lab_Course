@@ -7,6 +7,7 @@ import { Prindi } from "../models/prindi";
 import { Admin, AdminFormValues } from "../models/user";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
+import { Parent, ParentFormValues } from "../models/parent";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -99,6 +100,14 @@ const Account = {
   login: (user: AdminFormValues) =>
     requests.post<Admin>("/account/login", user),
 };
+const AccountPrindi = {
+  current: () => requests.get<Parent>("/PrindAccount") ,
+  login: (prindi: ParentFormValues) =>
+    requests.post<Parent>("/PrindAccount/loginPrindi", prindi),
+  register: (prindi: ParentFormValues) =>
+    requests.post<Parent>("/PrindAccount/registerPrind", prindi),
+};
+
 
 const agent = {
   Profesoret,
@@ -107,6 +116,7 @@ const agent = {
   Lendet,
   Prinderit,
   Account,
+  AccountPrindi
 };
 
 export default agent;

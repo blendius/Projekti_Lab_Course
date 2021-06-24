@@ -10,13 +10,14 @@ export default observer(function PrindiForm() {
     
     const initialState = selectedPrindi ?? {
         id: '',
-        emri: '',
-        mbiemri: '',
+        displayName: '',
+        username: '',
         email: '',
-        fjalkalimi: '',
-        nrTel: ''
+        password: '',
+        dataLindjes:'',
+        nrTel: 0
     }
-    
+    console.log(selectedPrindi?.email);
     const [prindi, setPrindi] = useState(initialState);
 
     function handleSubmit() {
@@ -31,11 +32,12 @@ export default observer(function PrindiForm() {
     return (
         <Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off'>
-                <Form.Input placeholder='Emri' value={prindi.emri} name='emri' onChange={handleInputChange} />
-                <Form.Input placeholder='Mbiemri' value={prindi.mbiemri} name='mbiemri' onChange={handleInputChange} />
-                <Form.Input placeholder='email' value={prindi.email} name='email' onChange={handleInputChange} />
-                <Form.Input type='password' placeholder='Fjalkalimi' value={prindi.fjalkalimi} name='fjalkalimi' onChange={handleInputChange} />                
-                <Form.Input placeholder='nr. i Telefonit' value={prindi.nrTel} name='nrTel' onChange={handleInputChange} />
+                <Form.Input placeholder='Emri' value={prindi.displayName} name='displayName' onChange={handleInputChange} />
+                <Form.Input placeholder='Username' value={prindi.username} name='username' onChange={handleInputChange} />
+                <Form.Input placeholder='Data e lindjes' value={prindi.dataLindjes} name='dataLindjes' onChange={handleInputChange} />
+                <Form.Input placeholder='Email' value={prindi.email} name='email' onChange={handleInputChange} />
+                <Form.Input type='Password' placeholder='Fjalkalimi' value={prindi.password} name='password' onChange={handleInputChange} />                
+                <Form.Input placeholder='Nr. i Telefonit' value={prindi.nrTel} name='nrTel' onChange={handleInputChange} />
                 <Button loading={loading} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
