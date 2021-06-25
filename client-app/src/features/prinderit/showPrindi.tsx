@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react';
-import NavBar from '../../app/layout/NavBar';
+import NavBar from '../NavBar';
 import { Container } from 'semantic-ui-react';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';

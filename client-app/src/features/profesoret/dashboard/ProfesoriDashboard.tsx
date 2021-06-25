@@ -9,16 +9,9 @@ import RegisterFormProf from '../form/RegisterFormProf';
 
 
 export default observer(function ProfesoriDashboard() {
-    const { profesoriStore, modalStore ,commonStore} = useStore();
+    const { profesoriStore, modalStore } = useStore();
     const { selectedProfessor, editMode } = profesoriStore
-    useEffect(() => {
-        if (commonStore.token) {
-            profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-        } else {
-            commonStore.setAppLoaded();
-        }
-
-    }, [commonStore, profesoriStore])
+    
     return (
         <Grid>
             <Grid.Column width='6'>

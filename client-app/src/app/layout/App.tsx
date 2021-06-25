@@ -23,11 +23,16 @@ import ShowProfessors from "../../features/profesoret/profesoret";
 import ProfProfileDashboard from "../../features/profesoret/profProfile/ProfProfileDashboard";
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import LoginForm from "../../features/users/LoginForm";
+import ProfessorPage from "../../professorFeatures/ProfessorPage";
 import ModalContainer from "../common/modals/ModalContainer";
 import { Nxenesi } from "../models/nxenesi";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponent";
-import NavBar from "./NavBar";
+import NavBar from "../../features/NavBar";
+import adminPage from "../../features/adminPage";
+import NavBarProf from "../../professorFeatures/NavBarProf";
+import PrindiPage from "../../prindiFeatures/PrindiPage";
+import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -36,13 +41,13 @@ function App() {
 
 
   // useEffect(() => {
-  //   if (commonStore.token) {
+  //   if (commonStore.token && adminStore.isLoggedIn) {
   //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
   //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
   //   }  else {
   //     commonStore.setAppLoaded();
   //   }
-  // }, [commonStore, adminStore, profesoriStore])
+  // }, [commonStore, adminStore])
 
   // useEffect(() => {
   //   if (commonStore.token) {
@@ -52,6 +57,8 @@ function App() {
   //   }
 
   // }, [commonStore, profesoriStore])
+
+
   commonStore.setAppLoaded();
 
 
@@ -62,11 +69,12 @@ function App() {
   //       setNxenesit(response.data);
   //     });
   // }, []);
-  
+
   if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
 
   return (
     <>
+
       <ToastContainer position="bottom-right" hideProgressBar />
       <ModalContainer />
       <Route exact path="/" component={HomePage} />
@@ -74,12 +82,10 @@ function App() {
         path={"/(.+)"}
         render={() => (
           <>
-            <NavBar />
+            {/* <NavBar /> */}
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <Route exact path="/Profili" component={NxenesiDashboard} />
-                <Route path="/ProfProfili" component={ProfProfileDashboard} />
-
+                {/* <Route exact path="/Profili" component={NxenesiDashboard} />
                 <Route path="/profesoret" component={ShowProfessors} />
                 <Route path="/terminet" component={TerminetDashboard} />
                 <Route exact path="/postimet" component={PostimetDashboard} />
@@ -89,18 +95,73 @@ function App() {
                 <Route path="/lendet/:id" component={LendetDetails} />
                 <Route path="/login" component={LoginForm} />
                 <Route path="/loginProf" component={LoginFormProf} />
-                <Route path="/paneli" component={Paneli} />
-
-                <Route path="/loginPrindi" component={LoginFormPrindi}  />
+                <Route path="/loginPrindi" component={LoginFormPrindi} />
                 <Route
                   path={["/krijoLende", "/manageLenda/:id"]}
                   component={LendaForm}
-                />
+                /> */}
               </Switch>
             </Container>
           </>
         )}
       />
+       <Route path="/professorPage" component={ProfessorPage} />
+      <Route
+        path={"/professorPage/(.+)"}
+        render={() => (
+          <>
+          <NavBarProf />
+          
+          <Container style={{ marginTop: "7em" }}>
+            <Switch>
+              <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
+            </Switch>
+          </Container>
+          </>
+        )} />
+<Route path="/prindiPage" component={PrindiPage} />
+      <Route
+        path={"/professorPage/(.+)"}
+        render={() => (
+          <>
+          <NavBarPrindi />
+          
+          <Container style={{ marginTop: "7em" }}>
+            <Switch>
+            </Switch>
+          </Container>
+          </>
+        )} />
+
+        
+       <Route path="/adminPage" component={adminPage} />
+      <Route
+        path={"/adminPage/(.+)"}
+        render={() => (
+          <>
+          <NavBar />
+          <Container style={{ marginTop: "7em" }}>
+            <Switch>
+              <Route path="/adminPage/paneli" component={Paneli} />
+              <Route exact path="/adminPage/Profili" component={NxenesiDashboard} />
+                <Route path="/adminPage/profesoret" component={ShowProfessors} />
+                <Route path="/adminPage/terminet" component={TerminetDashboard} />
+                <Route exact path="/adminPage/postimet" component={PostimetDashboard} />
+                <Route path="/adminPage/postimet/:id" component={PostimetDetails} />
+                <Route path="/adminPage/prinderit" component={ShowPrinderit} />
+                <Route exact path="/adminPage/lendet" component={LendetDashboard} />
+                <Route path="/adminPage/lendet/:id" component={LendetDetails} />
+                <Route path="/adminPage/login" component={LoginForm} />
+                <Route path="/adminPage/loginProf" component={LoginFormProf} />
+                <Route path="/adminPage/loginPrindi" component={LoginFormPrindi} />
+                <Route
+                  path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
+                  component={LendaForm}
+                />
+            </Switch>
+          </Container>
+          </>
+        )} />
     </>
   );
 }

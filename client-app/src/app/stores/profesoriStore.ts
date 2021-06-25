@@ -30,7 +30,7 @@ export default class ProfesoriStore {
             const prof = await agent.AccountProf.login(creds);
             store.commonStore.setToken(prof.token)
             runInAction(() => this.prof = prof);
-            history.push('/profesoret') 
+            history.push('/professorPage/ProfProfili') 
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

@@ -12,13 +12,6 @@ export default observer(function PrindiDashboard() {
     const { prindiStore, modalStore, commonStore, prindStoreAccount } = useStore();
     const { selectedPrindi, editMode, closeForm, openForm } = prindiStore;
 
-    useEffect(() => {
-        if (commonStore.token) {
-            prindStoreAccount.getPrindi().finally(() => commonStore.setAppLoaded());
-        } else {
-            commonStore.setAppLoaded();
-        }
-    }, [commonStore, prindStoreAccount])
 
 
     return (

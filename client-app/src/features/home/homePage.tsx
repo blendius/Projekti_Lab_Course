@@ -22,7 +22,7 @@ export default observer(function HomePage() {
                 {adminStore.isLoggedIn ? (
                     <>
                         <Header as='h2' content='Mire se vini' />
-                        <Button as={Link} to='/paneli' size='huge' inverted>
+                        <Button as={Link} to='/adminPage/paneli' size='huge' inverted>
                             Vazhdo Tek Paneli!
                         </Button>
                     </>
@@ -39,7 +39,7 @@ export default observer(function HomePage() {
                 {profesoriStore.isLoggedIn ? (
                     <>
                         <Header as='h2' content='Mire se vini' />
-                        <Button as={Link} to='/paneli' size='huge' inverted>
+                        <Button as={Link} to='/professorPage/ProfProfili' size='huge' inverted>
                             Vazhdo Tek Profili!
                         </Button>
                     </>

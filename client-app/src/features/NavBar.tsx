@@ -2,8 +2,8 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Dropdown, Image, Menu } from "semantic-ui-react";
-import { useStore } from "../stores/store";
-import "./styles.css";
+import { useStore } from "../app/stores/store";
+// import "./styles.css";
 
 export default observer(function NavBar() {
   const { adminStore: { user, logout } , profesoriStore:{prof,logoutProf},  prindStoreAccount: { prindi, logoutPrindi }} = useStore();
@@ -18,11 +18,11 @@ export default observer(function NavBar() {
           />
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/paneli" name='Paneli' />
-        <Menu.Item as={NavLink} to="/profesoret" name="Profesoret" />
-        <Menu.Item as={NavLink} to="/terminet" name="Terminet" />
-        <Menu.Item as={NavLink} to="/lendet" name="Lendet" />
-        <Menu.Item as={NavLink} to="/prinderit" name="Prinderit" />
+        <Menu.Item as={NavLink} to="adminPage/paneli" name='Paneli' />
+        <Menu.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret" />
+        <Menu.Item as={NavLink} to="/adminPage/terminet" name="Terminet" />
+        <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />
+        <Menu.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit" />
         <Menu.Item position='right'>
           <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
           <Dropdown pointing='top right' text={user?.displayName}>
@@ -32,7 +32,7 @@ export default observer(function NavBar() {
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
-        <Menu.Item position='right'>
+        {/* <Menu.Item position='right'>
           <Image src={prof?.image || '/assets/user.png'} avatar spaced='right' />
           <Dropdown pointing='top right' text={prof?.displayName}>
             <Dropdown.Menu>
@@ -50,7 +50,7 @@ export default observer(function NavBar() {
               <Dropdown.Item onClick={logoutPrindi} text='Ckycu' icon='power' />
             </Dropdown.Menu>
           </Dropdown>
-        </Menu.Item>
+        </Menu.Item> */}
 
         {/* <Menu.Item style={{ marginInlineStart: "auto" }}>
           <Link to="/Profili">

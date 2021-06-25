@@ -22,7 +22,7 @@ export default class AdminStore {
       const user = await agent.Account.login(creds);
      store.commonStore.setToken(user.token);
       runInAction(() => this.user = user);
-      history.push('/paneli')
+      history.push('/adminPage/paneli')
       store.modalStore.closeModal();
     } catch (error) {
       throw error;

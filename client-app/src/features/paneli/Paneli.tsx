@@ -4,12 +4,12 @@ import { useStore } from '../../app/stores/store';
 
 export default function Paneli() {
 
-    const { commonStore, adminStore,  } = useStore();
-    useEffect(() => {
-        if (commonStore.token) {
-            adminStore.getUser().finally(() => commonStore.setAppLoaded())
-        } 
-    }, [commonStore, adminStore])
+    // const { commonStore, adminStore,  } = useStore();
+    // useEffect(() => {
+    //     if (commonStore.token) {
+    //         adminStore.getUser().finally(() => commonStore.setAppLoaded())
+    //     } 
+    // }, [commonStore, adminStore])
 
     return (
         <Segment>
