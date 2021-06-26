@@ -20,6 +20,7 @@ import LoginFormPrindi from "../../features/prinderit/form/LoginFormPrindi";
 import ShowPrinderit from "../../features/prinderit/showPrindi";
 import LoginFormProf from "../../features/profesoret/form/LoginFormProf";
 import ShowProfessors from "../../features/profesoret/profesoret";
+import ShowLaburatoret from "../../features/laburatori/laburatoret";
 import ProfProfileDashboard from "../../features/profesoret/profProfile/ProfProfileDashboard";
 import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import LoginForm from "../../features/users/LoginForm";
@@ -154,6 +155,7 @@ function App() {
                 <Route path="/adminPage/login" component={LoginForm} />
                 <Route path="/adminPage/loginProf" component={LoginFormProf} />
                 <Route path="/adminPage/loginPrindi" component={LoginFormPrindi} />
+                <Route path="/adminPage/laburatoret" component={ShowLaburatoret} />
                 <Route
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
                   component={LendaForm}

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
+import { Laburatori } from "../models/laburatori";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -118,6 +119,14 @@ const AccountPrindi = {
     requests.post<Parent>("/PrindAccount/registerPrind", prindi),
 };
 
+const Laburatoret = {
+  list: () => requests.get<Laburatori[]>("/laburatori"),
+  details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
+  create: (laburatori: Laburatori) => axios.post<void>(`/laburatori/`, laburatori),
+  update: (laburatori: Laburatori) =>
+    axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
+  delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
+};
 
 const agent = {
   Profesoret,
@@ -127,7 +136,8 @@ const agent = {
   Prinderit,
   Account,
   AccountProf,
-  AccountPrindi
+  AccountPrindi,
+  Laburatoret
 };
 
 export default agent;

@@ -23,6 +23,7 @@ export default observer(function NavBar() {
         <Menu.Item as={NavLink} to="/adminPage/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit" />
+        <Menu.Item as={NavLink} to="/adminPage/laburatoret" name="Laburatoret" />
         <Menu.Item position='right'>
           <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
           <Dropdown pointing='top right' text={user?.displayName}>
