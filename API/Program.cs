@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,11 +27,16 @@ namespace API
              try{
 
                  var context = services.GetRequiredService<DataContext>();
+                 var userManager = services.GetRequiredService<UserManager<AppAdmin>>();
+                 var userManagerProf = services.GetRequiredService<UserManager<Profesori>>();
+                 var prindiManager = services.GetRequiredService<UserManager<Prindi>>();
                  await context.Database.MigrateAsync();
-                 await Seed.SeedData(context);
-                 await Seed.SeedDataProf(context);
-                 await Seed.SeedDataPrind(context);
+                 await Seed.SeedData(context,userManager);
+                 await Seed.SeedDataProf(context,userManagerProf);
+                 await Seed.SeedDataPrind(context, prindiManager);
                  await Seed.SeedDataNxenesit(context);
+                 await context.Database.MigrateAsync();
+                 
 
              }catch(Exception ex){
                  var logger = services.GetRequiredService<ILogger<Program>>();

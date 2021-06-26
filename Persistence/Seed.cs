@@ -3,15 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppAdmin> userManager)
         {
-            if(context.Postimet.Any() && context.Lendet.Any()) return;
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppAdmin>{
+                    new AppAdmin{DisplayName = "Bob",UserName="bob",Email="bob@test.com"},
+                    new AppAdmin{DisplayName = "Jerry",UserName="Jerry",Email="Jerry@test.com"},
+                    new AppAdmin{DisplayName = "Test",UserName="Test",Email="Test@test.com"}
+
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
+            if (context.Postimet.Any()) return;
 
             var postimet = new List<Postimi>
             {
@@ -34,44 +50,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
-
-            await context.Postimet.AddRangeAsync(postimet);
-
-            await context.SaveChangesAsync();
-        }
-        //seed data for Professor
-        public static async Task SeedDataProf(DataContext context)
-        {
-            if (context.Profesoret.Any()) return;
-
-            var profesoret = new List<Profesori>
-            {
-                new Profesori
-                {
-                    Name= "Prof 1",
-                    Email = "prof1@test.com",
-                    GradaAkademike="Prof.",
-                    Fjalkalimi="123",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
-                    Lenda= "TestLenda",
-                    Roli=1
-                },
-                new Profesori
-                {
-                    Name= "Prof 2",
-                    Email = "prof2@test.com",
-                    GradaAkademike="Prof.",
-                    Fjalkalimi="123",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-2000),
-                    Lenda= "TestLenda2",
-                    Roli=1
-                }
-            };
-
-            await context.Profesoret.AddRangeAsync(profesoret);
-            await context.SaveChangesAsync();
-
-            var lendet = new List<Lenda>
+ var lendet = new List<Lenda>
             {
                 new Lenda
                 {
@@ -96,7 +75,32 @@ namespace Persistence
                 }
             };
             await context.Lendet.AddRangeAsync(lendet);
+            await context.Postimet.AddRangeAsync(postimet);
+
             await context.SaveChangesAsync();
+        }
+        //seed data for Professor
+        public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
+        {
+            if (userManager.Users.Any()) return;
+
+            var profesoret = new List<Profesori>
+            {
+               new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
+               new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
+               new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
+
+            };
+            foreach (var prof in profesoret)
+            {
+                await userManager.CreateAsync(prof,"Pa$$w0rd");
+            }
+
+            // await context.Profesoret.AddRangeAsync(profesoret);
+            // await context.SaveChangesAsync();
+
+           
+          //  await context.SaveChangesAsync();
             // var Profesoret = new List<Profesori>
             // {
             //     new Profesori
@@ -123,41 +127,22 @@ namespace Persistence
             // await context.Postimet.AddRangeAsync(postimet);
             // await context.SaveChangesAsync();
         }
-        
-        public static async Task SeedDataPrind(DataContext context)
+
+        public static async Task SeedDataPrind(DataContext context, UserManager<Prindi> userManager)
         {
-            if (context.Prinderit.Any()) return;
-
-            var profesoret = new List<Prindi>
+            if (!userManager.Users.Any())
             {
-                new Prindi
+                var prinderit = new List<Prindi>
                 {
-                    Emri= "Prindi1",
-                    Mbiemri="Test1",
-                    Email = "Prindi1@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                },
-                  new Prindi
-                {
-                    Emri= "Prindi2",
-                    Mbiemri="Test2",
-                    Email = "Prindi2@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                },
-                  new Prindi
-                {
-                    Emri= "Prindi3",
-                    Mbiemri="Test3",
-                    Email = "Prindi3@test.com",
-                    Fjalkalimi="1234",
-                    nrTel=123456
-                }
-            };
+                    new Prindi{DisplayName = "prind1", UserName="p1", Email = "prind1@gmail.com"},
+                    new Prindi{DisplayName = "prind2", UserName="p2", Email = "prind2@gmail.com"},
+                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}                        
+                };
 
-            await context.Prinderit.AddRangeAsync(profesoret);
-            await context.SaveChangesAsync();
+                foreach (var prindi in prinderit){
+                    await userManager.CreateAsync(prindi, "Pa$$w0rd");
+                }
+            }
         }
         //seed for Nxenesi
         public static async Task SeedDataNxenesit(DataContext context)
@@ -192,7 +177,7 @@ namespace Persistence
 
             await context.Nxenesit.AddRangeAsync(nxenesit);
             await context.SaveChangesAsync();
-            }
+        }
 
     }
 }

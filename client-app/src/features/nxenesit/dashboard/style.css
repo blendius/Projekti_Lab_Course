@@ -1,0 +1,35 @@
+.ui .grid {
+    padding: 40px;
+}
+.img {
+    height: auto;
+}
+h2:first-child {
+    margin-top: 10px;
+}
+
+p {
+    font-size: 1.3em; 
+}
+.ui.grid>.row>[class*="six wide"].column > .row {
+    padding-bottom: 10px;
+}
+
+.ui.grid>.row>[class*="six wide"].column.thirdCol {
+    margin-top: 41px;
+}
+.ui.primary.button {
+    margin-top: -35px;
+    float: right;
+}
+
+.field {
+    width: 100%;
+}
+i.icon:before{
+    vertical-align: middle;
+}
+
+.profileData{
+    margin-bottom: 20px !important;
+}

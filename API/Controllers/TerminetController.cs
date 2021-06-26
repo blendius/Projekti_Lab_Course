@@ -14,19 +14,19 @@ namespace API.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<List<Termini>>> GetTerminet()
+        public async Task<IActionResult> GetTerminet()
         {
-            return await Mediator.Send(new List.Query());
+            return HandleResult( await Mediator.Send(new List.Query()));
         }
         [HttpGet("{id}")] //postimi/id
-        public async Task<ActionResult<Termini>> GetTermini(Guid id)
+        public async Task<IActionResult> GetTermini(Guid id)
         {
-            return await Mediator.Send(new Details.Query{Id=id});
+            return HandleResult(await Mediator.Send(new Details.Query{Id=id}));
         }
         [HttpPost]
         public async Task<IActionResult> CreateTermini(Termini termini)
         {
-            return Ok(await Mediator.Send(new Create.Command{Termini = termini}));
+            return HandleResult(await Mediator.Send(new Create.Command{Termini = termini}));
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> EditTermini(Guid id,Termini termini)
@@ -37,7 +37,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTermini(Guid id)
         {
-            return Ok(await Mediator.Send(new Delete.Command{Id = id}));
+            return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
         }
     }
 }

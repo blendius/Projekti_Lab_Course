@@ -1,51 +1,32 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useEffect } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
-import { Prindi } from '../../../app/models/prindi';
+import { useStore } from '../../../app/stores/store';
 import PrindiForm from '../form/PrindiForm';
+import RegisterFormPrindi from '../form/RegisterFormPrindi';
 import PrindiList from './PrindiList';
 
-interface Props {
-    prinderit: Prindi[];
-    selectedPrindi: Prindi | undefined;
-    selectPrindi: (id: string) => void;
-    cancelSelectPrindi: () => void;
-    editMode: boolean;
-    openForm: (id: string | undefined) => void
-    openForm2: () => void;
-    closeForm: () => void;
+export default observer(function PrindiDashboard() {
 
-    createOrEdit: (prindi: Prindi) => void;
-    deletePrindi: (id: string) => void;
-    submitting: boolean;
-}
+    const { prindiStore, modalStore, commonStore, prindStoreAccount } = useStore();
+    const { selectedPrindi, editMode, closeForm, openForm } = prindiStore;
 
-export default function PrindiDashboard({ prinderit, selectedPrindi, selectPrindi, cancelSelectPrindi, editMode, openForm, closeForm, createOrEdit, deletePrindi, submitting, openForm2 }: Props) {
+
 
     return (
         <Grid>
             <Grid.Column width='12'>
-                <PrindiList
-                    prinderit={prinderit}
-                    selectedPrindi={selectPrindi}
-
-                    deletePrindi={deletePrindi}
-                    cancelSelectPrindi={cancelSelectPrindi}
-                    openForm={openForm}
-                    submitting={submitting}
-                />
-
-
+                <PrindiList />
             </Grid.Column>
 
             <Grid.Column width='4'>
-                <Button onClick={() => openForm2()} positive content="Shto Prindin" size='big'/>
-
-
+                <Button onClick={() => modalStore.openModal(<RegisterFormPrindi />)} size='small' >
+                    Regjistro Prind!
+                </Button>
                 {editMode &&
-                    <PrindiForm closeForm={closeForm} prindi={selectedPrindi} createOrEdit={createOrEdit} submitting={submitting} />}
-
-
+                    <PrindiForm />}
             </Grid.Column>
         </Grid>
     )
-}
+})

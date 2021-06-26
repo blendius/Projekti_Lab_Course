@@ -3,6 +3,6 @@ export interface Lenda {
     emriLendes: string;
     pershkrimi: string;
     syllabusi: string;
-    dataEShtimit: string;//date
-    
+    dataEShtimit: Date | null;//date
+
 }

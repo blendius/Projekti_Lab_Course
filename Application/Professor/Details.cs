@@ -11,7 +11,7 @@ namespace Application.Professor
     {
         public class Query : IRequest<Profesori>
         {
-            public Guid Id { get; set; }
+            public string Id { get; set; }
         }
         public class Handler : IRequestHandler<Query, Profesori>
         {
