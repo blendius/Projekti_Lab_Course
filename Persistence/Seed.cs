@@ -50,7 +50,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
- var lendet = new List<Lenda>
+            var lendet = new List<Lenda>
             {
                 new Lenda
                 {
@@ -74,10 +74,24 @@ namespace Persistence
                     Syllabusi = "Ky eshte nje postim testues 1"
                 }
             };
+
+            if (!context.Laburatioret.Any())
+            {
+                var laburatioret = new List<Laburatiori>{
+                     new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
+                     new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
+                     new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
+                 };
+                await context.Laburatioret.AddRangeAsync(laburatioret);
+
+            };
+
             await context.Lendet.AddRangeAsync(lendet);
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
+
+
         }
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
@@ -93,14 +107,14 @@ namespace Persistence
             };
             foreach (var prof in profesoret)
             {
-                await userManager.CreateAsync(prof,"Pa$$w0rd");
+                await userManager.CreateAsync(prof, "Pa$$w0rd");
             }
 
             // await context.Profesoret.AddRangeAsync(profesoret);
             // await context.SaveChangesAsync();
 
-           
-          //  await context.SaveChangesAsync();
+
+            //  await context.SaveChangesAsync();
             // var Profesoret = new List<Profesori>
             // {
             //     new Profesori
@@ -136,10 +150,11 @@ namespace Persistence
                 {
                     new Prindi{DisplayName = "prind1", UserName="p1", Email = "prind1@gmail.com"},
                     new Prindi{DisplayName = "prind2", UserName="p2", Email = "prind2@gmail.com"},
-                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}                        
+                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}
                 };
 
-                foreach (var prindi in prinderit){
+                foreach (var prindi in prinderit)
+                {
                     await userManager.CreateAsync(prindi, "Pa$$w0rd");
                 }
             }
