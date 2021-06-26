@@ -79,72 +79,46 @@ function App() {
       <ToastContainer position="bottom-right" hideProgressBar />
       <ModalContainer />
       <Route exact path="/" component={HomePage} />
+
+      <Route path="/professorPage" component={ProfessorPage} />
       <Route
-        path={"/(.+)"}
+        path={"/professorPage/(.+)"}
         render={() => (
           <>
-            {/* <NavBar /> */}
+            <NavBarProf />
+
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                {/* <Route exact path="/Profili" component={NxenesiDashboard} />
-                <Route path="/profesoret" component={ShowProfessors} />
-                <Route path="/terminet" component={TerminetDashboard} />
-                <Route exact path="/postimet" component={PostimetDashboard} />
-                <Route path="/postimet/:id" component={PostimetDetails} />
-                <Route path="/prinderit" component={ShowPrinderit} />
-                <Route exact path="/lendet" component={LendetDashboard} />
-                <Route path="/lendet/:id" component={LendetDetails} />
-                <Route path="/login" component={LoginForm} />
-                <Route path="/loginProf" component={LoginFormProf} />
-                <Route path="/loginPrindi" component={LoginFormPrindi} />
-                <Route
-                  path={["/krijoLende", "/manageLenda/:id"]}
-                  component={LendaForm}
-                /> */}
+                <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
               </Switch>
             </Container>
           </>
-        )}
-      />
-       <Route path="/professorPage" component={ProfessorPage} />
-      <Route
-        path={"/professorPage/(.+)"}
-        render={() => (
-          <>
-          <NavBarProf />
-          
-          <Container style={{ marginTop: "7em" }}>
-            <Switch>
-              <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
-            </Switch>
-          </Container>
-          </>
         )} />
-<Route path="/prindiPage" component={PrindiPage} />
+      <Route path="/prindiPage" component={PrindiPage} />
       <Route
-        path={"/professorPage/(.+)"}
+        path={"/prindiPage/(.+)"}
         render={() => (
           <>
-          <NavBarPrindi />
-          
-          <Container style={{ marginTop: "7em" }}>
-            <Switch>
-            </Switch>
-          </Container>
+            <NavBarPrindi />
+
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+              </Switch>
+            </Container>
           </>
         )} />
 
-        
-       <Route path="/adminPage" component={adminPage} />
+
+      <Route path="/adminPage" component={adminPage} />
       <Route
         path={"/adminPage/(.+)"}
         render={() => (
           <>
-          <NavBar />
-          <Container style={{ marginTop: "7em" }}>
-            <Switch>
-              <Route path="/adminPage/paneli" component={Paneli} />
-              <Route exact path="/adminPage/Profili" component={NxenesiDashboard} />
+            <NavBar />
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+                <Route path="/adminPage/paneli" component={Paneli} />
+                <Route exact path="/adminPage/Profili" component={NxenesiDashboard} />
                 <Route path="/adminPage/profesoret" component={ShowProfessors} />
                 <Route path="/adminPage/terminet" component={TerminetDashboard} />
                 <Route exact path="/adminPage/postimet" component={PostimetDashboard} />
@@ -160,8 +134,8 @@ function App() {
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
                   component={LendaForm}
                 />
-            </Switch>
-          </Container>
+              </Switch>
+            </Container>
           </>
         )} />
     </>

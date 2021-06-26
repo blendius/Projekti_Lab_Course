@@ -18,7 +18,5 @@ export default observer(function ProfessorPage() {
 
     }, [commonStore, profesoriStore])
 
-    return(
-        <NavBarProf />
-    )
+    return <h6></h6>
 })

@@ -4,7 +4,6 @@ import { useStore } from "../app/stores/store";
 import NavBarPrindi from "./NavBarPrindi";
 
 export default observer(function ProfessorPage() {
-    
     const { prindStoreAccount,  commonStore } = useStore();
     useEffect(() => {
         if (commonStore.token) {
@@ -15,7 +14,5 @@ export default observer(function ProfessorPage() {
     }, [commonStore, prindStoreAccount])
 
 
-    return(
-        <NavBarPrindi />
-    )
+    return <NavBarPrindi />
 })

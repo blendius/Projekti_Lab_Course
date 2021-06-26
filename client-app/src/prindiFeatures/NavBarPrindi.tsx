@@ -5,6 +5,7 @@ import { useStore } from "../app/stores/store";
 // import "./styles.css";
 
 export default observer(function NavBarPrindi() {
+
     const { prindStoreAccount: {  logoutPrindi } } = useStore();
 
   return (
