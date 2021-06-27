@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210627090126_Kontakti")]
+    partial class Kontakti
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,9 +97,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Mesazhi")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PrindiId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Subjelti")
                         .HasColumnType("TEXT");
 
@@ -105,8 +104,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("KontaktiId");
-
-                    b.HasIndex("PrindiId");
 
                     b.ToTable("Kontaktet");
                 });
@@ -482,15 +479,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Kontakti", b =>
-                {
-                    b.HasOne("Domain.Prindi", "Prindi")
-                        .WithMany("Kontaktet")
-                        .HasForeignKey("PrindiId");
-
-                    b.Navigation("Prindi");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -540,11 +528,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Prindi", b =>
-                {
-                    b.Navigation("Kontaktet");
                 });
 #pragma warning restore 612, 618
         }
