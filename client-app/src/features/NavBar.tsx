@@ -18,7 +18,7 @@ export default observer(function NavBar() {
           />
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="adminPage/paneli" name='Paneli' />
+        <Menu.Item as={NavLink} to="/adminPage/paneli" name='Paneli' />
         <Menu.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret" />
         <Menu.Item as={NavLink} to="/adminPage/terminet" name="Terminet" />
         <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />

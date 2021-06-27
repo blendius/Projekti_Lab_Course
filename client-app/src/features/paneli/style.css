@@ -1,0 +1,23 @@
+.StatsCard{
+    padding: 10px!important;
+    text-align: center !important;
+}
+.StatsCard .title {
+    text-align: center;
+    font-size:25px!important;
+}
+.StatsCard .count{
+    margin-top: 5px;
+    text-align: center;
+    font-size: 30px !important
+}
+.icon{
+    text-align: center!important;
+    margin-right: 0 !important;
+    
+}
+Icon{
+    text-align: center!important;
+    margin-right: 0 !important;
+    
+}

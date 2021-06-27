@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
+import { Nxenesi } from "../models/nxenesi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -88,6 +89,10 @@ const Lendet = {
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
+const Nxenesit = {
+  list: () => requests.get<Nxenesi[]>("/nxenesi"),
+  details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
+};
 const Prinderit = {
   list: () => requests.get<Prindi[]>('/prinderit'),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
@@ -126,6 +131,7 @@ const agent = {
   Lendet,
   Prinderit,
   Account,
+  Nxenesit,
   AccountProf,
   AccountPrindi
 };

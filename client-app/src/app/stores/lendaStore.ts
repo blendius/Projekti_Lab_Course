@@ -17,6 +17,9 @@ export default class lendaStore {
         makeAutoObservable(this)
     }
 
+    get lendetCount(){
+        return this.lendaRegistry.size;
+    }
     get lendetByDate() {
         return Array.from(this.lendaRegistry.values()).sort((a, b) => a.dataEShtimit!.getTime() - b.dataEShtimit!.getTime());
     }

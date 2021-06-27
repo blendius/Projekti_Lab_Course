@@ -8,6 +8,7 @@ import AdminStore from "./adminStore";
 import CommonStore from "./commonStore";
 import PrindiStore from "./prindiStore";
 import PrindStoreAccount from "./prindStoreAccount";
+import nxenesiStore from "./nxenesiStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -18,6 +19,7 @@ interface Store {
   adminStore: AdminStore;
   commonStore: CommonStore;
   prindiStore: PrindiStore;
+  nxenesiStore: nxenesiStore;
   prindStoreAccount: PrindStoreAccount;
 }
 export const store: Store = {
@@ -29,6 +31,7 @@ export const store: Store = {
   adminStore: new AdminStore(),
   commonStore: new CommonStore(),
   prindiStore: new PrindiStore(),
+  nxenesiStore:new nxenesiStore(),
   prindStoreAccount: new PrindStoreAccount()
 };
 

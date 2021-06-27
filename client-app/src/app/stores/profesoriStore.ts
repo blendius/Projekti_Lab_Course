@@ -24,6 +24,9 @@ export default class ProfesoriStore {
     get isLoggedIn() {
         return !!this.prof;
     }
+    get profesoriCount(){
+        return this.professorRegistry.size;
+    }
 
     login = async (creds: ProfFormValues) => {
         try {

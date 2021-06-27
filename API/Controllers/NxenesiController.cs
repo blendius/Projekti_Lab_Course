@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Nxenesit;
 using Domain;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace API.Controllers
 {
-
+    
      public class CustomNxenesi
     {
         public Guid Id { get; set; }
@@ -26,6 +26,7 @@ namespace API.Controllers
         public string NewPassword { get; set; }
         public string ConfirmPassword{ get; set; }
     }
+    [AllowAnonymous]
     public class NxenesiController : BaseApiController
     {
 
@@ -38,6 +39,9 @@ namespace API.Controllers
             }
             return listaNxenesve;
         }
+
+
+    
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Nxenesi>> GetNxenesin(Guid id)
