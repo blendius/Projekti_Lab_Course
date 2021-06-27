@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Kontaktet;
 using Domain;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 namespace API.Controllers
 {
     public class KontaktiController : BaseApiController
     {
+          [HttpGet("{Id}")]
+        public async Task<ActionResult<List<Kontakti>>> GetKontaktPrindi(string id)
+        {
+            return await Mediator.Send(new ListPrindi.Query{Id=id});
+        }
+          [HttpGet("prof/{email}")]
+        public async Task<ActionResult<List<Kontakti>>> GetKontaktProf(string email)
+        {
+            return await Mediator.Send(new ListProf.Query{Email=email});
+        }
+        
         [HttpPost]
         public async Task<IActionResult> CreateKontakti(Kontakti kontakti)
         {

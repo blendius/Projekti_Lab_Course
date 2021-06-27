@@ -15,5 +15,6 @@ namespace Domain
         public string profEmail { get; set; }
         public string Subjelti { get; set; }
         public string Mesazhi { get; set; }
+        public DateTime DataEDergimit { get; set; }= DateTime.Now;
     }
 }
