@@ -50,31 +50,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
- var lendet = new List<Lenda>
-            {
-                new Lenda
-                {
-                    EmriLendes= "Postimi 1",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                },
-                new Lenda
-                {
-                    EmriLendes= "lenda 2",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                },
-                new Lenda
-                {
-                    EmriLendes= "lenda 3",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                }
-            };
-            await context.Lendet.AddRangeAsync(lendet);
+           
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
@@ -82,50 +58,84 @@ namespace Persistence
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
         {
-            if (userManager.Users.Any()) return;
 
-            var profesoret = new List<Profesori>
-            {
-               new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
-               new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
-               new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
-
+            var Profesori1 = new Profesori {
+                Name = "Profesori 1",
+                GradaAkademike = "Profesori 1",
+                DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
             };
-            foreach (var prof in profesoret)
+            var Profesori2 = new Profesori
             {
-                await userManager.CreateAsync(prof,"Pa$$w0rd");
-            }
+                Name = "Profesori 2",
+                GradaAkademike = "Profesori 2",
+                DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
+            };
+            context.AddRange(
+                new Lenda{
+                    EmriLendes = "Matematike",
+                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                    Pershkrimi = "Seeded Data  1",
+                    Syllabusi = "Seeded Data  1",
+                    Profesoret = new List<Profesori>{Profesori1}
+                },
+                new Lenda
+                {
+                    EmriLendes = "Gjuhe Shqipe",
+                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                    Pershkrimi = "Seeded Data  1",
+                    Syllabusi = "Seeded Data  1",
+                    Profesoret = new List<Profesori> { Profesori2 }
+                }
+            );
 
-            // await context.Profesoret.AddRangeAsync(profesoret);
-            // await context.SaveChangesAsync();
+            // if (userManager.Users.Any()) return;
 
-           
-          //  await context.SaveChangesAsync();
-            // var Profesoret = new List<Profesori>
+            // var profesoret = new List<Profesori>
             // {
-            //     new Profesori
-            //     {
-            //         Name= "Postimi 1",
-            //         Data = DateTime.Now.AddMinutes(-1000),
-            //         Email = "Ky eshte nje postim testues 1",
-            //         Fjalkalimi = "Ky eshte nje postim testues 1",
-            //         GradaAkademike = "Ky eshte nje postim testues 1",
-            //     },
-            //     new Profesori
-            //     {
-            //         Titulli= "Postimi 2",
-            //         Data = DateTime.Now.AddMinutes(-2000),
-            //         Permbajtja = "Ky eshte nje postim testues 2",
-            //     },
-            //     new Profesori
-            //     {
-            //         Titulli= "Postimi 3",
-            //         Data = DateTime.Now.AddMinutes(-3000),
-            //         Permbajtja = "Ky eshte nje postim testues 3",
-            //     }
+            //    new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
+            //    new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
+            //    new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
+
             // };
-            // await context.Postimet.AddRangeAsync(postimet);
-            // await context.SaveChangesAsync();
+            // foreach (var prof in profesoret)
+            // {
+            //     await userManager.CreateAsync(prof, "Pa$$w0rd");
+            // }
+
+
+            // context.AddRange(
+            //     new Lenda
+            //     {
+            //         EmriLendes = "Matematike",
+            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
+            //         Pershkrimi = "Seeded Data  1",
+            //         Syllabusi = "Seeded Data  1",
+            //         Profesoret = new List<Profesori>{profesoret[0]}
+
+            //     },
+            //     new Lenda
+            //     {
+            //         EmriLendes = "Gjuhe Shqipe",
+            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
+            //         Pershkrimi = "Seeded Data  1",
+            //         Syllabusi = "Seeded Data  1",
+            //         Profesoret = new List<Profesori> { profesoret[1] }
+            //     },
+            //     new Lenda
+            //     {
+            //         EmriLendes = "Gjuhe Angleze",
+            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
+            //         Pershkrimi = "Seeded Data  1",
+            //         Profesoret = new List<Profesori> { profesoret[2] }
+            //     }
+            // );
+
+            
+
+
+            //  await context.Profesoret.AddRangeAsync(profesoret);
+            //  await context.SaveChangesAsync();
+
         }
 
         public static async Task SeedDataPrind(DataContext context, UserManager<Prindi> userManager)
@@ -136,16 +146,19 @@ namespace Persistence
                 {
                     new Prindi{DisplayName = "prind1", UserName="p1", Email = "prind1@gmail.com"},
                     new Prindi{DisplayName = "prind2", UserName="p2", Email = "prind2@gmail.com"},
-                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}                        
+                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}
                 };
 
-                foreach (var prindi in prinderit){
+                foreach (var prindi in prinderit)
+                {
                     await userManager.CreateAsync(prindi, "Pa$$w0rd");
                 }
             }
         }
         //seed for Nxenesi
         public static async Task SeedDataNxenesit(DataContext context)
+
+
         {
             if (context.Nxenesit.Any()) return;
             var nxenesit = new List<Nxenesi>
@@ -179,5 +192,8 @@ namespace Persistence
             await context.SaveChangesAsync();
         }
 
+        
     }
+
 }
+

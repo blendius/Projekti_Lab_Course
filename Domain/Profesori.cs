@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain
@@ -9,5 +10,6 @@ namespace Domain
         public string GradaAkademike {get; set;}
         public DateTime DataRegjistrimit { get; set; }
         
+        public ICollection<Lenda> Lendet {get;set;}
     }
 }

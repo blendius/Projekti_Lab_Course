@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -11,7 +12,7 @@ namespace Domain
 
         public DateTime DataEShtimit{get;set;}
 
-        //public Profesori Profesori{get;set;}
+        public ICollection<Profesori> Profesoret { get; set; }
 
     }
 }

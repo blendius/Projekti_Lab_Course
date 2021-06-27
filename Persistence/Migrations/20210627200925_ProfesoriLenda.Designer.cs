@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210615104103_ProfTest")]
-    partial class ProfTest
+    [Migration("20210627200925_ProfesoriLenda")]
+    partial class ProfesoriLenda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,24 +168,56 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Prindi", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataLindjes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Emri")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Fjalkalimi")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mbiemri")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("nrTel")
+                    b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -215,9 +247,6 @@ namespace Persistence.Migrations
                     b.Property<string>("GradaAkademike")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Lenda")
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -240,9 +269,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Roli")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
@@ -280,6 +306,21 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Terminet");
+                });
+
+            modelBuilder.Entity("LendaProfesori", b =>
+                {
+                    b.Property<Guid>("LendetLendaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfesoretId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LendetLendaId", "ProfesoretId");
+
+                    b.HasIndex("ProfesoretId");
+
+                    b.ToTable("LendaProfesori");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -408,6 +449,21 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("LendaProfesori", b =>
+                {
+                    b.HasOne("Domain.Lenda", null)
+                        .WithMany()
+                        .HasForeignKey("LendetLendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Profesori", null)
+                        .WithMany()
+                        .HasForeignKey("ProfesoretId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

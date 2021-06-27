@@ -306,6 +306,21 @@ namespace Persistence.Migrations
                     b.ToTable("Terminet");
                 });
 
+            modelBuilder.Entity("LendaProfesori", b =>
+                {
+                    b.Property<Guid>("LendetLendaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfesoretId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LendetLendaId", "ProfesoretId");
+
+                    b.HasIndex("ProfesoretId");
+
+                    b.ToTable("LendaProfesori");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -432,6 +447,21 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("LendaProfesori", b =>
+                {
+                    b.HasOne("Domain.Lenda", null)
+                        .WithMany()
+                        .HasForeignKey("LendetLendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Profesori", null)
+                        .WithMany()
+                        .HasForeignKey("ProfesoretId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
