@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210627142240_Kontakt")]
+    partial class Kontakt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,10 +100,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Mesazhi")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PrindiId")
+                    b.Property<string>("Subjekti")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Subjekti")
+                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("profEmail")
@@ -109,7 +111,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("KontaktiId");
 
-                    b.HasIndex("PrindiId");
+                    b.HasIndex("UserName");
 
                     b.ToTable("Kontaktet");
                 });
@@ -489,7 +491,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Prindi", "Prindi")
                         .WithMany("Kontaktet")
-                        .HasForeignKey("PrindiId");
+                        .HasForeignKey("UserName");
 
                     b.Navigation("Prindi");
                 });

@@ -21,6 +21,8 @@ export default observer(function NavBarPrindi() {
         </Menu.Item>
 
         <Menu.Item content="Prindi Page" />
+        <Menu.Item as={NavLink} to="/prindiPage/Kontaktet" name="Kontaktet" />
+
         <Menu.Item onClick={logoutPrindi} text='Ckycu' icon='power' />
 
 

@@ -34,6 +34,8 @@ import adminPage from "../../features/adminPage";
 import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
+import ShowKontaktet from "../../prindiFeatures/kontaktet";
+import kontaktetProf from "../../professorFeatures/kontaktetProf";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -90,6 +92,8 @@ function App() {
             <Container style={{ marginTop: "7em" }}>
               <Switch>
                 <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
+                <Route path="/professorPage/Kontaktet" component={kontaktetProf} />
+
               </Switch>
             </Container>
           </>
@@ -103,6 +107,8 @@ function App() {
 
             <Container style={{ marginTop: "7em" }}>
               <Switch>
+              <Route path="/prindiPage/Kontaktet" component={ShowKontaktet} />
+
               </Switch>
             </Container>
           </>

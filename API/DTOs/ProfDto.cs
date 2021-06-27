@@ -7,6 +7,7 @@ namespace API.DTOs
         public string Token { get; set; }
         public string Username { get; set; }
         public string Image { get; set; }
+        public string Email { get; set; }
         public DateTime DataRegjistrimit { get; set; }
         public string GradaAkademike { get; set; }
     }

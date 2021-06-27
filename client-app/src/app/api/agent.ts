@@ -9,6 +9,7 @@ import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
 import { Laburatori } from "../models/laburatori";
+import { Kontakti } from "../models/kontakti";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -93,11 +94,11 @@ const Prinderit = {
   list: () => requests.get<Prindi[]>('/prinderit'),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
   create: (profesori: Prindi) => axios.post<void>('/prinderit', profesori),
-  update: (profesori: Prindi)=> axios.put<void>(`/prinderit/${profesori.id}`, profesori), 
-  delete: (id:string)=> axios.delete<void> (`/prinderit/${id}`)
+  update: (profesori: Prindi) => axios.put<void>(`/prinderit/${profesori.id}`, profesori),
+  delete: (id: string) => axios.delete<void>(`/prinderit/${id}`)
 }
 const Account = {
-  current: () => requests.get<Admin>("/account") ,
+  current: () => requests.get<Admin>("/account"),
   login: (user: AdminFormValues) =>
     requests.post<Admin>("/account/login", user),
 };
@@ -112,7 +113,7 @@ const AccountProf = {
 
 };
 const AccountPrindi = {
-  current: () => requests.get<Parent>("/PrindAccount") ,
+  current: () => requests.get<Parent>("/PrindAccount"),
   login: (prindi: ParentFormValues) =>
     requests.post<Parent>("/PrindAccount/loginPrindi", prindi),
   register: (prindi: ParentFormValues) =>
@@ -127,6 +128,12 @@ const Laburatoret = {
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
 };
+const Kontaktet = {
+  listPrindi: (id: string | undefined) => requests.get<Kontakti[]>(`/kontakti/${id}`),
+  listProf: (email: string | undefined) => requests.get<Kontakti[]>(`/kontakti/prof/${email}`),
+  create: (kontakti: Kontakti) => axios.post<void>(`/kontakti/`, kontakti),
+  delete: (id: string) => axios.delete<void>(`/kontakti/${id}`)
+};
 
 const agent = {
   Profesoret,
@@ -137,7 +144,8 @@ const agent = {
   Account,
   AccountProf,
   AccountPrindi,
-  Laburatoret
+  Laburatoret,
+  Kontaktet
 };
 
 export default agent;

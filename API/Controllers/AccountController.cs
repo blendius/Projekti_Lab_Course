@@ -125,6 +125,7 @@ namespace API.Controllers
             return new ProfDto
             {
                 DisplayName = prof.Name,
+                Email=prof.Email,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
                 Username = prof.UserName,
