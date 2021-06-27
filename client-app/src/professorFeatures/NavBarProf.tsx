@@ -18,7 +18,7 @@ export default observer(function NavBarProf() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
 
-        <Menu.Item as={NavLink} to="/ProfProfili" name="Profili im" />
+        <Menu.Item as={NavLink} to="/professorPage/ProfProfili" name="Profili im" />
         <Menu.Item onClick={logoutProf} text='Ckycu' icon='power' />
 
 

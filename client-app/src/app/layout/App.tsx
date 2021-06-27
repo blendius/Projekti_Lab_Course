@@ -33,6 +33,7 @@ import adminPage from "../../features/adminPage";
 import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
+import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindProfileDashboard";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -105,7 +106,7 @@ function App() {
           </>
         )}
       />
-       <Route path="/professorPage" component={ProfessorPage} />
+      <Route path="/professorPage" component={ProfessorPage} />
       <Route
         path={"/professorPage/(.+)"}
         render={() => (
@@ -118,20 +119,25 @@ function App() {
             </Switch>
           </Container>
           </>
-        )} />
-<Route path="/prindiPage" component={PrindiPage} />
+        )} 
+      />
+
+      <Route path="/prindiPage" component={PrindiPage} />
       <Route
-        path={"/professorPage/(.+)"}
+        path={"/prindiPage/(.+)"}
         render={() => (
           <>
           <NavBarPrindi />
           
           <Container style={{ marginTop: "7em" }}>
             <Switch>
+            <Route path="/prindiPage/PrindProfili" component={PrindProfileDashboard} />
+
             </Switch>
           </Container>
           </>
-        )} />
+        )} 
+      />
 
         
        <Route path="/adminPage" component={adminPage} />

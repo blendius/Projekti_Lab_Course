@@ -2,10 +2,9 @@ import { observer } from "mobx-react-lite";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
 import { useStore } from "../app/stores/store";
-// import "./styles.css";
 
 export default observer(function NavBarPrindi() {
-    const { prindStoreAccount: {  logoutPrindi } } = useStore();
+  const { prindStoreAccount: {  logoutPrindi } } = useStore();
 
   return (
     <Menu inverted fixed="top">
@@ -19,11 +18,8 @@ export default observer(function NavBarPrindi() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
 
-        <Menu.Item content="Prindi Page" />
+        <Menu.Item as={NavLink} to="/prindiPage/PrindProfili" name="Profili im" />
         <Menu.Item onClick={logoutPrindi} text='Ckycu' icon='power' />
-
-
-
 
       </Container>
     </Menu>
