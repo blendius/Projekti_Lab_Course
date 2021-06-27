@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
+import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -128,6 +129,14 @@ const AccountPrindi = {
     requests.post<Parent>("/PrindAccount/registerPrind", prindi),
 };
 
+const AccountNxenesi = {
+  current: () => requests.get<Nxenesiuser>('/NxenesiAccount'),
+  login: (nxenesi : NxenesiuserFormValues) => 
+    requests.post<Nxenesiuser>('/NxenesiAccount/loginNxenesi', nxenesi),
+  register: (nxenesi: NxenesiuserFormValues) => 
+  requests.post<Nxenesiuser>('/NxenesiAccount/registerNxenesi', nxenesi)
+};
+
 const agent = {
   Profesoret,
   Terminet,
@@ -138,6 +147,7 @@ const agent = {
   Account,
   AccountProf,
   AccountPrindi,
+  AccountNxenesi
 };
 
 export default agent;

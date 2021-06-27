@@ -32,6 +32,12 @@ namespace API.Extensions
            }).AddEntityFrameworkStores<DataContext>()
            .AddSignInManager<SignInManager<Prindi>>();
 
+            services.AddIdentityCore<Nxenesi>(opt =>
+           {
+               opt.Password.RequireNonAlphanumeric = false;
+           }).AddEntityFrameworkStores<DataContext>()
+           .AddSignInManager<SignInManager<Nxenesi>>();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

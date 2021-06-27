@@ -15,7 +15,7 @@ export default observer(function Dashboard() {
         nxenesiStore.loadNxenesit();
     }, [nxenesiStore]);
 
-    if(nxenesiStore.loadingInitial) return <LoadingComponent content='Loading app'/>
+    if(nxenesiStore.loadingInitial) return <LoadingComponent content='Loading nxenesit...'/>
 
 
     return (

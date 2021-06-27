@@ -31,20 +31,21 @@ import adminPage from "../../features/adminPage";
 import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
+import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
+import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const { commonStore, adminStore, profesoriStore } = useStore();
+  const { commonStore, adminStore, profesoriStore, nxenesiStore } = useStore();
 
-  // useEffect(() => {
-  //   if (commonStore.token && adminStore.isLoggedIn) {
-  //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
-  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-  //   }  else {
-  //     commonStore.setAppLoaded();
-  //   }
-  // }, [commonStore, adminStore])
+  useEffect(() => {
+    if (commonStore.token && nxenesiStore.isLoggedIn) {
+      nxenesiStore.getNxenesin().finally(() => commonStore.setAppLoaded());
+    } else {
+      commonStore.setAppLoaded();
+    }
+  }, [commonStore, nxenesiStore])
 
   // useEffect(() => {
   //   if (commonStore.token) {
@@ -117,6 +118,7 @@ function App() {
           </>
         )}
       />
+
       <Route path="/prindiPage" component={PrindiPage} />
       <Route
         path={"/professorPage/(.+)"}
@@ -131,6 +133,26 @@ function App() {
         )}
       />
 
+      <Route path="/nxenesiPage" component={NxenesiPage} />
+      <Route
+        path={"/nxenesiPage/(.+)"}
+        render={() => (
+          <>
+            <NavBarNxenesi />
+
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+              <Route
+                  exact
+                  path="/nxenesiPage/Profili"
+                  component={NxenesiDashboard}
+                />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
+
       <Route path="/adminPage" component={adminPage} />
       <Route
         path={"/adminPage/(.+)"}
@@ -140,11 +162,7 @@ function App() {
             <Container style={{ marginTop: "7em" }}>
               <Switch>
                 <Route path="/adminPage/paneli" component={Paneli} />
-                <Route
-                  exact
-                  path="/adminPage/Profili"
-                  component={NxenesiDashboard}
-                />
+            
                 <Route
                   path="/adminPage/profesoret"
                   component={ShowProfessors}

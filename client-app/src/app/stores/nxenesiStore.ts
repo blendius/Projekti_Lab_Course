@@ -3,9 +3,12 @@ import NxenesiDashboard from "../../features/nxenesit/dashboard/NxenesiDashboard
 import agent from "../api/agent";
 import { Nxenesi } from "../models/nxenesi";
 import {v4 as uuid} from 'uuid';
+import {Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
+import { store } from "./store";
+import { history } from "../..";
 
 export default class NxenesiStore {
-    nxenesit: Nxenesi[] = [];
+    nxenesit: Nxenesiuser | null = null;
     nxenesiRegistry = new Map<String, Nxenesi>();
     selectedNxenesi: Nxenesi | undefined = undefined;
     editMode = false;
@@ -14,6 +17,38 @@ export default class NxenesiStore {
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    get isLoggedIn() {
+        return !!this.nxenesit;
+    }
+
+    login = async (creds: NxenesiuserFormValues) => {
+        try {
+            const nxenesit = await agent.AccountNxenesi.login(creds);
+            store.commonStore.setToken(nxenesit.token);
+            runInAction(() => this.nxenesit = nxenesit);
+            history.push("/nxenesiPage/Profili");
+            store.modalStore.closeModal();
+        } catch(error) {
+            throw error;
+        }
+    }
+
+    logoutNxenesi = () => {
+        store.commonStore.setToken(null);
+        window.localStorage.removeItem('jwt');
+        this.nxenesit = null;
+        history.push('/');
+    }
+
+    getNxenesin = async () => {
+        try {
+           const nxenesit =  await agent.AccountNxenesi.current();
+           runInAction(() => this.nxenesit = nxenesit);
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     get nxenesitByDate() {

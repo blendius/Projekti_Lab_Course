@@ -145,38 +145,55 @@ namespace Persistence
             }
         }
         //seed for Nxenesi
-        public static async Task SeedDataNxenesit(DataContext context)
+        public static async Task SeedDataNxenesit(DataContext context, UserManager<Nxenesi> userManager)
         {
-            if (context.Nxenesit.Any()) return;
-            var nxenesit = new List<Nxenesi>
+            if(!userManager.Users.Any())
             {
-                new Nxenesi
+                var nxenesit = new List<Nxenesi>
                 {
-                    FullName = "Mal Haziri",
-                    ParentName = "Armend",
-                    Email = "malhaziri@student.edu",
-                    Password = "Mali123.",
-                    DateOfBirth = DateTime.Now.AddMonths(-120),
-                    YearOfRegistration = 2020,
-                    Class = "X1",
-                    PhoneNumber = "044-458-885"
-                },
-                  new Nxenesi
+                    new Nxenesi{DisplayName = "Erin Lekiqi", UserName= "erinlekiqi", Email= "erinlekiqi@student.edu"},
+                    new Nxenesi{DisplayName = "Mal Haziri", UserName= "malhaziri", Email= "malhaziri@student.edu"},
+                    new Nxenesi{DisplayName = "Erona Lekiqi", UserName= "eronalekiqi", Email= "eronalekiqi@student.edu"}
+
+                };
+
+                foreach (var nxenesi in nxenesit)
                 {
-                    FullName = "Erin Lekiqi",
-                    ParentName = "Naim",
-                    Email = "erinlekiqi@student.edu",
-                    Password = "Erini123.",
-                    DateOfBirth = DateTime.Now.AddMonths(-125),
-                    YearOfRegistration = 2020,
-                    Class = "X1",
-                    PhoneNumber = "044-458-885"
+                    await userManager.CreateAsync(nxenesi, "Pa$$w0rd");
                 }
+            }
 
-            };
 
-            await context.Nxenesit.AddRangeAsync(nxenesit);
-            await context.SaveChangesAsync();
+        //     if (context.Nxenesit.Any()) return;
+        //     var nxenesit = new List<Nxenesi>
+        //     {
+        //         new Nxenesi
+        //         {
+        //             FullName = "Mal Haziri",
+        //             ParentName = "Armend",
+        //             Email = "malhaziri@student.edu",
+        //             Password = "Mali123.",
+        //             DateOfBirth = DateTime.Now.AddMonths(-120),
+        //             YearOfRegistration = 2020,
+        //             Class = "X1",
+        //             PhoneNumber = "044-458-885"
+        //         },
+        //           new Nxenesi
+        //         {
+        //             FullName = "Erin Lekiqi",
+        //             ParentName = "Naim",
+        //             Email = "erinlekiqi@student.edu",
+        //             Password = "Erini123.",
+        //             DateOfBirth = DateTime.Now.AddMonths(-125),
+        //             YearOfRegistration = 2020,
+        //             Class = "X1",
+        //             PhoneNumber = "044-458-885"
+        //         }
+
+        //     };
+
+        //     await context.Nxenesit.AddRangeAsync(nxenesit);
+        //     await context.SaveChangesAsync();
         }
 
     }

@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Nxenesit;
 using Domain;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
 
      public class CustomNxenesi
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string FullName{ get; set; }
         public string ParentName{ get; set; } //we need to make this foreign key to the table Prindi, for the moment we'll keep it as text.
         public string Class{ get; set; } //for the moment we'll keep it as text.
@@ -29,21 +26,21 @@ namespace API.Controllers
     public class NxenesiController : BaseApiController
     {
 
+        
         [HttpGet]
         public async Task<ActionResult<List<Nxenesi>>> GetNxenesit()
         {
             List<Nxenesi> listaNxenesve = await Mediator.Send(new List.Query());
-            foreach (var nxenesi in listaNxenesve) {
-                nxenesi.Password = null;
-            }
+            // foreach (var nxenesi in listaNxenesve) {
+            //     nxenesi.Password = null;
+            // }
             return listaNxenesve;
         }
-
+    
         [HttpGet("{id}")]
-        public async Task<ActionResult<Nxenesi>> GetNxenesin(Guid id)
+        public async Task<ActionResult<Nxenesi>> GetNxenesin(string id)
         {
             Nxenesi nxenesi = await Mediator.Send(new Details.Query{Id = id});
-            nxenesi.Password = null;
             return nxenesi;
         }
 
@@ -54,9 +51,9 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditNxenesin(Guid id, CustomNxenesi nxenesi)
+        public async Task<IActionResult> EditNxenesin(string id, CustomNxenesi nxenesi)
         {
-            Nxenesi nxenesiAktual = await Mediator.Send(new Details.Query{Id = id});
+            Nxenesi nxenesiAktual = await Mediator.Send(new Details.Query{Id= id}); 
             nxenesiAktual.Id = id;
             nxenesiAktual.FullName = nxenesi.FullName;
             nxenesiAktual.YearOfRegistration = nxenesi.YearOfRegistration;
@@ -67,21 +64,21 @@ namespace API.Controllers
             nxenesiAktual.Email = nxenesi.Email;
             
             //checking if the user wrote their old password correctly
-            bool samePassword = nxenesi.CurrentPassword == nxenesiAktual.Password;
+          //  bool samePassword = nxenesi.CurrentPassword == nxenesiAktual.Password;
             
-            bool passwordValid = nxenesi.CurrentPassword != "" && nxenesi.NewPassword != "" && 
-                                    nxenesi.ConfirmPassword != "" && nxenesi.ConfirmPassword == nxenesi.NewPassword 
-                                    && samePassword;
+            // bool passwordValid = nxenesi.CurrentPassword != "" && nxenesi.NewPassword != "" && 
+                                    // nxenesi.ConfirmPassword != "" && nxenesi.ConfirmPassword == nxenesi.NewPassword 
+                                  //  && samePassword;
         
             //to do: store hashed passwords 
-            if(passwordValid){
-                nxenesiAktual.Password = nxenesi.NewPassword;
-            }
+            // if(passwordValid){
+            // //    nxenesiAktual.Password = nxenesi.NewPassword;
+            // }
             return Ok(await Mediator.Send(new Edit.Command{Nxenesi = nxenesiAktual}));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNxenesin(Guid id)
+        public async Task<IActionResult> DeleteNxenesin(string id)
         {
             return Ok(await Mediator.Send(new Delete.Command{Id = id}));
         }

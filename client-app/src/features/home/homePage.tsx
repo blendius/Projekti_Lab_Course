@@ -8,9 +8,11 @@ import RegisterFormProf from '../profesoret/form/RegisterFormProf';
 import LoginFormPrindi from '../prinderit/form/LoginFormPrindi';
 import RegisterFormPrindi from '../prinderit/form/RegisterFormPrindi';
 import LoginForm from '../users/LoginForm';
+import LoginFormNxenesi from '../nxenesit/form/LoginFormNxenesi';
+import './style.css';
 
 export default observer(function HomePage() {
-    const { adminStore, modalStore, profesoriStore } = useStore();
+    const { adminStore, modalStore, profesoriStore, nxenesiStore} = useStore();
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
@@ -34,6 +36,8 @@ export default observer(function HomePage() {
                         Kycu si Prind!
                     </Button>
                     
+                   
+                    
                 </>
                 )}
                 {profesoriStore.isLoggedIn ? (
@@ -48,10 +52,27 @@ export default observer(function HomePage() {
                     <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
                         Kyqu si Profesor!
                     </Button>
+                    {/* <Button onClick={()=>modalStore.openModal(<LoginFormNxenesi/>)} size='huge' inverted>
+                        Kyqu si Nxenes!
+                    </Button> */}
                     
                     </>
                 )} 
+                {nxenesiStore.isLoggedIn ? (
+                    <>
+                    <Button as={Link} to='/nxenesiPage/Profili' size='huge' inverted>
+                            Vazhdo te profili i nxenesit!
+                    </Button>
+                    </>
 
+                ) : (
+                    <Button onClick={()=>modalStore.openModal(<LoginFormNxenesi/>)} size='huge' inverted>
+                        Kyçu si Nxenes!
+                    </Button>
+
+                )}
+            
+                  
 
             </Container>
         </Segment>
