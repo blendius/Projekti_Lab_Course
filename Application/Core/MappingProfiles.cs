@@ -13,6 +13,9 @@ namespace Application.Core
             CreateMap<Lenda,Lenda>();
             CreateMap<Prindi, Prindi>();
             CreateMap<Nxenesi, Nxenesi>();
+            CreateMap<Viti, Viti>();
+            CreateMap<Paralelja, Paralelja>();
+            CreateMap<Klasa, Klasa>();
         }
     }
 }

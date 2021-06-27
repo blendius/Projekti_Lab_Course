@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -19,5 +20,7 @@ namespace Domain
         //public DateTime DateOfBirth {get; set; }
         public int YearOfRegistration { get; set; }
         //public string PhoneNumber{ get; set; }
+        public ICollection<PrindiNxenesi> PrinderitNxenesit { get; set; }
+
     }
 }
