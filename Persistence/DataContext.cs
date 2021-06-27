@@ -35,7 +35,7 @@ namespace Persistence
                 .WithMany(p => p.PrinderitNxenesit)
                 .HasForeignKey(pn => pn.NxenesiId);
 
-            base.OnModelCreating(modelbuilder);
+            // base.OnModelCreating(modelbuilder);
             modelbuilder.Entity<Klasa>()
                 .HasKey(vp => new { vp.VitiId, vp.ParaleljaId });
             modelbuilder.Entity<Klasa>()
@@ -46,6 +46,11 @@ namespace Persistence
                 .HasOne(vp => vp.Paralelja)
                 .WithMany(p => p.Klasa)
                 .HasForeignKey(vp => vp.ParaleljaId);
+
+            modelbuilder.Entity<Profesori>()
+                .HasOne(p => p.KlasaKujdestari)
+                .WithOne(k => k.Kujdestari)
+                .HasForeignKey<Klasa>(k => k.ProfesoriId);
         }
     }
 }
