@@ -50,7 +50,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
- var lendet = new List<Lenda>
+            var lendet = new List<Lenda>
             {
                 new Lenda
                 {
@@ -93,14 +93,14 @@ namespace Persistence
             };
             foreach (var prof in profesoret)
             {
-                await userManager.CreateAsync(prof,"Pa$$w0rd");
+                await userManager.CreateAsync(prof, "Pa$$w0rd");
             }
 
             // await context.Profesoret.AddRangeAsync(profesoret);
             // await context.SaveChangesAsync();
 
-           
-          //  await context.SaveChangesAsync();
+
+            //  await context.SaveChangesAsync();
             // var Profesoret = new List<Profesori>
             // {
             //     new Profesori
@@ -136,10 +136,11 @@ namespace Persistence
                 {
                     new Prindi{DisplayName = "prind1", UserName="p1", Email = "prind1@gmail.com"},
                     new Prindi{DisplayName = "prind2", UserName="p2", Email = "prind2@gmail.com"},
-                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}                        
+                    new Prindi{DisplayName = "prind3", UserName="p3", Email = "prind3@gmail.com"}
                 };
 
-                foreach (var prindi in prinderit){
+                foreach (var prindi in prinderit)
+                {
                     await userManager.CreateAsync(prindi, "Pa$$w0rd");
                 }
             }
@@ -178,6 +179,99 @@ namespace Persistence
             await context.Nxenesit.AddRangeAsync(nxenesit);
             await context.SaveChangesAsync();
         }
+        // public static async Task SeedDataPrinderitNxenesit(DataContext context)
+        // {
+        //     if (context.Nxenesit.Any()) return;
+        //     var nxenesit = new List<Nxenesi>
+        //     {
+        //         new PrindiNxenesi
+        //         {
+        //             PrindiId = "7cb47c32-acde-4f26-b684-e85c1e33b199",
+        //             NxenesiId = "66F2C262-1B35-414D-9E9F-E807D0F3A520"
+        //         }
 
+        //     };
+
+        //     await context.Nxenesit.AddRangeAsync(nxenesit);
+        //     await context.SaveChangesAsync();
+        // }
+
+        //VITI SEED
+        public static async Task SeedDataViti(DataContext context)
+        {
+            if (context.Vitet.Any()) return;
+            var vitet = new List<Viti>
+            {
+                new Viti
+                {
+                    VitiId = 10,
+                    Kohezgjatja = 9
+                },
+                new Viti
+                {
+                    VitiId = 11,
+                    Kohezgjatja = 9
+                },
+                new Viti
+                {
+                    VitiId = 12,
+                    Kohezgjatja = 8
+                }
+            };
+
+            await context.Vitet.AddRangeAsync(vitet);
+            await context.SaveChangesAsync();
+        }
+        public static async Task SeedDataParalelja(DataContext context)
+        {
+            if (context.Paralelet.Any()) return;
+            var paralelet = new List<Paralelja>
+            {
+                new Paralelja
+                {
+                    ParaleljaId = 1,
+                    KapacitetiMax = 20
+                },
+                new Paralelja
+                {
+                    ParaleljaId = 2,
+                    KapacitetiMax = 20
+                },
+                new Paralelja
+                {
+                    ParaleljaId = 3,
+                    KapacitetiMax = 25
+                }
+            };
+
+            await context.Paralelet.AddRangeAsync(paralelet);
+            await context.SaveChangesAsync();
+        }
+        public static async Task SeedDataKlasa(DataContext context)
+        {
+            if (context.Klasat.Any()) return;
+            var klasat = new List<Klasa>
+            {
+                new Klasa
+                {
+                    VitiId = 10,
+                    // Viti = 
+                    ParaleljaId = 1
+                },
+                new Klasa
+                {
+                    VitiId = 11,
+                    ParaleljaId = 1
+                },
+                new Klasa
+                {
+                    VitiId = 10,
+                    ParaleljaId = 2
+                }
+            };
+
+            await context.Klasat.AddRangeAsync(klasat);
+            await context.SaveChangesAsync();
+        }
     }
 }
