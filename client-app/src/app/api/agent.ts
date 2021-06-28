@@ -3,6 +3,8 @@ import { Termin } from "../models/termini";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from "../models/prindi";
+import { Nxenesi } from "../models/nxenesi";
+import { CustomNxenesi } from "../models/customNxenesi";
 import { Admin, AdminFormValues } from "../models/user";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
@@ -10,6 +12,7 @@ import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
 import { Laburatori } from "../models/laburatori";
 import { Kontakti } from "../models/kontakti";
+import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -19,11 +22,11 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use((config) => {
   const token = store.commonStore.token;
-  if (token) config.headers.Authorization = `Bearer ${token}`
-  return config
-})
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 axios.interceptors.response.use(
   async (response) => {
@@ -91,12 +94,19 @@ const Lendet = {
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
 const Prinderit = {
-  list: () => requests.get<Prindi[]>('/prinderit'),
+  list: () => requests.get<Prindi[]>("/prinderit"),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
   create: (profesori: Prindi) => axios.post<void>('/prinderit', profesori),
   update: (profesori: Prindi) => axios.put<void>(`/prinderit/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/prinderit/${id}`)
 }
+const Nxenesit = {
+  list: () => requests.get<Nxenesi[]>("/nxenesi"),
+  details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
+  create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
+  update: (nxenesi: Nxenesi) => {console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi)},
+  delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
+};
 const Account = {
   current: () => requests.get<Admin>("/account"),
   login: (user: AdminFormValues) =>
@@ -110,7 +120,6 @@ const AccountProf = {
     requests.post<Professor>("/account/loginProf", prof),
   register: (prof: ProfFormValues) =>
     requests.post<Professor>("/account/registerProf", prof),
-
 };
 const AccountPrindi = {
   current: () => requests.get<Parent>("/PrindAccount"),
@@ -134,6 +143,13 @@ const Kontaktet = {
   create: (kontakti: Kontakti) => axios.post<void>(`/kontakti/`, kontakti),
   delete: (id: string) => axios.delete<void>(`/kontakti/${id}`)
 };
+const AccountNxenesi = {
+  currentNxenesi: () => requests.get<Nxenesiuser>('/NxenesiAccount/currentNxenesi'),
+  login: (nxenesi : NxenesiuserFormValues) => 
+    requests.post<Nxenesiuser>('/NxenesiAccount/loginNxenesi', nxenesi),
+  register: (nxenesi: NxenesiuserFormValues) => 
+  requests.post<Nxenesiuser>('/NxenesiAccount/registerNxenesi', nxenesi)
+};
 
 const agent = {
   Profesoret,
@@ -141,11 +157,13 @@ const agent = {
   Postimet,
   Lendet,
   Prinderit,
+  Nxenesit,
   Account,
   AccountProf,
   AccountPrindi,
   Laburatoret,
-  Kontaktet
+  Kontaktet,
+  AccountNxenesi
 };
 
 export default agent;

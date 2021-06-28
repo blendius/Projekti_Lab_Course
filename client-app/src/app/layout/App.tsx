@@ -1,14 +1,12 @@
 import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import {
-  Route,
-  Switch,
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Container } from "semantic-ui-react";
 
 import HomePage from "../../features/home/homePage";
+import Dashboard from "../../features/nxenesiFromAdmin/dashboard/Dashboard";
 import LendetDashboard from "../../features/lendet/dashboard/LendetDashboard";
 import LendetDetails from "../../features/lendet/details/LendetDetails";
 import LendaForm from "../../features/lendet/form/LendaForm";
@@ -38,21 +36,21 @@ import ShowKontaktet from "../../prindiFeatures/kontaktet";
 import kontaktetProf from "../../professorFeatures/kontaktetProf";
 import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindProfileDashboard";
 import kontaktet from "../../prindiFeatures/kontaktet";
+import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
+import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
   const { commonStore, adminStore, profesoriStore } = useStore();
 
-
   // useEffect(() => {
-  //   if (commonStore.token && adminStore.isLoggedIn) {
-  //     adminStore.getUser().finally(() => commonStore.setAppLoaded())
-  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-  //   }  else {
+  //   if (commonStore.token && nxenesiStore.isLoggedIn) {
+  //     nxenesiStore.getNxenesin().finally(() => commonStore.setAppLoaded());
+  //   } else {
   //     commonStore.setAppLoaded();
   //   }
-  // }, [commonStore, adminStore])
+  // }, [commonStore, nxenesiStore])
 
   // useEffect(() => {
   //   if (commonStore.token) {
@@ -63,9 +61,7 @@ function App() {
 
   // }, [commonStore, profesoriStore])
 
-
   commonStore.setAppLoaded();
-
 
   // useEffect(() => {
   //   axios
@@ -75,11 +71,10 @@ function App() {
   //     });
   // }, []);
 
-  if (!commonStore.appLoaded) return <LoadingComponent content='Loading...' />
+  if (!commonStore.appLoaded) return <LoadingComponent content="Loading..." />;
 
   return (
     <>
-
       <ToastContainer position="bottom-right" hideProgressBar />
       <ModalContainer />
       <Route exact path="/" component={HomePage} />
@@ -100,6 +95,26 @@ function App() {
             </Container>
           </>
         )} />
+      
+      <Route path="/professorPage" component={ProfessorPage} />
+      <Route
+        path={"/professorPage/(.+)"}
+        render={() => (
+          <>
+            <NavBarProf />
+
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+                <Route
+                  path="/professorPage/ProfProfili"
+                  component={ProfProfileDashboard}
+                />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
+
       <Route path="/prindiPage" component={PrindiPage} />
       <Route
         path={"/prindiPage/(.+)"}
@@ -118,6 +133,33 @@ function App() {
         )} 
       />
 
+            <NavBarPrindi />
+
+            <Container style={{ marginTop: "7em" }}>
+              <Switch></Switch>
+            </Container>
+          
+      
+
+      <Route path="/nxenesiPage" component={NxenesiPage} />
+      <Route
+        path={"/nxenesiPage/(.+)"}
+        render={() => (
+          <>
+            <NavBarNxenesi />
+
+            <Container style={{ marginTop: "7em" }}>
+              <Switch>
+              <Route
+                  exact
+                  path="/nxenesiPage/Profili/"
+                  component={NxenesiDashboard}
+                />
+              </Switch>
+            </Container>
+          </>
+        )}
+      />
 
       <Route path="/adminPage" component={adminPage} />
       <Route
@@ -129,13 +171,32 @@ function App() {
               <Switch>
                 <Route path="/adminPage/paneli" component={Paneli} />
                 <Route exact path="/adminPage/Profili" component={NxenesiDashboard} />
-                <Route path="/adminPage/profesoret" component={ShowProfessors} />
-                <Route path="/adminPage/terminet" component={TerminetDashboard} />
-                <Route exact path="/adminPage/postimet" component={PostimetDashboard} />
-                <Route path="/adminPage/postimet/:id" component={PostimetDetails} />
+                <Route
+                  path="/adminPage/profesoret"
+                  component={ShowProfessors}
+                />
+                <Route
+                  path="/adminPage/terminet"
+                  component={TerminetDashboard}
+                />
+                <Route
+                  exact
+                  path="/adminPage/postimet"
+                  component={PostimetDashboard}
+                />
+                <Route
+                  path="/adminPage/postimet/:id"
+                  component={PostimetDetails}
+                />
+                <Route path="/adminPage/nxenesit" component={Dashboard} />
                 <Route path="/adminPage/prinderit" component={ShowPrinderit} />
-                <Route exact path="/adminPage/lendet" component={LendetDashboard} />
+                <Route
+                  exact
+                  path="/adminPage/lendet"
+                  component={LendetDashboard}
+                />
                 <Route path="/adminPage/lendet/:id" component={LendetDetails} />
+
                 <Route path="/adminPage/login" component={LoginForm} />
                 <Route path="/adminPage/loginProf" component={LoginFormProf} />
                 <Route path="/adminPage/loginPrindi" component={LoginFormPrindi} />
@@ -147,7 +208,8 @@ function App() {
               </Switch>
             </Container>
           </>
-        )} />
+        )}
+      />
     </>
   );
 }

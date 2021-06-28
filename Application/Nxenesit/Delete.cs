@@ -10,7 +10,7 @@ namespace Application.Nxenesit
     {
         public class Command : IRequest
         {
-            public Guid Id { get; set; }
+            public string Id { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
