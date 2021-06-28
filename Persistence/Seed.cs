@@ -193,19 +193,19 @@ namespace Persistence
             await context.Nxenesit.AddRangeAsync(nxenesit);
             await context.SaveChangesAsync();
         }
-        public static async Task SeedDataLaburatori(DataContext context)
-        {
-            if (context.Laburatioret.Any()) return;
-            var laburatioret = new List<Laburatiori>{
-                     new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
-                     new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
-                     new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
-                 };
+        // public static async Task SeedDataLaburatori(DataContext context)
+        // {
+        //     if (context.Laburatioret.Any()) return;
+        //     var laburatioret = new List<Laburatiori>{
+        //             //  new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
+        //             //  new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
+        //             //  new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
+        //          };
 
 
-            await context.Laburatioret.AddRangeAsync(laburatioret);
-            await context.SaveChangesAsync();
-        }
+        //     await context.Laburatioret.AddRangeAsync(laburatioret);
+        //     await context.SaveChangesAsync();
+        // }
 
     }
 }

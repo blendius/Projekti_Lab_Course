@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -10,6 +11,7 @@ namespace Domain
         public string Syllabusi{get;set;}
 
         public DateTime DataEShtimit{get;set;}
+        public ICollection<Laburatiori> Laburatoret{get;set;}
 
         //public Profesori Profesori{get;set;}
 

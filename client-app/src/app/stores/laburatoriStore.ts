@@ -57,11 +57,11 @@ export default class LaburatoriStore {
         this.editMode = false;
     }
 
-    createLaburatori = async (laburatori: Laburatori) => {
+    createLaburatori = async (laburatori: Laburatori, EmriLendes:string) => {
         this.loading = true;
         laburatori.id = uuid();
         try {
-            await agent.Laburatoret.create(laburatori);
+            await agent.Laburatoret.create(laburatori,EmriLendes);
             runInAction(() => {
                 this.laburatoriRegistry.set(laburatori.id, laburatori)
                 this.selectedLaburatori = laburatori;

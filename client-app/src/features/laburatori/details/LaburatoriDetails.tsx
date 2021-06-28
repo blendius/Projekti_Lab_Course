@@ -25,7 +25,7 @@ export default observer(function LaburatoriDetais() {
                 <Card.Content>
                     <Card.Description className='teDhena'>
                         <Card.Header className='Emri'>{laburatori.lloji}</Card.Header>
-                        <div className="data"><label >Lenda:  </label>  {laburatori.lenda}</div>
+                        <div className="data"><label >Lenda:  </label>  {laburatori.EmriLendes}</div>
                         <div className="data"><label >Numri i Paisjeve:  </label>  {laburatori.nrPaisjeve}</div>
                         <div className="data"><label>Data e krijimit: :</label> {laburatori.dataEKrijimit}</div>
                     </Card.Description>

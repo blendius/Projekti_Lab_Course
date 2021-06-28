@@ -5,15 +5,19 @@ import { observer } from 'mobx-react-lite';
 import LaburatoriDashboard from './dashboard/LaburatoriDashboard';
 
 
- function ShowLaburatoret() {
+function ShowLaburatoret() {
 
-  const{laburatoriStore}=useStore();
+  const { laburatoriStore, lendaStore } = useStore();
 
- 
+
 
   useEffect(() => {
     laburatoriStore.loadLaburatoret();
-  }, [laburatoriStore]) 
+  }, [laburatoriStore])
+
+  useEffect(() => {
+    lendaStore.loadLendet();
+  }, [lendaStore])
 
 
   if (laburatoriStore.loadingInitial) return <LoadingComponent content='Loading app' />
@@ -21,12 +25,12 @@ import LaburatoriDashboard from './dashboard/LaburatoriDashboard';
   return (
     <Fragment>
       <div>
-       
-          <LaburatoriDashboard 
-          />
+
+        <LaburatoriDashboard
+        />
       </div>
 
-     
+
     </Fragment>
   )
 }

@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Application.Laburatori;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 namespace API.Controllers
 {
+[AllowAnonymous]
     public class LaburatoriController: BaseApiController
     {
 
@@ -24,10 +26,10 @@ namespace API.Controllers
             return await Mediator.Send(new Details.Query { Id = id });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateLaburatori(Laburatiori laburatiori)
+        [HttpPost("{EmriLendes}")]
+        public async Task<IActionResult> CreateLaburatori(Laburatiori laburatiori, string EmriLendes)
         {
-            return Ok(await Mediator.Send(new Create.Command { Laburatiori = laburatiori }));
+            return Ok(await Mediator.Send(new Create.Command { Laburatiori = laburatiori, LendaEmri=EmriLendes }));
         }
 
         [HttpPut("{id}")]

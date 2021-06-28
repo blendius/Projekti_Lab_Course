@@ -16,7 +16,7 @@ const {laburatoriByDate}=laburatoriStore;
                         <List.Icon name='address card' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='a'>{laburatori.lloji}</List.Header>
-                            <div className="data" ><label>Lenda:  </label>  {laburatori.lenda}</div>
+                            <div className="data" ><label>Lenda:  </label>  {laburatori.EmriLendes}</div>
                         </List.Content>
                         <Item.Extra>
                             <Button onClick={() => laburatoriStore.selectLaburatori(laburatori.id)} floated='right' content='Shiko Detajet' color='blue' />

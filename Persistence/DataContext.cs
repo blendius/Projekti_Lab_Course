@@ -30,7 +30,12 @@ namespace Persistence
             .WithMany(p => p.Kontaktet)
              .HasForeignKey(pp => pp.PrindiId);
 
-            
+            builder.Entity<Laburatiori>()
+          .HasOne(p => p.Lenda)
+          .WithMany(p => p.Laburatoret)
+           .HasForeignKey(pp => pp.LendaId);
+
+
             // builder.Entity<Kontakti>()
             // .HasOne(p => p.Id)
             // .WithMany(pr => pr.)

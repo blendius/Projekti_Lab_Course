@@ -8,6 +8,7 @@ namespace Domain
         public string Lloji { get; set; }
         public int NrPaisjeve { get; set; }
         public DateTime DataEKrijimit { get; set; }
-        public string Lenda { get; set; }
+        public Guid LendaId { get; set; }
+        public Lenda Lenda { get; set; }
     }
 }

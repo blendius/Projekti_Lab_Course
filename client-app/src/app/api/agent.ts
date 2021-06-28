@@ -123,7 +123,7 @@ const AccountPrindi = {
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
-  create: (laburatori: Laburatori) => axios.post<void>(`/laburatori/`, laburatori),
+  create: (laburatori: Laburatori, EmriLendes:string) => axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
   update: (laburatori: Laburatori) =>
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
