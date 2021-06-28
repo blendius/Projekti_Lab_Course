@@ -10,7 +10,7 @@ import List from './List';
 
 export default observer(function Dashboard() {
     const { nxenesiStore} = useStore();
-    const {selectedNxenesi, editMode} = nxenesiStore
+    const {nxenesiSelected,selectedNxenesi, editMode} = nxenesiStore
     useEffect(() => {
         nxenesiStore.loadNxenesit();
     }, [nxenesiStore]);

@@ -11,7 +11,7 @@ export default observer (function LoginFormNxenesi() {
     return (
         <Formik
             initialValues = {{email: '', password: '', error: null}}
-            onSubmit = {(values, {setErrors}) => nxenesiStore.login(values).catch(error => 
+            onSubmit = {(values, {setErrors}) => nxenesiStore.loginNxenesi(values).catch(error => 
                 setErrors({error: 'Invalid email or password'}))}
         >
             {({handleSubmit, isSubmitting, errors}) => (

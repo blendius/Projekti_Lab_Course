@@ -25,7 +25,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     PrindiId = table.Column<string>(type: "TEXT", nullable: false),
-                    NxenesiId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    NxenesiId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

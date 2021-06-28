@@ -8,21 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
 
-     public class CustomNxenesi
-    {
-        public string Id { get; set; }
-        public string FullName{ get; set; }
-        public string ParentName{ get; set; } //we need to make this foreign key to the table Prindi, for the moment we'll keep it as text.
-        public string Class{ get; set; } //for the moment we'll keep it as text.
-        //public string Grades { get; set; } we'll be added as foreign key to the relation that connects Profesori, Nxenesi and Lenda and contains the grade.
-        public string Email {get; set; }
-        public string CurrentPassword {get; set; }
-        public DateTime DateOfBirth {get; set; }
-        public int YearOfRegistration { get; set; }
-        public string PhoneNumber{ get; set; }
-        public string NewPassword { get; set; }
-        public string ConfirmPassword{ get; set; }
-    }
+    
     public class NxenesiController : BaseApiController
     {
 
@@ -51,17 +37,23 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditNxenesin(string id, CustomNxenesi nxenesi)
+        public async Task<IActionResult> EditNxenesin(string id, Nxenesi nxenesi)
         {
             Nxenesi nxenesiAktual = await Mediator.Send(new Details.Query{Id= id}); 
-            nxenesiAktual.Id = id;
-            nxenesiAktual.FullName = nxenesi.FullName;
-            nxenesiAktual.YearOfRegistration = nxenesi.YearOfRegistration;
-            nxenesiAktual.DateOfBirth = nxenesi.DateOfBirth;
-            nxenesiAktual.PhoneNumber = nxenesi.PhoneNumber;
-            nxenesiAktual.ParentName = nxenesi.ParentName;
-            nxenesiAktual.Class = nxenesi.Class;
-            nxenesiAktual.Email = nxenesi.Email;
+
+           // Nxenesi nxenesiAktual = await Mediator.Send(new Details.Query{Id= id}); 
+            nxenesi.Id = id;
+            nxenesi.PasswordHash = nxenesiAktual.PasswordHash;
+            nxenesi.NormalizedEmail = nxenesiAktual.NormalizedEmail;
+            nxenesi.NormalizedUserName = nxenesiAktual.NormalizedUserName;
+            
+            // nxenesiAktual.FullName = nxenesi.FullName;
+            // nxenesiAktual.YearOfRegistration = nxenesi.YearOfRegistration;
+            // nxenesiAktual.DateOfBirth = nxenesi.DateOfBirth;
+            // nxenesiAktual.PhoneNumber = nxenesi.PhoneNumber;
+            // nxenesiAktual.ParentName = nxenesi.ParentName;
+            // nxenesiAktual.Class = nxenesi.Class;
+            // nxenesiAktual.Email = nxenesi.Email;
             
             //checking if the user wrote their old password correctly
           //  bool samePassword = nxenesi.CurrentPassword == nxenesiAktual.Password;
@@ -74,7 +66,7 @@ namespace API.Controllers
             // if(passwordValid){
             // //    nxenesiAktual.Password = nxenesi.NewPassword;
             // }
-            return Ok(await Mediator.Send(new Edit.Command{Nxenesi = nxenesiAktual}));
+            return Ok(await Mediator.Send(new Edit.Command{Nxenesi = nxenesi}));
         }
 
         [HttpDelete("{id}")]

@@ -1,12 +1,16 @@
 export interface Nxenesiuser {
+    id: string;
     username: string;
-    displayName: string;
+    displayName?: string;
     token: string;
     image?: string;
-    parentName: string;
-    class: string;
-    dateOfBirth: string;
-    yearOfRegistration: string;
+    parentName?: string;
+    class?: string;
+    dateOfBirth?: string | Date;
+    yearOfRegistration?: number;
+    fullName?: string;
+    email?: string;
+    phoneNumber?: string;
 }
 
 export interface NxenesiuserFormValues {
@@ -16,7 +20,7 @@ export interface NxenesiuserFormValues {
     username?: string;
     parentName?: string;
     class?: string;
-    dateOfBirth?: string;
+    dateOfBirth?: string | Date;
     yearOfRegistration?: number;
     fullName?: string;
 }

@@ -8,7 +8,7 @@ import { store } from "./store";
 import { history } from "../..";
 
 export default class NxenesiStore {
-    nxenesit: Nxenesiuser | null = null;
+    nxenesiSelected: Nxenesiuser | null = null;
     nxenesiRegistry = new Map<String, Nxenesi>();
     selectedNxenesi: Nxenesi | undefined = undefined;
     editMode = false;
@@ -16,18 +16,18 @@ export default class NxenesiStore {
     loadingInitial = true;
 
     constructor() {
+        //console.log("here1")
         makeAutoObservable(this)
     }
-
     get isLoggedIn() {
-        return !!this.nxenesit;
+        return !!this.nxenesiSelected;
     }
 
-    login = async (creds: NxenesiuserFormValues) => {
+    loginNxenesi = async (creds: NxenesiuserFormValues) => {
         try {
             const nxenesit = await agent.AccountNxenesi.login(creds);
             store.commonStore.setToken(nxenesit.token);
-            runInAction(() => this.nxenesit = nxenesit);
+            runInAction(() => this.nxenesiSelected = nxenesit);
             history.push("/nxenesiPage/Profili");
             store.modalStore.closeModal();
         } catch(error) {
@@ -38,14 +38,21 @@ export default class NxenesiStore {
     logoutNxenesi = () => {
         store.commonStore.setToken(null);
         window.localStorage.removeItem('jwt');
-        this.nxenesit = null;
+        this.nxenesiSelected = null;
         history.push('/');
     }
 
     getNxenesin = async () => {
+      //  console.log("here6")
+
         try {
-           const nxenesit =  await agent.AccountNxenesi.current();
-           runInAction(() => this.nxenesit = nxenesit);
+           const nxenesit =  await agent.AccountNxenesi.currentNxenesi();
+           runInAction(() => this.nxenesiSelected = nxenesit);
+         //  console.log("Nxenesit here: ", this.nxenesiSelected)
+
+           history.push("/nxenesiPage/Profili");
+
+
         } catch(error) {
             console.log(error);
         }
@@ -91,7 +98,7 @@ export default class NxenesiStore {
     }
 
     closeForm = () => {
-        console.log("HEre")
+        //console.log("HEre")
         this.editMode = false;
     }
 
@@ -99,7 +106,7 @@ export default class NxenesiStore {
         this.loading = true;
         nxenesi.id = uuid();
         
-        console.log("nx", nxenesi)
+        //console.log("nx", nxenesi)
         try{
             await agent.Nxenesit.create(nxenesi);
             runInAction(() => {
@@ -122,12 +129,16 @@ export default class NxenesiStore {
         console.log("nx", nxenesi)
         try {
             await agent.Nxenesit.update(nxenesi);
+            console.log("nxenesi para update", nxenesi)
             runInAction(() => {
                 this.nxenesiRegistry.set(nxenesi.id, nxenesi);
                 this.selectedNxenesi = nxenesi;
                 this.editMode= false;
                 this.loading = false;
+                //history.push("/nxenesiPage/Profili");
+               // window.location.reload();
             })
+            console.log("nxenesi", nxenesi)
         } catch(error) {
             console.log(error);
             runInAction(() => {
@@ -143,7 +154,7 @@ export default class NxenesiStore {
             await agent.Nxenesit.delete(id);
             runInAction(() => {
                 this.nxenesiRegistry.delete(id);
-                if(this.selectedNxenesi?.id === id) this.cancelSelectedNxenesi();
+                if(this.nxenesiSelected?.id === id) this.cancelSelectedNxenesi();
                 this.loading = false;
             })
         }catch(error) {

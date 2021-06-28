@@ -42,7 +42,7 @@ export default observer(function HomePage() {
                 )}
                 {profesoriStore.isLoggedIn ? (
                     <>
-                        <Header as='h2' content='Mire se vini' />
+                        {/* <Header as='h2' content='Mire se vini' /> */}
                         <Button as={Link} to='/professorPage/ProfProfili' size='huge' inverted>
                             Vazhdo Tek Profili!
                         </Button>
@@ -52,9 +52,6 @@ export default observer(function HomePage() {
                     <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
                         Kyqu si Profesor!
                     </Button>
-                    {/* <Button onClick={()=>modalStore.openModal(<LoginFormNxenesi/>)} size='huge' inverted>
-                        Kyqu si Nxenes!
-                    </Button> */}
                     
                     </>
                 )} 

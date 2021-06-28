@@ -15,21 +15,21 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class NxenesiAccountController : ControllerBase
     {
-        private readonly UserManager<Nxenesi> _userManage;
+        private readonly UserManager<Nxenesi> _userManager;
         private readonly SignInManager<Nxenesi> _signInManager;
         private readonly TokenService _tokenService;
-        public NxenesiAccountController(UserManager<Nxenesi> userManage,
+        public NxenesiAccountController(UserManager<Nxenesi> userManager,
         SignInManager<Nxenesi> signInManager, TokenService tokenService)
         {
             _tokenService = tokenService;
             _signInManager = signInManager;
-            _userManage = userManage;
+            _userManager = userManager;
         }
 
         [HttpPost("loginNxenesi")]
         public async Task<ActionResult<NxenesiDto>> Login(LoginDto loginDto)
         {
-            var nxenesi = await _userManage.FindByEmailAsync(loginDto.Email);
+            var nxenesi = await _userManager.FindByEmailAsync(loginDto.Email);
             if (nxenesi == null) return Unauthorized();
             var result = await _signInManager.CheckPasswordSignInAsync(nxenesi, loginDto.Password, false);
             
@@ -43,11 +43,11 @@ namespace API.Controllers
         [HttpPost("registerNxenesi")]
         public async Task<ActionResult<NxenesiDto>> Register(RegisterNxenesiDto registerDto)
         {
-            if(await _userManage.Users.AnyAsync(x => x.Email == registerDto.Email))
+            if(await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
                 return BadRequest("Email i zene");
             }
-             if(await _userManage.Users.AnyAsync(x => x.UserName == registerDto.Username))
+             if(await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
             {
                 return BadRequest("Username i zene");
             }
@@ -63,7 +63,7 @@ namespace API.Controllers
                 //YearOfRegistration = registerDto.YearOfRegistration
             };
             //System.Diagnostics.Debug.WriteLine(nxenesi);
-            var result = await _userManage.CreateAsync(nxenesi, registerDto.Password);
+            var result = await _userManager.CreateAsync(nxenesi, registerDto.Password);
             if(result.Succeeded) 
             {
                 return CreateNxenesiObject(nxenesi);
@@ -72,10 +72,10 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpGet("currentNxenesi")]
         public async Task<ActionResult<NxenesiDto>> GetCurrentNxenesin()
         {
-            var nxenesi = await _userManage.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var nxenesi = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
             return CreateNxenesiObject(nxenesi);
         }
@@ -84,11 +84,18 @@ namespace API.Controllers
         {
               return new NxenesiDto
                 {
+                    Id = nxenesi.Id,
                     DisplayName = nxenesi.DisplayName,
                     Image = null,
                     Token = _tokenService.CreateTokenNxenesi(nxenesi),
                     Username = nxenesi.UserName,
-                    Class = nxenesi.Class
+                    Class = nxenesi.Class,
+                    FullName = nxenesi.FullName,
+                    email = nxenesi.Email,
+                    ParentName = nxenesi.ParentName,
+                    DateOfBirth = nxenesi.DateOfBirth,
+                    PhoneNumber = nxenesi.PhoneNumber,
+                    YearOfRegistration = nxenesi.YearOfRegistration
                 };
 
         }

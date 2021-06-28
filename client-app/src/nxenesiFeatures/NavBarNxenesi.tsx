@@ -5,7 +5,7 @@ import { useStore } from "../app/stores/store";
 // import "./styles.css";
 
 export default observer(function NavBarNxenesi() {
-  const { nxenesiStore: { nxenesit, logoutNxenesi } } = useStore();
+  const { nxenesiStore: { nxenesiSelected, logoutNxenesi } } = useStore();
   return (
     <Menu inverted fixed="top">
       <Container>

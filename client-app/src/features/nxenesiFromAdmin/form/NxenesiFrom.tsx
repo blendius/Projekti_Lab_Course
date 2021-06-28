@@ -21,7 +21,7 @@ const options_Class = [
 
 export default observer(function NxenesiForm() {
     const {nxenesiStore} = useStore();
-    const {selectedNxenesi, updateNxenesin, createNxenesin, loading,closeForm} = nxenesiStore;
+    const {nxenesiSelected, selectedNxenesi, updateNxenesin, createNxenesin, loading,closeForm} = nxenesiStore;
 
     const initialState = selectedNxenesi ?? {
         id: '',
@@ -44,6 +44,7 @@ export default observer(function NxenesiForm() {
  
     function handleSubmit(){
         nxenesi.id ? updateNxenesin(nxenesi) : createNxenesin(nxenesi);
+
     }
 
     function handleInputChange(event: any) {
@@ -55,6 +56,7 @@ export default observer(function NxenesiForm() {
         const {name, value} = event.target;
         setPasswordData({...passwordData, [name]: value})
     }
+
 
     function setSelectValues(selectName: any, event: any) {
         const { innerText } = event.target;

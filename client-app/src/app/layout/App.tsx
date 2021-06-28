@@ -37,15 +37,15 @@ import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const { commonStore, adminStore, profesoriStore, nxenesiStore } = useStore();
+  const { commonStore, adminStore, profesoriStore } = useStore();
 
-  useEffect(() => {
-    if (commonStore.token && nxenesiStore.isLoggedIn) {
-      nxenesiStore.getNxenesin().finally(() => commonStore.setAppLoaded());
-    } else {
-      commonStore.setAppLoaded();
-    }
-  }, [commonStore, nxenesiStore])
+  // useEffect(() => {
+  //   if (commonStore.token && nxenesiStore.isLoggedIn) {
+  //     nxenesiStore.getNxenesin().finally(() => commonStore.setAppLoaded());
+  //   } else {
+  //     commonStore.setAppLoaded();
+  //   }
+  // }, [commonStore, nxenesiStore])
 
   // useEffect(() => {
   //   if (commonStore.token) {
@@ -144,7 +144,7 @@ function App() {
               <Switch>
               <Route
                   exact
-                  path="/nxenesiPage/Profili"
+                  path="/nxenesiPage/Profili/"
                   component={NxenesiDashboard}
                 />
               </Switch>

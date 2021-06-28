@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import { Button, Form, Input, Modal } from 'semantic-ui-react';
+import { useStore } from '../../../app/stores/store';
+import { history } from '../../../index';
 
 interface ModalProps {
   open: boolean;
@@ -24,35 +26,42 @@ const options_Registration = [
 ];
 
 function NxenesiModal(props: ModalProps) {
+  const {nxenesiStore: {updateNxenesin, nxenesiSelected, logoutNxenesi } } = useStore();
   const { open, setOpen, nxenesi } = props;
-
+// console.log("nxenesi:", nxenesi)
+// console.log("nxenesi id:", nxenesi.id)
+console.log("nxenesi edna:", nxenesiSelected)
   const [currentData, setCurrentData] = useState({
     ...nxenesi,
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-    dateOfBirth: new Date(nxenesi.dateOfBirth),
+    // currentPassword: "",
+    // newPassword: "",
+    // confirmPassword: "",
+    dateOfBirth: nxenesi?.dateOfBirth ? new Date(nxenesi.dateOfBirth) : "",
   });
+  useEffect(() => {
+    resetCurrentData()
+  },[nxenesi])
 
   function resetCurrentData() {
     setCurrentData({
       ...nxenesi,
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-      dateOfBirth: new Date(nxenesi.dateOfBirth),
+      // currentPassword: "",
+      // newPassword: "",
+      // confirmPassword: "",
+      dateOfBirth: nxenesi?.dateOfBirth ? new Date(nxenesi.dateOfBirth) : "",
     });
   }
-  function updateNxenesi(nxenesiId: any) {
-    axios
-      .put(`http://localhost:5000/api/Nxenesi/${nxenesiId}`, currentData)
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
-    resetCurrentData();
-    setOpen(false);
-  }
+  // function updateNxenesi(nxenesiId: any) {
+  //   axios
+  //     .put(`http://localhost:5000/api/nxenesi/${nxenesiId}`, currentData)
+  //     .then(() => {
+  //       window.location.reload();
+  //     })
+  //     .catch((err) => console.log(err));
+  //   resetCurrentData();
+  //   setOpen(false);
+  // }
+ 
 
   useEffect(() => {
     resetCurrentData();
@@ -61,6 +70,7 @@ function NxenesiModal(props: ModalProps) {
   function handleInputChange(event: any) {
     const { name, value } = event.target;
     setCurrentData({ ...currentData, [name]: value });
+    //setCurrentData((prevState) => ({...prevState, [name]: value}))
   }
   function setSelectValues(selectName: any, event: any) {
     const { innerText } = event.target;
@@ -74,7 +84,6 @@ function NxenesiModal(props: ModalProps) {
       dateOfBirth: data.value,
     });
   }
-  console.log("currentData:", currentData);
   return (
     <Modal
       onClose={() => {
@@ -154,7 +163,7 @@ function NxenesiModal(props: ModalProps) {
                 />
               </Form.Field>
             </Form.Group>
-            <Form.Group widths="equal">
+            {/* <Form.Group widths="equal">
               <Form.Field>
                 <label>Passwordi aktual</label>
                 <Input
@@ -184,8 +193,8 @@ function NxenesiModal(props: ModalProps) {
                   name="confirmPassword"
                   onChange={handleInputChange}
                 />
-              </Form.Field>
-            </Form.Group>
+              </Form.Field> */}
+            {/* </Form.Group> */}
           </Form>
         </Modal.Description>
       </Modal.Content>
@@ -204,7 +213,13 @@ function NxenesiModal(props: ModalProps) {
           labelPosition="right"
           icon="checkmark"
           type="submit"
-          onClick={() => updateNxenesi(nxenesi.id)}
+          onClick={() => {
+            updateNxenesin(currentData)
+            setOpen(false);
+            window.location.reload();
+            history.push("/nxenesiPage/Profili");
+            window.location.reload();
+          }}
           positive
         />
       </Modal.Actions>

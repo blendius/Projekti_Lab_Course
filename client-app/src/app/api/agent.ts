@@ -103,8 +103,7 @@ const Nxenesit = {
   list: () => requests.get<Nxenesi[]>("/nxenesi"),
   details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
   create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
-  update: (nxenesi: CustomNxenesi) =>
-    axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi),
+  update: (nxenesi: Nxenesi) => {console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi)},
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
 };
 const Account = {
@@ -130,7 +129,7 @@ const AccountPrindi = {
 };
 
 const AccountNxenesi = {
-  current: () => requests.get<Nxenesiuser>('/NxenesiAccount'),
+  currentNxenesi: () => requests.get<Nxenesiuser>('/NxenesiAccount/currentNxenesi'),
   login: (nxenesi : NxenesiuserFormValues) => 
     requests.post<Nxenesiuser>('/NxenesiAccount/loginNxenesi', nxenesi),
   register: (nxenesi: NxenesiuserFormValues) => 
