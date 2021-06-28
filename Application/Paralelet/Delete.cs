@@ -1,17 +1,15 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Nxenesit
+namespace Application.Paralelet
 {
-    public class Create
+    public class Delete
     {
         public class Command : IRequest
         {
-            public Nxenesi Nxenesi { get; set; }
-            // public Prindi Prind
+            public int Id { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -20,13 +18,12 @@ namespace Application.Nxenesit
             {
                 _context = context;
             }
-
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle (Command request, CancellationToken cancellationToken)
             {
-                _context.Nxenesit.Add(request.Nxenesi);
+                var paralelja = await _context.Paralelet.FindAsync(request.Id);
+                _context.Remove(paralelja);
 
                 await _context.SaveChangesAsync();
-                
                 return Unit.Value;
             }
         }

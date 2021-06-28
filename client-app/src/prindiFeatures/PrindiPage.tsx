@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useStore } from "../app/stores/store";
 import NavBarPrindi from "./NavBarPrindi";
 
-export default observer(function ProfessorPage() {
+export default observer(function PrindiPage() {
+    
     const { prindStoreAccount,  commonStore } = useStore();
     useEffect(() => {
         if (commonStore.token) {

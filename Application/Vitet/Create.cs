@@ -4,29 +4,27 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Nxenesit
+namespace Application.Vitet
 {
     public class Create
     {
         public class Command : IRequest
         {
-            public Nxenesi Nxenesi { get; set; }
-            // public Prindi Prind
+            public Viti Viti { get; set; }
         }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
+
             public Handler(DataContext context)
             {
                 _context = context;
             }
-
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle (Command request, CancellationToken cancellationToken)
             {
-                _context.Nxenesit.Add(request.Nxenesi);
-
+                _context.Vitet.Add(request.Viti);
                 await _context.SaveChangesAsync();
-                
                 return Unit.Value;
             }
         }

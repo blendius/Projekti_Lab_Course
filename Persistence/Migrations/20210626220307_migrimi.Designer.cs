@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210626220307_migrimi")]
+    partial class migrimi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,58 +88,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Domain.Kontakti", b =>
-                {
-                    b.Property<Guid>("KontaktiId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataEDergimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mesazhi")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PrindiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Subjekti")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("profEmail")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("KontaktiId");
-
-                    b.HasIndex("PrindiId");
-
-                    b.ToTable("Kontaktet");
-                });
-
-            modelBuilder.Entity("Domain.Laburatiori", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataEKrijimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("LendaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Lloji")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("NrPaisjeve")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LendaId");
-
-                    b.ToTable("Laburatioret");
-                });
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
                     b.Property<int>("VitiId")
@@ -146,15 +96,9 @@ namespace Persistence.Migrations
                     b.Property<int>("ParaleljaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProfesoriId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("VitiId", "ParaleljaId");
 
                     b.HasIndex("ParaleljaId");
-
-                    b.HasIndex("ProfesoriId")
-                        .IsUnique();
 
                     b.ToTable("Klasat");
                 });
@@ -550,25 +494,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Kontakti", b =>
-                {
-                    b.HasOne("Domain.Prindi", "Prindi")
-                        .WithMany("Kontaktet")
-                        .HasForeignKey("PrindiId");
-
-                    b.Navigation("Prindi");
-                });
-
-            modelBuilder.Entity("Domain.Laburatiori", b =>
-                {
-                    b.HasOne("Domain.Lenda", "Lenda")
-                        .WithMany("Laburatoret")
-                        .HasForeignKey("LendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lenda");
-                });
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
                     b.HasOne("Domain.Paralelja", "Paralelja")
@@ -577,17 +502,11 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Profesori", "Kujdestari")
-                        .WithOne("KlasaKujdestari")
-                        .HasForeignKey("Domain.Klasa", "ProfesoriId");
-
                     b.HasOne("Domain.Viti", "Viti")
                         .WithMany("Klasa")
                         .HasForeignKey("VitiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Kujdestari");
 
                     b.Navigation("Paralelja");
 
@@ -664,10 +583,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Lenda", b =>
-                {
-                    b.Navigation("Laburatoret");
-                });
             modelBuilder.Entity("Domain.Nxenesi", b =>
                 {
                     b.Navigation("PrinderitNxenesit");
@@ -680,13 +595,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Prindi", b =>
                 {
-                    b.Navigation("Kontaktet");
                     b.Navigation("PrinderitNxenesit");
-                });
-
-            modelBuilder.Entity("Domain.Profesori", b =>
-                {
-                    b.Navigation("KlasaKujdestari");
                 });
 
             modelBuilder.Entity("Domain.Viti", b =>
@@ -694,7 +603,6 @@ namespace Persistence.Migrations
                     b.Navigation("Klasa");
                 });
 #pragma warning restore 612, 618
-
         }
     }
 }

@@ -193,19 +193,101 @@ namespace Persistence
             await context.Nxenesit.AddRangeAsync(nxenesit);
             await context.SaveChangesAsync();
         }
-        // public static async Task SeedDataLaburatori(DataContext context)
+        // public static async Task SeedDataPrinderitNxenesit(DataContext context)
         // {
-        //     if (context.Laburatioret.Any()) return;
-        //     var laburatioret = new List<Laburatiori>{
-        //             //  new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
-        //             //  new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
-        //             //  new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
-        //          };
+        //     if (context.Nxenesit.Any()) return;
+        //     var nxenesit = new List<Nxenesi>
+        //     {
+        //         new PrindiNxenesi
+        //         {
+        //             PrindiId = "7cb47c32-acde-4f26-b684-e85c1e33b199",
+        //             NxenesiId = "66F2C262-1B35-414D-9E9F-E807D0F3A520"
+        //         }
 
+        //     };
 
-        //     await context.Laburatioret.AddRangeAsync(laburatioret);
+        //     await context.Nxenesit.AddRangeAsync(nxenesit);
         //     await context.SaveChangesAsync();
         // }
 
+        //VITI SEED
+        public static async Task SeedDataViti(DataContext context)
+        {
+            if (context.Vitet.Any()) return;
+            var vitet = new List<Viti>
+            {
+                new Viti
+                {
+                    VitiId = 10,
+                    Kohezgjatja = 9
+                },
+                new Viti
+                {
+                    VitiId = 11,
+                    Kohezgjatja = 9
+                },
+                new Viti
+                {
+                    VitiId = 12,
+                    Kohezgjatja = 8
+                }
+            };
+
+            await context.Vitet.AddRangeAsync(vitet);
+            await context.SaveChangesAsync();
+        }
+        public static async Task SeedDataParalelja(DataContext context)
+        {
+            if (context.Paralelet.Any()) return;
+            var paralelet = new List<Paralelja>
+            {
+                new Paralelja
+                {
+                    ParaleljaId = 1,
+                    KapacitetiMax = 20
+                },
+                new Paralelja
+                {
+                    ParaleljaId = 2,
+                    KapacitetiMax = 20
+                },
+                new Paralelja
+                {
+                    ParaleljaId = 3,
+                    KapacitetiMax = 25
+                }
+            };
+
+            await context.Paralelet.AddRangeAsync(paralelet);
+            await context.SaveChangesAsync();
+        }
+        public static async Task SeedDataKlasa(DataContext context)
+        {
+            if (context.Klasat.Any()) return;
+            var klasat = new List<Klasa>
+            {
+                new Klasa
+                {
+                    VitiId = 10,
+                    // Viti = 
+                    ParaleljaId = 1,
+                    ProfesoriId = "3ec13838-3cff-44e6-ab4b-47f48e39751c"
+                },
+                new Klasa
+                {
+                    VitiId = 11,
+                    ParaleljaId = 1,
+                    ProfesoriId = "37e9ce9a-643e-4316-8c58-94ff27def1de"
+                },
+                new Klasa
+                {
+                    VitiId = 10,
+                    ParaleljaId = 2
+                }
+            };
+
+            await context.Klasat.AddRangeAsync(klasat);
+            await context.SaveChangesAsync();
+        }
     }
 }

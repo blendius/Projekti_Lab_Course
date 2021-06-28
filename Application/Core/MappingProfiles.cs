@@ -15,6 +15,9 @@ namespace Application.Core
             CreateMap<Nxenesi, Nxenesi>();
             CreateMap<Laburatiori, Laburatiori>(); 
             CreateMap<Kontakti, Kontakti>(); 
+            CreateMap<Viti, Viti>();
+            CreateMap<Paralelja, Paralelja>();
+            CreateMap<Klasa, Klasa>();
         }
     }
 }

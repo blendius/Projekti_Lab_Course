@@ -15,5 +15,6 @@ namespace Domain
         // public Kontakti Kontakti { get; set; }
         // public Guid KontaktiId { get; set; }
 
+        public ICollection<PrindiNxenesi> PrinderitNxenesit {get; set;}
     }
 }

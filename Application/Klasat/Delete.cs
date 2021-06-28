@@ -1,17 +1,17 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Nxenesit
+namespace Application.Klasat
 {
-    public class Create
+    public class Delete
     {
         public class Command : IRequest
         {
-            public Nxenesi Nxenesi { get; set; }
-            // public Prindi Prind
+            public int VitiId { get; set; }
+            public int ParaleljaId { get; set; }
+
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -20,13 +20,15 @@ namespace Application.Nxenesit
             {
                 _context = context;
             }
-
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Nxenesit.Add(request.Nxenesi);
+                var viti = await _context.Klasat.FindAsync(request.VitiId);
+                var paralelja = await _context.Klasat.FindAsync(request.ParaleljaId);
+
+                var klasa = await _context.Klasat.FindAsync(viti, paralelja);
+                _context.Remove(klasa);
 
                 await _context.SaveChangesAsync();
-                
                 return Unit.Value;
             }
         }

@@ -35,7 +35,9 @@ namespace API
                  await Seed.SeedDataProf(context,userManagerProf);
                  await Seed.SeedDataPrind(context, prindiManager);
                  await Seed.SeedDataNxenesit(context);
-               //  await Seed.SeedDataLaburatori(context);
+                 await Seed.SeedDataViti(context);
+                 await Seed.SeedDataParalelja(context);
+                 await Seed.SeedDataKlasa(context);
                  await context.Database.MigrateAsync();
                  
 

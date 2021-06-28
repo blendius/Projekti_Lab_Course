@@ -36,6 +36,8 @@ import PrindiPage from "../../prindiFeatures/PrindiPage";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
 import ShowKontaktet from "../../prindiFeatures/kontaktet";
 import kontaktetProf from "../../professorFeatures/kontaktetProf";
+import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindProfileDashboard";
+import kontaktet from "../../prindiFeatures/kontaktet";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -103,16 +105,18 @@ function App() {
         path={"/prindiPage/(.+)"}
         render={() => (
           <>
-            <NavBarPrindi />
+          <NavBarPrindi />
+          
+          <Container style={{ marginTop: "7em" }}>
+            <Switch>
+            <Route path="/prindiPage/PrindProfili" component={PrindProfileDashboard} />
+            <Route path="/prindiPage/Kontaktet" component={kontaktet} />
 
-            <Container style={{ marginTop: "7em" }}>
-              <Switch>
-              <Route path="/prindiPage/Kontaktet" component={ShowKontaktet} />
-
-              </Switch>
-            </Container>
+            </Switch>
+          </Container>
           </>
-        )} />
+        )} 
+      />
 
 
       <Route path="/adminPage" component={adminPage} />
