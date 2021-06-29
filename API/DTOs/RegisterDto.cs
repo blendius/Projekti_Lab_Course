@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using Domain;
+
 namespace API.DTOs
 {
     public class RegisterDto
@@ -21,5 +23,9 @@ namespace API.DTOs
         public DateTime DataRegjistrimit { get; set; }
         [Required]
         public string GradaAkademike { get; set; }
+        public Guid LendaId { get; set; }
+        public Lenda Lenda { get; set; }
+
+
     }
 }

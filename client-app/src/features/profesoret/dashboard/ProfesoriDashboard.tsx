@@ -14,7 +14,7 @@ export default observer(function ProfesoriDashboard() {
     
     return (
         <Grid>
-            <Grid.Column width='6'>
+            <Grid.Column width='12'>
                 <ProfesoriList />
 
 

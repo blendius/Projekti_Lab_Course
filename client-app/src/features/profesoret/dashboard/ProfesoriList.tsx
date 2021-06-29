@@ -16,9 +16,9 @@ export default observer(function ProfesoriList() {
                         <List.Icon name='address card' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='a'>{profesori.email}</List.Header>
-                            <div className="data" ><label>username:  </label> {profesori.username} </div>
-                            <div className="data" ><label>Grada:  </label>  {profesori.gradaAkademike}</div>
-                            <div className="data" ><label>Data:  </label> {profesori.dataRegjistrimit} </div>
+                            <div className="data" ><label>Emri :  </label> {profesori.name} </div>
+                            <div className="data" ><label>Grada Akademike:  </label>  {profesori.gradaAkademike}</div>
+                            <div className="data" ><label>Data e Punesimit:  </label> {profesori.dataRegjistrimit} </div>
                             
                         </List.Content>
                         <Item.Extra>

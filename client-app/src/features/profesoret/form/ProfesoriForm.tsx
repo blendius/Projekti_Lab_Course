@@ -14,8 +14,10 @@ import { useStore } from '../../../app/stores/store';
 
 export default observer(function ProfesoriForm() {
 
-    const { profesoriStore } = useStore();
+    const { lendaStore, profesoriStore } = useStore();
     const { prof, closeForm, loading, updateProfessor } = profesoriStore;
+    const { lendaRegistry, lendetByDate } = lendaStore;
+
 
     const initialState = prof ?? {
         id: '',
@@ -26,7 +28,8 @@ export default observer(function ProfesoriForm() {
         password: '',
         gradaAkademike: '',
         dataRegjistrimit: '',
-        token: ''
+        token: '',
+        EmriLendes: ''
 
     }
     const validationSchema = Yup.object({
@@ -34,6 +37,8 @@ export default observer(function ProfesoriForm() {
         username: Yup.string().required(),
         email: Yup.string().required().email(),
         password: Yup.string().required(),
+        EmriLendes: Yup.string().required('Lenda duhet te plotesohet!'),
+
     })
 
     const [profesori] = useState(initialState);
@@ -45,7 +50,7 @@ export default observer(function ProfesoriForm() {
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
-                enableReinitialize initialValues={initialState}
+                enableReinitialize initialValues={profesori}
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
@@ -54,6 +59,16 @@ export default observer(function ProfesoriForm() {
                         <MyTextInput name='username' placeholder='Username' />
                         <MyTextInput name='password' placeholder='Password' type='password' />
                         <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
+                        <MySelectInput options=
+                            {
+                                lendetByDate.map(lenda => (
+                                    {
+                                        key: lenda.lendaId,
+                                        text: lenda.emriLendes,
+                                        value: lenda.emriLendes
+                                    }
+                                ))
+                            } placeholder='Lenda' name='EmriLendes' />
                         <MyTextInput name='DataRegjistrimit' placeholder='dataRegjistrimit' type='date' />
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />

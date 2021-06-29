@@ -11,7 +11,7 @@ using Persistence;
 
 namespace API.Controllers
 {
-
+    [AllowAnonymous]
     public class ProfesoriController : BaseApiController
     {
       
@@ -28,10 +28,10 @@ namespace API.Controllers
             return await Mediator.Send(new Details.Query{Id=id});
         }
 
-        [HttpPost]
-        public async Task <IActionResult> CreateProfessor(Profesori profesori)
+        [HttpPost("{EmriLendes}")]
+        public async Task <IActionResult> CreateProfessor(Profesori profesori,string emriLendes)
         {
-            return Ok(await Mediator.Send(new Create.Command{Profesori=profesori}));
+            return Ok(await Mediator.Send(new Create.Command{Profesori=profesori,LendaEmri = emriLendes}));
         }
 
         [HttpPut("{id}")]

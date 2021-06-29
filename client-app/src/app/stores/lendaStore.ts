@@ -21,6 +21,7 @@ export default class lendaStore {
         return this.lendaRegistry.size;
     }
     get lendetByDate() {
+        //this.loadLendet();
         return Array.from(this.lendaRegistry.values()).sort((a, b) => a.dataEShtimit!.getTime() - b.dataEShtimit!.getTime());
     }
     get groupedLendet(){

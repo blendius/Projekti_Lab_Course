@@ -50,7 +50,7 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
-           
+
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
@@ -58,36 +58,42 @@ namespace Persistence
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
         {
-
-            var Profesori1 = new Profesori {
-                Name = "Profesori 1",
-                GradaAkademike = "Profesori 1",
-                DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
-            };
-            var Profesori2 = new Profesori
+            if (!context.Profesoret.Any())
             {
-                Name = "Profesori 2",
-                GradaAkademike = "Profesori 2",
-                DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
-            };
-            context.AddRange(
-                new Lenda{
-                    EmriLendes = "Matematike",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Seeded Data  1",
-                    Syllabusi = "Seeded Data  1",
-                    Profesoret = new List<Profesori>{Profesori1}
-                },
-                new Lenda
-                {
-                    EmriLendes = "Gjuhe Shqipe",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Seeded Data  1",
-                    Syllabusi = "Seeded Data  1",
-                    Profesoret = new List<Profesori> { Profesori2 }
-                }
-            );
 
+                var Profesori1 = new Profesori
+                {
+                    Name = "Profesori 1",
+                    GradaAkademike = "Profesori 1",
+                    DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
+                };
+                var Profesori2 = new Profesori
+                {
+                    Name = "Profesori 2",
+                    GradaAkademike = "Profesori 2",
+                    DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
+                };
+
+                context.AddRange(
+                    new Lenda
+                    {
+                        EmriLendes = "Matematike",
+                        DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                        Pershkrimi = "Seeded Data  1",
+                        Syllabusi = "Seeded Data  1",
+                        Profesoret = new List<Profesori> { Profesori1 }
+                    },
+                    new Lenda
+                    {
+                        EmriLendes = "Gjuhe Shqipe",
+                        DataEShtimit = DateTime.Now.AddMinutes(-1000),
+                        Pershkrimi = "Seeded Data  1",
+                        Syllabusi = "Seeded Data  1",
+                        Profesoret = new List<Profesori> { Profesori2 }
+                    }
+
+                );
+            }
             // if (userManager.Users.Any()) return;
 
             // var profesoret = new List<Profesori>
@@ -130,11 +136,11 @@ namespace Persistence
             //     }
             // );
 
-            
 
 
-            //  await context.Profesoret.AddRangeAsync(profesoret);
-            //  await context.SaveChangesAsync();
+
+            //await context.Profesoret.AddRangeAsync(profesoret);
+            await context.SaveChangesAsync();
 
         }
 
@@ -192,7 +198,7 @@ namespace Persistence
             await context.SaveChangesAsync();
         }
 
-        
+
     }
 
 }

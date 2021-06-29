@@ -56,9 +56,9 @@ export default class ProfesoriStore {
         }
     }
 
-    register = async (creds: ProfFormValues) => {
+    register = async (creds: ProfFormValues,id:string) => {
         try {
-            await agent.AccountProf.register(creds);
+            await agent.AccountProf.register(creds,id);
             // store.commonStore.setToken(prof.token)
             // runInAction(() => this.prof = prof);
             // history.push('/lendet')
@@ -128,25 +128,25 @@ export default class ProfesoriStore {
         this.editMode = false;
     }
 
-    // createProfessor = async (profesori: Profesori) => {
-    //     this.loading = true;
-    //     profesori.id = uuid();
-    //     try {
-    //         await agent.Profesoret.create(profesori);
-    //         runInAction(() => {
-    //             this.professorRegistry.set(profesori.id, profesori)
-    //             this.selectedProfessor = profesori;
-    //             this.editMode = false;
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //         runInAction(() => {
-    //             this.loading = false;
-    //         })
+    createProfessor = async (profesori: Professor,EmriLendes:string) => {
+        this.loading = true;
+        profesori.id = uuid();
+        try {
+            await agent.Profesoret.create(profesori,EmriLendes);
+            runInAction(() => {
+                this.professorRegistry.set(profesori.id, profesori)
+                this.selectedProfessor = profesori;
+                this.editMode = false;
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
 
-    //     }
-    // }
+        }
+    }
 
     deleteProfessor = async (id: string) => {
         this.loading = true;

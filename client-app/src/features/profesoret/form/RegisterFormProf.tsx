@@ -1,24 +1,59 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Label } from 'semantic-ui-react';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { useStore } from '../../../app/stores/store';
 import * as Yup from 'yup';
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import { values } from 'mobx';
 
 
 export default observer(function RegisterFormProf() {
-    const { profesoriStore } = useStore();
+    const { profesoriStore ,lendaStore} = useStore();
+    const { lendaRegistry, lendetByDate } = lendaStore;
 
+    useEffect(() => {
+        lendaStore.loadLendet();
+    }, [lendaStore])
+
+    // var lenda = lendetByDate;
+    // var arr: any = [];
+    // var len = lendetByDate.length;
+    // for (var i = 0; i < len; i++) {
+    //     arr.push({
+    //         text: lenda[i].emriLendes,
+    //         value: lenda[i].lendaId
+    //     });
+    // }
+    
     return (
         <Formik
-            initialValues={{id:'', displayName: '', username: '', email: '', password: '',GradaAkademike:'',DataRegjistrimit:'', error: null }}
-            onSubmit={(values, { setErrors }) => profesoriStore.register(values).catch(error => setErrors({ error: 'Invalid email or password' }))}
+            initialValues={
+                {
+                id:'', 
+                displayName: '', 
+                username: '', 
+                email: '', 
+                password: '',
+                gradaAkademike:'',
+                dataRegjistrimit:'', 
+                token:'',
+                error: null,
+                LendaId: ''
+            }
+            
+            }
+            onSubmit={(values, { setErrors }) => profesoriStore.register(values, values.LendaId).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
-                displayName: Yup.string().required(),
-                username: Yup.string().required(),
-                email: Yup.string().required().email(),
-                password: Yup.string().required(),
+                displayName: Yup.string().required("DisplayName eshte i nevojshem!"),
+                username: Yup.string().required("Username eshte i nevojshem!"),
+                email: Yup.string().required("Email eshte i nevojshem!").email(),
+                password: Yup.string().required("Passwordi eshte i nevojshem!").matches(
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                    "Duhet te i permbaj 8 karaktere, Nje Shkronje te madhe, Nje Shkronje te vogel, Nje Number and Nje karakter special"
+                ),
+                LendaId: Yup.string().required("Zgjedhja e lendes eshte e nevojshem!")
             })}
         >
 
@@ -28,8 +63,21 @@ export default observer(function RegisterFormProf() {
                     <MyTextInput name='displayName' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
-                    <MyTextInput name='GradaAkademike' placeholder='GradaAkademike' />
-                    <MyTextInput name='DataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
+                    <MyTextInput name='gradaAkademike' placeholder='GradaAkademike' />
+                    <MySelectInput options=
+                        {
+                            lendetByDate.map(lenda => (
+                                {
+                                    key: lenda.lendaId,
+                                    text: lenda.emriLendes,
+                                    value: lenda.lendaId,
+                                    
+                                }
+                                
+                            ))
+                        } placeholder='LendaId' name='LendaId' />
+
+                    <MyTextInput name='dataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
                     <Button disabled={!isValid|| !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
                 </Form>

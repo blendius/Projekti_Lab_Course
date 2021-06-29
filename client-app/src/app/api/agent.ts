@@ -61,7 +61,7 @@ const requests = {
 const Profesoret = {
   list: () => requests.get<Professor[]>("/profesori"),
   details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
-  // create: (profesori: Profesori) => axios.post<void>("/profesori", profesori),
+  create: (profesori: Professor, EmriLendes: string) => axios.post<void>(`/profesori/${EmriLendes}`, profesori),
   update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
@@ -111,8 +111,11 @@ const AccountProf = {
 
   login: (prof: ProfFormValues) =>
     requests.post<Professor>("/account/loginProf", prof),
-  register: (prof: ProfFormValues) =>
-    requests.post<Professor>("/account/registerProf", prof),
+  register: (prof: ProfFormValues,id:string) =>
+    requests.post<Professor>(`/account/registerProf/${id}`, prof),
+
+ // register: (profesori: Professor, EmriLendes: string) => axios.post<void>(`/profesori/${EmriLendes}`, profesori),
+
 
 };
 const AccountPrindi = {
