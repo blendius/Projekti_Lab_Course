@@ -38,7 +38,7 @@ namespace API
                  await Seed.SeedDataNxenesit(context, nxenesiManager);
                  await Seed.SeedDataViti(context);
                  await Seed.SeedDataParalelja(context);
-                 await Seed.SeedDataKlasa(context);
+               //  await Seed.SeedDataKlasa(context);
                  await context.Database.MigrateAsync();
                  
 

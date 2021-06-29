@@ -248,33 +248,33 @@ namespace Persistence
             await context.Paralelet.AddRangeAsync(paralelet);
             await context.SaveChangesAsync();
         }
-        public static async Task SeedDataKlasa(DataContext context)
-        {
-            if (context.Klasat.Any()) return;
-            var klasat = new List<Klasa>
-            {
-                new Klasa
-                {
-                    VitiId = 10,
-                    // Viti = 
-                    ParaleljaId = 1,
-                    ProfesoriId = "3ec13838-3cff-44e6-ab4b-47f48e39751c"
-                },
-                new Klasa
-                {
-                    VitiId = 11,
-                    ParaleljaId = 1,
-                    ProfesoriId = "37e9ce9a-643e-4316-8c58-94ff27def1de"
-                },
-                new Klasa
-                {
-                    VitiId = 10,
-                    ParaleljaId = 2
-                }
-            };
+        // public static async Task SeedDataKlasa(DataContext context)
+        // {
+        //     if (context.Klasat.Any()) return;
+        //     var klasat = new List<Klasa>
+        //     {
+        //         new Klasa
+        //         {
+        //             VitiId = 10,
+        //             // Viti = 
+        //             ParaleljaId = 1,
+        //             ProfesoriId = "3ec13838-3cff-44e6-ab4b-47f48e39751c"
+        //         },
+        //         new Klasa
+        //         {
+        //             VitiId = 11,
+        //             ParaleljaId = 1,
+        //             ProfesoriId = "37e9ce9a-643e-4316-8c58-94ff27def1de"
+        //         },
+        //         new Klasa
+        //         {
+        //             VitiId = 10,
+        //             ParaleljaId = 2
+        //         }
+        //     };
 
-            await context.Klasat.AddRangeAsync(klasat);
-            await context.SaveChangesAsync();
-        }
+        //     await context.Klasat.AddRangeAsync(klasat);
+        //     await context.SaveChangesAsync();
+        // }
     }
 }
