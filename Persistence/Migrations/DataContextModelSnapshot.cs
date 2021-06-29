@@ -138,26 +138,6 @@ namespace Persistence.Migrations
 
                     b.ToTable("Laburatioret");
                 });
-            modelBuilder.Entity("Domain.Klasa", b =>
-                {
-                    b.Property<int>("VitiId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ParaleljaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ProfesoriId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("VitiId", "ParaleljaId");
-
-                    b.HasIndex("ParaleljaId");
-
-                    b.HasIndex("ProfesoriId")
-                        .IsUnique();
-
-                    b.ToTable("Klasat");
-                });
 
             modelBuilder.Entity("Domain.Lenda", b =>
                 {
@@ -184,64 +164,29 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Nxenesi", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Class")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("FullName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ParentName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("YearOfRegistration")
@@ -250,20 +195,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Nxenesit");
-                });
-
-            modelBuilder.Entity("Domain.Paralelja", b =>
-                {
-                    b.Property<int>("ParaleljaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("KapacitetiMax")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ParaleljaId");
-
-                    b.ToTable("Paralelet");
                 });
 
             modelBuilder.Entity("Domain.Postimi", b =>
@@ -342,21 +273,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prinderit");
-                });
-
-            modelBuilder.Entity("Domain.PrindiNxenesi", b =>
-                {
-                    b.Property<string>("PrindiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NxenesiId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PrindiId", "NxenesiId");
-
-                    b.HasIndex("NxenesiId");
-
-                    b.ToTable("PrindiNxenesi");
                 });
 
             modelBuilder.Entity("Domain.Profesori", b =>
@@ -441,20 +357,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Terminet");
-                });
-
-            modelBuilder.Entity("Domain.Viti", b =>
-                {
-                    b.Property<int>("VitiId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Kohezgjatja")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("VitiId");
-
-                    b.ToTable("Vitet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -604,49 +506,6 @@ namespace Persistence.Migrations
 
                     b.Navigation("Lenda");
                 });
-            modelBuilder.Entity("Domain.Klasa", b =>
-                {
-                    b.HasOne("Domain.Paralelja", "Paralelja")
-                        .WithMany("Klasa")
-                        .HasForeignKey("ParaleljaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Profesori", "Kujdestari")
-                        .WithOne("KlasaKujdestari")
-                        .HasForeignKey("Domain.Klasa", "ProfesoriId");
-
-                    b.HasOne("Domain.Viti", "Viti")
-                        .WithMany("Klasa")
-                        .HasForeignKey("VitiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kujdestari");
-
-                    b.Navigation("Paralelja");
-
-                    b.Navigation("Viti");
-                });
-
-            modelBuilder.Entity("Domain.PrindiNxenesi", b =>
-                {
-                    b.HasOne("Domain.Nxenesi", "Nxenesi")
-                        .WithMany("PrinderitNxenesit")
-                        .HasForeignKey("NxenesiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Prindi", "Prindi")
-                        .WithMany("PrinderitNxenesit")
-                        .HasForeignKey("PrindiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Nxenesi");
-
-                    b.Navigation("Prindi");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -703,33 +562,12 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Laburatoret");
                 });
-            modelBuilder.Entity("Domain.Nxenesi", b =>
-                {
-                    b.Navigation("PrinderitNxenesit");
-                });
-
-            modelBuilder.Entity("Domain.Paralelja", b =>
-                {
-                    b.Navigation("Klasa");
-                });
 
             modelBuilder.Entity("Domain.Prindi", b =>
                 {
                     b.Navigation("Kontaktet");
-                    b.Navigation("PrinderitNxenesit");
-                });
-
-            modelBuilder.Entity("Domain.Profesori", b =>
-                {
-                    b.Navigation("KlasaKujdestari");
-                });
-
-            modelBuilder.Entity("Domain.Viti", b =>
-                {
-                    b.Navigation("Klasa");
                 });
 #pragma warning restore 612, 618
-
         }
     }
 }
