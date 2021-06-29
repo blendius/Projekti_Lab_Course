@@ -133,7 +133,6 @@ function App() {
         )} 
       />
 
-            <NavBarPrindi />
 
             <Container style={{ marginTop: "7em" }}>
               <Switch></Switch>
