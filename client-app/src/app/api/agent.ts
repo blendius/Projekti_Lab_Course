@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Termin } from "../models/termini";
+import { Orari } from "../models/orari";
 import { Lenda } from "../models/lenda";
 import { Postimi } from "../models/postimi";
 import { Prindi } from "../models/prindi";
@@ -70,13 +70,13 @@ const Profesoret = {
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
 };
-const Terminet = {
-  list: () => requests.get<Termin[]>("/terminet"),
-  details: (id: string) => requests.get<Termin>(`/terminet/${id}`),
-  create: (termini: Termin) => requests.post<void>("/terminet", termini),
-  update: (termini: Termin) =>
-    requests.put<void>(`/terminet/${termini.id}`, termini),
-  delete: (id: string) => axios.delete<void>(`/terminet/${id}`),
+const Oraret = {
+  list: () => requests.get<Orari[]>("/oraret"),
+  details: (id: string) => requests.get<Orari>(`/oraret/${id}`),
+  create: (orari: Orari) => requests.post<void>(`/oraret`, orari),
+  update: (orari: Orari) =>
+    requests.put<void>(`/oraret/${orari.orariId}`, orari),
+  delete: (id: string) => axios.delete<void>(`/oraret/${id}`),
 };
 const Postimet = {
   list: () => requests.get<Postimi[]>("/Postimet"),
@@ -96,15 +96,19 @@ const Lendet = {
 const Prinderit = {
   list: () => requests.get<Prindi[]>("/prinderit"),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
-  create: (profesori: Prindi) => axios.post<void>('/prinderit', profesori),
-  update: (profesori: Prindi) => axios.put<void>(`/prinderit/${profesori.id}`, profesori),
-  delete: (id: string) => axios.delete<void>(`/prinderit/${id}`)
-}
+  create: (profesori: Prindi) => axios.post<void>("/prinderit", profesori),
+  update: (profesori: Prindi) =>
+    axios.put<void>(`/prinderit/${profesori.id}`, profesori),
+  delete: (id: string) => axios.delete<void>(`/prinderit/${id}`),
+};
 const Nxenesit = {
   list: () => requests.get<Nxenesi[]>("/nxenesi"),
   details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
   create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
-  update: (nxenesi: Nxenesi) => {console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi)},
+  update: (nxenesi: Nxenesi) => {
+    console.log("nxenesi inside:", nxenesi);
+    return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi);
+  },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
 };
 const Account = {
@@ -132,28 +136,32 @@ const AccountPrindi = {
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
-  create: (laburatori: Laburatori, EmriLendes:string) => axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
+  create: (laburatori: Laburatori, EmriLendes: string) =>
+    axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
   update: (laburatori: Laburatori) =>
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
 };
 const Kontaktet = {
-  listPrindi: (id: string | undefined) => requests.get<Kontakti[]>(`/kontakti/${id}`),
-  listProf: (email: string | undefined) => requests.get<Kontakti[]>(`/kontakti/prof/${email}`),
+  listPrindi: (id: string | undefined) =>
+    requests.get<Kontakti[]>(`/kontakti/${id}`),
+  listProf: (email: string | undefined) =>
+    requests.get<Kontakti[]>(`/kontakti/prof/${email}`),
   create: (kontakti: Kontakti) => axios.post<void>(`/kontakti/`, kontakti),
-  delete: (id: string) => axios.delete<void>(`/kontakti/${id}`)
+  delete: (id: string) => axios.delete<void>(`/kontakti/${id}`),
 };
 const AccountNxenesi = {
-  currentNxenesi: () => requests.get<Nxenesiuser>('/NxenesiAccount/currentNxenesi'),
-  login: (nxenesi : NxenesiuserFormValues) => 
-    requests.post<Nxenesiuser>('/NxenesiAccount/loginNxenesi', nxenesi),
-  register: (nxenesi: NxenesiuserFormValues) => 
-  requests.post<Nxenesiuser>('/NxenesiAccount/registerNxenesi', nxenesi)
+  currentNxenesi: () =>
+    requests.get<Nxenesiuser>("/NxenesiAccount/currentNxenesi"),
+  login: (nxenesi: NxenesiuserFormValues) =>
+    requests.post<Nxenesiuser>("/NxenesiAccount/loginNxenesi", nxenesi),
+  register: (nxenesi: NxenesiuserFormValues) =>
+    requests.post<Nxenesiuser>("/NxenesiAccount/registerNxenesi", nxenesi),
 };
 
 const agent = {
   Profesoret,
-  Terminet,
+  Oraret,
   Postimet,
   Lendet,
   Prinderit,
@@ -163,7 +171,7 @@ const agent = {
   AccountPrindi,
   Laburatoret,
   Kontaktet,
-  AccountNxenesi
+  AccountNxenesi,
 };
 
 export default agent;

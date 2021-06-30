@@ -8,7 +8,6 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Profesori, Profesori>();
-            CreateMap<Termini,Termini>();
             CreateMap<Postimi,Postimi>();
             CreateMap<Lenda,Lenda>();
             CreateMap<Prindi, Prindi>();
@@ -18,6 +17,7 @@ namespace Application.Core
             CreateMap<Salla, Salla>(); 
             CreateMap<Paralelja, Paralelja>();
             CreateMap<Klasa, Klasa>();
+            CreateMap<Orari, Orari>();
         }
     }
 }

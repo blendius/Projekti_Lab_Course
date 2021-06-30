@@ -15,7 +15,6 @@ namespace Persistence
         public DbSet<Postimi> Postimet { get; set; }
         public DbSet<Profesori> Profesoret { get; set; }
         public DbSet<Lenda> Lendet { get; set; }
-        public DbSet<Termini> Terminet { get; set; }
         public DbSet<Prindi> Prinderit { get; set; }
         public DbSet<Nxenesi> Nxenesit { get; set; }
         public DbSet<Laburatiori> Laburatioret { get; set; }
@@ -23,6 +22,7 @@ namespace Persistence
         public DbSet<Paralelja> Paralelet { get; set; }
         public DbSet<Klasa> Klasat { get; set; }
         public DbSet<Salla> Sallat { get; set; }
+        public DbSet<Orari> Oraret { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {

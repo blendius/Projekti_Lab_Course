@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210630172804_orariDone")]
+    partial class orariDone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,24 +90,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
-                    b.Property<Guid>("KlasaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("VitiId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ParaleljaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("SallaId")
+                    b.Property<string>("ProfesoriId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Viti")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("KlasaId");
+                    b.HasKey("VitiId", "ParaleljaId");
 
                     b.HasIndex("ParaleljaId");
 
-                    b.HasIndex("SallaId")
+                    b.HasIndex("ProfesoriId")
                         .IsUnique();
 
                     b.ToTable("Klasat");
@@ -257,6 +255,110 @@ namespace Persistence.Migrations
                     b.ToTable("Nxenesit");
                 });
 
+            modelBuilder.Entity("Domain.Orari", b =>
+                {
+                    b.Property<Guid>("OrariId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmriOrarit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte6")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrariId");
+
+                    b.ToTable("Oraret");
+                });
+
             modelBuilder.Entity("Domain.Paralelja", b =>
                 {
                     b.Property<int>("ParaleljaId")
@@ -387,9 +489,6 @@ namespace Persistence.Migrations
                     b.Property<string>("GradaAkademike")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("KlasaKujdestariKlasaId")
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -425,26 +524,10 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KlasaKujdestariKlasaId");
-
                     b.ToTable("Profesoret");
                 });
 
-            modelBuilder.Entity("Domain.Salla", b =>
-                {
-                    b.Property<Guid>("SallaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EmriSalles")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("SallaId");
-
-                    b.ToTable("Sallat");
-                });
-
-            modelBuilder.Entity("Domain.Termini", b =>
+            modelBuilder.Entity("Domain.Viti", b =>
                 {
                     b.Property<int>("VitiId")
                         .ValueGeneratedOnAdd()
@@ -594,15 +677,21 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Salla", "Salla")
-                        .WithOne("Klasa")
-                        .HasForeignKey("Domain.Klasa", "SallaId")
+                    b.HasOne("Domain.Profesori", "Kujdestari")
+                        .WithOne("KlasaKujdestari")
+                        .HasForeignKey("Domain.Klasa", "ProfesoriId");
+
+                    b.HasOne("Domain.Viti", "Viti")
+                        .WithMany("Klasa")
+                        .HasForeignKey("VitiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Kujdestari");
+
                     b.Navigation("Paralelja");
 
-                    b.Navigation("Salla");
+                    b.Navigation("Viti");
                 });
 
             modelBuilder.Entity("Domain.Kontakti", b =>
@@ -642,15 +731,6 @@ namespace Persistence.Migrations
                     b.Navigation("Nxenesi");
 
                     b.Navigation("Prindi");
-                });
-
-            modelBuilder.Entity("Domain.Profesori", b =>
-                {
-                    b.HasOne("Domain.Klasa", "KlasaKujdestari")
-                        .WithMany()
-                        .HasForeignKey("KlasaKujdestariKlasaId");
-
-                    b.Navigation("KlasaKujdestari");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -726,7 +806,12 @@ namespace Persistence.Migrations
                     b.Navigation("PrinderitNxenesit");
                 });
 
-            modelBuilder.Entity("Domain.Salla", b =>
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.Navigation("KlasaKujdestari");
+                });
+
+            modelBuilder.Entity("Domain.Viti", b =>
                 {
                     b.Navigation("Klasa");
                 });

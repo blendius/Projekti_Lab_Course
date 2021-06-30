@@ -1,18 +1,20 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Persistence;
 
-namespace Application.Terminet
+namespace Application.Oraret
 {
     public class List
     {
-        public class Query : IRequest<Result<List<Termini>>>{}
-        public class Handler : IRequestHandler<Query, Result<List<Termini>>>
+        public class Query : IRequest<List<Orari>>{}
+
+        public class Handler : IRequestHandler<Query, List<Orari>>
         {
             private readonly DataContext _context;
 
@@ -20,9 +22,11 @@ namespace Application.Terminet
             {
                 _context = context;
             }
-            public async Task<Result<List<Termini>>> Handle(Query request, CancellationToken cancellationToken)
+
+            public async Task<List<Orari>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return Result<List<Termini>>.Success( await _context.Terminet.ToListAsync());
+                
+                return await _context.Oraret.ToListAsync();
             }
         }
     }

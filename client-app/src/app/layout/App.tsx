@@ -20,7 +20,6 @@ import LoginFormProf from "../../features/profesoret/form/LoginFormProf";
 import ShowProfessors from "../../features/profesoret/profesoret";
 import ShowLaburatoret from "../../features/laburatori/laburatoret";
 import ProfProfileDashboard from "../../features/profesoret/profProfile/ProfProfileDashboard";
-import TerminetDashboard from "../../features/terminet/dashboard/TerminetDashboard";
 import LoginForm from "../../features/users/LoginForm";
 import ProfessorPage from "../../professorFeatures/ProfessorPage";
 import ModalContainer from "../common/modals/ModalContainer";
@@ -38,6 +37,7 @@ import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindPr
 import kontaktet from "../../prindiFeatures/kontaktet";
 import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
 import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
+import OraretDashboard from "../../features/oraret/dashboard/OraretDashboard";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -88,14 +88,20 @@ function App() {
 
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
-                <Route path="/professorPage/Kontaktet" component={kontaktetProf} />
-
+                <Route
+                  path="/professorPage/ProfProfili"
+                  component={ProfProfileDashboard}
+                />
+                <Route
+                  path="/professorPage/Kontaktet"
+                  component={kontaktetProf}
+                />
               </Switch>
             </Container>
           </>
-        )} />
-      
+        )}
+      />
+
       <Route path="/professorPage" component={ProfessorPage} />
       <Route
         path={"/professorPage/(.+)"}
@@ -120,25 +126,24 @@ function App() {
         path={"/prindiPage/(.+)"}
         render={() => (
           <>
-          <NavBarPrindi />
-          
-          <Container style={{ marginTop: "7em" }}>
-            <Switch>
-            <Route path="/prindiPage/PrindProfili" component={PrindProfileDashboard} />
-            <Route path="/prindiPage/Kontaktet" component={kontaktet} />
-
-            </Switch>
-          </Container>
-          </>
-        )} 
-      />
-
+            <NavBarPrindi />
 
             <Container style={{ marginTop: "7em" }}>
-              <Switch></Switch>
+              <Switch>
+                <Route
+                  path="/prindiPage/PrindProfili"
+                  component={PrindProfileDashboard}
+                />
+                <Route path="/prindiPage/Kontaktet" component={kontaktet} />
+              </Switch>
             </Container>
-          
-      
+          </>
+        )}
+      />
+
+      <Container style={{ marginTop: "7em" }}>
+        <Switch></Switch>
+      </Container>
 
       <Route path="/nxenesiPage" component={NxenesiPage} />
       <Route
@@ -149,7 +154,7 @@ function App() {
 
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-              <Route
+                <Route
                   exact
                   path="/nxenesiPage/Profili/"
                   component={NxenesiDashboard}
@@ -169,15 +174,16 @@ function App() {
             <Container style={{ marginTop: "7em" }}>
               <Switch>
                 <Route path="/adminPage/paneli" component={Paneli} />
-                <Route exact path="/adminPage/Profili" component={NxenesiDashboard} />
+                <Route
+                  exact
+                  path="/adminPage/Profili"
+                  component={NxenesiDashboard}
+                />
                 <Route
                   path="/adminPage/profesoret"
                   component={ShowProfessors}
                 />
-                <Route
-                  path="/adminPage/terminet"
-                  component={TerminetDashboard}
-                />
+                <Route path="/adminPage/oraret" component={OraretDashboard} />
                 <Route
                   exact
                   path="/adminPage/postimet"
@@ -198,8 +204,14 @@ function App() {
 
                 <Route path="/adminPage/login" component={LoginForm} />
                 <Route path="/adminPage/loginProf" component={LoginFormProf} />
-                <Route path="/adminPage/loginPrindi" component={LoginFormPrindi} />
-                <Route path="/adminPage/laburatoret" component={ShowLaburatoret} />
+                <Route
+                  path="/adminPage/loginPrindi"
+                  component={LoginFormPrindi}
+                />
+                <Route
+                  path="/adminPage/laburatoret"
+                  component={ShowLaburatoret}
+                />
                 <Route
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
                   component={LendaForm}

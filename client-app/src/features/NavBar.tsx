@@ -24,11 +24,15 @@ export default observer(function NavBar() {
         </Menu.Item>
         <Menu.Item as={NavLink} to="adminPage/paneli" name="Paneli" />
         <Menu.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret" />
-        <Menu.Item as={NavLink} to="/adminPage/terminet" name="Terminet" />
+        <Menu.Item as={NavLink} to="/adminPage/oraret" name="Oraret" />
         <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit" />
         <Menu.Item as={NavLink} to="/adminPage/nxenesit" name="Nxenesit" />
-        <Menu.Item as={NavLink} to="/adminPage/laburatoret" name="Laburatoret" />
+        <Menu.Item
+          as={NavLink}
+          to="/adminPage/laburatoret"
+          name="Laburatoret"
+        />
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}

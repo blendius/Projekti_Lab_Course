@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import ProfesoriStore from "./profesoriStore";
-import TerminiStore from "./terminiStore";
 import lendaStore from "./lendaStore";
 import PostimiStore from "./postimetStore";
 import NxenesiStore from "./nxenesiStore";
@@ -11,10 +10,11 @@ import PrindiStore from "./prindiStore";
 import PrindStoreAccount from "./prindStoreAccount";
 import LaburatoriStore from "./laburatoriStore";
 import KontaktiStore from "./kontaktiStore";
+import OrariStore from "./orariStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
-  terminiStore: TerminiStore;
+  orariStore: OrariStore;
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
   nxenesiStore: NxenesiStore;
@@ -28,7 +28,7 @@ interface Store {
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
-  terminiStore: new TerminiStore(),
+  orariStore: new OrariStore(),
   postimiStore: new PostimiStore(),
   lendaStore: new lendaStore(),
   nxenesiStore: new NxenesiStore(),
