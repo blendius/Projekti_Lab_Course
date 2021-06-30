@@ -23,6 +23,7 @@ namespace Persistence
         public DbSet<Viti> Vitet { get; set; }
         public DbSet<Paralelja> Paralelet { get; set; }
         public DbSet<Klasa> Klasat { get; set; }
+        public DbSet<Orari> Oraret { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
