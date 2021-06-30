@@ -20,9 +20,9 @@ namespace Persistence
         public DbSet<Nxenesi> Nxenesit { get; set; }
         public DbSet<Laburatiori> Laburatioret { get; set; }
         public DbSet<Kontakti> Kontaktet { get; set; }
-        public DbSet<Viti> Vitet { get; set; }
         public DbSet<Paralelja> Paralelet { get; set; }
         public DbSet<Klasa> Klasat { get; set; }
+        public DbSet<Salla> Sallat { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
@@ -40,6 +40,16 @@ namespace Persistence
           .WithMany(p => p.Laburatoret)
            .HasForeignKey(pp => pp.LendaId);
 
+            modelbuilder.Entity<Klasa>()
+            .HasOne(p => p.Paralelja)
+            .WithMany(k => k.Klasa)
+            .HasForeignKey(kp => kp.ParaleljaId);
+
+            modelbuilder.Entity<Salla>()
+            .HasOne(s => s.Klasa)
+            .WithOne(k => k.Salla)
+            .HasForeignKey<Klasa>(k => k.SallaId);
+
             modelbuilder.Entity<PrindiNxenesi>()
                 .HasKey(pn => new { pn.PrindiId, pn.NxenesiId });
             modelbuilder.Entity<PrindiNxenesi>()
@@ -51,22 +61,7 @@ namespace Persistence
                 .WithMany(p => p.PrinderitNxenesit)
                 .HasForeignKey(pn => pn.NxenesiId);
 
-            // base.OnModelCreating(modelbuilder);
-            modelbuilder.Entity<Klasa>()
-                .HasKey(vp => new { vp.VitiId, vp.ParaleljaId });
-            modelbuilder.Entity<Klasa>()
-                .HasOne(vp => vp.Viti)
-                .WithMany(v => v.Klasa)
-                .HasForeignKey(vp => vp.VitiId);
-            modelbuilder.Entity<Klasa>()
-                .HasOne(vp => vp.Paralelja)
-                .WithMany(p => p.Klasa)
-                .HasForeignKey(vp => vp.ParaleljaId);
 
-            modelbuilder.Entity<Profesori>()
-                .HasOne(p => p.KlasaKujdestari)
-                .WithOne(k => k.Kujdestari)
-                .HasForeignKey<Klasa>(k => k.ProfesoriId);
         }
 
 
@@ -75,6 +70,6 @@ namespace Persistence
         // .WithMany(pr => pr.)
         // .HasForeignKey(pp => pp.ProfesoriId);
 
-      
+
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Application.Klasat;
+using System;
 
 namespace API.Controllers
 {
@@ -14,29 +15,28 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
-        [HttpGet("{vitiId}&{paraleljaId}")]
-        public async Task<ActionResult<Klasa>> GetKlasa(int vitiId, int paraleljaId)
+        [HttpGet("{klasaId}")]
+        public async Task<ActionResult<Klasa>> GetKlasa(Guid klasaId)
         {
-            return await Mediator.Send(new Details.Query { VitiId = vitiId, ParaleljaId = paraleljaId });
+            return await Mediator.Send(new Details.Query { KlasaId = klasaId });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateKlasa(Klasa klasa)
+        [HttpPost("{paraleljaId}&{sallaId}")]
+        public async Task<IActionResult> CreateKlasa(Klasa klasa, int paraleljaId, Guid sallaId)
         {
-            return Ok(await Mediator.Send(new Create.Command { Klasa = klasa }));
+            return Ok(await Mediator.Send(new Create.Command { Klasa = klasa, SallaId=sallaId, ParaleljaId=paraleljaId }));
         }
 
-        [HttpPut("{vitiId}&{paraleljaId}")]
-        public async Task<IActionResult> EditViti(int vitiId, int paraleljaId, Klasa klasa)
+        [HttpPut("{klasaId}")]
+        public async Task<IActionResult> EditViti(Guid klasaId, Klasa klasa)
         {
-            klasa.VitiId = vitiId;
-            klasa.ParaleljaId = paraleljaId;
+            klasa.KlasaId = klasaId;
             return Ok(await Mediator.Send(new Edit.Command { Klasa = klasa }));
         }
-        [HttpDelete("{vitiId}&{paraleljaId}")]
-        public async Task<IActionResult> DeleteViti(int vitiId, int paraleljaId)
+        [HttpDelete("{klasaId}")]
+        public async Task<IActionResult> DeleteViti(Guid klasaId)
         {
-            return Ok(await Mediator.Send(new Delete.Command { VitiId = vitiId, ParaleljaId = paraleljaId }));
+            return Ok(await Mediator.Send(new Delete.Command { KlasaId = klasaId }));
         }
     }
 }

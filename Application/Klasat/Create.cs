@@ -1,7 +1,9 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Klasat
@@ -11,6 +13,8 @@ namespace Application.Klasat
         public class Command : IRequest
         {
             public Klasa Klasa { get; set; }
+            public int ParaleljaId {get; set;}
+            public Guid SallaId {get; set;}
         }
 
         public class Handler : IRequestHandler<Command>
@@ -23,6 +27,10 @@ namespace Application.Klasat
             }
             public async Task<Unit> Handle (Command request, CancellationToken cancellationToken)
             {
+                var salla = await _context.Sallat.FirstOrDefaultAsync(x => x.SallaId == request.SallaId);
+                var paralelja = await _context.Paralelet.FirstOrDefaultAsync(x => x.ParaleljaId == request.ParaleljaId);
+                request.Klasa.Salla = salla;
+                request.Klasa.Paralelja = paralelja;
                 _context.Klasat.Add(request.Klasa);
                 await _context.SaveChangesAsync();
                 return Unit.Value;

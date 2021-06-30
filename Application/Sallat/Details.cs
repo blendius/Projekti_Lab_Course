@@ -1,18 +1,19 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Vitet
+namespace Application.Sallat
 {
     public class Details
     {
-        public class Query : IRequest<Viti>
+        public class Query : IRequest<Salla>
         {
-            public int Id { get; set; }
+            public Guid Id { get; set; }
         }
-        public class Handler : IRequestHandler<Query, Viti>
+        public class Handler : IRequestHandler<Query, Salla>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -20,9 +21,9 @@ namespace Application.Vitet
                 _context = context;
             }
 
-            public async Task<Viti> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Salla> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Vitet.FindAsync(request.Id);
+                return await _context.Sallat.FindAsync(request.Id);
             }
         }
     }

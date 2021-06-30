@@ -1,29 +1,29 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Vitet
+namespace Application.Sallat
 {
-    public class Create
+    public class Delete
     {
         public class Command : IRequest
         {
-            public Viti Viti { get; set; }
+            public Guid Id { get; set; }
         }
-
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-
             public Handler(DataContext context)
             {
                 _context = context;
             }
             public async Task<Unit> Handle (Command request, CancellationToken cancellationToken)
             {
-                _context.Vitet.Add(request.Viti);
+                var salla = await _context.Sallat.FindAsync(request.Id);
+                _context.Remove(salla);
+
                 await _context.SaveChangesAsync();
                 return Unit.Value;
             }
