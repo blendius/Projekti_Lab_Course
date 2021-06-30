@@ -257,6 +257,110 @@ namespace Persistence.Migrations
                     b.ToTable("Nxenesit");
                 });
 
+            modelBuilder.Entity("Domain.Orari", b =>
+                {
+                    b.Property<Guid>("OrariId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmriOrarit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Enjte6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hene6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marte6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Merkure6")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Premte6")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrariId");
+
+                    b.ToTable("Oraret");
+                });
+
             modelBuilder.Entity("Domain.Paralelja", b =>
                 {
                     b.Property<int>("ParaleljaId")
@@ -442,20 +546,6 @@ namespace Persistence.Migrations
                     b.HasKey("SallaId");
 
                     b.ToTable("Sallat");
-                });
-
-            modelBuilder.Entity("Domain.Termini", b =>
-                {
-                    b.Property<int>("VitiId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Kohezgjatja")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("VitiId");
-
-                    b.ToTable("Vitet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
