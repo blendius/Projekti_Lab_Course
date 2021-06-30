@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210630131603_Vlersimet")]
+    partial class Vlersimet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -460,8 +462,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Vleresimi", b =>
                 {
-                    b.Property<Guid>("VleresimiId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("ProfesoriId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NxenesiId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gjysemvjetori")
@@ -473,20 +477,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Nota")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("NxenesiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfesoriId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Viti")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("VleresimiId");
+                    b.HasKey("ProfesoriId", "NxenesiId");
 
                     b.HasIndex("NxenesiId");
-
-                    b.HasIndex("ProfesoriId");
 
                     b.ToTable("Vleresimi");
                 });
@@ -687,11 +683,15 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Nxenesi", "Nxenesi")
                         .WithMany("Vleresimet")
-                        .HasForeignKey("NxenesiId");
+                        .HasForeignKey("NxenesiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Profesori", "Profesori")
                         .WithMany("Vleresimet")
-                        .HasForeignKey("ProfesoriId");
+                        .HasForeignKey("ProfesoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Nxenesi");
 

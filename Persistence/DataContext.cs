@@ -23,6 +23,8 @@ namespace Persistence
         public DbSet<Viti> Vitet { get; set; }
         public DbSet<Paralelja> Paralelet { get; set; }
         public DbSet<Klasa> Klasat { get; set; }
+        public DbSet<Vleresimi>  Vleresimi { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
@@ -67,6 +69,16 @@ namespace Persistence
                 .HasOne(p => p.KlasaKujdestari)
                 .WithOne(k => k.Kujdestari)
                 .HasForeignKey<Klasa>(k => k.ProfesoriId);
+            modelbuilder.Entity<Vleresimi>()
+                           .HasKey(v => new { v.VleresimiId });
+            modelbuilder.Entity<Vleresimi>()
+         .HasOne(p => p.Nxenesi)
+         .WithMany(v => v.Vleresimet)
+         .HasForeignKey(p => p.NxenesiId);
+            modelbuilder.Entity<Vleresimi>()
+                .HasOne(p => p.Profesori)
+                .WithMany(v => v.Vleresimet)
+                .HasForeignKey(p => p.ProfesoriId);
         }
 
 
@@ -75,6 +87,6 @@ namespace Persistence
         // .WithMany(pr => pr.)
         // .HasForeignKey(pp => pp.ProfesoriId);
 
-      
+
     }
 }
