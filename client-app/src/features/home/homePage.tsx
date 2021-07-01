@@ -12,7 +12,7 @@ import LoginFormNxenesi from '../nxenesit/form/LoginFormNxenesi';
 import './style.css';
 
 export default observer(function HomePage() {
-    const { adminStore, modalStore, profesoriStore, nxenesiStore} = useStore();
+    const { adminStore, modalStore, profesoriStore, nxenesiStore } = useStore();
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
@@ -30,14 +30,14 @@ export default observer(function HomePage() {
                     </>
                 ) : (<>
                     <Button onClick={() => modalStore.openModal(<LoginForm />)} to='/login' size='huge' inverted>
-                        Kycu si Admin!
+                        Kyçu si Admin!
                     </Button>
                     <Button onClick={() => modalStore.openModal(<LoginFormPrindi />)} size='huge' inverted>
-                        Kycu si Prind!
+                        Kyëu si Prind!
                     </Button>
-                    
-                   
-                    
+
+
+
                 </>
                 )}
                 {profesoriStore.isLoggedIn ? (
@@ -49,27 +49,27 @@ export default observer(function HomePage() {
                     </>
                 ) : (
                     <>
-                    <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
-                        Kyqu si Profesor!
-                    </Button>
-                    
+                        <Button onClick={() => modalStore.openModal(<LoginFormProf />)} size='huge' inverted>
+                            Kyçu si Profesor!
+                        </Button>
+
                     </>
-                )} 
+                )}
                 {nxenesiStore.isLoggedIn ? (
                     <>
-                    <Button as={Link} to='/nxenesiPage/Profili' size='huge' inverted>
+                        <Button as={Link} to='/nxenesiPage/Profili' size='huge' inverted>
                             Vazhdo te profili i nxenesit!
-                    </Button>
+                        </Button>
                     </>
 
                 ) : (
-                    <Button onClick={()=>modalStore.openModal(<LoginFormNxenesi/>)} size='huge' inverted>
+                    <Button onClick={() => modalStore.openModal(<LoginFormNxenesi />)} size='huge' inverted>
                         Kyçu si Nxenes!
                     </Button>
 
                 )}
-            
-                  
+
+
 
             </Container>
         </Segment>

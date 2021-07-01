@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -10,8 +11,7 @@ namespace Application.Klasat
     {
         public class Query : IRequest<Klasa>
         {
-            public int VitiId { get; set; }
-            public int ParaleljaId { get; set; }
+            public Guid KlasaId { get; set; }
         }
         public class Handler : IRequestHandler<Query, Klasa>
         {
@@ -23,7 +23,7 @@ namespace Application.Klasat
 
             public async Task<Klasa> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Klasat.FindAsync(request.VitiId, request.ParaleljaId);
+                return await _context.Klasat.FindAsync(request.KlasaId);
             }
         }
     }

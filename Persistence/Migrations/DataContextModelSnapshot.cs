@@ -88,20 +88,24 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
-                    b.Property<int>("VitiId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("KlasaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ParaleljaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProfesoriId")
+                    b.Property<Guid>("SallaId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("VitiId", "ParaleljaId");
+                    b.Property<int>("Viti")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("KlasaId");
 
                     b.HasIndex("ParaleljaId");
 
-                    b.HasIndex("ProfesoriId")
+                    b.HasIndex("SallaId")
                         .IsUnique();
 
                     b.ToTable("Klasat");
@@ -512,6 +516,9 @@ namespace Persistence.Migrations
                     b.Property<string>("GradaAkademike")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("KlasaKujdestariKlasaId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -547,21 +554,23 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KlasaKujdestariKlasaId");
+
                     b.ToTable("Profesoret");
                 });
 
-            modelBuilder.Entity("Domain.Viti", b =>
+            modelBuilder.Entity("Domain.Salla", b =>
                 {
-                    b.Property<int>("VitiId")
+                    b.Property<Guid>("SallaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("Kohezgjatja")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("EmriSalles")
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("VitiId");
+                    b.HasKey("SallaId");
 
-                    b.ToTable("Vitet");
+                    b.ToTable("Sallat");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -700,21 +709,15 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Profesori", "Kujdestari")
-                        .WithOne("KlasaKujdestari")
-                        .HasForeignKey("Domain.Klasa", "ProfesoriId");
-
-                    b.HasOne("Domain.Viti", "Viti")
-                        .WithMany("Klasa")
-                        .HasForeignKey("VitiId")
+                    b.HasOne("Domain.Salla", "Salla")
+                        .WithOne("Klasa")
+                        .HasForeignKey("Domain.Klasa", "SallaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Kujdestari");
-
                     b.Navigation("Paralelja");
 
-                    b.Navigation("Viti");
+                    b.Navigation("Salla");
                 });
 
             modelBuilder.Entity("Domain.Kontakti", b =>
@@ -765,6 +768,15 @@ namespace Persistence.Migrations
                     b.Navigation("Nxenesi");
 
                     b.Navigation("Prindi");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.HasOne("Domain.Klasa", "KlasaKujdestari")
+                        .WithMany()
+                        .HasForeignKey("KlasaKujdestariKlasaId");
+
+                    b.Navigation("KlasaKujdestari");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -845,12 +857,7 @@ namespace Persistence.Migrations
                     b.Navigation("PrinderitNxenesit");
                 });
 
-            modelBuilder.Entity("Domain.Profesori", b =>
-                {
-                    b.Navigation("KlasaKujdestari");
-                });
-
-            modelBuilder.Entity("Domain.Viti", b =>
+            modelBuilder.Entity("Domain.Salla", b =>
                 {
                     b.Navigation("Klasa");
                 });

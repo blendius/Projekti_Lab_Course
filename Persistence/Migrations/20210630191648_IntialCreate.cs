@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class test : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,6 +95,48 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Oraret",
+                columns: table => new
+                {
+                    OrariId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EmriOrarit = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene4 = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Hene6 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte4 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Marte6 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure4 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Merkure6 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte4 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Enjte6 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte4 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Premte6 = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Oraret", x => x.OrariId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Paralelet",
                 columns: table => new
                 {
@@ -149,59 +191,15 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profesoret",
+                name: "Sallat",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    GradaAkademike = table.Column<string>(type: "TEXT", nullable: true),
-                    DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                    SallaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EmriSalles = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Profesoret", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Terminet",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    DataFillimit = table.Column<string>(type: "TEXT", nullable: true),
-                    DataMbarimit = table.Column<string>(type: "TEXT", nullable: true),
-                    Salla = table.Column<string>(type: "TEXT", nullable: true),
-                    KohaMbajtjes = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Terminet", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Vitet",
-                columns: table => new
-                {
-                    VitiId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Kohezgjatja = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vitet", x => x.VitiId);
+                    table.PrimaryKey("PK_Sallat", x => x.SallaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -381,13 +379,14 @@ namespace Persistence.Migrations
                 name: "Klasat",
                 columns: table => new
                 {
-                    VitiId = table.Column<int>(type: "INTEGER", nullable: false),
+                    KlasaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Viti = table.Column<int>(type: "INTEGER", nullable: false),
                     ParaleljaId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProfesoriId = table.Column<string>(type: "TEXT", nullable: true)
+                    SallaId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Klasat", x => new { x.VitiId, x.ParaleljaId });
+                    table.PrimaryKey("PK_Klasat", x => x.KlasaId);
                     table.ForeignKey(
                         name: "FK_Klasat_Paralelet_ParaleljaId",
                         column: x => x.ParaleljaId,
@@ -395,17 +394,46 @@ namespace Persistence.Migrations
                         principalColumn: "ParaleljaId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Klasat_Profesoret_ProfesoriId",
-                        column: x => x.ProfesoriId,
-                        principalTable: "Profesoret",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Klasat_Vitet_VitiId",
-                        column: x => x.VitiId,
-                        principalTable: "Vitet",
-                        principalColumn: "VitiId",
+                        name: "FK_Klasat_Sallat_SallaId",
+                        column: x => x.SallaId,
+                        principalTable: "Sallat",
+                        principalColumn: "SallaId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Profesoret",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    GradaAkademike = table.Column<string>(type: "TEXT", nullable: true),
+                    DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    KlasaKujdestariKlasaId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profesoret", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Profesoret_Klasat_KlasaKujdestariKlasaId",
+                        column: x => x.KlasaKujdestariKlasaId,
+                        principalTable: "Klasat",
+                        principalColumn: "KlasaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -451,9 +479,9 @@ namespace Persistence.Migrations
                 column: "ParaleljaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Klasat_ProfesoriId",
+                name: "IX_Klasat_SallaId",
                 table: "Klasat",
-                column: "ProfesoriId",
+                column: "SallaId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -470,6 +498,11 @@ namespace Persistence.Migrations
                 name: "IX_PrindiNxenesi_NxenesiId",
                 table: "PrindiNxenesi",
                 column: "NxenesiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Profesoret_KlasaKujdestariKlasaId",
+                table: "Profesoret",
+                column: "KlasaKujdestariKlasaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -490,13 +523,13 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Klasat");
-
-            migrationBuilder.DropTable(
                 name: "Kontaktet");
 
             migrationBuilder.DropTable(
                 name: "Laburatioret");
+
+            migrationBuilder.DropTable(
+                name: "Oraret");
 
             migrationBuilder.DropTable(
                 name: "Postimet");
@@ -505,22 +538,13 @@ namespace Persistence.Migrations
                 name: "PrindiNxenesi");
 
             migrationBuilder.DropTable(
-                name: "Terminet");
+                name: "Profesoret");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Paralelet");
-
-            migrationBuilder.DropTable(
-                name: "Profesoret");
-
-            migrationBuilder.DropTable(
-                name: "Vitet");
 
             migrationBuilder.DropTable(
                 name: "Lendet");
@@ -530,6 +554,15 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Prinderit");
+
+            migrationBuilder.DropTable(
+                name: "Klasat");
+
+            migrationBuilder.DropTable(
+                name: "Paralelet");
+
+            migrationBuilder.DropTable(
+                name: "Sallat");
         }
     }
 }

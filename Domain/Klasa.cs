@@ -1,12 +1,14 @@
+using System;
+
 namespace Domain
 {
     public class Klasa
     {
-        public int VitiId {get; set;}
-        public Viti Viti { get; set; }
+        public Guid KlasaId {get; set;}
+        public int Viti {get; set;}
         public int ParaleljaId { get; set; }
         public Paralelja Paralelja { get; set; }
-        public string ProfesoriId { get; set; }
-        public Profesori Kujdestari { get; set; }
+        public Guid SallaId {get; set;}
+        public Salla Salla {get; set;}
     }
 }

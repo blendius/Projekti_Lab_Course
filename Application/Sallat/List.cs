@@ -6,12 +6,12 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Vitet
+namespace Application.Sallat
 {
     public class List
     {
-        public class Query : IRequest<List<Viti>> { }
-        public class Handler : IRequestHandler<Query, List<Viti>>
+        public class Query : IRequest<List<Salla>> { }
+        public class Handler : IRequestHandler<Query, List<Salla>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -19,9 +19,9 @@ namespace Application.Vitet
                 _context = context;
             }
 
-            public async Task<List<Viti>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Salla>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Vitet.ToListAsync();
+                return await _context.Sallat.ToListAsync();
             }
         }
     }

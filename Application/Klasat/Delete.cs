@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,8 +10,7 @@ namespace Application.Klasat
     {
         public class Command : IRequest
         {
-            public int VitiId { get; set; }
-            public int ParaleljaId { get; set; }
+            public Guid KlasaId { get; set; }
 
         }
         public class Handler : IRequestHandler<Command>
@@ -22,10 +22,7 @@ namespace Application.Klasat
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var viti = await _context.Klasat.FindAsync(request.VitiId);
-                var paralelja = await _context.Klasat.FindAsync(request.ParaleljaId);
-
-                var klasa = await _context.Klasat.FindAsync(viti, paralelja);
+                var klasa = await _context.Klasat.FindAsync(request.KlasaId);
                 _context.Remove(klasa);
 
                 await _context.SaveChangesAsync();

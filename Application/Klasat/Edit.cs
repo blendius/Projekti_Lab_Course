@@ -25,10 +25,7 @@ namespace Application.Klasat
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                // var viti = await _context.Klasat.FindAsync(request.Klasa.VitiId);
-                // var paralelja = await _context.Klasat.FindAsync(request.Klasa.ParaleljaId);
-
-                var klasa = await _context.Klasat.FindAsync(request.Klasa.VitiId, request.Klasa.ParaleljaId);
+                var klasa = await _context.Klasat.FindAsync(request.Klasa.KlasaId);
 
                 _mapper.Map(request.Klasa, klasa);
 

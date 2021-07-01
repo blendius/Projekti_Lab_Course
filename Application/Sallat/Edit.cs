@@ -5,13 +5,13 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Vitet
+namespace Application.Sallat
 {
     public class Edit
     {
         public class Command : IRequest
         {
-            public Viti Viti { get; set; }
+            public Salla Salla { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -25,8 +25,8 @@ namespace Application.Vitet
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var viti = await _context.Vitet.FindAsync(request.Viti.VitiId);
-                _mapper.Map(request.Viti, viti);
+                var salla = await _context.Sallat.FindAsync(request.Salla.SallaId);
+                _mapper.Map(request.Salla, salla);
                 
                 await _context.SaveChangesAsync();
                 return Unit.Value;
