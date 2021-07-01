@@ -12,12 +12,7 @@ export default function OrariDetails() {
   return (
     <Card>
       <Card.Content>
-        <Card.Header>Lenda Standin</Card.Header>
-        <Card.Meta>
-          <span>{orari.merkure6}</span>
-          <span>{orari.premte1}</span>
-        </Card.Meta>
-        <Card.Description>Salla:{orari.hene2}</Card.Description>
+        <Card.Header>{orari.emriOrarit}</Card.Header>
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
