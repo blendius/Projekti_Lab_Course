@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
 
 namespace Domain
 {
     public class Paralelja
     {
-        public int ParaleljaId { get; set; }
+        public Guid ParaleljaId { get; set; }
+        public int Numri { get; set; }
         public int KapacitetiMax { get; set; }
         public ICollection<Klasa> Klasa { get; set; }
     }

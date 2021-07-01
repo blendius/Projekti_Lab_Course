@@ -40,6 +40,10 @@ import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 import OraretDashboard from "../../features/oraret/dashboard/OraretDashboard";
 import SallaDashboard from "../../features/sallat/dashboard/SallaDashboard";
 import SallaDetails from "../../features/sallat/details/SallaDetails";
+import ParaleljaDetails from "../../features/paralelet/details/ParaleljaDetails";
+import ParaleljaDashboard from "../../features/paralelet/dashboard/ParaleljaDashboard";
+import KlasaDashboard from "../../features/klasat/dashboard/KlasaDashboard";
+import KlasaDetails from "../../features/klasat/details/KlasaDetails";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -223,7 +227,20 @@ function App() {
                   path="/adminPage/sallat"
                   component={SallaDashboard}
                 />
-                <Route path="/adminPage/sallat/:id" component={SallaDetails} />
+                <Route path="/adminPage/paralelet/:id" component={SallaDetails} />
+                <Route
+                  exact
+                  path="/adminPage/paralelet"
+                  component={ParaleljaDashboard}
+                />
+                <Route path="/adminPage/paralelet/:id" component={ParaleljaDetails} />
+
+                <Route
+                  exact
+                  path="/adminPage/klasat"
+                  component={KlasaDashboard}
+                />
+                <Route path="/adminPage/klasat/:id" component={KlasaDetails} />
               </Switch>
             </Container>
           </>

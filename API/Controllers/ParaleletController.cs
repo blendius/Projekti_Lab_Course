@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Application.Paralelet;
+using System;
 
 namespace API.Controllers
 {
@@ -15,7 +16,7 @@ namespace API.Controllers
         }
         
         [HttpGet("{id}")]   
-        public async Task<ActionResult<Paralelja>> GetParalelja(int id)
+        public async Task<ActionResult<Paralelja>> GetParalelja(Guid id)
         {
             return await Mediator.Send(new Details.Query{Id=id});
         }
@@ -27,13 +28,13 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-         public async Task <IActionResult> EditParalelja(int id ,Paralelja paralelja)
+         public async Task <IActionResult> EditParalelja(Guid id ,Paralelja paralelja)
         {
             paralelja.ParaleljaId=id;
             return Ok(await Mediator.Send(new Edit.Command{Paralelja=paralelja}));
         }
         [HttpDelete("{id}")]
-        public async Task <IActionResult> DeleteParalelja(int id)
+        public async Task <IActionResult> DeleteParalelja(Guid id)
         {
             return Ok(await Mediator.Send(new Delete.Command{Id=id}));
         }

@@ -12,6 +12,8 @@ import LaburatoriStore from "./laburatoriStore";
 import KontaktiStore from "./kontaktiStore";
 import OrariStore from "./orariStore";
 import SallaStore from "./sallaStore";
+import ParaleljaStore from "./paraleljaStore";
+import KlasaStore from "./klasaStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -27,6 +29,8 @@ interface Store {
   laburatoriStore: LaburatoriStore;
   kontaktiStore: KontaktiStore;
   sallaStore: SallaStore;
+  paraleljaStore: ParaleljaStore;
+  klasaStore: KlasaStore;
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
@@ -41,7 +45,9 @@ export const store: Store = {
   prindStoreAccount: new PrindStoreAccount(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),
-  sallaStore: new SallaStore()
+  sallaStore: new SallaStore(),
+  paraleljaStore: new ParaleljaStore(),
+  klasaStore: new KlasaStore()
 };
 
 export const StoreContext = createContext(store);

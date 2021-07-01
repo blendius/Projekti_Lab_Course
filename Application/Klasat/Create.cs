@@ -13,7 +13,7 @@ namespace Application.Klasat
         public class Command : IRequest
         {
             public Klasa Klasa { get; set; }
-            public int ParaleljaId {get; set;}
+            public Guid ParaleljaId {get; set;}
             public Guid SallaId {get; set;}
         }
 

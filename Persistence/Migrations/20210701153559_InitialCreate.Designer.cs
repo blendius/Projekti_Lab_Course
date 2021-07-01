@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210630191648_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20210701153559_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,8 +94,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ParaleljaId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ParaleljaId")
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("SallaId")
                         .HasColumnType("TEXT");
@@ -365,11 +365,14 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Paralelja", b =>
                 {
-                    b.Property<int>("ParaleljaId")
+                    b.Property<Guid>("ParaleljaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("KapacitetiMax")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Numri")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ParaleljaId");

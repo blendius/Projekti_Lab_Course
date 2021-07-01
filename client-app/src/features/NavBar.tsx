@@ -34,6 +34,9 @@ export default observer(function NavBar() {
           name="Laboratoret"
         />
         <Menu.Item as={NavLink} to="/adminPage/sallat" name="Sallat" />
+        <Menu.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" />
+        <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
+
 
         <Menu.Item position="right">
           <Image

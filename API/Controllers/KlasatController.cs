@@ -22,16 +22,16 @@ namespace API.Controllers
         }
 
         [HttpPost("{paraleljaId}&{sallaId}")]
-        public async Task<IActionResult> CreateKlasa(Klasa klasa, int paraleljaId, Guid sallaId)
+        public async Task<IActionResult> CreateKlasa(Klasa klasa, Guid paraleljaId, Guid sallaId)
         {
             return Ok(await Mediator.Send(new Create.Command { Klasa = klasa, SallaId=sallaId, ParaleljaId=paraleljaId }));
         }
 
-        [HttpPut("{klasaId}")]
-        public async Task<IActionResult> EditViti(Guid klasaId, Klasa klasa)
+        [HttpPut("{klasaId}&{paraleljaId}&{sallaId}")]
+        public async Task<IActionResult> EditViti(Guid klasaId, Guid paraleljaId, Guid sallaId, Klasa klasa)
         {
             klasa.KlasaId = klasaId;
-            return Ok(await Mediator.Send(new Edit.Command { Klasa = klasa }));
+            return Ok(await Mediator.Send(new Edit.Command { Klasa = klasa , ParaleljaId = paraleljaId, SallaId = sallaId}));
         }
         [HttpDelete("{klasaId}")]
         public async Task<IActionResult> DeleteViti(Guid klasaId)

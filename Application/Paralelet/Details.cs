@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -10,7 +11,7 @@ namespace Application.Paralelet
     {
         public class Query : IRequest<Paralelja>
         {
-            public int Id { get; set; }
+            public Guid Id { get; set; }
         }
         public class Handler : IRequestHandler<Query, Paralelja>
         {

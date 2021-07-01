@@ -14,7 +14,7 @@ export default class SallaStore {
     makeAutoObservable(this);
   }
   get sallatByName() {
-    return Array.from(this.sallatRegistry.values()).sort((s1, s2) =>s1.emriSalles.localeCompare(s2.emriSalles));
+    return Array.from(this.sallatRegistry.values()).sort((s1, s2) => s1.emriSalles.localeCompare(s2.emriSalles));
   }
 
   get getSallat() {
@@ -124,5 +124,8 @@ export default class SallaStore {
 
   private getSalla = (id: string) => {
     return this.sallatRegistry.get(id);
+  };
+  public getEmriSallesById = (id: string) => {
+    return this.sallatRegistry.get(id)?.emriSalles;
   };
 }

@@ -6,7 +6,6 @@ import { Salla } from "../../../app/models/salla";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { Formik } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import MyDataInput from "../../../app/common/form/MyDateInput";
 
 export default observer(function SallaForm() {
     const { sallaStore } = useStore();

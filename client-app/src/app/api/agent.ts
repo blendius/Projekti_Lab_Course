@@ -14,6 +14,8 @@ import { Laburatori } from "../models/laburatori";
 import { Kontakti } from "../models/kontakti";
 import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
 import { Salla } from "../models/salla";
+import { Paralelja } from "../models/paralelja";
+import { Klasa } from "../models/klasa";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -167,6 +169,22 @@ const Sallat = {
     requests.put<void>(`/sallat/${salla.sallaId}`, salla),
   delete: (id: string) => axios.delete<void>(`/sallat/${id}`),
 };
+const Paralelet = {
+  list: () => requests.get<Paralelja[]>("/paralelet"),
+  details: (id: string) => requests.get<Paralelja>(`/paralelet/${id}`),
+  create: (paralelja: Paralelja) => requests.post<void>(`/paralelet`, paralelja),
+  update: (paralelja: Paralelja) =>
+    requests.put<void>(`/paralelet/${paralelja.paraleljaId}`, paralelja),
+  delete: (id: string) => axios.delete<void>(`/paralelet/${id}`),
+};
+const Klasat = {
+  list: () => requests.get<Klasa[]>("/klasat"),
+  details: (id: string) => requests.get<Klasa>(`/klasat/${id}`),
+  create: (klasa: Klasa, paraleljaId: string, sallaId: string) => requests.post<void>(`/klasat/${paraleljaId}&${sallaId}`, klasa),
+  update: (klasa: Klasa, paraleljaId: string, sallaId: string) =>
+    requests.put<void>(`/klasat/${klasa.klasaId}&${paraleljaId}&${sallaId}`, klasa),
+  delete: (id: string) => axios.delete<void>(`/klasat/${id}`),
+};
 
 const agent = {
   Profesoret,
@@ -181,7 +199,9 @@ const agent = {
   Laburatoret,
   Kontaktet,
   AccountNxenesi,
-  Sallat
+  Sallat, 
+  Paralelet,
+  Klasat
 };
 
 export default agent;

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,7 +10,7 @@ namespace Application.Paralelet
     {
         public class Command : IRequest
         {
-            public int Id { get; set; }
+            public Guid Id { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {

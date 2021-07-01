@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -140,8 +140,8 @@ namespace Persistence.Migrations
                 name: "Paralelet",
                 columns: table => new
                 {
-                    ParaleljaId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    ParaleljaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Numri = table.Column<int>(type: "INTEGER", nullable: false),
                     KapacitetiMax = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -381,7 +381,7 @@ namespace Persistence.Migrations
                 {
                     KlasaId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Viti = table.Column<int>(type: "INTEGER", nullable: false),
-                    ParaleljaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ParaleljaId = table.Column<Guid>(type: "TEXT", nullable: false),
                     SallaId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

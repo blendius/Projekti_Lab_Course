@@ -32,7 +32,6 @@ export default observer(function SallaDashboard() {
                     />}
                 {editMode &&
                     <SallaForm />}
-
             </Grid.Column>
         </Grid>
     )

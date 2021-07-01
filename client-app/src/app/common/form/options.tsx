@@ -55,4 +55,19 @@ export const labOptions = [
     {
         text: 'Fizike',
         value: 'Fizike'
-    }]
+    }
+]
+export const vitiOptions = [
+    {
+        text: '10',
+        value: '10'
+    },
+    {
+        text: '11',
+        value: '11'
+    },
+    {
+        text: '12',
+        value: '12'
+    }
+]

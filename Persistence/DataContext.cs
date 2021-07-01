@@ -27,9 +27,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
-            // builder.Entity<Kontakti>(x => x.HasKey(aa => new { aa.KontaktiId}));
-            // builder.Entity<Prindi>(x => x.HasKey(aa => new { aa.KontaktiId}));
-
+            
             modelbuilder.Entity<Kontakti>()
             .HasOne(p => p.Prindi)
             .WithMany(p => p.Kontaktet)
@@ -60,16 +58,6 @@ namespace Persistence
                 .HasOne(pn => pn.Nxenesi)
                 .WithMany(p => p.PrinderitNxenesit)
                 .HasForeignKey(pn => pn.NxenesiId);
-
-
         }
-
-
-        // builder.Entity<Kontakti>()
-        // .HasOne(p => p.Id)
-        // .WithMany(pr => pr.)
-        // .HasForeignKey(pp => pp.ProfesoriId);
-
-
     }
 }
