@@ -23,7 +23,7 @@ export default observer(function ParaleljaList() {
                             <Table.HeaderCell >Kapaciteti Maksimal</Table.HeaderCell>
                             <Table.HeaderCell>Shiko</Table.HeaderCell>
                             <Table.HeaderCell>Fshije</Table.HeaderCell>
-                        </Table.Row>\
+                        </Table.Row>
                     </Table.Header>
                     <TableBody>
                         {paraleletByNumri.map(paralelet => (
