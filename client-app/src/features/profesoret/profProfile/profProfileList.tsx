@@ -16,11 +16,11 @@ export default function ProfProfileList() {
             <Grid.Column width={2}></Grid.Column>
             <Grid.Column  width={10}>
                 <Grid.Row >
-                    <h2>{prof?.name} </h2>
+                        <h2>{prof?.name} </h2>
                 </Grid.Row>
                
                 <Grid.Row>
-                    <p className='profileData'> Username:{prof?.username}     </p>
+                    <p className='profileData'> Username:{prof?.userName}     </p>
                 </Grid.Row>
                
                 <Grid.Row>

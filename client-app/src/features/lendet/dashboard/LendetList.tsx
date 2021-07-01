@@ -20,9 +20,6 @@ export default observer(function LendetList() {
 
     return (
 
-
-
-
         <Segment.Group>
             <Segment className='lendetlist'>
                 <Table celled compact >

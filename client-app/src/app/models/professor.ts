@@ -1,13 +1,16 @@
 export interface Professor {
-    id:string;
-    username: string;
-    name: string;
-    email: string;
-    token: string;
-    image?: string;
-    gradaAkademike: string;
-    dataRegjistrimit: string;
-    EmriLendes: string;
+
+    name: string,
+    gradaAkademike: string,
+    dataRegjistrimit:string,
+    lendaId: string,
+    lenda?: string | null,
+    id: string,
+    userName: string,
+    normalizedUserName: string,
+    email: string,
+    token:string
+
 }
 
 

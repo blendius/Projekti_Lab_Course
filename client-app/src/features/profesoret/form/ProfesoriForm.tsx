@@ -29,7 +29,10 @@ export default observer(function ProfesoriForm() {
         gradaAkademike: '',
         dataRegjistrimit: '',
         token: '',
-        EmriLendes: ''
+        EmriLendes: '',
+        lendaId: '', 
+        userName: '', 
+        normalizedUserName: ''
 
     }
     const validationSchema = Yup.object({

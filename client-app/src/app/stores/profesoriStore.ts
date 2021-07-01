@@ -13,7 +13,7 @@ export default class ProfesoriStore {
 
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
 
 
     constructor() {
@@ -54,6 +54,10 @@ export default class ProfesoriStore {
         } catch (error) {
             console.log(error);
         }
+    }
+    getProfFromId = async (id: string) => {
+        console.log(id)
+        return this.professorRegistry.get(id);
     }
 
     register = async (creds: ProfFormValues,id:string) => {
@@ -96,8 +100,7 @@ export default class ProfesoriStore {
             const profesoret = await agent.Profesoret.list();
 
             profesoret.forEach(profesori => {
-                profesori.dataRegjistrimit = profesori.dataRegjistrimit.split('T')[0];
-                this.professorRegistry.set(profesori.id, profesori);
+                this.setProfesori(profesori);
             })
             this.setLoadingInitial(false);
         }
@@ -108,6 +111,34 @@ export default class ProfesoriStore {
             this.setLoadingInitial(false);
         }
 
+    }
+
+    loadProfesori = async (id: string) => {
+        let profesori = this.getProfFromId(id);
+        console.log(profesori);
+        // if (profesori) {
+        //     this.selectedProfessor = profesori;
+        //     return profesori;
+        // } else {
+        //     this.loadingInitial = true;
+        //     try {
+        //         profesori = await agent.Profesoret.details(id);
+        //         this.setProfesori(profesori);
+        //         runInAction(() => {
+        //             this.selectedProfessor = profesori;
+        //         })
+        //         this.setLoadingInitial(false);
+        //         return profesori;
+        //     } catch (error) {
+        //         console.log(error);
+        //         this.setLoadingInitial(false);
+        //     }
+        // }
+    }
+    
+    private setProfesori = (profesor: Professor) => {
+        profesor.dataRegjistrimit = profesor.dataRegjistrimit!;
+        this.professorRegistry.set(profesor.id, profesor);
     }
 
     setLoadingInitial = (state: boolean) => {

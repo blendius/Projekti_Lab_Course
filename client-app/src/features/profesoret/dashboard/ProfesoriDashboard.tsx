@@ -6,12 +6,20 @@ import ProfesoriDetais from '../details/ProfesoriDetails';
 import ProfesoriForm from '../form/ProfesoriForm';
 import ProfesoriList from './ProfesoriList';
 import RegisterFormProf from '../form/RegisterFormProf';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 
 export default observer(function ProfesoriDashboard() {
     const { profesoriStore, modalStore } = useStore();
     const { selectedProfessor, editMode } = profesoriStore
     
+    useEffect(() => {
+        profesoriStore.loadProfesoret();
+
+    }, [profesoriStore])
+
+    if (profesoriStore.loadingInitial) return <LoadingComponent content='Lendet duke u Ngarkuar...' />
+
     return (
         <Grid>
             <Grid.Column width='12'>

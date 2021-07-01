@@ -7,6 +7,7 @@ import { useStore } from '../../../app/stores/store';
 import * as Yup from 'yup';
 import MySelectInput from '../../../app/common/form/MySelectInput';
 import { values } from 'mobx';
+import { gradaOptions } from '../../../app/common/form/options';
 
 
 export default observer(function RegisterFormProf() {
@@ -53,7 +54,8 @@ export default observer(function RegisterFormProf() {
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     "Duhet te i permbaj 8 karaktere, Nje Shkronje te madhe, Nje Shkronje te vogel, Nje Number and Nje karakter special"
                 ),
-                LendaId: Yup.string().required("Zgjedhja e lendes eshte e nevojshem!")
+                LendaId: Yup.string().required("Zgjedhja e lendes eshte e nevojshem!"),
+                gradaAkademike: Yup.string().required("Zgjedhja e grades akademike eshte e nevojshem!")
             })}
         >
 
@@ -63,7 +65,7 @@ export default observer(function RegisterFormProf() {
                     <MyTextInput name='displayName' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
-                    <MyTextInput name='gradaAkademike' placeholder='GradaAkademike' />
+                    <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
                     <MySelectInput options=
                         {
                             lendetByDate.map(lenda => (
