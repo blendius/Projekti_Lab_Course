@@ -23,6 +23,7 @@ namespace Persistence
         public DbSet<Klasa> Klasat { get; set; }
         public DbSet<Salla> Sallat { get; set; }
         public DbSet<Orari> Oraret { get; set; }
+        public DbSet<Pajisja> Pajisjet { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
@@ -38,6 +39,10 @@ namespace Persistence
           .WithMany(p => p.Laburatoret)
            .HasForeignKey(pp => pp.LendaId);
 
+           modelbuilder.Entity<Pajisja>()
+          .HasOne(p => p.Laburatiori)
+          .WithMany(p => p.Pajisjet)
+           .HasForeignKey(pp => pp.LaburatioriId);
             modelbuilder.Entity<Klasa>()
             .HasOne(p => p.Paralelja)
             .WithMany(k => k.Klasa)

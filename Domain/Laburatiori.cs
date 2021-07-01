@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -10,5 +11,6 @@ namespace Domain
         public DateTime DataEKrijimit { get; set; }
         public Guid LendaId { get; set; }
         public Lenda Lenda { get; set; }
+        public ICollection<Pajisja> Pajisjet{get;set;}
     }
 }
