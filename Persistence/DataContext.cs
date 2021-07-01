@@ -45,6 +45,7 @@ namespace Persistence
           .HasOne(p => p.Laburatiori)
           .WithMany(p => p.Pajisjet)
            .HasForeignKey(pp => pp.LaburatioriId);
+           
             modelbuilder.Entity<Klasa>()
             .HasOne(p => p.Paralelja)
             .WithMany(k => k.Klasa)
