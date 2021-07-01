@@ -13,6 +13,7 @@ namespace Domain
         public string Lenda { get; set; }
         public string Gjysemvjetori { get; set; }
         public string Viti { get; set; }
+        public DateTime DataRegjistrimit { get; set; }
         
     }
 }

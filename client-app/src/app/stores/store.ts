@@ -11,6 +11,7 @@ import PrindiStore from "./prindiStore";
 import PrindStoreAccount from "./prindStoreAccount";
 import LaburatoriStore from "./laburatoriStore";
 import KontaktiStore from "./kontaktiStore";
+import VlersimiStore from "./vlersimiStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -25,6 +26,7 @@ interface Store {
   prindStoreAccount: PrindStoreAccount;
   laburatoriStore: LaburatoriStore;
   kontaktiStore: KontaktiStore;
+  vleresimiStore: VlersimiStore;
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
@@ -39,6 +41,7 @@ export const store: Store = {
   prindStoreAccount: new PrindStoreAccount(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),
+  vleresimiStore: new VlersimiStore()
 };
 
 export const StoreContext = createContext(store);

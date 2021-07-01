@@ -38,6 +38,7 @@ import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindPr
 import kontaktet from "../../prindiFeatures/kontaktet";
 import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
 import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
+import ShowVlersimet from "../../professorFeatures/vleresimet";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -108,6 +109,10 @@ function App() {
                 <Route
                   path="/professorPage/ProfProfili"
                   component={ProfProfileDashboard}
+                />
+                <Route
+                  path="/professorPage/Vlersimet"
+                  component={ShowVlersimet}
                 />
               </Switch>
             </Container>
