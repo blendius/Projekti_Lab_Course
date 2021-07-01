@@ -44,6 +44,7 @@ import ParaleljaDetails from "../../features/paralelet/details/ParaleljaDetails"
 import ParaleljaDashboard from "../../features/paralelet/dashboard/ParaleljaDashboard";
 import KlasaDashboard from "../../features/klasat/dashboard/KlasaDashboard";
 import KlasaDetails from "../../features/klasat/details/KlasaDetails";
+import ShowVlersimet from "../../professorFeatures/vleresimet";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -120,6 +121,10 @@ function App() {
                 <Route
                   path="/professorPage/ProfProfili"
                   component={ProfProfileDashboard}
+                />
+                <Route
+                  path="/professorPage/Vlersimet"
+                  component={ShowVlersimet}
                 />
               </Switch>
             </Container>

@@ -24,6 +24,8 @@ namespace Persistence
         public DbSet<Salla> Sallat { get; set; }
         public DbSet<Orari> Oraret { get; set; }
         public DbSet<Pajisja> Pajisjet { get; set; }
+        public DbSet<Vleresimi>  Vleresimi { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {

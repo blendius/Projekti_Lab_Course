@@ -18,6 +18,7 @@ namespace Application.Core
             CreateMap<Paralelja, Paralelja>();
             CreateMap<Klasa, Klasa>();
             CreateMap<Orari, Orari>();
+            CreateMap<Vleresimi, Vleresimi>();
         }
     }
 }

@@ -16,6 +16,7 @@ import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
 import { Salla } from "../models/salla";
 import { Paralelja } from "../models/paralelja";
 import { Klasa } from "../models/klasa";
+import { Vleresimi } from "../models/Vleresimi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -108,10 +109,7 @@ const Nxenesit = {
   list: () => requests.get<Nxenesi[]>("/nxenesi"),
   details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
   create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
-  update: (nxenesi: Nxenesi) => {
-    console.log("nxenesi inside:", nxenesi);
-    return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi);
-  },
+  update: (nxenesi: Nxenesi) => { console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi) },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
 };
 const Account = {
@@ -139,8 +137,7 @@ const AccountPrindi = {
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
-  create: (laburatori: Laburatori, EmriLendes: string) =>
-    axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
+  create: (laburatori: Laburatori, EmriLendes: string) => axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
   update: (laburatori: Laburatori) =>
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
@@ -186,6 +183,15 @@ const Klasat = {
   delete: (id: string) => axios.delete<void>(`/klasat/${id}`),
 };
 
+
+const Vleresimet = {
+  list: () => requests.get<Vleresimi[]>('/Vleresimet'),
+  details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
+  create: (vlersimi: Vleresimi, profID: string, nxensiId: string) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
+  update: (vlersimi: Vleresimi, profID: string, nxensiId: string) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),
+  delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`)
+}
+
 const agent = {
   Profesoret,
   Oraret,
@@ -201,7 +207,8 @@ const agent = {
   AccountNxenesi,
   Sallat, 
   Paralelet,
-  Klasat
+  Klasat,
+  Vleresimet
 };
 
 export default agent;
