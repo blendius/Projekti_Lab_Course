@@ -14,7 +14,7 @@ namespace API.Controllers
         {
             return await Mediator.Send(new ListProf.Query{Id=id});
         }
-          [HttpGet("prof/{email}")]
+          [HttpGet("nxenesi/{email}")]
         public async Task<ActionResult<List<FeedbackToNxenesi>>> GetFeedbackNxenesi(string email)
         {
             return await Mediator.Send(new ListNxenesi.Query{NxenesiEmail =email});

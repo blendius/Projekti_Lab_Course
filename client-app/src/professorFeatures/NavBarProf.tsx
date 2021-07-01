@@ -19,6 +19,8 @@ export default observer(function NavBarProf() {
         </Menu.Item>
 
         <Menu.Item as={NavLink} to="/ProfProfili" name="Profili im" />
+        <Menu.Item as={NavLink} to="/ProfFeedbacks" name="Feedbacks" />
+
         <Menu.Item onClick={logoutProf} text='Ckycu' icon='power' />
 
 

@@ -11,6 +11,7 @@ namespace Domain
         public DateTime DataRegjistrimit { get; set; }
         public Guid LendaId { get; set; }
         public Lenda Lenda { get; set; }
+       
         public ICollection<FeedbackToNxenesi> FeedbackToNxenesit { get; set; }
     }
 }

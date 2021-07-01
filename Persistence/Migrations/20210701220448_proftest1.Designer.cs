@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210628205427_LendaProfesoriRel")]
-    partial class LendaProfesoriRel
+    [Migration("20210701220448_proftest1")]
+    partial class proftest1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,34 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
+                {
+                    b.Property<Guid>("FeedbackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("MessageSentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NxenesiEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfesoriID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FeedbackID");
+
+                    b.HasIndex("ProfesoriID");
+
+                    b.ToTable("FeedbackToNxenesit");
                 });
 
             modelBuilder.Entity("Domain.Lenda", b =>
@@ -441,6 +469,15 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
+                {
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("FeedbackToNxenesit")
+                        .HasForeignKey("ProfesoriID");
+
+                    b.Navigation("Profesori");
+                });
+
             modelBuilder.Entity("Domain.Profesori", b =>
                 {
                     b.HasOne("Domain.Lenda", "Lenda")
@@ -506,6 +543,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Lenda", b =>
                 {
                     b.Navigation("Profesoret");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.Navigation("FeedbackToNxenesit");
                 });
 #pragma warning restore 612, 618
         }

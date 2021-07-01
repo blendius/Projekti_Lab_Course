@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210627200925_ProfesoriLenda")]
-    partial class ProfesoriLenda
+    [Migration("20210701215721_proftest")]
+    partial class proftest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,34 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
+                {
+                    b.Property<Guid>("FeedbackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("MessageSentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NxenesiEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfesoriID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FeedbackID");
+
+                    b.HasIndex("ProfesoriID");
+
+                    b.ToTable("FeedbackToNxenesit");
                 });
 
             modelBuilder.Entity("Domain.Lenda", b =>
@@ -247,6 +275,9 @@ namespace Persistence.Migrations
                     b.Property<string>("GradaAkademike")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("LendaId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -282,6 +313,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LendaId");
+
                     b.ToTable("Profesoret");
                 });
 
@@ -306,21 +339,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Terminet");
-                });
-
-            modelBuilder.Entity("LendaProfesori", b =>
-                {
-                    b.Property<Guid>("LendetLendaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfesoretId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("LendetLendaId", "ProfesoretId");
-
-                    b.HasIndex("ProfesoretId");
-
-                    b.ToTable("LendaProfesori");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -451,19 +469,24 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LendaProfesori", b =>
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
                 {
-                    b.HasOne("Domain.Lenda", null)
-                        .WithMany()
-                        .HasForeignKey("LendetLendaId")
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("FeedbackToNxenesit")
+                        .HasForeignKey("ProfesoriID");
+
+                    b.Navigation("Profesori");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.HasOne("Domain.Lenda", "Lenda")
+                        .WithMany("Profesoret")
+                        .HasForeignKey("LendaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Profesori", null)
-                        .WithMany()
-                        .HasForeignKey("ProfesoretId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Lenda");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -515,6 +538,16 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Lenda", b =>
+                {
+                    b.Navigation("Profesoret");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.Navigation("FeedbackToNxenesit");
                 });
 #pragma warning restore 612, 618
         }

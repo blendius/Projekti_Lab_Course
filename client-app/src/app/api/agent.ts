@@ -9,6 +9,7 @@ import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
 import { Nxenesi } from "../models/nxenesi";
+import { FeedbackToNxenesi } from "../models/feedbackToNxenesi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -116,7 +117,6 @@ const AccountProf = {
 
  // register: (profesori: Professor, EmriLendes: string) => axios.post<void>(`/profesori/${EmriLendes}`, profesori),
 
-
 };
 const AccountPrindi = {
   current: () => requests.get<Parent>("/PrindAccount") ,
@@ -126,6 +126,12 @@ const AccountPrindi = {
     requests.post<Parent>("/PrindAccount/registerPrind", prindi),
 };
 
+const FeedbackToNxenesit = {
+  listProf: (id: string | undefined) => requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/${id}`),
+  listNxenesi: (email: string | undefined) => requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/nxenesi/${email}`),
+  create: (feedback: FeedbackToNxenesi) => axios.post<void>(`/FeedbackToNxenesit/`, feedback),
+  delete: (id: string) => axios.delete<void>(`/FeedbackToNxenesit/${id}`)
+};
 
 const agent = {
   Profesoret,
@@ -136,7 +142,8 @@ const agent = {
   Account,
   Nxenesit,
   AccountProf,
-  AccountPrindi
+  AccountPrindi,
+  FeedbackToNxenesit
 };
 
 export default agent;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class ProfesoriLenda : Migration
+    public partial class proftest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,34 +121,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prinderit", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Profesoret",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    GradaAkademike = table.Column<string>(type: "TEXT", nullable: true),
-                    DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profesoret", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,27 +245,60 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LendaProfesori",
+                name: "Profesoret",
                 columns: table => new
                 {
-                    LendetLendaId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ProfesoretId = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    GradaAkademike = table.Column<string>(type: "TEXT", nullable: true),
+                    DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserName = table.Column<string>(type: "TEXT", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LendaProfesori", x => new { x.LendetLendaId, x.ProfesoretId });
+                    table.PrimaryKey("PK_Profesoret", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LendaProfesori_Lendet_LendetLendaId",
-                        column: x => x.LendetLendaId,
+                        name: "FK_Profesoret_Lendet_LendaId",
+                        column: x => x.LendaId,
                         principalTable: "Lendet",
                         principalColumn: "LendaId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FeedbackToNxenesit",
+                columns: table => new
+                {
+                    FeedbackID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ProfesoriID = table.Column<string>(type: "TEXT", nullable: true),
+                    NxenesiEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    Subject = table.Column<string>(type: "TEXT", nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: true),
+                    MessageSentDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedbackToNxenesit", x => x.FeedbackID);
                     table.ForeignKey(
-                        name: "FK_LendaProfesori_Profesoret_ProfesoretId",
-                        column: x => x.ProfesoretId,
+                        name: "FK_FeedbackToNxenesit_Profesoret_ProfesoriID",
+                        column: x => x.ProfesoriID,
                         principalTable: "Profesoret",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -334,9 +339,14 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LendaProfesori_ProfesoretId",
-                table: "LendaProfesori",
-                column: "ProfesoretId");
+                name: "IX_FeedbackToNxenesit_ProfesoriID",
+                table: "FeedbackToNxenesit",
+                column: "ProfesoriID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Profesoret_LendaId",
+                table: "Profesoret",
+                column: "LendaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -357,7 +367,7 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "LendaProfesori");
+                name: "FeedbackToNxenesit");
 
             migrationBuilder.DropTable(
                 name: "Nxenesit");
@@ -378,10 +388,10 @@ namespace Persistence.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Lendet");
+                name: "Profesoret");
 
             migrationBuilder.DropTable(
-                name: "Profesoret");
+                name: "Lendet");
         }
     }
 }

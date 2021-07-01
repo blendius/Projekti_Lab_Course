@@ -32,6 +32,7 @@ import NavBar from "../../features/NavBar";
 import adminPage from "../../features/adminPage";
 import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
+import ShowFeedbacks from "../../professorFeatures/Feedbacks";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
 
 function App() {
@@ -114,6 +115,7 @@ function App() {
           
           <Container style={{ marginTop: "7em" }}>
             <Switch>
+                <Route path="/professorPage/ProfFeedbacks" component={ShowFeedbacks} />
               <Route path="/professorPage/ProfProfili" component={ProfProfileDashboard} />
             </Switch>
           </Container>

@@ -10,6 +10,11 @@ namespace Persistence
 {
     public class Seed
     {
+        public static Guid lenda1 = new Guid();
+        public static Guid lenda2 = new Guid();
+        public static Guid lenda3 = new Guid();
+
+
         public static async Task SeedData(DataContext context, UserManager<AppAdmin> userManager)
         {
             if (!userManager.Users.Any())
@@ -51,96 +56,48 @@ namespace Persistence
                 }
             };
 
+
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
         }
+       
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
         {
-            if (!context.Profesoret.Any())
+
+            if (!userManager.Users.Any())
             {
-
-                var Profesori1 = new Profesori
+                var prinderit = new List<Profesori>
                 {
-                    Name = "Profesori 1",
-                    GradaAkademike = "Profesori 1",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
+                    new Profesori{Name = "prof", UserName="p1", Email = "prof@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 1",
+                        Pershkrimi = "Pershkrimi Seed lenda 1"
+
+                    }},
+                    new Profesori{Name = "prof2", UserName="p2", Email = "prof2@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 2",
+                        Pershkrimi = "Pershkrimi Seed lenda 2"
+
+                    }},
+                    new Profesori{Name = "prof3", UserName="p3", Email = "prind3@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 3",
+                        Pershkrimi = "Pershkrimi Seed lenda 3"
+
+                    }}
                 };
-                var Profesori2 = new Profesori
+
+                foreach (var prindi in prinderit)
                 {
-                    Name = "Profesori 2",
-                    GradaAkademike = "Profesori 2",
-                    DataRegjistrimit = DateTime.Now.AddMinutes(-1000)
-                };
-
-                context.AddRange(
-                    new Lenda
-                    {
-                        EmriLendes = "Matematike",
-                        DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                        Pershkrimi = "Seeded Data  1",
-                        Syllabusi = "Seeded Data  1",
-                        Profesoret = new List<Profesori> { Profesori1 }
-                    },
-                    new Lenda
-                    {
-                        EmriLendes = "Gjuhe Shqipe",
-                        DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                        Pershkrimi = "Seeded Data  1",
-                        Syllabusi = "Seeded Data  1",
-                        Profesoret = new List<Profesori> { Profesori2 }
-                    }
-
-                );
+                    await userManager.CreateAsync(prindi, "Pa$$w0rd");
+                }
             }
-            // if (userManager.Users.Any()) return;
-
-            // var profesoret = new List<Profesori>
-            // {
-            //    new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
-            //    new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
-            //    new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
-
-            // };
-            // foreach (var prof in profesoret)
-            // {
-            //     await userManager.CreateAsync(prof, "Pa$$w0rd");
-            // }
-
-
-            // context.AddRange(
-            //     new Lenda
-            //     {
-            //         EmriLendes = "Matematike",
-            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
-            //         Pershkrimi = "Seeded Data  1",
-            //         Syllabusi = "Seeded Data  1",
-            //         Profesoret = new List<Profesori>{profesoret[0]}
-
-            //     },
-            //     new Lenda
-            //     {
-            //         EmriLendes = "Gjuhe Shqipe",
-            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
-            //         Pershkrimi = "Seeded Data  1",
-            //         Syllabusi = "Seeded Data  1",
-            //         Profesoret = new List<Profesori> { profesoret[1] }
-            //     },
-            //     new Lenda
-            //     {
-            //         EmriLendes = "Gjuhe Angleze",
-            //         DataEShtimit = DateTime.Now.AddMinutes(-1000),
-            //         Pershkrimi = "Seeded Data  1",
-            //         Profesoret = new List<Profesori> { profesoret[2] }
-            //     }
-            // );
-
-
-
-
-            //await context.Profesoret.AddRangeAsync(profesoret);
-            await context.SaveChangesAsync();
 
         }
 
