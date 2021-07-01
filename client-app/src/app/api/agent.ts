@@ -13,6 +13,7 @@ import { Parent, ParentFormValues } from "../models/parent";
 import { Laburatori } from "../models/laburatori";
 import { Kontakti } from "../models/kontakti";
 import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
+import { Salla } from "../models/salla";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -158,6 +159,14 @@ const AccountNxenesi = {
   register: (nxenesi: NxenesiuserFormValues) =>
     requests.post<Nxenesiuser>("/NxenesiAccount/registerNxenesi", nxenesi),
 };
+const Sallat = {
+  list: () => requests.get<Salla[]>("/sallat"),
+  details: (id: string) => requests.get<Salla>(`/sallat/${id}`),
+  create: (salla: Salla) => requests.post<void>(`/sallat`, salla),
+  update: (salla: Salla) =>
+    requests.put<void>(`/sallat/${salla.sallaId}`, salla),
+  delete: (id: string) => axios.delete<void>(`/sallat/${id}`),
+};
 
 const agent = {
   Profesoret,
@@ -172,6 +181,7 @@ const agent = {
   Laburatoret,
   Kontaktet,
   AccountNxenesi,
+  Sallat
 };
 
 export default agent;

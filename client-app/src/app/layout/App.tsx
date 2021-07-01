@@ -38,6 +38,8 @@ import kontaktet from "../../prindiFeatures/kontaktet";
 import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
 import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 import OraretDashboard from "../../features/oraret/dashboard/OraretDashboard";
+import SallaDashboard from "../../features/sallat/dashboard/SallaDashboard";
+import SallaDetails from "../../features/sallat/details/SallaDetails";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -216,6 +218,12 @@ function App() {
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
                   component={LendaForm}
                 />
+                <Route
+                  exact
+                  path="/adminPage/sallat"
+                  component={SallaDashboard}
+                />
+                <Route path="/adminPage/sallat/:id" component={SallaDetails} />
               </Switch>
             </Container>
           </>

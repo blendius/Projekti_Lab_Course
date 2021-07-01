@@ -1,16 +1,10 @@
 import { ErrorMessage, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React from "react";
 import {  useEffect } from "react";
 import { Button, Form, Header, Label } from "semantic-ui-react";
 
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
-
-
-//const { handleSetAdminMode } = adminStore;
-
-
 
 export default observer(function LoginForm() {
 const { adminStore, commonStore } = useStore();useEffect(() => {
@@ -30,7 +24,7 @@ const { adminStore, commonStore } = useStore();useEffect(() => {
     >
       {({ handleSubmit, isSubmitting, errors }) => (
         <Form className="ui form" onSubmit={handleSubmit} autoComplete="off ">
-          <Header as='h2' content='Kyqu ne Shkolle!' color='teal' textAlign='center' />
+          <Header as='h2' content='Kyçu në Shkollë!' color='teal' textAlign='center' />
           <MyTextInput name="email" placeholder="Email" />
 
           <MyTextInput name="password" placeholder="Password" type="password" />
@@ -48,7 +42,7 @@ const { adminStore, commonStore } = useStore();useEffect(() => {
           <Button
             loading={isSubmitting}
             positive
-            content="Kyqu"
+            content="Kyçu"
             type="submit"
             fluid
           //onClick={AppLoadedAdmin}

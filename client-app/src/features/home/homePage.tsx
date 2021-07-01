@@ -18,7 +18,7 @@ export default observer(function HomePage() {
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='assets/school.png' alt='Logo' style={{ marginBottom: 12 }} />
-                    Menaxhimi i Shkolles
+                    Menaxhimi i Shkollës
 
                 </Header>
                 {adminStore.isLoggedIn ? (
@@ -33,11 +33,8 @@ export default observer(function HomePage() {
                         Kyçu si Admin!
                     </Button>
                     <Button onClick={() => modalStore.openModal(<LoginFormPrindi />)} size='huge' inverted>
-                        Kyëu si Prind!
+                        Kyçu si Prind!
                     </Button>
-
-
-
                 </>
                 )}
                 {profesoriStore.isLoggedIn ? (
@@ -58,19 +55,16 @@ export default observer(function HomePage() {
                 {nxenesiStore.isLoggedIn ? (
                     <>
                         <Button as={Link} to='/nxenesiPage/Profili' size='huge' inverted>
-                            Vazhdo te profili i nxenesit!
+                            Vazhdo te profili i nxënësit!
                         </Button>
                     </>
 
                 ) : (
                     <Button onClick={() => modalStore.openModal(<LoginFormNxenesi />)} size='huge' inverted>
-                        Kyçu si Nxenes!
+                        Kyçu si Nxënës!
                     </Button>
 
                 )}
-
-
-
             </Container>
         </Segment>
     )

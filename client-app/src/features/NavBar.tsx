@@ -31,8 +31,10 @@ export default observer(function NavBar() {
         <Menu.Item
           as={NavLink}
           to="/adminPage/laburatoret"
-          name="Laburatoret"
+          name="Laboratoret"
         />
+        <Menu.Item as={NavLink} to="/adminPage/sallat" name="Sallat" />
+
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}
@@ -47,7 +49,7 @@ export default observer(function NavBar() {
                 text="Profili Im"
                 icon="user"
               />
-              <Dropdown.Item onClick={logout} text="Ckycu" icon="power" />
+              <Dropdown.Item onClick={logout} text="Çkyçu" icon="power" />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
