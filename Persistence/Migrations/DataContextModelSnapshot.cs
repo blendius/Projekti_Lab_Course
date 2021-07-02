@@ -829,6 +829,15 @@ namespace Persistence.Migrations
                     b.Navigation("Prindi");
                 });
 
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.HasOne("Domain.Klasa", "KlasaKujdestari")
+                        .WithMany()
+                        .HasForeignKey("KlasaKujdestariKlasaId");
+
+                    b.Navigation("KlasaKujdestari");
+                });
+
             modelBuilder.Entity("Domain.Vleresimi", b =>
                 {
                     b.HasOne("Domain.Nxenesi", "Nxenesi")
@@ -922,6 +931,11 @@ namespace Persistence.Migrations
                     b.Navigation("Kontaktet");
 
                     b.Navigation("PrinderitNxenesit");
+                });
+
+            modelBuilder.Entity("Domain.Profesori", b =>
+                {
+                    b.Navigation("Vleresimet");
                 });
 
             modelBuilder.Entity("Domain.Salla", b =>

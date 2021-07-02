@@ -28,7 +28,7 @@ namespace API.Controllers
             _userManagerProf = userManagerProf;
             _signInManagerProf = signInManagerProf;
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AdminDto>> Login(LoginDto loginDto)
         {

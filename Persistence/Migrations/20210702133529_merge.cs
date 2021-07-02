@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class merge : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,20 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lendet", x => x.LendaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Njoftimet",
+                columns: table => new
+                {
+                    NjoftimiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Titulli = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Njoftimet", x => x.NjoftimiId);
                 });
 
             migrationBuilder.CreateTable(
@@ -402,6 +416,27 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pajisjet",
+                columns: table => new
+                {
+                    PajisjaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    kodiProduktit = table.Column<string>(type: "TEXT", nullable: true),
+                    emriPajisjes = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LaburatioriId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pajisjet", x => x.PajisjaId);
+                    table.ForeignKey(
+                        name: "FK_Pajisjet_Laburatioret_LaburatioriId",
+                        column: x => x.LaburatioriId,
+                        principalTable: "Laburatioret",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Profesoret",
                 columns: table => new
                 {
@@ -433,6 +468,36 @@ namespace Persistence.Migrations
                         column: x => x.KlasaKujdestariKlasaId,
                         principalTable: "Klasat",
                         principalColumn: "KlasaId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vleresimi",
+                columns: table => new
+                {
+                    VleresimiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    NxenesiId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProfesoriId = table.Column<string>(type: "TEXT", nullable: true),
+                    Nota = table.Column<string>(type: "TEXT", nullable: true),
+                    Lenda = table.Column<string>(type: "TEXT", nullable: true),
+                    Gjysemvjetori = table.Column<string>(type: "TEXT", nullable: true),
+                    Viti = table.Column<string>(type: "TEXT", nullable: true),
+                    DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vleresimi", x => x.VleresimiId);
+                    table.ForeignKey(
+                        name: "FK_Vleresimi_Nxenesit_NxenesiId",
+                        column: x => x.NxenesiId,
+                        principalTable: "Nxenesit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vleresimi_Profesoret_ProfesoriId",
+                        column: x => x.ProfesoriId,
+                        principalTable: "Profesoret",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -495,6 +560,11 @@ namespace Persistence.Migrations
                 column: "LendaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pajisjet_LaburatioriId",
+                table: "Pajisjet",
+                column: "LaburatioriId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PrindiNxenesi_NxenesiId",
                 table: "PrindiNxenesi",
                 column: "NxenesiId");
@@ -503,6 +573,16 @@ namespace Persistence.Migrations
                 name: "IX_Profesoret_KlasaKujdestariKlasaId",
                 table: "Profesoret",
                 column: "KlasaKujdestariKlasaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vleresimi_NxenesiId",
+                table: "Vleresimi",
+                column: "NxenesiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vleresimi_ProfesoriId",
+                table: "Vleresimi",
+                column: "ProfesoriId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -526,10 +606,13 @@ namespace Persistence.Migrations
                 name: "Kontaktet");
 
             migrationBuilder.DropTable(
-                name: "Laburatioret");
+                name: "Njoftimet");
 
             migrationBuilder.DropTable(
                 name: "Oraret");
+
+            migrationBuilder.DropTable(
+                name: "Pajisjet");
 
             migrationBuilder.DropTable(
                 name: "Postimet");
@@ -538,7 +621,7 @@ namespace Persistence.Migrations
                 name: "PrindiNxenesi");
 
             migrationBuilder.DropTable(
-                name: "Profesoret");
+                name: "Vleresimi");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -547,13 +630,19 @@ namespace Persistence.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Lendet");
+                name: "Laburatioret");
+
+            migrationBuilder.DropTable(
+                name: "Prinderit");
 
             migrationBuilder.DropTable(
                 name: "Nxenesit");
 
             migrationBuilder.DropTable(
-                name: "Prinderit");
+                name: "Profesoret");
+
+            migrationBuilder.DropTable(
+                name: "Lendet");
 
             migrationBuilder.DropTable(
                 name: "Klasat");
