@@ -74,10 +74,24 @@ namespace Persistence
                     Syllabusi = "Ky eshte nje postim testues 1"
                 }
             };
+
+            // if (!context.Laburatioret.Any())
+            // {
+            //     var laburatioret = new List<Laburatiori>{
+            //          new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
+            //          new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
+            //          new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
+            //      };
+            //     await context.Laburatioret.AddRangeAsync(laburatioret);
+
+            // };
+
             await context.Lendet.AddRangeAsync(lendet);
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
+
+
         }
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
@@ -243,12 +257,14 @@ namespace Persistence
                 {
                     VitiId = 10,
                     // Viti = 
-                    ParaleljaId = 1
+                    ParaleljaId = 1,
+                    ProfesoriId = "3ec13838-3cff-44e6-ab4b-47f48e39751c"
                 },
                 new Klasa
                 {
                     VitiId = 11,
-                    ParaleljaId = 1
+                    ParaleljaId = 1,
+                    ProfesoriId = "37e9ce9a-643e-4316-8c58-94ff27def1de"
                 },
                 new Klasa
                 {

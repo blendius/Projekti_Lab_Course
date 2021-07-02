@@ -33,7 +33,7 @@ export default observer(function ProfesoriForm() {
         displayName: Yup.string().required(),
         username: Yup.string().required(),
         email: Yup.string().required().email(),
-        password: Yup.string().required(),
+        // password: Yup.string().required(),
     })
 
     const [profesori] = useState(initialState);
@@ -41,7 +41,7 @@ export default observer(function ProfesoriForm() {
     function handleFormSubmit(profesori: Professor) {
         updateProfessor(profesori);
     }
-
+    console.log(prof?.dataRegjistrimit)
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
@@ -52,9 +52,9 @@ export default observer(function ProfesoriForm() {
                         <MyTextInput name='email' placeholder='Email' />
                         <MyTextInput name='displayName' placeholder='Display Name' />
                         <MyTextInput name='username' placeholder='Username' />
-                        <MyTextInput name='password' placeholder='Password' type='password' />
+                        {/* <MyTextInput name='password' placeholder='Password' type='password' /> */}
                         <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
-                        <MyTextInput name='DataRegjistrimit' placeholder='dataRegjistrimit' type='date' />
+                        <MyTextInput name='dataRegjistrimit' placeholder='Data  e Regjistrimit' type='date' />
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />

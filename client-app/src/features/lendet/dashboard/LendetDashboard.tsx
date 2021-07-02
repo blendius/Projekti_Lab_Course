@@ -1,7 +1,7 @@
 //import react from 'react';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import { Button, Container, Grid } from 'semantic-ui-react';
+import { Button, Container, Dropdown, Grid } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 import LendetDetails from '../details/LendetDetails';
@@ -13,10 +13,10 @@ import LendetList from './LendetList';
 
 export default observer(function LendetDashboard() {
     const { lendaStore } = useStore();
-    const { selectedLenda, editMode, openForm } = lendaStore;
+    const { selectedLenda, editMode, openForm, lendetByDate } = lendaStore;
+
 
    
-
 
 
     useEffect(() => {

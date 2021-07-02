@@ -15,7 +15,5 @@ export default observer(function PrindiPage() {
     }, [commonStore, prindStoreAccount])
 
 
-    return(
-        <NavBarPrindi />
-    )
+    return <NavBarPrindi />
 })

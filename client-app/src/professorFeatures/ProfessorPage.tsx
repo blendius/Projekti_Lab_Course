@@ -1,9 +1,6 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Container, Dropdown, Image, Menu } from "semantic-ui-react";
+import { useEffect } from "react";
 import { useStore } from "../app/stores/store";
-import NavBarProf from "./NavBarProf";
 
 export default observer(function ProfessorPage() {
     // return <NavBarProf />
@@ -18,7 +15,5 @@ export default observer(function ProfessorPage() {
 
     }, [commonStore, profesoriStore])
 
-    return(
-        <NavBarProf />
-    )
+    return <h6></h6>
 })

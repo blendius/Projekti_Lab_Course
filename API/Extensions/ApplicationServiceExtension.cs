@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using AutoMapper;
 using Application.Nxenesit;
+using Infrastructure.Security;
+using Application.Interfaces;
 
 namespace API.Extensions
 {
@@ -29,7 +31,7 @@ namespace API.Extensions
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-        
+            services.AddScoped<IPrindiAccessor, PrindiAccessor>();
         
             return services;
         }

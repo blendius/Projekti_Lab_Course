@@ -5,6 +5,7 @@ import { useStore } from "../app/stores/store";
 // import "./styles.css";
 
 export default observer(function NavBarProf() {
+
   const { profesoriStore: { prof, logoutProf } } = useStore();
   return (
     <Menu inverted fixed="top">
@@ -18,8 +19,9 @@ export default observer(function NavBarProf() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
 
-        <Menu.Item as={NavLink} to="/professorPage/ProfProfili" content="Profili im" />
+        <Menu.Item as={NavLink} to="/professorPage/ProfProfili" name="Profili im" />
         <Menu.Item as={NavLink} to="/professorPage/ProfNjoftimet" content='Njoftimet'/>
+        <Menu.Item as={NavLink} to="/professorPage/Kontaktet" name="Kontaktet" />
         <Menu.Item onClick={logoutProf} text='Ckycu' icon='power' />
 
 

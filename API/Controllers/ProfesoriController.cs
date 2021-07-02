@@ -11,7 +11,7 @@ using Persistence;
 
 namespace API.Controllers
 {
-
+[AllowAnonymous]
     public class ProfesoriController : BaseApiController
     {
       

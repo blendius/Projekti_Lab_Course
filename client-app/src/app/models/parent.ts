@@ -1,4 +1,7 @@
+import { Kontakti } from "./kontakti";
+
 export interface Parent {
+    id:string;
     username: string;
     displayName: string;
     token: string;
