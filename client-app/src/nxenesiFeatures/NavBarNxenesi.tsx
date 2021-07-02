@@ -18,7 +18,8 @@ export default observer(function NavBarNxenesi() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
 
-        <Menu.Item content="Profili im" />
+        <Menu.Item as={NavLink} to="/nxenesiPage/profili" content="Profili im" />
+        <Menu.Item as={NavLink} to="/nxenesiPage/njoftimet" content='Njoftimet'/>
         <Menu.Item onClick={logoutNxenesi} text='Ckycu' icon='power' />
 
 

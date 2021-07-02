@@ -8,6 +8,7 @@ import AdminStore from "./adminStore";
 import CommonStore from "./commonStore";
 import PrindiStore from "./prindiStore";
 import PrindStoreAccount from "./prindStoreAccount";
+import NjoftimiStore from "./njoftimiStore";
 import LaburatoriStore from "./laburatoriStore";
 import KontaktiStore from "./kontaktiStore";
 import OrariStore from "./orariStore";
@@ -27,6 +28,7 @@ interface Store {
   commonStore: CommonStore;
   prindiStore: PrindiStore;
   prindStoreAccount: PrindStoreAccount;
+  njoftimiStore: NjoftimiStore;
   laburatoriStore: LaburatoriStore;
   kontaktiStore: KontaktiStore;
   sallaStore: SallaStore;
@@ -45,6 +47,7 @@ export const store: Store = {
   commonStore: new CommonStore(),
   prindiStore: new PrindiStore(),
   prindStoreAccount: new PrindStoreAccount(),
+  njoftimiStore: new NjoftimiStore(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),
   sallaStore: new SallaStore(),

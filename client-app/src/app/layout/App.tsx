@@ -1,4 +1,3 @@
-import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
@@ -23,7 +22,6 @@ import ProfProfileDashboard from "../../features/profesoret/profProfile/ProfProf
 import LoginForm from "../../features/users/LoginForm";
 import ProfessorPage from "../../professorFeatures/ProfessorPage";
 import ModalContainer from "../common/modals/ModalContainer";
-import { Nxenesi } from "../models/nxenesi";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponent";
 import NavBar from "../../features/NavBar";
@@ -45,42 +43,23 @@ import ParaleljaDashboard from "../../features/paralelet/dashboard/ParaleljaDash
 import KlasaDashboard from "../../features/klasat/dashboard/KlasaDashboard";
 import KlasaDetails from "../../features/klasat/details/KlasaDetails";
 import ShowVlersimet from "../../professorFeatures/vleresimet";
+import NjoftimiDashboard from "../../features/njoftimet/dashboard/NjoftimiDashboard";
+import DashboardNjoftimi from "../../features/njoftimet/dashboardFromNxenesiandProfesori/DashboardNjoftimi";
+
+
 
 function App() {
-  const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
-  const [editMode, setEditMode] = useState(false);
   const { commonStore, adminStore, profesoriStore } = useStore();
-
-  // useEffect(() => {
-  //   if (commonStore.token && nxenesiStore.isLoggedIn) {
-  //     nxenesiStore.getNxenesin().finally(() => commonStore.setAppLoaded());
-  //   } else {
-  //     commonStore.setAppLoaded();
-  //   }
-  // }, [commonStore, nxenesiStore])
-
-  // useEffect(() => {
-  //   if (commonStore.token) {
-  //     profesoriStore.getProf().finally(() => commonStore.setAppLoaded())
-  //   } else {
-  //     commonStore.setAppLoaded();
-  //   }
-
-  // }, [commonStore, profesoriStore])
 
   commonStore.setAppLoaded();
 
-  // useEffect(() => {
-  //   axios
-  //     .get<Nxenesi[]>("http://localhost:5000/api/Nxenesi")
-  //     .then((response) => {
-  //       setNxenesit(response.data);
-  //     });
-  // }, []);
+
 
   if (!commonStore.appLoaded) return <LoadingComponent content="Loading..." />;
 
+
   return (
+
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
       <ModalContainer />
@@ -126,6 +105,7 @@ function App() {
                   path="/professorPage/Vlersimet"
                   component={ShowVlersimet}
                 />
+                <Route path="/professorPage/ProfNjoftimet" component={DashboardNjoftimi} />
               </Switch>
             </Container>
           </>
@@ -170,6 +150,8 @@ function App() {
                   path="/nxenesiPage/Profili/"
                   component={NxenesiDashboard}
                 />
+                <Route
+                  path="/nxenesiPage/njoftimet/" component={DashboardNjoftimi} />
               </Switch>
             </Container>
           </>
@@ -206,6 +188,7 @@ function App() {
                 />
                 <Route path="/adminPage/nxenesit" component={Dashboard} />
                 <Route path="/adminPage/prinderit" component={ShowPrinderit} />
+                <Route path="/adminPage/njoftimet" component={NjoftimiDashboard} />
                 <Route
                   exact
                   path="/adminPage/lendet"

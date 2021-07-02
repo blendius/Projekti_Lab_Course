@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210629084101_Njoftimet")]
+    partial class Njoftimet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,80 +90,17 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
-                    b.Property<Guid>("KlasaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ParaleljaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("SallaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Viti")
+                    b.Property<int>("VitiId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("KlasaId");
+                    b.Property<int>("ParaleljaId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("VitiId", "ParaleljaId");
 
                     b.HasIndex("ParaleljaId");
 
-                    b.HasIndex("SallaId")
-                        .IsUnique();
-
                     b.ToTable("Klasat");
-                });
-
-            modelBuilder.Entity("Domain.Kontakti", b =>
-                {
-                    b.Property<Guid>("KontaktiId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataEDergimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mesazhi")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PrindiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Subjekti")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("profEmail")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("KontaktiId");
-
-                    b.HasIndex("PrindiId");
-
-                    b.ToTable("Kontaktet");
-                });
-
-            modelBuilder.Entity("Domain.Laburatiori", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataEKrijimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("LendaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Lloji")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("NrPaisjeve")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LendaId");
-
-                    b.ToTable("Laburatioret");
                 });
 
             modelBuilder.Entity("Domain.Lenda", b =>
@@ -277,145 +216,13 @@ namespace Persistence.Migrations
                     b.ToTable("Nxenesit");
                 });
 
-            modelBuilder.Entity("Domain.Orari", b =>
-                {
-                    b.Property<Guid>("OrariId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EmriOrarit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte5")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Enjte6")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene5")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Hene6")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte5")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Marte6")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure5")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Merkure6")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte5")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Premte6")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("OrariId");
-
-                    b.ToTable("Oraret");
-                });
-
-            modelBuilder.Entity("Domain.Pajisja", b =>
-                {
-                    b.Property<Guid>("PajisjaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataEShtimit")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("LaburatioriId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("emriPajisjes")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("kodiProduktit")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PajisjaId");
-
-                    b.HasIndex("LaburatioriId");
-
-                    b.ToTable("Pajisjet");
-                });
-
             modelBuilder.Entity("Domain.Paralelja", b =>
                 {
-                    b.Property<Guid>("ParaleljaId")
+                    b.Property<int>("ParaleljaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("KapacitetiMax")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Numri")
+                    b.Property<int>("KapacitetiMax")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ParaleljaId");
@@ -539,9 +346,6 @@ namespace Persistence.Migrations
                     b.Property<string>("GradaAkademike")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("KlasaKujdestariKlasaId")
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -577,59 +381,44 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KlasaKujdestariKlasaId");
-
                     b.ToTable("Profesoret");
                 });
 
-            modelBuilder.Entity("Domain.Salla", b =>
+            modelBuilder.Entity("Domain.Termini", b =>
                 {
-                    b.Property<Guid>("SallaId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmriSalles")
+                    b.Property<string>("DataFillimit")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("SallaId");
+                    b.Property<string>("DataMbarimit")
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Sallat");
+                    b.Property<string>("KohaMbajtjes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Salla")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Terminet");
                 });
 
-            modelBuilder.Entity("Domain.Vleresimi", b =>
+            modelBuilder.Entity("Domain.Viti", b =>
                 {
-                    b.Property<Guid>("VleresimiId")
+                    b.Property<int>("VitiId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DataRegjistrimit")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Kohezgjatja")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Gjysemvjetori")
-                        .HasColumnType("TEXT");
+                    b.HasKey("VitiId");
 
-                    b.Property<string>("Lenda")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nota")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NxenesiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfesoriId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Viti")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("VleresimiId");
-
-                    b.HasIndex("NxenesiId");
-
-                    b.HasIndex("ProfesoriId");
-
-                    b.ToTable("Vleresimi");
+                    b.ToTable("Vitet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -768,46 +557,15 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Salla", "Salla")
-                        .WithOne("Klasa")
-                        .HasForeignKey("Domain.Klasa", "SallaId")
+                    b.HasOne("Domain.Viti", "Viti")
+                        .WithMany("Klasa")
+                        .HasForeignKey("VitiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Paralelja");
 
-                    b.Navigation("Salla");
-                });
-
-            modelBuilder.Entity("Domain.Kontakti", b =>
-                {
-                    b.HasOne("Domain.Prindi", "Prindi")
-                        .WithMany("Kontaktet")
-                        .HasForeignKey("PrindiId");
-
-                    b.Navigation("Prindi");
-                });
-
-            modelBuilder.Entity("Domain.Laburatiori", b =>
-                {
-                    b.HasOne("Domain.Lenda", "Lenda")
-                        .WithMany("Laburatoret")
-                        .HasForeignKey("LendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lenda");
-                });
-
-            modelBuilder.Entity("Domain.Pajisja", b =>
-                {
-                    b.HasOne("Domain.Laburatiori", "Laburatiori")
-                        .WithMany("Pajisjet")
-                        .HasForeignKey("LaburatioriId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Laburatiori");
+                    b.Navigation("Viti");
                 });
 
             modelBuilder.Entity("Domain.PrindiNxenesi", b =>
@@ -827,21 +585,6 @@ namespace Persistence.Migrations
                     b.Navigation("Nxenesi");
 
                     b.Navigation("Prindi");
-                });
-
-            modelBuilder.Entity("Domain.Vleresimi", b =>
-                {
-                    b.HasOne("Domain.Nxenesi", "Nxenesi")
-                        .WithMany("Vleresimet")
-                        .HasForeignKey("NxenesiId");
-
-                    b.HasOne("Domain.Profesori", "Profesori")
-                        .WithMany("Vleresimet")
-                        .HasForeignKey("ProfesoriId");
-
-                    b.Navigation("Nxenesi");
-
-                    b.Navigation("Profesori");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -895,21 +638,9 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Laburatiori", b =>
-                {
-                    b.Navigation("Pajisjet");
-                });
-
-            modelBuilder.Entity("Domain.Lenda", b =>
-                {
-                    b.Navigation("Laburatoret");
-                });
-
             modelBuilder.Entity("Domain.Nxenesi", b =>
                 {
                     b.Navigation("PrinderitNxenesit");
-
-                    b.Navigation("Vleresimet");
                 });
 
             modelBuilder.Entity("Domain.Paralelja", b =>
@@ -919,12 +650,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Prindi", b =>
                 {
-                    b.Navigation("Kontaktet");
-
                     b.Navigation("PrinderitNxenesit");
                 });
 
-            modelBuilder.Entity("Domain.Salla", b =>
+            modelBuilder.Entity("Domain.Viti", b =>
                 {
                     b.Navigation("Klasa");
                 });
