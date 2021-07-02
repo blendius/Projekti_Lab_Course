@@ -12,6 +12,7 @@ const options_Class = [
     { key: "XII1", text: "XII/1", value: "XII/1" },
     { key: "XII2", text: "XII/2", value: "XII/2" },
 ];
+
 const options_Registration = [
     { key: "1", text: 2018, value: 2018 },
     { key: "2", text: 2019, value: 2019 },
@@ -46,18 +47,14 @@ export default observer(function NxenesiForm() {
         nxenesi.id ? updateNxenesin(nxenesi) : createNxenesin(nxenesi);
 
     }
-
     function handleInputChange(event: any) {
         const { name, value } = event.target;
         setNxenesin((prevState) => ({ ...prevState, [name]: value }))
     }
-
     function handlePasswordChange(event: any) {
         const { name, value } = event.target;
         setPasswordData({ ...passwordData, [name]: value })
     }
-
-
     function setSelectValues(selectName: any, event: any) {
         const { innerText } = event.target;
         const value =

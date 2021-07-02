@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210702133529_merge")]
+    [Migration("20210702141555_merge")]
     partial class merge
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

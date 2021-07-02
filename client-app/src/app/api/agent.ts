@@ -18,6 +18,7 @@ import { Paralelja } from "../models/paralelja";
 import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
 import { Njoftimi } from "../models/njoftimi";
+import { Pajisja } from "../models/pajisja";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -155,6 +156,15 @@ const Laburatoret = {
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
 };
+const Pajisjet = {
+  list: () => requests.get<Pajisja[]>("/pajisjet"),
+  details: (id: string) => requests.get<Pajisja>(`/pajisjet/${id}`),
+  create: (pajisja: Pajisja, LabId: string) =>
+    axios.post<void>(`/pajisjet/${LabId}`, pajisja),
+  update: (pajisja: Pajisja) =>
+    axios.put<void>(`/pajisjet/${pajisja.PajisjaId}`, pajisja),
+  delete: (id: string) => axios.delete<void>(`/pajisjet/${id}`),
+};
 const Kontaktet = {
   listPrindi: (id: string | undefined) =>
     requests.get<Kontakti[]>(`/kontakti/${id}`),
@@ -232,6 +242,7 @@ const agent = {
   Paralelet,
   Klasat,
   Vleresimet,
+  Pajisjet,
 };
 
 export default agent;

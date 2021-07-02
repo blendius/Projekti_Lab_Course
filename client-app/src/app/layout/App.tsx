@@ -45,6 +45,7 @@ import KlasaDetails from "../../features/klasat/details/KlasaDetails";
 import ShowVlersimet from "../../professorFeatures/vleresimet";
 import NjoftimiDashboard from "../../features/njoftimet/dashboard/NjoftimiDashboard";
 import DashboardNjoftimi from "../../features/njoftimet/dashboardFromNxenesiandProfesori/DashboardNjoftimi";
+import PajisjetDashboard from "../../features/pajisjet/dashboard/PajisjetDashboard";
 
 
 
@@ -205,6 +206,10 @@ function App() {
                 <Route
                   path="/adminPage/laburatoret"
                   component={ShowLaburatoret}
+                />
+                <Route
+                  path="/adminPage/pajisjet"
+                  component={PajisjetDashboard}
                 />
                 <Route
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}
