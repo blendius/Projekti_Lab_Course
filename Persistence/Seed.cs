@@ -166,9 +166,9 @@ namespace Persistence
             {
                 var nxenesit = new List<Nxenesi>
                 {
-                    new Nxenesi{DisplayName = "Erin Lekiqi", UserName= "erinlekiqi", Email= "erinlekiqi@student.edu"},
-                    new Nxenesi{DisplayName = "Mal Haziri", UserName= "malhaziri", Email= "malhaziri@student.edu"},
-                    new Nxenesi{DisplayName = "Erona Lekiqi", UserName= "eronalekiqi", Email= "eronalekiqi@student.edu"}
+                    new Nxenesi{DisplayName = "Erin Lekiqi", FullName = "Erin Lekiqi", ParentName = "Naim", DateOfBirth = new DateTime(2003, 12, 31), Class = "X/1", PhoneNumber = "044-555-660", YearOfRegistration = 2018, UserName= "erinlekiqi", Email= "erinlekiqi@student.edu"},
+                    new Nxenesi{DisplayName = "Mal Haziri", FullName = "Mal Haziri", ParentName = "Armend", DateOfBirth = new DateTime(2002, 10, 28), Class = "XI/2", PhoneNumber = "044-550-660", YearOfRegistration = 2019, UserName= "malhaziri", Email= "malhaziri@student.edu"},
+                    new Nxenesi{DisplayName = "Erona Lekiqi", FullName = "Erona Lekiqi", ParentName = "Naim", DateOfBirth = new DateTime(2004, 10, 10), Class = "XII/1", PhoneNumber = "044-021-660", YearOfRegistration = 2018, UserName= "eronalekiqi", Email= "eronalekiqi@student.edu"}
 
                 };
 

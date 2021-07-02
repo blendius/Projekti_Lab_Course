@@ -344,6 +344,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Librat",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Titulli = table.Column<string>(type: "TEXT", nullable: true),
+                    Autori = table.Column<string>(type: "TEXT", nullable: true),
+                    Linku = table.Column<string>(type: "TEXT", nullable: true),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Klasa = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Librat", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Librat_Lendet_LendaId",
+                        column: x => x.LendaId,
+                        principalTable: "Lendet",
+                        principalColumn: "LendaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Kontaktet",
                 columns: table => new
                 {
@@ -560,6 +583,11 @@ namespace Persistence.Migrations
                 column: "LendaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Librat_LendaId",
+                table: "Librat",
+                column: "LendaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pajisjet_LaburatioriId",
                 table: "Pajisjet",
                 column: "LaburatioriId");
@@ -604,6 +632,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Kontaktet");
+
+            migrationBuilder.DropTable(
+                name: "Librat");
 
             migrationBuilder.DropTable(
                 name: "Njoftimet");

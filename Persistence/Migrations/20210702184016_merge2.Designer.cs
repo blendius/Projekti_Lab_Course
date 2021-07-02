@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210702184016_merge2")]
+    partial class merge2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,13 +198,13 @@ namespace Persistence.Migrations
                     b.Property<string>("Autori")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EmriLendes")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Klasa")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("LendaId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LendaString")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Linku")

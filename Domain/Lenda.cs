@@ -12,6 +12,7 @@ namespace Domain
 
         public DateTime DataEShtimit{get;set;}
         public ICollection<Laburatiori> Laburatoret{get;set;}
+        public ICollection<Libri> Librat { get; set; }
 
         //public Profesori Profesori{get;set;}
 

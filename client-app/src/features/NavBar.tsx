@@ -37,6 +37,7 @@ export default observer(function NavBar() {
         <Menu.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" />
         <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
         <Menu.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet' />
+        <Menu.Item as={NavLink} to="/adminPage/librat" name='Librat' />
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}

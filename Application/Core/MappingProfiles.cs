@@ -20,6 +20,7 @@ namespace Application.Core
             CreateMap<Orari, Orari>();
             CreateMap<Vleresimi, Vleresimi>();
             CreateMap<Njoftimi, Njoftimi>();
+            CreateMap<Libri, Libri>();
         }
     }
 }

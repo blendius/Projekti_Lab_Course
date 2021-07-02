@@ -25,7 +25,8 @@ namespace Persistence
         public DbSet<Orari> Oraret { get; set; }
         public DbSet<Pajisja> Pajisjet { get; set; }
         public DbSet<Vleresimi>  Vleresimi { get; set; }
-         public DbSet<Njoftimi> Njoftimet {get; set;}
+        public DbSet<Njoftimi> Njoftimet {get; set;}
+        public DbSet<Libri> Librat { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -66,6 +67,11 @@ namespace Persistence
                 .HasOne(pn => pn.Nxenesi)
                 .WithMany(p => p.PrinderitNxenesit)
                 .HasForeignKey(pn => pn.NxenesiId);
+
+            modelbuilder.Entity<Libri>()
+                .HasOne(p => p.Lenda)
+                .WithMany(p => p.Librat)
+                .HasForeignKey(pp => pp.LendaId);
         }
     }
 }

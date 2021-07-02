@@ -45,6 +45,8 @@ import KlasaDetails from "../../features/klasat/details/KlasaDetails";
 import ShowVlersimet from "../../professorFeatures/vleresimet";
 import NjoftimiDashboard from "../../features/njoftimet/dashboard/NjoftimiDashboard";
 import DashboardNjoftimi from "../../features/njoftimet/dashboardFromNxenesiandProfesori/DashboardNjoftimi";
+import LibriDashboard from "../../features/librat/dashboart/LibriDashboard";
+import DashboardLibri from "../../features/librat/libratViewFromNxenesi/DashboardLibri";
 
 
 
@@ -151,7 +153,13 @@ function App() {
                   component={NxenesiDashboard}
                 />
                 <Route
-                  path="/nxenesiPage/njoftimet/" component={DashboardNjoftimi} />
+                  path="/nxenesiPage/njoftimet/" 
+                  component={DashboardNjoftimi} 
+                />
+                <Route
+                  path="/nxenesiPage/librat/" 
+                  component={DashboardLibri} 
+                />
               </Switch>
             </Container>
           </>
@@ -227,6 +235,11 @@ function App() {
                   exact
                   path="/adminPage/klasat"
                   component={KlasaDashboard}
+                />
+                <Route
+                  exact
+                  path="/adminPage/librat"
+                  component={LibriDashboard}
                 />
                 <Route path="/adminPage/klasat/:id" component={KlasaDetails} />
               </Switch>

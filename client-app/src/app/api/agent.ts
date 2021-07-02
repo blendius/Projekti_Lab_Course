@@ -18,6 +18,7 @@ import { Paralelja } from "../models/paralelja";
 import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
 import { Njoftimi } from "../models/njoftimi";
+import { Libri } from "../models/libri";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -214,6 +215,16 @@ const Vleresimet = {
   delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`),
 };
 
+const Librat = {
+  list: () => requests.get<Libri[]>("/libri"),
+  details: (id: string) => requests.get<Libri>(`/libri/${id}`),
+  create: (libri: Libri, EmriLendes: string) =>
+    axios.post<void>(`/libri/${EmriLendes}`, libri),
+  update: (libri: Libri) =>
+    axios.put<void>(`/libri/${libri.id}`, libri),
+  delete: (id: string) => axios.delete<void>(`/libri/${id}`),
+};
+
 const agent = {
   Profesoret,
   Oraret,
@@ -232,6 +243,7 @@ const agent = {
   Paralelet,
   Klasat,
   Vleresimet,
+  Librat
 };
 
 export default agent;
