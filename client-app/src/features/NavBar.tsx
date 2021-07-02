@@ -33,6 +33,11 @@ export default observer(function NavBar() {
           to="/adminPage/laburatoret"
           name="Laburatoret"
         />
+        <Menu.Item
+          as={NavLink}
+          to="/adminPage/pajisjet"
+          name="Pajisjet"
+        />
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}

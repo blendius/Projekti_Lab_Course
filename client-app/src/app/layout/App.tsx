@@ -38,6 +38,7 @@ import kontaktet from "../../prindiFeatures/kontaktet";
 import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
 import NxenesiPage from "../../nxenesiFeatures/NxenesiPage";
 import OraretDashboard from "../../features/oraret/dashboard/OraretDashboard";
+import PajisjetDashboard from "../../features/pajisjet/dashboard/PajisjetDashboard";
 
 function App() {
   const [nxenesit, setNxenesit] = useState<Nxenesi[]>([]);
@@ -211,6 +212,10 @@ function App() {
                 <Route
                   path="/adminPage/laburatoret"
                   component={ShowLaburatoret}
+                />
+                <Route
+                  path="/adminPage/pajisjet"
+                  component={PajisjetDashboard}
                 />
                 <Route
                   path={["/adminPage/krijoLende", "/adminPage/manageLenda/:id"]}

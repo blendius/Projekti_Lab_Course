@@ -13,6 +13,7 @@ import { Parent, ParentFormValues } from "../models/parent";
 import { Laburatori } from "../models/laburatori";
 import { Kontakti } from "../models/kontakti";
 import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
+import { Pajisja } from "../models/pajisja";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -142,6 +143,15 @@ const Laburatoret = {
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
 };
+const Pajisjet = {
+  list: () => requests.get<Pajisja[]>("/pajisjet"),
+  details: (id: string) => requests.get<Pajisja>(`/pajisjet/${id}`),
+  create: (pajisja: Pajisja, LabId: string) =>
+    axios.post<void>(`/pajisjet/${LabId}`, pajisja),
+  update: (pajisja: Pajisja) =>
+    axios.put<void>(`/pajisjet/${pajisja.PajisjaId}`, pajisja),
+  delete: (id: string) => axios.delete<void>(`/pajisjet/${id}`),
+};
 const Kontaktet = {
   listPrindi: (id: string | undefined) =>
     requests.get<Kontakti[]>(`/kontakti/${id}`),
@@ -172,6 +182,7 @@ const agent = {
   Laburatoret,
   Kontaktet,
   AccountNxenesi,
+  Pajisjet,
 };
 
 export default agent;
