@@ -30,9 +30,9 @@ namespace API
                 var prindiManager = services.GetRequiredService<UserManager<Prindi>>();
                 var nxenesiManager = services.GetRequiredService<UserManager<Nxenesi>>();
                 await context.Database.MigrateAsync();
-                await Seed.SeedData(context, userManager);
-                await Seed.SeedDataProf(context, userManagerProf);
-                await Seed.SeedDataPrind(context, prindiManager);
+                 await Seed.SeedData(context, userManager);
+                 await Seed.SeedDataProf(context, userManagerProf);
+                 await Seed.SeedDataPrind(context, prindiManager);
                 await Seed.SeedDataNxenesit(context, nxenesiManager);
                 await context.Database.MigrateAsync();
             }

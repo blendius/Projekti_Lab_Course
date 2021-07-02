@@ -60,9 +60,9 @@ export default class ProfesoriStore {
         return this.professorRegistry.get(id);
     }
 
-    register = async (creds: ProfFormValues,id:string) => {
+    register = async (creds: ProfFormValues, id: string) => {
         try {
-            await agent.AccountProf.register(creds,id);
+            await agent.AccountProf.register(creds, id);
             // store.commonStore.setToken(prof.token)
             // runInAction(() => this.prof = prof);
             // history.push('/lendet')
@@ -94,6 +94,7 @@ export default class ProfesoriStore {
     get profesoretByDate() {
         return Array.from(this.professorRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
     }
+
 
     loadProfesoret = async () => {
         try {

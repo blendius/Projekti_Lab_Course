@@ -100,10 +100,7 @@ const Lendet = {
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
-const Nxenesit = {
-  list: () => requests.get<Nxenesi[]>("/nxenesi"),
-  details: (id: string) => requests.get<Nxenesi>(`/nxenesi/${id}`),
-};
+
 const Prinderit = {
   list: () => requests.get<Prindi[]>("/prinderit"),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
@@ -141,8 +138,8 @@ const AccountProf = {
 
   login: (prof: ProfFormValues) =>
     requests.post<Professor>("/account/loginProf", prof),
-  register: (prof: ProfFormValues) =>
-    requests.post<Professor>("/account/registerProf", prof),
+  register: (prof: ProfFormValues, id: string) =>
+    requests.post<Professor>(`/account/registerProf/${id}`, prof),
 };
 const AccountPrindi = {
   current: () => requests.get<Parent>("/PrindAccount"),
@@ -157,6 +154,7 @@ const FeedbackToNxenesit = {
   listNxenesi: (email: string | undefined) => requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/nxenesi/${email}`),
   create: (feedback: FeedbackToNxenesi) => axios.post<void>(`/FeedbackToNxenesit/`, feedback),
   delete: (id: string) => axios.delete<void>(`/FeedbackToNxenesit/${id}`)
+}
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
@@ -243,10 +241,9 @@ const agent = {
   Nxenesit,
   Njoftimet,
   Account,
-  Nxenesit,
   AccountProf,
   AccountPrindi,
-  FeedbackToNxenesit
+  FeedbackToNxenesit,
   Laburatoret,
   Kontaktet,
   AccountNxenesi,

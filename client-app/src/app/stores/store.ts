@@ -25,7 +25,6 @@ interface Store {
   orariStore: OrariStore;
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
-  nxenesiStore: NxenesiStore;
   pajisjetStore: PajisjaStore;
   modalStore: ModalStore;
   adminStore: AdminStore;
@@ -52,10 +51,8 @@ export const store: Store = {
   adminStore: new AdminStore(),
   commonStore: new CommonStore(),
   prindiStore: new PrindiStore(),
-  nxenesiStore:new nxenesiStore(),
   prindStoreAccount: new PrindStoreAccount(),
-  feedbackStore:new FeedbackStore()
-  prindStoreAccount: new PrindStoreAccount(),
+  feedbackStore:new FeedbackStore(),
   njoftimiStore: new NjoftimiStore(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),

@@ -21,7 +21,7 @@ namespace API.Controllers
         private readonly UserManager<Profesori> _userManagerProf;
         private readonly SignInManager<AppAdmin> _signInManager;
         private readonly SignInManager<Profesori> _signInManagerProf;
-        private readonly DataContext _context;
+       // private readonly DataContext _context;
 
         private readonly TokenService _tokenService;
         public AccountController(DataContext context,UserManager<AppAdmin> userManager, UserManager<Profesori> userManagerProf, SignInManager<AppAdmin> signInManager, SignInManager<Profesori> signInManagerProf, TokenService tokenService)
