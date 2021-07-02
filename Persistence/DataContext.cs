@@ -24,13 +24,14 @@ namespace Persistence
         public DbSet<Salla> Sallat { get; set; }
         public DbSet<Orari> Oraret { get; set; }
         public DbSet<Pajisja> Pajisjet { get; set; }
-        public DbSet<Vleresimi>  Vleresimi { get; set; }
+        public DbSet<Vleresimi> Vleresimi { get; set; }
+        public DbSet<ProfesoriKlasa> ProfesoriKlasa { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
-            
+
             modelbuilder.Entity<Kontakti>()
             .HasOne(p => p.Prindi)
             .WithMany(p => p.Kontaktet)
@@ -41,10 +42,10 @@ namespace Persistence
           .WithMany(p => p.Laburatoret)
            .HasForeignKey(pp => pp.LendaId);
 
-           modelbuilder.Entity<Pajisja>()
-          .HasOne(p => p.Laburatiori)
-          .WithMany(p => p.Pajisjet)
-           .HasForeignKey(pp => pp.LaburatioriId);
+            modelbuilder.Entity<Pajisja>()
+           .HasOne(p => p.Laburatiori)
+           .WithMany(p => p.Pajisjet)
+            .HasForeignKey(pp => pp.LaburatioriId);
             modelbuilder.Entity<Klasa>()
             .HasOne(p => p.Paralelja)
             .WithMany(k => k.Klasa)
@@ -65,6 +66,19 @@ namespace Persistence
                 .HasOne(pn => pn.Nxenesi)
                 .WithMany(p => p.PrinderitNxenesit)
                 .HasForeignKey(pn => pn.NxenesiId);
+
+
+
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasKey(pn => new { pn.Id });
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasOne(pn => pn.Profesori)
+                .WithMany(p => p.Klaset)
+                .HasForeignKey(pn => pn.ProfId);
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasOne(pn => pn.Klasa)
+                .WithMany(p => p.Profesoret)
+                .HasForeignKey(pn => pn.KlasaId);    
         }
     }
 }

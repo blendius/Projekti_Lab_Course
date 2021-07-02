@@ -8,7 +8,7 @@ export default observer(function ProfesoriDetais() {
     const { profesoriStore } = useStore();
     const { deleteProfessor, loading } = profesoriStore
 
-    const { selectedProfessor: profesori, openForm, cancelSelectedProfessor } = profesoriStore;
+    const { selectedProfessor: profesori, openForm,openAddKlasaForm,  cancelSelectedProfessor } = profesoriStore;
 
     const [target, setTarget] = useState('');
 
@@ -36,6 +36,8 @@ export default observer(function ProfesoriDetais() {
             <Card.Content extra>
                 <Container>
                     <Button onClick={() => openForm(profesori.id)} color='blue' content='Edit' className='detailsbtn' />
+                    <Button onClick={() => openAddKlasaForm(profesori.id)} color='blue' content='Shto Klasen' className='detailsbtn' />
+
                     <Button name={profesori.id}
                         loading={loading && target === profesori.id}
                         onClick={(e) => handleProfessorDelete(e, profesori.id)}

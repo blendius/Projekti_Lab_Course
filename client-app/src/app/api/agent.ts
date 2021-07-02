@@ -17,6 +17,7 @@ import { Salla } from "../models/salla";
 import { Paralelja } from "../models/paralelja";
 import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
+import { ProfKlasa } from "../models/profKlasa";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -73,6 +74,7 @@ const Profesoret = {
   update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
+  createKlasa: (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => axios.post<void>(`/profesori/${profId}&${klasaId}`, profesoriKlasa),
 };
 const Oraret = {
   list: () => requests.get<Orari[]>("/oraret"),
@@ -205,7 +207,7 @@ const agent = {
   Laburatoret,
   Kontaktet,
   AccountNxenesi,
-  Sallat, 
+  Sallat,
   Paralelet,
   Klasat,
   Vleresimet

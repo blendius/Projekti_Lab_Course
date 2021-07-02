@@ -6,12 +6,13 @@ import ProfesoriDetais from '../details/ProfesoriDetails';
 import ProfesoriForm from '../form/ProfesoriForm';
 import ProfesoriList from './ProfesoriList';
 import RegisterFormProf from '../form/RegisterFormProf';
+import AddKlasaForm from '../form/AddKlasaForm';
 
 
 export default observer(function ProfesoriDashboard() {
     const { profesoriStore, modalStore } = useStore();
-    const { selectedProfessor, editMode } = profesoriStore
-    
+    const { selectedProfessor, editMode , klasaMode} = profesoriStore
+
     return (
         <Grid>
             <Grid.Column width='6'>
@@ -28,6 +29,9 @@ export default observer(function ProfesoriDashboard() {
                     <ProfesoriDetais />}
                 {editMode &&
                     <ProfesoriForm />}
+
+                {klasaMode &&
+                    <AddKlasaForm />}
 
 
             </Grid.Column>

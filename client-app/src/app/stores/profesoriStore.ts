@@ -5,12 +5,13 @@ import { Professor, ProfFormValues } from "../models/professor";
 import { store } from "./store";
 import { history } from "../..";
 import CommonStore from "./commonStore";
+import { ProfKlasa } from "../models/profKlasa";
 
 export default class ProfesoriStore {
     prof: Professor | null = null;
     professorRegistry = new Map<string, Professor>();
     selectedProfessor: Professor | undefined = undefined;
-
+    klasaMode = false;
     editMode = false;
     loading = false;
     loadingInitial = true;
@@ -18,9 +19,9 @@ export default class ProfesoriStore {
 
     constructor() {
         makeAutoObservable(this);
-       
+
     }
-  
+
     get isLoggedIn() {
         return !!this.prof;
     }
@@ -30,7 +31,7 @@ export default class ProfesoriStore {
             const prof = await agent.AccountProf.login(creds);
             store.commonStore.setToken(prof.token)
             runInAction(() => this.prof = prof);
-            history.push('/professorPage/ProfProfili') 
+            history.push('/professorPage/ProfProfili')
             store.modalStore.closeModal();
         } catch (error) {
             throw error;
@@ -121,29 +122,35 @@ export default class ProfesoriStore {
         id ? this.selectProfessor(id) : this.cancelSelectedProfessor();
         this.editMode = true;
     }
+
+    openAddKlasaForm = (id?: string) => {
+        id ? this.selectProfessor(id) : this.cancelSelectedProfessor();
+        this.klasaMode = true;
+    }
     closeForm = () => {
         this.editMode = false;
     }
 
-    // createProfessor = async (profesori: Profesori) => {
-    //     this.loading = true;
-    //     profesori.id = uuid();
-    //     try {
-    //         await agent.Profesoret.create(profesori);
-    //         runInAction(() => {
-    //             this.professorRegistry.set(profesori.id, profesori)
-    //             this.selectedProfessor = profesori;
-    //             this.editMode = false;
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //         runInAction(() => {
-    //             this.loading = false;
-    //         })
+    closeAddKlasaForm = () => {
+        this.klasaMode = false;
+    }
 
-    //     }
-    // }
+    createProfKlasa = async (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => {
+
+        // profId = this.selectedProfessor?.id
+        try {
+            await agent.Profesoret.createKlasa(profesoriKlasa, profId, klasaId);
+            runInAction(() => {
+                this.klasaMode = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.klasaMode = false;
+            })
+
+        }
+    }
 
     deleteProfessor = async (id: string) => {
         this.loading = true;
