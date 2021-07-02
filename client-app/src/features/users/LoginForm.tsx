@@ -1,18 +1,18 @@
 import { ErrorMessage, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Form, Header, Label } from "semantic-ui-react";
 
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 
 export default observer(function LoginForm() {
-const { adminStore, commonStore } = useStore();useEffect(() => {
-  //if(adminMode){ 
-  if (commonStore.token) {
-    adminStore.getUser().finally(() => commonStore.setAppLoaded())
-  }
-}, [commonStore, adminStore])
+  const { adminStore, commonStore } = useStore(); useEffect(() => {
+    //if(adminMode){ 
+    if (commonStore.token) {
+      adminStore.getUser().finally(() => commonStore.setAppLoaded())
+    }
+  }, [commonStore, adminStore])
   return (
     <Formik
       initialValues={{ email: "", password: "", error: null }}
