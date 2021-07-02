@@ -11,6 +11,7 @@ import { store } from "../stores/store";
 import { Professor, ProfFormValues } from "../models/professor";
 import { Parent, ParentFormValues } from "../models/parent";
 import { Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
+import { Njoftimi } from "../models/njoftimi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -106,6 +107,13 @@ const Nxenesit = {
   update: (nxenesi: Nxenesi) => {console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi)},
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
 };
+const Njoftimet = {
+  list: () => requests.get<Njoftimi[]>("/njoftimet"),
+  details: (id: string) => requests.get<Njoftimi>(`/njoftimet/${id}`),
+  create: (njoftimi: Njoftimi) => axios.post<void>(`/njoftimet`, njoftimi),
+  update: (njoftimi: Njoftimi) => axios.put<void>(`/njoftimet/${njoftimi.njoftimiId}`, njoftimi),
+  delete: (id: string) => axios.delete<void>(`/njoftimet/${id}`),
+};
 const Account = {
   current: () => requests.get<Admin>("/account"),
   login: (user: AdminFormValues) =>
@@ -143,6 +151,7 @@ const agent = {
   Lendet,
   Prinderit,
   Nxenesit,
+  Njoftimet,
   Account,
   AccountProf,
   AccountPrindi,

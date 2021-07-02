@@ -16,6 +16,7 @@ namespace Application.Core
             CreateMap<Viti, Viti>();
             CreateMap<Paralelja, Paralelja>();
             CreateMap<Klasa, Klasa>();
+            CreateMap<Njoftimi, Njoftimi>();
         }
     }
 }
