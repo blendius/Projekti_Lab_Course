@@ -1,39 +1,37 @@
+
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using Domain;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-
-namespace Application.Professor
+namespace Application.FeedbackToNxenesit
 {
+
     public class Create
     {
-        private readonly UserManager<Profesori> _userManagerProf;
-
         public class Command : IRequest
         {
-            public Profesori Profesori { get; set; }
-            public string LendaEmri { get; set; }
+            public FeedbackToNxenesi FeedbackToNxenesi { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IProfessoriAccesor _professoriAccesor;
+            public Handler(DataContext context, IProfessoriAccesor professoriAccesor)
             {
+                _professoriAccesor = professoriAccesor;
                 _context = context;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var lenda = await _context.Lendet.FirstOrDefaultAsync(x => x.EmriLendes == request.LendaEmri);
+                var profesori = await _context.Profesoret.FirstOrDefaultAsync(x => x.UserName == _professoriAccesor.GetUsername());
 
-                request.Profesori.Lenda = lenda;
+                 request.FeedbackToNxenesi.Profesori =profesori; 
 
-               // var result = await _userManagerProf.CreateAsync(prof, registerDto.Password);
-
-                _context.Profesoret.Add(request.Profesori);
+                 _context.FeedbackToNxenesit.Add(request.FeedbackToNxenesi);
                 await _context.SaveChangesAsync();
                 return Unit.Value;
             }

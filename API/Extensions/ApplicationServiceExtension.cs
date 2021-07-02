@@ -31,6 +31,8 @@ namespace API.Extensions
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddScoped<IProfessoriAccesor, ProfesoriAccesor>();
+        
             services.AddScoped<IPrindiAccessor, PrindiAccessor>();
         
             return services;

@@ -86,6 +86,34 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
+                {
+                    b.Property<Guid>("FeedbackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("MessageSentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NxenesiEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfesoriID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FeedbackID");
+
+                    b.HasIndex("ProfesoriID");
+
+                    b.ToTable("FeedbackToNxenesit");
+                });
+
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
                     b.Property<Guid>("KlasaId")
@@ -542,6 +570,9 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("KlasaKujdestariKlasaId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("LendaId")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -578,6 +609,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("KlasaKujdestariKlasaId");
+
+                    b.HasIndex("LendaId");
 
                     b.ToTable("Profesoret");
                 });
@@ -760,6 +793,15 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
+                {
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("FeedbackToNxenesit")
+                        .HasForeignKey("ProfesoriID");
+
+                    b.Navigation("Profesori");
+                });
+
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
                     b.HasOne("Domain.Paralelja", "Paralelja")
@@ -835,7 +877,15 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("KlasaKujdestariKlasaId");
 
+                    b.HasOne("Domain.Lenda", "Lenda")
+                        .WithMany("Profesoret")
+                        .HasForeignKey("LendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("KlasaKujdestari");
+
+                    b.Navigation("Lenda");
                 });
 
             modelBuilder.Entity("Domain.Vleresimi", b =>
@@ -912,6 +962,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Lenda", b =>
                 {
                     b.Navigation("Laburatoret");
+
+                    b.Navigation("Profesoret");
                 });
 
             modelBuilder.Entity("Domain.Nxenesi", b =>
@@ -935,6 +987,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Profesori", b =>
                 {
+                    b.Navigation("FeedbackToNxenesit");
+
                     b.Navigation("Vleresimet");
                 });
 

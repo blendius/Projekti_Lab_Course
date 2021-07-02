@@ -8,6 +8,8 @@ import AdminStore from "./adminStore";
 import CommonStore from "./commonStore";
 import PrindiStore from "./prindiStore";
 import PrindStoreAccount from "./prindStoreAccount";
+import nxenesiStore from "./nxenesiStore";
+import FeedbackStore from "./feedbackStore";
 import NjoftimiStore from "./njoftimiStore";
 import LaburatoriStore from "./laburatoriStore";
 import KontaktiStore from "./kontaktiStore";
@@ -23,13 +25,14 @@ interface Store {
   orariStore: OrariStore;
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
-  nxenesiStore: NxenesiStore;
   pajisjetStore: PajisjaStore;
   modalStore: ModalStore;
   adminStore: AdminStore;
   commonStore: CommonStore;
   prindiStore: PrindiStore;
+  nxenesiStore: nxenesiStore;
   prindStoreAccount: PrindStoreAccount;
+  feedbackStore:FeedbackStore;
   njoftimiStore: NjoftimiStore;
   laburatoriStore: LaburatoriStore;
   kontaktiStore: KontaktiStore;
@@ -49,6 +52,7 @@ export const store: Store = {
   commonStore: new CommonStore(),
   prindiStore: new PrindiStore(),
   prindStoreAccount: new PrindStoreAccount(),
+  feedbackStore:new FeedbackStore(),
   njoftimiStore: new NjoftimiStore(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),

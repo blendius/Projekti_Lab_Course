@@ -9,5 +9,5 @@ export default observer(function AdminPage() {
             adminStore.getUser().finally(() => commonStore.setAppLoaded())
         } 
     }, [commonStore, adminStore])
-    return <h1></h1>
+    return <></>
 })

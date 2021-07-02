@@ -10,6 +10,11 @@ namespace Persistence
 {
     public class Seed
     {
+        public static Guid lenda1 = new Guid();
+        public static Guid lenda2 = new Guid();
+        public static Guid lenda3 = new Guid();
+
+
         public static async Task SeedData(DataContext context, UserManager<AppAdmin> userManager)
         {
             if (!userManager.Users.Any())
@@ -50,96 +55,52 @@ namespace Persistence
                     Permbajtja = "Ky eshte nje postim testues 3",
                 }
             };
-            var lendet = new List<Lenda>
-            {
-                new Lenda
-                {
-                    EmriLendes= "Postimi 1",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                },
-                new Lenda
-                {
-                    EmriLendes= "lenda 2",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                },
-                new Lenda
-                {
-                    EmriLendes= "lenda 3",
-                    DataEShtimit = DateTime.Now.AddMinutes(-1000),
-                    Pershkrimi = "Ky eshte nje postim testues 1",
-                    Syllabusi = "Ky eshte nje postim testues 1"
-                }
-            };
 
-            // if (!context.Laburatioret.Any())
-            // {
-            //     var laburatioret = new List<Laburatiori>{
-            //          new Laburatiori {Lloji="Teknologji", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="TIK"},
-            //          new Laburatiori {Lloji="Fizike", NrPaisjeve=18, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Fizike"},
-            //          new Laburatiori {Lloji="Kimi", NrPaisjeve=20, DataEKrijimit = DateTime.Now.AddMinutes(-2000),Lenda="Kimi"},
-            //      };
-            //     await context.Laburatioret.AddRangeAsync(laburatioret);
 
-            // };
-
-            await context.Lendet.AddRangeAsync(lendet);
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
 
 
         }
+       
         //seed data for Professor
         public static async Task SeedDataProf(DataContext context, UserManager<Profesori> userManager)
         {
-            if (userManager.Users.Any()) return;
 
-            var profesoret = new List<Profesori>
+            if (!userManager.Users.Any())
             {
-               new Profesori{Name="Profe", UserName="proftest",Email="prof@test.com"},
-               new Profesori{Name="Profe1", UserName="proftest1",Email="prof1@test.com"},
-               new Profesori{Name="Profe2", UserName="proftest2",Email="prof2@test.com"},
+                var prinderit = new List<Profesori>
+                {
+                    new Profesori{Name = "prof", UserName="p1", Email = "prof@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 1",
+                        Pershkrimi = "Pershkrimi Seed lenda 1"
 
-            };
-            foreach (var prof in profesoret)
-            {
-                await userManager.CreateAsync(prof, "Pa$$w0rd");
+                    }},
+                    new Profesori{Name = "prof2", UserName="p2", Email = "prof2@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 2",
+                        Pershkrimi = "Pershkrimi Seed lenda 2"
+
+                    }},
+                    new Profesori{Name = "prof3", UserName="p3", Email = "prind3@test.com",Lenda = new Lenda
+                    {
+                        LendaId = lenda1,
+                        EmriLendes = "Lenda Seed 3",
+                        Pershkrimi = "Pershkrimi Seed lenda 3"
+
+                    }}
+                };
+
+                foreach (var prindi in prinderit)
+                {
+                    await userManager.CreateAsync(prindi, "Pa$$w0rd");
+                }
             }
 
-            // await context.Profesoret.AddRangeAsync(profesoret);
-            // await context.SaveChangesAsync();
-
-
-            //  await context.SaveChangesAsync();
-            // var Profesoret = new List<Profesori>
-            // {
-            //     new Profesori
-            //     {
-            //         Name= "Postimi 1",
-            //         Data = DateTime.Now.AddMinutes(-1000),
-            //         Email = "Ky eshte nje postim testues 1",
-            //         Fjalkalimi = "Ky eshte nje postim testues 1",
-            //         GradaAkademike = "Ky eshte nje postim testues 1",
-            //     },
-            //     new Profesori
-            //     {
-            //         Titulli= "Postimi 2",
-            //         Data = DateTime.Now.AddMinutes(-2000),
-            //         Permbajtja = "Ky eshte nje postim testues 2",
-            //     },
-            //     new Profesori
-            //     {
-            //         Titulli= "Postimi 3",
-            //         Data = DateTime.Now.AddMinutes(-3000),
-            //         Permbajtja = "Ky eshte nje postim testues 3",
-            //     }
-            // };
-            // await context.Postimet.AddRangeAsync(postimet);
-            // await context.SaveChangesAsync();
         }
 
         public static async Task SeedDataPrind(DataContext context, UserManager<Prindi> userManager)
@@ -243,4 +204,6 @@ namespace Persistence
         //     await context.SaveChangesAsync();
         // }
     }
+
 }
+

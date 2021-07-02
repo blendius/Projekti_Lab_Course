@@ -1,5 +1,21 @@
 export interface Professor {
-    id:string;
+
+    name: string,
+    gradaAkademike: string,
+    dataRegjistrimit:string,
+    lendaId: string,
+    lenda?: string | null,
+    id: string,
+    userName: string,
+    normalizedUserName: string,
+    email: string,
+    token:string
+
+}
+
+
+export interface ProfFormValues {
+    id: string;
     username: string;
     displayName: string;
     email: string;
@@ -7,14 +23,6 @@ export interface Professor {
     image?: string;
     gradaAkademike: string;
     dataRegjistrimit: string;
-}
+    LendaId?: string;
 
-export interface ProfFormValues {
-    id: string;
-    email: string;
-    password: string;
-    displayName?: string;
-    username?: string;
-    gradaAkademike?: string;
-    dataRegjistrimit?: string;
 }

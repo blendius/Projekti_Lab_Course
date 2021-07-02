@@ -14,7 +14,7 @@ import { useStore } from '../../../app/stores/store';
 
 export default observer(function LendaForm() {
     const { lendaStore } = useStore();
-    const { selectedLenda, createLenda, updateLenda, closeForm ,loading} = lendaStore;
+    const { selectedLenda, createLenda, updateLenda, closeForm, loading } = lendaStore;
     //const { id } = useParams<{ id: string }>();
 
     const initialState = selectedLenda ?? ({
@@ -35,8 +35,8 @@ export default observer(function LendaForm() {
     //     if(id) loadLenda(lendaId).then(lenda=>setLenda(lenda!))
     // },[id,loadLenda])
 
-    function handleFormSubmit(lenda:Lenda){
-        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda); 
+    function handleFormSubmit(lenda: Lenda) {
+        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda);
     }
 
     const options = [
@@ -46,9 +46,9 @@ export default observer(function LendaForm() {
     ]
     return (
         <Segment clearing>
-            <Header content='Lendet Detajet' sub color='teal'/>
+            <Header content='Lendet Detajet' sub color='teal' />
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={lenda} onSubmit={values => handleFormSubmit(values)}>
-                {({ handleSubmit,isValid,isSubmitting,dirty }) => (
+                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MyTextInput name='emriLendes' placeholder='EmriLendes' />
 
@@ -66,7 +66,7 @@ export default observer(function LendaForm() {
                             name='syllabusi' />
 
 
-                        <Button disabled={isSubmitting||!dirty||!isValid} loading={loading} floated='right' positive type='submit' content='Submit' />
+                        <Button disabled={isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
 
                     </Form>

@@ -13,7 +13,7 @@ export default class ProfesoriStore {
 
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
 
 
     constructor() {
@@ -23,6 +23,9 @@ export default class ProfesoriStore {
   
     get isLoggedIn() {
         return !!this.prof;
+    }
+    get profesoriCount(){
+        return this.professorRegistry.size;
     }
 
     login = async (creds: ProfFormValues) => {
@@ -52,10 +55,14 @@ export default class ProfesoriStore {
             console.log(error);
         }
     }
+    getProfFromId = async (id: string) => {
+        console.log(id)
+        return this.professorRegistry.get(id);
+    }
 
-    register = async (creds: ProfFormValues) => {
+    register = async (creds: ProfFormValues, id: string) => {
         try {
-            await agent.AccountProf.register(creds);
+            await agent.AccountProf.register(creds, id);
             // store.commonStore.setToken(prof.token)
             // runInAction(() => this.prof = prof);
             // history.push('/lendet')
@@ -88,13 +95,13 @@ export default class ProfesoriStore {
         return Array.from(this.professorRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
     }
 
+
     loadProfesoret = async () => {
         try {
             const profesoret = await agent.Profesoret.list();
 
             profesoret.forEach(profesori => {
-                profesori.dataRegjistrimit = profesori.dataRegjistrimit.split('T')[0];
-                this.professorRegistry.set(profesori.id, profesori);
+                this.setProfesori(profesori);
             })
             this.setLoadingInitial(false);
         }
@@ -105,6 +112,34 @@ export default class ProfesoriStore {
             this.setLoadingInitial(false);
         }
 
+    }
+
+    loadProfesori = async (id: string) => {
+        let profesori = this.getProfFromId(id);
+        console.log(profesori);
+        // if (profesori) {
+        //     this.selectedProfessor = profesori;
+        //     return profesori;
+        // } else {
+        //     this.loadingInitial = true;
+        //     try {
+        //         profesori = await agent.Profesoret.details(id);
+        //         this.setProfesori(profesori);
+        //         runInAction(() => {
+        //             this.selectedProfessor = profesori;
+        //         })
+        //         this.setLoadingInitial(false);
+        //         return profesori;
+        //     } catch (error) {
+        //         console.log(error);
+        //         this.setLoadingInitial(false);
+        //     }
+        // }
+    }
+    
+    private setProfesori = (profesor: Professor) => {
+        profesor.dataRegjistrimit = profesor.dataRegjistrimit!;
+        this.professorRegistry.set(profesor.id, profesor);
     }
 
     setLoadingInitial = (state: boolean) => {
@@ -125,25 +160,25 @@ export default class ProfesoriStore {
         this.editMode = false;
     }
 
-    // createProfessor = async (profesori: Profesori) => {
-    //     this.loading = true;
-    //     profesori.id = uuid();
-    //     try {
-    //         await agent.Profesoret.create(profesori);
-    //         runInAction(() => {
-    //             this.professorRegistry.set(profesori.id, profesori)
-    //             this.selectedProfessor = profesori;
-    //             this.editMode = false;
-    //             this.loading = false
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //         runInAction(() => {
-    //             this.loading = false;
-    //         })
+    createProfessor = async (profesori: Professor,EmriLendes:string) => {
+        this.loading = true;
+        profesori.id = uuid();
+        try {
+            await agent.Profesoret.create(profesori,EmriLendes);
+            runInAction(() => {
+                this.professorRegistry.set(profesori.id, profesori)
+                this.selectedProfessor = profesori;
+                this.editMode = false;
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
 
-    //     }
-    // }
+        }
+    }
 
     deleteProfessor = async (id: string) => {
         this.loading = true;

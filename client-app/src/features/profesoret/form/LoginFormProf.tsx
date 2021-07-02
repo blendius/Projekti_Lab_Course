@@ -10,7 +10,19 @@ export default observer(function LoginFormProf() {
 
     return (
         <Formik
-            initialValues={{ id: '', email: '', password: '', error: null }}
+            initialValues={
+                {
+                    id: '',
+                    displayName: '',
+                    username: '',
+                    email: '',
+                    password: '',
+                    gradaAkademike: '',
+                    dataRegjistrimit: '',
+                    token: '',
+                    error: null
+                }
+            }
             onSubmit={(values, { setErrors }) => profesoriStore.login(values).catch(error => setErrors({ error: 'Invalid email or password' }))}
         >
 

@@ -88,7 +88,7 @@ export default observer(function VlersimiForm() {
                                 profesoretByDate.map(prof => (
                                     {
                                         key: prof.id,
-                                        text: prof.displayName,
+                                        text: prof.name,
                                         value: prof.id
                                     }
                                 ))

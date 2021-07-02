@@ -22,6 +22,9 @@ export default class NxenesiStore {
     get isLoggedIn() {
         return !!this.nxenesiSelected;
     }
+    get nxenesitCount(){
+        return this.nxenesiRegistry.size;
+    }
 
     loginNxenesi = async (creds: NxenesiuserFormValues) => {
         try {

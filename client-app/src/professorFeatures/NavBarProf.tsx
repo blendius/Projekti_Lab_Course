@@ -23,6 +23,7 @@ export default observer(function NavBarProf() {
         <Menu.Item as={NavLink} to="/professorPage/ProfNjoftimet" content='Njoftimet'/>
         <Menu.Item as={NavLink} to="/professorPage/Kontaktet" name="Kontaktet" />
         <Menu.Item as={NavLink} to="/professorPage/Vlersimet" name="Vlersimet" />
+        <Menu.Item as={NavLink} to="/ProfFeedbacks" name="Feedbacks" />
         <Menu.Item onClick={logoutProf} text='Ckycu' icon='power' />
 
 

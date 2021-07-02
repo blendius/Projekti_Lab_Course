@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class merge : Migration
+    public partial class test12 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -444,6 +444,7 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     GradaAkademike = table.Column<string>(type: "TEXT", nullable: true),
                     DataRegjistrimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
                     KlasaKujdestariKlasaId = table.Column<Guid>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
@@ -468,6 +469,34 @@ namespace Persistence.Migrations
                         column: x => x.KlasaKujdestariKlasaId,
                         principalTable: "Klasat",
                         principalColumn: "KlasaId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Profesoret_Lendet_LendaId",
+                        column: x => x.LendaId,
+                        principalTable: "Lendet",
+                        principalColumn: "LendaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FeedbackToNxenesit",
+                columns: table => new
+                {
+                    FeedbackID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ProfesoriID = table.Column<string>(type: "TEXT", nullable: true),
+                    NxenesiEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    Subject = table.Column<string>(type: "TEXT", nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: true),
+                    MessageSentDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedbackToNxenesit", x => x.FeedbackID);
+                    table.ForeignKey(
+                        name: "FK_FeedbackToNxenesit_Profesoret_ProfesoriID",
+                        column: x => x.ProfesoriID,
+                        principalTable: "Profesoret",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -539,6 +568,11 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_FeedbackToNxenesit_ProfesoriID",
+                table: "FeedbackToNxenesit",
+                column: "ProfesoriID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Klasat_ParaleljaId",
                 table: "Klasat",
                 column: "ParaleljaId");
@@ -575,6 +609,11 @@ namespace Persistence.Migrations
                 column: "KlasaKujdestariKlasaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Profesoret_LendaId",
+                table: "Profesoret",
+                column: "LendaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vleresimi_NxenesiId",
                 table: "Vleresimi",
                 column: "NxenesiId");
@@ -601,6 +640,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "FeedbackToNxenesit");
 
             migrationBuilder.DropTable(
                 name: "Kontaktet");
@@ -642,10 +684,10 @@ namespace Persistence.Migrations
                 name: "Profesoret");
 
             migrationBuilder.DropTable(
-                name: "Lendet");
+                name: "Klasat");
 
             migrationBuilder.DropTable(
-                name: "Klasat");
+                name: "Lendet");
 
             migrationBuilder.DropTable(
                 name: "Paralelet");

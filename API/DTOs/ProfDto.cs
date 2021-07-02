@@ -1,4 +1,6 @@
 using System;
+using Domain;
+
 namespace API.DTOs
 {
     public class ProfDto
@@ -10,5 +12,7 @@ namespace API.DTOs
         public string Email { get; set; }
         public DateTime DataRegjistrimit { get; set; }
         public string GradaAkademike { get; set; }
+        public Guid LendaId { get; set; }
+        public Lenda Lenda {get;set;}
     }
 }

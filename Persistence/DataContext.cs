@@ -26,12 +26,17 @@ namespace Persistence
         public DbSet<Pajisja> Pajisjet { get; set; }
         public DbSet<Vleresimi>  Vleresimi { get; set; }
          public DbSet<Njoftimi> Njoftimet {get; set;}
-
+        public DbSet<FeedbackToNxenesi> FeedbackToNxenesit { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
-            
+
+            modelbuilder.Entity<FeedbackToNxenesi>()
+                .HasOne(p => p.Profesori)
+                .WithMany(p => p.FeedbackToNxenesit)
+                .HasForeignKey(pp => pp.ProfesoriID);
+
             modelbuilder.Entity<Kontakti>()
             .HasOne(p => p.Prindi)
             .WithMany(p => p.Kontaktet)
