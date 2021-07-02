@@ -32,7 +32,7 @@ namespace API.Controllers
             _userManagerProf = userManagerProf;
             _signInManagerProf = signInManagerProf;
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AdminDto>> Login(LoginDto loginDto)
         {
@@ -153,6 +153,7 @@ namespace API.Controllers
             return new ProfDto
             {
                 DisplayName = prof.Name,
+                Email=prof.Email,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
                 Username = prof.UserName,

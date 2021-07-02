@@ -6,7 +6,11 @@ import { useStore } from "../app/stores/store";
 // import "./styles.css";
 
 export default observer(function NavBar() {
-  const { adminStore: { user, logout } , profesoriStore:{prof,logoutProf},  prindStoreAccount: { prindi, logoutPrindi }} = useStore();
+  const {
+    adminStore: { user, logout },
+    profesoriStore: { prof, logoutProf },
+    prindStoreAccount: { prindi, logoutPrindi },
+  } = useStore();
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -18,17 +22,41 @@ export default observer(function NavBar() {
           />
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/adminPage/paneli" name='Paneli' />
+        <Menu.Item as={NavLink} to="/adminPage/paneli" name="Paneli" />
         <Menu.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret" />
-        <Menu.Item as={NavLink} to="/adminPage/terminet" name="Terminet" />
+        <Menu.Item as={NavLink} to="/adminPage/oraret" name="Oraret" />
         <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />
         <Menu.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit" />
-        <Menu.Item position='right'>
-          <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
-          <Dropdown pointing='top right' text={user?.displayName}>
+        <Menu.Item as={NavLink} to="/adminPage/nxenesit" name="Nxenesit" />
+        <Menu.Item
+          as={NavLink}
+          to="/adminPage/laburatoret"
+          name="Laboratoret"
+        />
+        <Menu.Item as={NavLink} to="/adminPage/sallat" name="Sallat" />
+        <Menu.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" />
+        <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
+        <Menu.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet' />
+        <Menu.Item
+          as={NavLink}
+          to="/adminPage/pajisjet"
+          name="Pajisjet"
+        />
+        <Menu.Item position="right">
+          <Image
+            src={user?.image || "/assets/user.png"}
+            avatar
+            spaced="right"
+          />
+          <Dropdown pointing="top right" text={user?.displayName}>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to={`/profili/${user?.username}`} text="Profili Im" icon='user' />
-              <Dropdown.Item onClick={logout} text='Ckycu' icon='power' />
+              <Dropdown.Item
+                as={Link}
+                to={`/profili/${user?.username}`}
+                text="Profili Im"
+                icon="user"
+              />
+              <Dropdown.Item onClick={logout} text="Çkyçu" icon="power" />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
@@ -65,4 +93,4 @@ export default observer(function NavBar() {
       </Container>
     </Menu>
   );
-})
+});

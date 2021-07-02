@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,25 +21,27 @@ namespace API
 
             var services = scope.ServiceProvider;
 
-             try{
+            try
+            {
 
-                 var context = services.GetRequiredService<DataContext>();
-                 var userManager = services.GetRequiredService<UserManager<AppAdmin>>();
-                 var userManagerProf = services.GetRequiredService<UserManager<Profesori>>();
-                 var prindiManager = services.GetRequiredService<UserManager<Prindi>>();
-                 await context.Database.MigrateAsync();
-                 await Seed.SeedData(context,userManager);
-                 await Seed.SeedDataProf(context,userManagerProf);
-                 await Seed.SeedDataPrind(context, prindiManager);
-                 await Seed.SeedDataNxenesit(context);
-                 await context.Database.MigrateAsync();
-                 
-
-             }catch(Exception ex){
-                 var logger = services.GetRequiredService<ILogger<Program>>();
-                 logger.LogError(ex,"An error occured during migration");
-             }
-             await host.RunAsync();
+                var context = services.GetRequiredService<DataContext>();
+                var userManager = services.GetRequiredService<UserManager<AppAdmin>>();
+                var userManagerProf = services.GetRequiredService<UserManager<Profesori>>();
+                var prindiManager = services.GetRequiredService<UserManager<Prindi>>();
+                var nxenesiManager = services.GetRequiredService<UserManager<Nxenesi>>();
+                await context.Database.MigrateAsync();
+                await Seed.SeedData(context, userManager);
+                await Seed.SeedDataProf(context, userManagerProf);
+                await Seed.SeedDataPrind(context, prindiManager);
+                await Seed.SeedDataNxenesit(context, nxenesiManager);
+                await context.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occured during migration");
+            }
+            await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

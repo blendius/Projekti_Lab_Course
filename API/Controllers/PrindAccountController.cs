@@ -55,6 +55,7 @@ namespace API.Controllers
         {
             return new PrindDto
             {
+                Id=prindi.Id,
                 DisplayName = prindi.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateTokenPrind(prindi),

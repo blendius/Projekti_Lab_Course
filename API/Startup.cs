@@ -20,9 +20,6 @@ namespace API
             _config = config;
 
         }
-
-
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -44,8 +41,7 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
-            {
-                
+            {                
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }

@@ -11,6 +11,7 @@ namespace Application.Nxenesit
         public class Command : IRequest
         {
             public Nxenesi Nxenesi { get; set; }
+            // public Prindi Prind
         }
         public class Handler : IRequestHandler<Command>
         {

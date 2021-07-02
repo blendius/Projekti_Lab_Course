@@ -7,9 +7,8 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using AutoMapper;
 using Application.Nxenesit;
-using Application.Interfaces;
 using Infrastructure.Security;
-
+using Application.Interfaces;
 
 namespace API.Extensions
 {
@@ -34,6 +33,7 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IProfessoriAccesor, ProfesoriAccesor>();
         
+            services.AddScoped<IPrindiAccessor, PrindiAccessor>();
         
             return services;
         }

@@ -1,21 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Prinderit;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
     [AllowAnonymous]
     public class PrinderitController : BaseApiController
     {
-      
-
         [HttpGet]
         public async Task<ActionResult<List<Prindi>>> GetPrinderit()
         {

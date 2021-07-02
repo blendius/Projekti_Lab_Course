@@ -60,6 +60,8 @@ namespace Persistence
             await context.Postimet.AddRangeAsync(postimet);
 
             await context.SaveChangesAsync();
+
+
         }
        
         //seed data for Professor
@@ -119,43 +121,88 @@ namespace Persistence
             }
         }
         //seed for Nxenesi
-        public static async Task SeedDataNxenesit(DataContext context)
-
-
+        public static async Task SeedDataNxenesit(DataContext context, UserManager<Nxenesi> userManager)
         {
-            if (context.Nxenesit.Any()) return;
-            var nxenesit = new List<Nxenesi>
+            if (!userManager.Users.Any())
             {
-                new Nxenesi
+                var nxenesit = new List<Nxenesi>
                 {
-                    FullName = "Mal Haziri",
-                    ParentName = "Armend",
-                    Email = "malhaziri@student.edu",
-                    Password = "Mali123.",
-                    DateOfBirth = DateTime.Now.AddMonths(-120),
-                    YearOfRegistration = 2020,
-                    Class = "X1",
-                    PhoneNumber = "044-458-885"
-                },
-                  new Nxenesi
+                    new Nxenesi{DisplayName = "Erin Lekiqi", UserName= "erinlekiqi", Email= "erinlekiqi@student.edu"},
+                    new Nxenesi{DisplayName = "Mal Haziri", UserName= "malhaziri", Email= "malhaziri@student.edu"},
+                    new Nxenesi{DisplayName = "Erona Lekiqi", UserName= "eronalekiqi", Email= "eronalekiqi@student.edu"}
+
+                };
+
+                foreach (var nxenesi in nxenesit)
                 {
-                    FullName = "Erin Lekiqi",
-                    ParentName = "Naim",
-                    Email = "erinlekiqi@student.edu",
-                    Password = "Erini123.",
-                    DateOfBirth = DateTime.Now.AddMonths(-125),
-                    YearOfRegistration = 2020,
-                    Class = "X1",
-                    PhoneNumber = "044-458-885"
+                    await userManager.CreateAsync(nxenesi, "Pa$$w0rd");
                 }
+            }
 
-            };
-
-            await context.Nxenesit.AddRangeAsync(nxenesit);
-            await context.SaveChangesAsync();
         }
+        //    
+        // public static async Task SeedDataPrinderitNxenesit(DataContext context)
+        // {
+        //     if (context.Nxenesit.Any()) return;
+        //     var nxenesit = new List<Nxenesi>
+        //     {
+        //         new PrindiNxenesi
+        //         {
+        //             PrindiId = "7cb47c32-acde-4f26-b684-e85c1e33b199",
+        //             NxenesiId = "66F2C262-1B35-414D-9E9F-E807D0F3A520"
+        //         }
 
+        //     };
 
+        //     await context.Nxenesit.AddRangeAsync(nxenesit);
+        //     await context.SaveChangesAsync();
+        // }
+        // public static async Task SeedDataKlasa(DataContext context)
+        // {
+        //     if (context.Klasat.Any()) return;
+        //     var klasat = new List<Klasa>
+        //     {
+        //         new Klasa
+        //         {
+        //             Viti = 10,
+        //             ParaleljaId = 1,
+        //             EmriSalles = "A01"
+        //         },
+        //         new Klasa
+        //         {
+        //             Viti = 10,
+        //             ParaleljaId = 2,
+        //             EmriSalles = "A02"
+        //         },
+        //         new Klasa
+        //         {
+        //             Viti = 10,
+        //             ParaleljaId = 3,
+        //             EmriSalles = "A03"
+        //         },
+        //         new Klasa
+        //         {
+        //             Viti = 11,
+        //             ParaleljaId = 1,
+        //             EmriSalles = "A11"
+        //         },
+        //         new Klasa
+        //         {
+        //             Viti = 11,
+        //             ParaleljaId = 2,
+        //             EmriSalles = "A12"
+        //         },
+        //         new Klasa
+        //         {
+        //             Viti = 12,
+        //             ParaleljaId = 1,
+        //             EmriSalles = "A13"
+        //         },
+        //     };
+
+        //     await context.Klasat.AddRangeAsync(klasat);
+        //     await context.SaveChangesAsync();
+        // }
     }
 
 }

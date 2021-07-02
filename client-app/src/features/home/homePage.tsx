@@ -8,15 +8,17 @@ import RegisterFormProf from '../profesoret/form/RegisterFormProf';
 import LoginFormPrindi from '../prinderit/form/LoginFormPrindi';
 import RegisterFormPrindi from '../prinderit/form/RegisterFormPrindi';
 import LoginForm from '../users/LoginForm';
+import LoginFormNxenesi from '../nxenesit/form/LoginFormNxenesi';
+import './style.css';
 
 export default observer(function HomePage() {
-    const { adminStore, modalStore, profesoriStore } = useStore();
+    const { adminStore, modalStore, profesoriStore, nxenesiStore } = useStore();
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='assets/school.png' alt='Logo' style={{ marginBottom: 12 }} />
-                    Menaxhimi i Shkolles
+                    Menaxhimi i Shkollës
 
                 </Header>
                 {adminStore.isLoggedIn ? (
@@ -28,31 +30,41 @@ export default observer(function HomePage() {
                     </>
                 ) : (<>
                     <Button onClick={() => modalStore.openModal(<LoginForm />)} to='/login' size='huge' inverted>
-                        Kycu si Admin!
+                        Kyçu si Admin!
                     </Button>
                     <Button onClick={() => modalStore.openModal(<LoginFormPrindi />)} size='huge' inverted>
-                        Kycu si Prind!
+                        Kyçu si Prind!
                     </Button>
-                    
                 </>
                 )}
                 {profesoriStore.isLoggedIn ? (
                     <>
-                        <Header as='h2' content='Mire se vini' />
+                        {/* <Header as='h2' content='Mire se vini' /> */}
                         <Button as={Link} to='/professorPage/ProfProfili' size='huge' inverted>
                             Vazhdo Tek Profili!
                         </Button>
                     </>
                 ) : (
                     <>
-                    <Button onClick={()=>modalStore.openModal(<LoginFormProf/>)} size='huge' inverted>
-                        Kyqu si Profesor!
-                    </Button>
-                    
+                        <Button onClick={() => modalStore.openModal(<LoginFormProf />)} size='huge' inverted>
+                            Kyçu si Profesor!
+                        </Button>
+
                     </>
-                )} 
+                )}
+                {nxenesiStore.isLoggedIn ? (
+                    <>
+                        <Button as={Link} to='/nxenesiPage/Profili' size='huge' inverted>
+                            Vazhdo te profili i nxënësit!
+                        </Button>
+                    </>
 
+                ) : (
+                    <Button onClick={() => modalStore.openModal(<LoginFormNxenesi />)} size='huge' inverted>
+                        Kyçu si Nxënës!
+                    </Button>
 
+                )}
             </Container>
         </Segment>
     )

@@ -49,7 +49,7 @@ export default observer(function ProfesoriForm() {
     function handleFormSubmit(profesori: Professor) {
         updateProfessor(profesori);
     }
-
+    console.log(prof?.dataRegjistrimit)
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
@@ -60,7 +60,7 @@ export default observer(function ProfesoriForm() {
                         <MyTextInput name='email' placeholder='Email' />
                         <MyTextInput name='displayName' placeholder='Display Name' />
                         <MyTextInput name='username' placeholder='Username' />
-                        <MyTextInput name='password' placeholder='Password' type='password' />
+                        {/* <MyTextInput name='password' placeholder='Password' type='password' /> */}
                         <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
                         <MySelectInput options=
                             {

@@ -46,7 +46,7 @@ export default class PrindStoreAccount {
     register = async (creds: ParentFormValues) => {
         try {
             await agent.AccountPrindi.register(creds);
-            history.push('/prinderit');
+            history.push('/adminPage/prinderit');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

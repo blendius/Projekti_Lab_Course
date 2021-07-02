@@ -39,7 +39,11 @@ namespace API.Services
             return tokenHandler.WriteToken(token);
         }
 
-    
+        internal string CreateToken(Nxenesi nxenesi)
+        {
+            throw new NotImplementedException();
+        }
+
         public string CreateTokenProf(Profesori prof)
         {
             var claims = new List<Claim>{
@@ -80,6 +84,32 @@ namespace API.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        public string CreateTokenNxenesi(Nxenesi nxenesi)
+        {
+            var claims = new List<Claim> 
+            {
+                new Claim(ClaimTypes.Name, nxenesi.UserName),
+                new Claim(ClaimTypes.NameIdentifier, nxenesi.Id),
+                new Claim(ClaimTypes.Email, nxenesi.Email)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+        
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
             return tokenHandler.WriteToken(token);
         }
     }
