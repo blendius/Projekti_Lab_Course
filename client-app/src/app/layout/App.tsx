@@ -47,6 +47,8 @@ import ShowVlersimet from "../../professorFeatures/vleresimet";
 import NjoftimiDashboard from "../../features/njoftimet/dashboard/NjoftimiDashboard";
 import DashboardNjoftimi from "../../features/njoftimet/dashboardFromNxenesiandProfesori/DashboardNjoftimi";
 import PajisjetDashboard from "../../features/pajisjet/dashboard/PajisjetDashboard";
+import FamiljaDetails from "../../features/familjet/FamiljaDetails";
+import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
 
 
 
@@ -237,6 +239,13 @@ function App() {
                   component={KlasaDashboard}
                 />
                 <Route path="/adminPage/klasat/:id" component={KlasaDetails} />
+
+                <Route
+                  exact
+                  path="/adminPage/familjet"
+                  component={FamiljaDashboard}
+                />
+                <Route path="/adminPage/familjet/:id" component={FamiljaDetails} />
               </Switch>
             </Container>
           </>

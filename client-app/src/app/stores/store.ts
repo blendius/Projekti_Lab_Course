@@ -19,6 +19,7 @@ import ParaleljaStore from "./paraleljaStore";
 import KlasaStore from "./klasaStore";
 import VlersimiStore from "./vlersimiStore";
 import PajisjaStore from "./pajisjetStore";
+import FamiljaStore from "./familjaStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -40,6 +41,7 @@ interface Store {
   paraleljaStore: ParaleljaStore;
   klasaStore: KlasaStore;
   vleresimiStore: VlersimiStore;
+  familjaStore: FamiljaStore;
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
@@ -61,6 +63,7 @@ export const store: Store = {
   klasaStore: new KlasaStore(),
   vleresimiStore: new VlersimiStore(),
   pajisjetStore: new PajisjaStore(),
+  familjaStore: new FamiljaStore()
 };
 
 export const StoreContext = createContext(store);

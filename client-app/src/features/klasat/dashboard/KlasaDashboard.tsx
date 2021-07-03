@@ -25,9 +25,10 @@ export default observer(function KlasaDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width='7' >
+            <Grid.Column width='8' >
                 <KlasaList />
             </Grid.Column>
+            <Grid.Column width='2'></Grid.Column>
             <Grid.Column width='4'>
                 <Container>
                     <Button onClick={() => openForm()} color='green' content='Shto Klasë' size='big' ></Button>
