@@ -3,10 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class marged : Migration
+    public partial class margedA : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Aktivitetet",
+                columns: table => new
+                {
+                    AktivitetiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Emri = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true),
+                    DataMbajtjes = table.Column<string>(type: "TEXT", nullable: true),
+                    EmriSalles = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aktivitetet", x => x.AktivitetiId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -655,6 +670,9 @@ namespace Persistence.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Aktivitetet");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

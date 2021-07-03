@@ -16,6 +16,29 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.6");
 
+            modelBuilder.Entity("Domain.Aktiviteti", b =>
+                {
+                    b.Property<Guid>("AktivitetiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DataMbajtjes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Emri")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmriSalles")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pershkrimi")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AktivitetiId");
+
+                    b.ToTable("Aktivitetet");
+                });
+
             modelBuilder.Entity("Domain.AppAdmin", b =>
                 {
                     b.Property<string>("Id")

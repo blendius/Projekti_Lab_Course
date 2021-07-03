@@ -37,6 +37,7 @@ export default observer(function NavBar() {
         <Menu.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" />
         <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
         <Menu.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet' />
+        <Menu.Item as={NavLink} to="/adminPage/aktivitetet" name='Aktivitetet' />
         <Menu.Item
           as={NavLink}
           to="/adminPage/pajisjet"
@@ -49,7 +50,7 @@ export default observer(function NavBar() {
             avatar
             spaced="right"
           />
-          <Dropdown pointing="top right" text={user?.displayName}>
+          <Dropdown spaced="right" pointing="top right" text={user?.displayName}>
             <Dropdown.Menu>
               <Dropdown.Item
                 as={Link}

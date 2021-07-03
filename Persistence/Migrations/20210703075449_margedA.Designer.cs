@@ -9,14 +9,37 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210703074452_marged")]
-    partial class marged
+    [Migration("20210703075449_margedA")]
+    partial class margedA
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.6");
+
+            modelBuilder.Entity("Domain.Aktiviteti", b =>
+                {
+                    b.Property<Guid>("AktivitetiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DataMbajtjes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Emri")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmriSalles")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pershkrimi")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AktivitetiId");
+
+                    b.ToTable("Aktivitetet");
+                });
 
             modelBuilder.Entity("Domain.AppAdmin", b =>
                 {

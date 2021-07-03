@@ -23,6 +23,7 @@ namespace Application.Core
             CreateMap<Njoftimi, Njoftimi>();
             CreateMap<Pajisja,Pajisja>();
             CreateMap<Libri, Libri>();
+            CreateMap<Aktiviteti,Aktiviteti>();
         }
     }
 }

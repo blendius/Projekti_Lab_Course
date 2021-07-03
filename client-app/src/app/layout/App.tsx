@@ -49,6 +49,7 @@ import DashboardNjoftimi from "../../features/njoftimet/dashboardFromNxenesiandP
 import PajisjetDashboard from "../../features/pajisjet/dashboard/PajisjetDashboard";
 import LibriDashboard from "../../features/librat/dashboart/LibriDashboard";
 import DashboardLibri from "../../features/librat/libratViewFromNxenesi/DashboardLibri";
+import AktivitetetDashboard from "../../features/aktivitetet/dashboard/AktivitetetDashboard";
 
 
 
@@ -230,6 +231,11 @@ function App() {
                   exact
                   path="/adminPage/sallat"
                   component={SallaDashboard}
+                />
+                <Route
+                  exact
+                  path="/adminPage/aktivitetet"
+                  component={AktivitetetDashboard}
                 />
                 <Route path="/adminPage/paralelet/:id" component={SallaDetails} />
                 <Route

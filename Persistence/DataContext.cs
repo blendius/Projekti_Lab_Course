@@ -28,6 +28,7 @@ namespace Persistence
         public DbSet<FeedbackToNxenesi> FeedbackToNxenesit { get; set; }
         public DbSet<Njoftimi> Njoftimet {get; set;}
         public DbSet<Libri> Librat { get; set; }
+        public DbSet<Aktiviteti> Aktivitetet{get;set;}
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -53,6 +54,8 @@ namespace Persistence
           .HasOne(p => p.Laburatiori)
           .WithMany(p => p.Pajisjet)
            .HasForeignKey(pp => pp.LaburatioriId);
+
+    
            
             modelbuilder.Entity<Klasa>()
             .HasOne(p => p.Paralelja)
