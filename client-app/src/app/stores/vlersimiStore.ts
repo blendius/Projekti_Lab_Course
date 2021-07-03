@@ -2,14 +2,19 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Vleresimi } from "../models/Vleresimi";
 import { v4 as uuid } from 'uuid';
+import { Nxenesi } from "../models/nxenesi";
 
 export default class VlersimiStore {
 
     vlersimiRegistry = new Map<string, Vleresimi>();
+    nxenesiRegistry = new Map<string, Nxenesi>();
     selectedVlersimi: Vleresimi | undefined = undefined;
+    selectedNxenesi: Nxenesi| undefined= undefined;
     editMode = false;
     loading = false;
     loadingInitial = true;
+    nxensiMode = false;
+    disabled = false;
 
 
     constructor() {
@@ -20,9 +25,9 @@ export default class VlersimiStore {
         return Array.from(this.vlersimiRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
     }
 
-    loadVleresimet = async () => {
+    loadVleresimet = async (ProfId: string |undefined) => {
         try {
-            const vlersimet = await agent.Vleresimet.list();
+            const vlersimet = await agent.Vleresimet.list(ProfId);
 
             vlersimet.forEach(vleresimi => {
                 vleresimi.dataRegjistrimit = vleresimi.dataRegjistrimit.split('T')[0];
@@ -45,6 +50,9 @@ export default class VlersimiStore {
     selectVlersimi = (id: string) => {
         this.selectedVlersimi = this.vlersimiRegistry.get(id);
     }
+    selectNxenesi = (id: string) => {
+        this.selectedNxenesi = this.nxenesiRegistry.get(id);
+    }
 
     cancelSelectedVlersimi = () => {
         this.selectedVlersimi = undefined;
@@ -53,11 +61,15 @@ export default class VlersimiStore {
         id ? this.selectVlersimi(id) : this.cancelSelectedVlersimi();
         this.editMode = true;
     }
+    openFormNxenesi = (id: string) => {
+        this.selectNxenesi(id) 
+        this.editMode = true;
+    }
     closeForm = () => {
         this.editMode = false;
     }
 
-    createVlersimi = async (vlersimi: Vleresimi, profId: string, nxenesiId: string) => {
+    createVlersimi = async (vlersimi: Vleresimi, profId: string |undefined, nxenesiId: string |undefined) => {
         this.loading = true;
         vlersimi.vleresimiId = uuid();
         try {
@@ -77,10 +89,11 @@ export default class VlersimiStore {
         }
     }
 
-    updateVlersimi = async (vleresimi: Vleresimi, profId:string, nxenesiId:string) => {
+
+    updateVlersimi = async (vleresimi: Vleresimi, profId: string | undefined, nxenesiId: string| undefined) => {
         this.loading = true;
         try {
-            await agent.Vleresimet.update(vleresimi,profId,nxenesiId );
+            await agent.Vleresimet.update(vleresimi, profId, nxenesiId);
             runInAction(() => {
                 this.vlersimiRegistry.set(vleresimi.vleresimiId, vleresimi);
                 this.selectedVlersimi = vleresimi;
@@ -112,4 +125,30 @@ export default class VlersimiStore {
             })
         }
     }
+
+    getNxensitByKlasa = async (EmriKlases: string) => {
+        try {
+            const nxenesit = await agent.Nxenesit.listNxensitByKlasa(EmriKlases);
+        console.log(nxenesit);
+            nxenesit.forEach(nxenesi => {
+                this.nxenesiRegistry.set(nxenesi.id, nxenesi);
+           })
+            this.nxensiMode = true;
+            this.disabled = true
+            this.setLoadingInitial(false);
+        } catch (error) {
+            console.log(error);
+
+            this.setLoadingInitial(false);
+        }
+
+    }
+    get NxenesiSortByEmri() {
+        return Array.from(this.nxenesiRegistry.values()).sort((a, b) => Date.parse(a.dateOfBirth) - Date.parse(b.dateOfBirth))
+    }
+    
+
 }
+
+
+

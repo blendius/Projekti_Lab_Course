@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class margedAut : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -555,6 +555,31 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProfesoriKlasa",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ProfId = table.Column<string>(type: "TEXT", nullable: true),
+                    KlasaId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProfesoriKlasa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProfesoriKlasa_Klasat_KlasaId",
+                        column: x => x.KlasaId,
+                        principalTable: "Klasat",
+                        principalColumn: "KlasaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProfesoriKlasa_Profesoret_ProfId",
+                        column: x => x.ProfId,
+                        principalTable: "Profesoret",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vleresimi",
                 columns: table => new
                 {
@@ -673,6 +698,16 @@ namespace Persistence.Migrations
                 column: "LendaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProfesoriKlasa_KlasaId",
+                table: "ProfesoriKlasa",
+                column: "KlasaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProfesoriKlasa_ProfId",
+                table: "ProfesoriKlasa",
+                column: "ProfId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vleresimi_NxenesiId",
                 table: "Vleresimi",
                 column: "NxenesiId");
@@ -729,6 +764,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "PrindiNxenesi");
+
+            migrationBuilder.DropTable(
+                name: "ProfesoriKlasa");
 
             migrationBuilder.DropTable(
                 name: "Vleresimi");

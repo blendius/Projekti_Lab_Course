@@ -30,6 +30,7 @@ namespace Persistence
         public DbSet<Libri> Librat { get; set; }
         public DbSet<Aktiviteti> Aktivitetet{get;set;}
         public DbSet<Autobusi> Autobusat{get;set;}
+        public DbSet<ProfesoriKlasa> ProfesoriKlasa { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -83,6 +84,18 @@ namespace Persistence
                 .HasOne(p => p.Lenda)
                 .WithMany(p => p.Librat)
                 .HasForeignKey(pp => pp.LendaId);
+
+
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasKey(pn => new { pn.Id });
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasOne(pn => pn.Profesori)
+                .WithMany(p => p.Klaset)
+                .HasForeignKey(pn => pn.ProfId);
+            modelbuilder.Entity<ProfesoriKlasa>()
+                .HasOne(pn => pn.Klasa)
+                .WithMany(p => p.Profesoret)
+                .HasForeignKey(pn => pn.KlasaId);    
         }
     }
 }

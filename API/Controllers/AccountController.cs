@@ -21,10 +21,10 @@ namespace API.Controllers
         private readonly UserManager<Profesori> _userManagerProf;
         private readonly SignInManager<AppAdmin> _signInManager;
         private readonly SignInManager<Profesori> _signInManagerProf;
-       // private readonly DataContext _context;
+        // private readonly DataContext _context;
 
         private readonly TokenService _tokenService;
-        public AccountController(DataContext context,UserManager<AppAdmin> userManager, UserManager<Profesori> userManagerProf, SignInManager<AppAdmin> signInManager, SignInManager<Profesori> signInManagerProf, TokenService tokenService)
+        public AccountController(DataContext context, UserManager<AppAdmin> userManager, UserManager<Profesori> userManagerProf, SignInManager<AppAdmin> signInManager, SignInManager<Profesori> signInManagerProf, TokenService tokenService)
         {
             _tokenService = tokenService;
             _signInManager = signInManager;
@@ -65,7 +65,7 @@ namespace API.Controllers
                     DisplayName = prof.Name,
                     Image = null,
                     Token = _tokenService.CreateTokenProf(prof),
-                    Username = prof.UserName,
+                    UserName = prof.UserName,
                     GradaAkademike = prof.GradaAkademike,
                     DataRegjistrimit = prof.DataRegjistrimit,
 
@@ -75,7 +75,7 @@ namespace API.Controllers
 
         }
         [HttpPost("registerProf/{Lendaid}")]
-        public async Task<ActionResult<ProfDto>> RegisterProf(RegisterDto registerDto,Guid LendaId)
+        public async Task<ActionResult<ProfDto>> RegisterProf(RegisterDto registerDto, Guid LendaId)
         {
             if (await _userManagerProf.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
@@ -91,20 +91,20 @@ namespace API.Controllers
                 Name = registerDto.DisplayName,
                 Email = registerDto.Email,
                 UserName = registerDto.Username,
-                GradaAkademike=registerDto.GradaAkademike,
-                DataRegjistrimit=registerDto.DataRegjistrimit,
+                GradaAkademike = registerDto.GradaAkademike,
+                DataRegjistrimit = registerDto.DataRegjistrimit,
                 LendaId = LendaId
 
             };
 
-           // var lenda = await _context.Lendet.FirstOrDefaultAsync(x => x.EmriLendes == request.LendaEmri);
+            // var lenda = await _context.Lendet.FirstOrDefaultAsync(x => x.EmriLendes == request.LendaEmri);
 
 
             var result = await _userManagerProf.CreateAsync(prof, registerDto.Password);
 
             if (result.Succeeded)
             {
-                 return CreateProfObject(prof,LendaId);
+                return CreateProfObject(prof, LendaId);
             }
             return BadRequest("Problem registering professor");
         }
@@ -129,37 +129,41 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName
             };
-        } 
+        }
 
         [HttpGet("currentProf")]
         public async Task<ActionResult<ProfDto>> GetCurrentProf()
         {
             var prof = await _userManagerProf.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            return  new ProfDto
+            return new ProfDto
             {
+                Id = prof.Id,
                 DisplayName = prof.Name,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
-                Username = prof.UserName,
+                UserName = prof.UserName,
+                Email = prof.Email,
+
                 GradaAkademike = prof.GradaAkademike,
                 DataRegjistrimit = prof.DataRegjistrimit,
 
-            }; 
+            };
         }
 
-         private ProfDto CreateProfObject(Profesori prof,Guid lendaId)
+        private ProfDto CreateProfObject(Profesori prof, Guid lendaId)
         {
             return new ProfDto
             {
+                Id = prof.Id,
                 DisplayName = prof.Name,
-                Email=prof.Email,
+                Email = prof.Email,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
-                Username = prof.UserName,
-                GradaAkademike=prof.GradaAkademike,
-                DataRegjistrimit=prof.DataRegjistrimit,
-                LendaId=lendaId
+                UserName = prof.UserName,
+                GradaAkademike = prof.GradaAkademike,
+                DataRegjistrimit = prof.DataRegjistrimit,
+                LendaId = lendaId
 
             };
         }

@@ -6,6 +6,7 @@ interface Props {
     name: string;
     label?: string;
     type?:string;
+    value?:string;
 }
 
 export default function MyTextInput(props: Props) {

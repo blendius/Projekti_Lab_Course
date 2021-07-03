@@ -7,18 +7,12 @@ import ProfesoriForm from '../form/ProfesoriForm';
 import ProfesoriList from './ProfesoriList';
 import RegisterFormProf from '../form/RegisterFormProf';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import AddKlasaForm from '../form/AddKlasaForm';
 
 
 export default observer(function ProfesoriDashboard() {
     const { profesoriStore, modalStore } = useStore();
-    const { selectedProfessor, editMode } = profesoriStore
-    
-    useEffect(() => {
-        profesoriStore.loadProfesoret();
-
-    }, [profesoriStore])
-
-    if (profesoriStore.loadingInitial) return <LoadingComponent content='Lendet duke u Ngarkuar...' />
+    const { selectedProfessor, editMode , klasaMode} = profesoriStore
 
     return (
         <Grid>
@@ -36,6 +30,9 @@ export default observer(function ProfesoriDashboard() {
                     <ProfesoriDetais />}
                 {editMode &&
                     <ProfesoriForm />}
+
+                {klasaMode &&
+                    <AddKlasaForm />}
 
 
             </Grid.Column>

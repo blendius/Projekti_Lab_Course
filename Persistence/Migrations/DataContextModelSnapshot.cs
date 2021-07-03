@@ -695,6 +695,27 @@ namespace Persistence.Migrations
                     b.ToTable("Profesoret");
                 });
 
+            modelBuilder.Entity("Domain.ProfesoriKlasa", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("KlasaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KlasaId");
+
+                    b.HasIndex("ProfId");
+
+                    b.ToTable("ProfesoriKlasa");
+                });
+
             modelBuilder.Entity("Domain.Salla", b =>
                 {
                     b.Property<Guid>("SallaId")
@@ -979,6 +1000,23 @@ namespace Persistence.Migrations
                     b.Navigation("Lenda");
                 });
 
+            modelBuilder.Entity("Domain.ProfesoriKlasa", b =>
+                {
+                    b.HasOne("Domain.Klasa", "Klasa")
+                        .WithMany("Profesoret")
+                        .HasForeignKey("KlasaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("Klaset")
+                        .HasForeignKey("ProfId");
+
+                    b.Navigation("Klasa");
+
+                    b.Navigation("Profesori");
+                });
+
             modelBuilder.Entity("Domain.Vleresimi", b =>
                 {
                     b.HasOne("Domain.Nxenesi", "Nxenesi")
@@ -1045,6 +1083,11 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Klasa", b =>
+                {
+                    b.Navigation("Profesoret");
+                });
+
             modelBuilder.Entity("Domain.Laburatiori", b =>
                 {
                     b.Navigation("Pajisjet");
@@ -1081,6 +1124,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Profesori", b =>
                 {
                     b.Navigation("FeedbackToNxenesit");
+
+                    b.Navigation("Klaset");
 
                     b.Navigation("Vleresimet");
                 });

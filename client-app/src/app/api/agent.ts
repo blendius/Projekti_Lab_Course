@@ -23,6 +23,7 @@ import { Pajisja } from "../models/pajisja";
 import { Libri } from "../models/libri";
 import { Aktiviteti } from "../models/Aktiviteti";
 import { Autobusi } from "../models/Autobusi";
+import { ProfKlasa } from "../models/profKlasa";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -80,6 +81,7 @@ const Profesoret = {
   update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
+  createKlasa: (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => axios.post<void>(`/profesori/${profId}&${klasaId}`, profesoriKlasa),
 };
 const Oraret = {
   list: () => requests.get<Orari[]>("/oraret"),
@@ -147,6 +149,7 @@ const Nxenesit = {
     return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi);
   },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
+  listNxensitByKlasa: (emriKlases: string) => requests.get<Nxenesi[]>(`/nxenesi/klasa&${emriKlases}`)
 };
 const Njoftimet = {
   list: () => requests.get<Njoftimi[]>("/njoftimet"),
@@ -252,16 +255,12 @@ const Klasat = {
 };
 
 const Vleresimet = {
-  list: () => requests.get<Vleresimi[]>("/Vleresimet"),
+  
+  list: (profId:string |undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
   details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
-  create: (vlersimi: Vleresimi, profID: string, nxensiId: string) =>
-    axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
-  update: (vlersimi: Vleresimi, profID: string, nxensiId: string) =>
-    axios.put<void>(
-      `/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`,
-      vlersimi
-    ),
-  delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`),
+  create: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
+  update: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),
+  delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`)
 };
 
 const Librat = {

@@ -17,6 +17,8 @@ export default observer(function ProfProfileDashboard() {
 
     const Profesori = profesoriStore.prof;
 
+    
+
     return (
         <>
             <Segment>

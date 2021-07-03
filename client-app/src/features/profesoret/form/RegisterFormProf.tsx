@@ -34,7 +34,7 @@ export default observer(function RegisterFormProf() {
                 {
                 id:'', 
                 displayName: '', 
-                username: '', 
+                userName: '', 
                 email: '', 
                 password: '',
                 gradaAkademike:'',

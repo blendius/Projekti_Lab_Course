@@ -1,6 +1,6 @@
 export interface Professor {
 
-    name: string,
+    displayName: string,
     gradaAkademike: string,
     dataRegjistrimit:string,
     lendaId: string,
@@ -16,7 +16,7 @@ export interface Professor {
 
 export interface ProfFormValues {
     id: string;
-    username: string;
+    userName: string;
     displayName: string;
     email: string;
     token: string;

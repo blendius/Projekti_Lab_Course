@@ -14,7 +14,7 @@ export default observer(function LoginFormProf() {
                 {
                     id: '',
                     displayName: '',
-                    username: '',
+                    userName: '',
                     email: '',
                     password: '',
                     gradaAkademike: '',

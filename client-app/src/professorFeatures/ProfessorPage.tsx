@@ -15,5 +15,7 @@ export default observer(function ProfessorPage() {
 
     }, [commonStore, profesoriStore])
 
+    
+
     return <h6></h6>
 })
