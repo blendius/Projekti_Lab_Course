@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class margedA : Migration
+    public partial class margedAut : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,21 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Autobusat",
+                columns: table => new
+                {
+                    AutobusiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    targatId = table.Column<string>(type: "TEXT", nullable: true),
+                    brendi = table.Column<string>(type: "TEXT", nullable: true),
+                    vitiProdhimit = table.Column<string>(type: "TEXT", nullable: true),
+                    nrPasagjereve = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Autobusat", x => x.AutobusiId);
                 });
 
             migrationBuilder.CreateTable(
@@ -687,6 +702,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Autobusat");
 
             migrationBuilder.DropTable(
                 name: "FeedbackToNxenesit");

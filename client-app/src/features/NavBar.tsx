@@ -38,11 +38,13 @@ export default observer(function NavBar() {
         <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
         <Menu.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet' />
         <Menu.Item as={NavLink} to="/adminPage/aktivitetet" name='Aktivitetet' />
+
         <Menu.Item
           as={NavLink}
           to="/adminPage/pajisjet"
           name="Pajisjet"
         />
+        <Menu.Item as={NavLink} to="/adminPage/autobusat" name='Autobusat' />
         <Menu.Item as={NavLink} to="/adminPage/librat" name='Librat' />
         <Menu.Item position="right">
           <Image

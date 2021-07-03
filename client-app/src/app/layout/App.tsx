@@ -50,6 +50,7 @@ import PajisjetDashboard from "../../features/pajisjet/dashboard/PajisjetDashboa
 import LibriDashboard from "../../features/librat/dashboart/LibriDashboard";
 import DashboardLibri from "../../features/librat/libratViewFromNxenesi/DashboardLibri";
 import AktivitetetDashboard from "../../features/aktivitetet/dashboard/AktivitetetDashboard";
+import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDashboards";
 
 
 
@@ -202,6 +203,7 @@ function App() {
                 <Route path="/adminPage/nxenesit" component={Dashboard} />
                 <Route path="/adminPage/prinderit" component={ShowPrinderit} />
                 <Route path="/adminPage/njoftimet" component={NjoftimiDashboard} />
+                <Route path="/adminPage/autobusat" component={AutobusatDashboards} />
                 <Route
                   exact
                   path="/adminPage/lendet"

@@ -11,7 +11,7 @@ namespace Application.Autobusat
     {
         public class Query : IRequest<Autobusi>
         {
-            public string targatId { get; set; }
+            public Guid AutobusiId { get; set; }
         }
         public class Handler : IRequestHandler<Query, Autobusi>
         {
@@ -25,7 +25,7 @@ namespace Application.Autobusat
 
             public async Task<Autobusi> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Autobusat.FindAsync(request.targatId);
+                return await _context.Autobusat.FindAsync(request.AutobusiId);
             }
         }
     }

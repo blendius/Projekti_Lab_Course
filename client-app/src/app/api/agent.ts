@@ -22,6 +22,7 @@ import { Njoftimi } from "../models/njoftimi";
 import { Pajisja } from "../models/pajisja";
 import { Libri } from "../models/libri";
 import { Aktiviteti } from "../models/Aktiviteti";
+import { Autobusi } from "../models/Autobusi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -97,6 +98,22 @@ const Aktivitetet = {
     requests.put<void>(`/aktivitetet/${aktiviteti.AktivitetiId}`, aktiviteti),
   delete: (id: string) => axios.delete<void>(`/aktivitetet/${id}`),
 };
+const Autobusat = {
+  list: () => requests.get<Autobusi[]>("/autobusat"),
+  details: (id: string) => requests.get<Autobusi>(`/autobusat/${id}`),
+  create: (autobusi: Autobusi) => requests.post<void>(`/autobusat`, autobusi),
+  update: (autobusi: Autobusi) =>
+    requests.put<void>(`/autobusat/${autobusi.AutobusiId}`, autobusi),
+  delete: (id: string) => axios.delete<void>(`/autobusat/${id}`),
+};
+// const Autobusat = {
+//   list: () => requests.get<Autobusi[]>("/autobusat"),
+//   details: (id: string) => requests.get<Autobusi>(`/autobusat/${id}`),
+//   create: (autobusi: Autobusi) => requests.post<void>(`/autobusat`, autobusi),
+//   update: (autobusi: Autobusi) =>
+//     requests.put<void>(`/autobusat/${autobusi.AutobusiId}`, autobusi),
+//   delete: (id: string) => axios.delete<void>(`/autobusat/${id}`),
+// };
 const Postimet = {
   list: () => requests.get<Postimi[]>("/Postimet"),
   details: (id: string) => requests.get<Postimi>(`/postimet/${id}`),
@@ -278,6 +295,7 @@ const agent = {
   Pajisjet,
   Librat,
   Aktivitetet,
+  Autobusat,
 };
 
 export default agent;

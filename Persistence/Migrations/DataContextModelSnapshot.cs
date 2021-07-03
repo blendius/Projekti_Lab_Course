@@ -109,6 +109,29 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Domain.Autobusi", b =>
+                {
+                    b.Property<Guid>("AutobusiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("brendi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("nrPasagjereve")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("targatId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("vitiProdhimit")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AutobusiId");
+
+                    b.ToTable("Autobusat");
+                });
+
             modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
                 {
                     b.Property<Guid>("FeedbackID")

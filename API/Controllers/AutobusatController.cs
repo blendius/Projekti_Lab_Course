@@ -13,16 +13,16 @@ namespace API.Controllers
     {
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<Autobusi>>> GetAutobusat()
+        public async Task<ActionResult<List<Autobusi>>> GetAutobuset()
         {
 
             return await Mediator.Send(new List.Query());
         }
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Autobusi>> GetAutobusi(string targa)
+        public async Task<ActionResult<Autobusi>> GetAutobuset(Guid id)
         {
-            return await Mediator.Send(new Details.Query{targatId = targa});
+            return await Mediator.Send(new Details.Query{AutobusiId = id});
         }
         [AllowAnonymous]
         [HttpPost]
@@ -32,14 +32,14 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> EditAutobusi(string targa,Autobusi autobusi){
-            autobusi.targatId=targa;
+        public async Task<IActionResult> EditAutobusi(Guid id,Autobusi autobusi){
+            autobusi.AutobusiId=id;
             return Ok(await Mediator.Send(new Edit.Command{Autobusi = autobusi}));
         }
         [AllowAnonymous]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAktiviteti(string targa){
-            return Ok(await Mediator.Send(new Delete.Command{targatId = targa}));
+        public async Task<IActionResult> DeleteAktiviteti(Guid id){
+            return Ok(await Mediator.Send(new Delete.Command{AutobusiId = id}));
         }
     }
 }

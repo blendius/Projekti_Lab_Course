@@ -10,7 +10,7 @@ namespace Application.Autobusat
     {
         public class Command : IRequest
         {
-            public string targatId { get; set; }
+            public Guid AutobusiId { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -21,7 +21,7 @@ namespace Application.Autobusat
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var autobusi = await _context.Autobusat.FindAsync(request.targatId);
+                var autobusi = await _context.Autobusat.FindAsync(request.AutobusiId);
                 _context.Remove(autobusi);
 
                 await _context.SaveChangesAsync();
