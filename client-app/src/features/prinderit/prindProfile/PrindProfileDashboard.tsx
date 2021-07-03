@@ -1,12 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, Grid, Segment } from 'semantic-ui-react';
+import { useStore } from '../../../app/stores/store';
 import PrindModal from './PrindModal';
 import PrindProfileList from './PrindProfileList';
 
 export default observer(function PrindProfileDashboard() {
     const [open, setOpen] = React.useState(false)
-
+    const { prindStoreAccount } = useStore();
+    const Prindi = prindStoreAccount.prindi;
     return (
         <>
             <Segment>

@@ -59,7 +59,10 @@ namespace API.Controllers
                 DisplayName = prindi.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateTokenPrind(prindi),
-                Username = prindi.UserName
+                Username = prindi.UserName,
+                Email = prindi.Email,
+                DataLindjes = prindi.DataLindjes,
+                NrTel = prindi.PhoneNumber
             };
         }
 

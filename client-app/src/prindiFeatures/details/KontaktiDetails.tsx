@@ -28,7 +28,7 @@ export default observer(function KontaktiDetais() {
                         <Card.Header >{kontakti.subjekti}</Card.Header>
                         <div className="data"><label >Mesaxhi:  </label>  {kontakti.mesazhi}</div>
                         <div className="data"><label >Email i profesorit:  </label>  {kontakti.profEmail}</div>
-                        <div className="data"><label >Data e dergimit:</label> {kontakti.dataEDergimit}</div>
+                        <div className="data"><label >Data e dërgimit:</label> {kontakti.dataEDergimit}</div>
                     </Card.Description>
                 </Card.Content>
             </div>

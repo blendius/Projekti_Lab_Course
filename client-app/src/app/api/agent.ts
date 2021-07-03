@@ -20,6 +20,7 @@ import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
 import { Njoftimi } from "../models/njoftimi";
 import { Pajisja } from "../models/pajisja";
+import { Familja } from "../models/familja";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -118,6 +119,18 @@ const Nxenesit = {
     return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi);
   },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
+};
+const Familjet = {
+  list: () => requests.get<Familja[]>("/Familjet"),
+  details: (id: string) => requests.get<Familja>(`/Familjet/${id}`),
+  create: (familja: Familja, prindiId: string, nxenesiId: string) =>
+    axios.post<void>(`/Familjet/${prindiId}&${nxenesiId}`, familja),
+  update: (familja: Familja, prindiId: string, nxenesiId: string) =>
+    axios.put<void>(
+      `/Familjet/${familja.familjaId}/${prindiId}&${nxenesiId}`,
+      familja
+    ),
+  delete: (id: string) => axios.delete<void>(`/Familjet/${id}`),
 };
 const Njoftimet = {
   list: () => requests.get<Njoftimi[]>("/njoftimet"),
@@ -252,6 +265,7 @@ const agent = {
   Klasat,
   Vleresimet,
   Pajisjet,
+  Familjet
 };
 
 export default agent;

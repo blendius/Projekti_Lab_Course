@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class test12 : Migration
+    public partial class Familja : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -344,6 +344,31 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Familjet",
+                columns: table => new
+                {
+                    FamiljaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PrindiId = table.Column<string>(type: "TEXT", nullable: true),
+                    NxenesiId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Familjet", x => x.FamiljaId);
+                    table.ForeignKey(
+                        name: "FK_Familjet_Nxenesit_NxenesiId",
+                        column: x => x.NxenesiId,
+                        principalTable: "Nxenesit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Familjet_Prinderit_PrindiId",
+                        column: x => x.PrindiId,
+                        principalTable: "Prinderit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Kontaktet",
                 columns: table => new
                 {
@@ -363,30 +388,6 @@ namespace Persistence.Migrations
                         principalTable: "Prinderit",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PrindiNxenesi",
-                columns: table => new
-                {
-                    PrindiId = table.Column<string>(type: "TEXT", nullable: false),
-                    NxenesiId = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PrindiNxenesi", x => new { x.PrindiId, x.NxenesiId });
-                    table.ForeignKey(
-                        name: "FK_PrindiNxenesi_Nxenesit_NxenesiId",
-                        column: x => x.NxenesiId,
-                        principalTable: "Nxenesit",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PrindiNxenesi_Prinderit_PrindiId",
-                        column: x => x.PrindiId,
-                        principalTable: "Prinderit",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -568,6 +569,16 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Familjet_NxenesiId",
+                table: "Familjet",
+                column: "NxenesiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Familjet_PrindiId",
+                table: "Familjet",
+                column: "PrindiId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FeedbackToNxenesit_ProfesoriID",
                 table: "FeedbackToNxenesit",
                 column: "ProfesoriID");
@@ -597,11 +608,6 @@ namespace Persistence.Migrations
                 name: "IX_Pajisjet_LaburatioriId",
                 table: "Pajisjet",
                 column: "LaburatioriId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PrindiNxenesi_NxenesiId",
-                table: "PrindiNxenesi",
-                column: "NxenesiId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Profesoret_KlasaKujdestariKlasaId",
@@ -642,6 +648,9 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Familjet");
+
+            migrationBuilder.DropTable(
                 name: "FeedbackToNxenesit");
 
             migrationBuilder.DropTable(
@@ -660,9 +669,6 @@ namespace Persistence.Migrations
                 name: "Postimet");
 
             migrationBuilder.DropTable(
-                name: "PrindiNxenesi");
-
-            migrationBuilder.DropTable(
                 name: "Vleresimi");
 
             migrationBuilder.DropTable(
@@ -672,10 +678,10 @@ namespace Persistence.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Laburatioret");
+                name: "Prinderit");
 
             migrationBuilder.DropTable(
-                name: "Prinderit");
+                name: "Laburatioret");
 
             migrationBuilder.DropTable(
                 name: "Nxenesit");
