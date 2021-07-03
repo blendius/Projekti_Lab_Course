@@ -19,9 +19,8 @@ export default observer(function ProfesoriDetais() {
 
     return (
         <Card fluid>
-         <Image src={(`/assets/categoryImages/{profesori.}.jpg`)} /> 
             <Card.Content>
-                <Card.Header>{profesori.displayName}</Card.Header>
+                <Card.Header>{profesori.name}</Card.Header>
                 <Card.Meta>
                     <span>{profesori.dataRegjistrimit!}</span>
                 </Card.Meta>

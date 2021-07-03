@@ -33,7 +33,7 @@ export default observer(function RegisterFormProf() {
             initialValues={
                 {
                 id:'', 
-                displayName: '', 
+                name: '', 
                 userName: '', 
                 email: '', 
                 password: '',
@@ -62,7 +62,7 @@ export default observer(function RegisterFormProf() {
             {({ handleSubmit, isSubmitting, errors , isValid,dirty}) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name='email' placeholder='Email' />
-                    <MyTextInput name='displayName' placeholder='Display Name' />
+                    <MyTextInput name='name' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
                     <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
