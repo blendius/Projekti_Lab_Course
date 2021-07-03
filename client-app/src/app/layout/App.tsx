@@ -53,6 +53,7 @@ import AktivitetetDashboard from "../../features/aktivitetet/dashboard/Aktivitet
 import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDashboards";
 import FamiljaDetails from "../../features/familjet/FamiljaDetails";
 import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
+import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
 
 
 
@@ -226,6 +227,10 @@ function App() {
                 <Route
                   path="/adminPage/laburatoret"
                   component={ShowLaburatoret}
+                />
+                <Route
+                  path="/adminPage/syllabuset"
+                  component={SyllabusetDashboard}
                 />
                 <Route
                   path="/adminPage/pajisjet"

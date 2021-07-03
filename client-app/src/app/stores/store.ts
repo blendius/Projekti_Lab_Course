@@ -23,6 +23,8 @@ import LibriStore from "./libriStore";
 import AktivitetiStore from "./aktivitetiStore";
 import AutobusiStore from "./autobusiStore";
 import FamiljaStore from "./familjaStore";
+import syllabusiStore from "./syllabusiStore";
+import SyllabusiStore from "./syllabusiStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -31,6 +33,7 @@ interface Store {
   orariStore: OrariStore;
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
+  syllabusiStore: syllabusiStore;
   pajisjetStore: PajisjaStore;
   modalStore: ModalStore;
   adminStore: AdminStore;
@@ -53,6 +56,7 @@ export const store: Store = {
   profesoriStore: new ProfesoriStore(),
   autobusiStore: new AutobusiStore(),
   aktivitetiStore: new AktivitetiStore(),
+  syllabusiStore: new SyllabusiStore(),
   orariStore: new OrariStore(),
   postimiStore: new PostimiStore(),
   lendaStore: new lendaStore(),

@@ -25,6 +25,7 @@ import { Aktiviteti } from "../models/Aktiviteti";
 import { Autobusi } from "../models/Autobusi";
 import { ProfKlasa } from "../models/profKlasa";
 import { Familja } from "../models/familja";
+import { Syllabusi } from "../models/syllabusi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -131,6 +132,13 @@ const Lendet = {
   create: (lenda: Lenda) => axios.post<void>(`/lendet/`, lenda),
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
+};
+const Syllabuset = {
+  list: () => requests.get<Syllabusi[]>("/syllabuset"),
+  details: (id: string) => requests.get<Syllabusi>(`/syllabuset/${id}`),
+  create: (syllabusi: Syllabusi) => axios.post<void>(`/syllabuset/`, syllabusi),
+  update: (syllabusi: Syllabusi) => axios.put<void>(`/syllabuset/${syllabusi.syllabusiId}`, syllabusi),
+  delete: (id: string) => axios.delete<void>(`/syllabuset/${id}`),
 };
 
 const Prinderit = {
@@ -301,6 +309,7 @@ const agent = {
   Kontaktet,
   AccountNxenesi,
   Sallat,
+  Syllabuset,
   Paralelet,
   Klasat,
   Vleresimet,

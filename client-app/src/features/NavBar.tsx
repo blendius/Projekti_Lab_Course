@@ -23,30 +23,39 @@ export default observer(function NavBar() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
         <Menu.Item as={NavLink} to="/adminPage/paneli" name="Paneli" />
-        <Menu.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret" />
-        <Menu.Item as={NavLink} to="/adminPage/oraret" name="Oraret" />
-        <Menu.Item as={NavLink} to="/adminPage/lendet" name="Lendet" />
-        <Menu.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit" />
-        <Menu.Item as={NavLink} to="/adminPage/nxenesit" name="Nxenesit" />
-        <Menu.Item as={NavLink} to="/adminPage/familjet" name="Familjet" />
-        <Menu.Item
-          as={NavLink}
-          to="/adminPage/laburatoret"
-          name="Laboratoret"
-        />
-        <Menu.Item as={NavLink} to="/adminPage/sallat" name="Sallat" />
-        <Menu.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" />
-        <Menu.Item as={NavLink} to="/adminPage/klasat" name="Klasat" />
-        <Menu.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet' />
-        <Menu.Item as={NavLink} to="/adminPage/aktivitetet" name='Aktivitetet' />
+        <Dropdown item text='Organizimi i klasave'>
+          <Dropdown.Menu>
+            <Dropdown.Item as={NavLink} to="/adminPage/klasat" name="Klasat" >Klasat </Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/laburatoret" name="Laboratoret" >Laboratoret </Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/sallat" name="Sallat" >Sallat </Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/paralelet" name="Paralelet" >Paralelet </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
 
-        <Menu.Item
-          as={NavLink}
-          to="/adminPage/pajisjet"
-          name="Pajisjet"
-        />
+        <Dropdown item text='Frymore'>
+          <Dropdown.Menu>
+            <Dropdown.Item as={NavLink} to="/adminPage/profesoret" name="Profesoret">Profesoret</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/prinderit" name="Prinderit">Prinderit</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/nxenesit" name="Nxenesit">Nxenesit</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/familjet" name="Familjet">Familjet</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown >
+
+        <Dropdown item text='Jo Frymore'>
+          <Dropdown.Menu>
+            <Dropdown.Item as={NavLink} to="/adminPage/oraret" name="Oraret" >Oraret</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/lendet" name="Lendet" >Lendet</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/njoftimet" name='Njoftimet'>Njoftimet</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/adminPage/aktivitetet" name='Aktivitetet' >Aktivitetet</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+
+        <Menu.Item as={NavLink} to="/adminPage/pajisjet" name="Pajisjet" />
         <Menu.Item as={NavLink} to="/adminPage/autobusat" name='Autobusat' />
         <Menu.Item as={NavLink} to="/adminPage/librat" name='Librat' />
+        <Menu.Item as={NavLink} to="/adminPage/syllabuset" name='Syllabuset' />
+
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}

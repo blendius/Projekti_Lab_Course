@@ -16,6 +16,7 @@ namespace Persistence
         public DbSet<Profesori> Profesoret { get; set; }
         public DbSet<Lenda> Lendet { get; set; }
         public DbSet<Prindi> Prinderit { get; set; }
+        public DbSet<Syllabusi> Syllabuset {get;set;}
         public DbSet<Nxenesi> Nxenesit { get; set; }
         public DbSet<Familja> Familjet { get; set; }
         public DbSet<Laburatiori> Laburatioret { get; set; }

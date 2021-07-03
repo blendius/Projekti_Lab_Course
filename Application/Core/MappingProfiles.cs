@@ -8,6 +8,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Profesori, Profesori>();
+            CreateMap<Syllabusi, Syllabusi>();
             CreateMap<Postimi,Postimi>();
             CreateMap<Lenda,Lenda>();
             CreateMap<Prindi, Prindi>();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class syllabuset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,21 +76,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Autobusat", x => x.AutobusiId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Lendet",
-                columns: table => new
-                {
-                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    EmriLendes = table.Column<string>(type: "TEXT", nullable: true),
-                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true),
-                    Syllabusi = table.Column<string>(type: "TEXT", nullable: true),
-                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lendet", x => x.LendaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,6 +232,20 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Syllabuset",
+                columns: table => new
+                {
+                    SyllabusiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EmriSyllabusit = table.Column<string>(type: "TEXT", nullable: true),
+                    LinkuISyllabusit = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEKrijimit = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Syllabuset", x => x.SyllabusiId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -353,51 +352,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Laburatioret",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Lloji = table.Column<string>(type: "TEXT", nullable: true),
-                    NrPaisjeve = table.Column<int>(type: "INTEGER", nullable: false),
-                    DataEKrijimit = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Laburatioret", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Laburatioret_Lendet_LendaId",
-                        column: x => x.LendaId,
-                        principalTable: "Lendet",
-                        principalColumn: "LendaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Librat",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Titulli = table.Column<string>(type: "TEXT", nullable: true),
-                    Autori = table.Column<string>(type: "TEXT", nullable: true),
-                    Linku = table.Column<string>(type: "TEXT", nullable: true),
-                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LendaString = table.Column<string>(type: "TEXT", nullable: true),
-                    Klasa = table.Column<string>(type: "TEXT", nullable: true),
-                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Librat", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Librat_Lendet_LendaId",
-                        column: x => x.LendaId,
-                        principalTable: "Lendet",
-                        principalColumn: "LendaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Familjet",
                 columns: table => new
                 {
@@ -471,23 +425,68 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pajisjet",
+                name: "Lendet",
                 columns: table => new
                 {
-                    PajisjaId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    kodiProduktit = table.Column<string>(type: "TEXT", nullable: true),
-                    emriPajisjes = table.Column<string>(type: "TEXT", nullable: true),
-                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LaburatioriId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EmriLendes = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true),
+                    SyllabusiId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pajisjet", x => x.PajisjaId);
+                    table.PrimaryKey("PK_Lendet", x => x.LendaId);
                     table.ForeignKey(
-                        name: "FK_Pajisjet_Laburatioret_LaburatioriId",
-                        column: x => x.LaburatioriId,
-                        principalTable: "Laburatioret",
-                        principalColumn: "Id",
+                        name: "FK_Lendet_Syllabuset_SyllabusiId",
+                        column: x => x.SyllabusiId,
+                        principalTable: "Syllabuset",
+                        principalColumn: "SyllabusiId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Laburatioret",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Lloji = table.Column<string>(type: "TEXT", nullable: true),
+                    NrPaisjeve = table.Column<int>(type: "INTEGER", nullable: false),
+                    DataEKrijimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Laburatioret", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Laburatioret_Lendet_LendaId",
+                        column: x => x.LendaId,
+                        principalTable: "Lendet",
+                        principalColumn: "LendaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Librat",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Titulli = table.Column<string>(type: "TEXT", nullable: true),
+                    Autori = table.Column<string>(type: "TEXT", nullable: true),
+                    Linku = table.Column<string>(type: "TEXT", nullable: true),
+                    LendaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LendaString = table.Column<string>(type: "TEXT", nullable: true),
+                    Klasa = table.Column<string>(type: "TEXT", nullable: true),
+                    Pershkrimi = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Librat", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Librat_Lendet_LendaId",
+                        column: x => x.LendaId,
+                        principalTable: "Lendet",
+                        principalColumn: "LendaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -530,6 +529,27 @@ namespace Persistence.Migrations
                         column: x => x.LendaId,
                         principalTable: "Lendet",
                         principalColumn: "LendaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pajisjet",
+                columns: table => new
+                {
+                    PajisjaId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    kodiProduktit = table.Column<string>(type: "TEXT", nullable: true),
+                    emriPajisjes = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEShtimit = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LaburatioriId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pajisjet", x => x.PajisjaId);
+                    table.ForeignKey(
+                        name: "FK_Pajisjet_Laburatioret_LaburatioriId",
+                        column: x => x.LaburatioriId,
+                        principalTable: "Laburatioret",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -684,6 +704,11 @@ namespace Persistence.Migrations
                 column: "LendaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Lendet_SyllabusiId",
+                table: "Lendet",
+                column: "SyllabusiId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Librat_LendaId",
                 table: "Librat",
                 column: "LendaId");
@@ -806,6 +831,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sallat");
+
+            migrationBuilder.DropTable(
+                name: "Syllabuset");
         }
     }
 }

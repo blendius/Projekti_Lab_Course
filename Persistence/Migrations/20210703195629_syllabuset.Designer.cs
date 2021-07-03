@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210703170943_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20210703195629_syllabuset")]
+    partial class syllabuset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,10 +276,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Pershkrimi")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Syllabusi")
+                    b.Property<Guid?>("SyllabusiId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("LendaId");
+
+                    b.HasIndex("SyllabusiId");
 
                     b.ToTable("Lendet");
                 });
@@ -738,6 +740,26 @@ namespace Persistence.Migrations
                     b.ToTable("Sallat");
                 });
 
+            modelBuilder.Entity("Domain.Syllabusi", b =>
+                {
+                    b.Property<Guid>("SyllabusiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataEKrijimit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmriSyllabusit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LinkuISyllabusit")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SyllabusiId");
+
+                    b.ToTable("Syllabuset");
+                });
+
             modelBuilder.Entity("Domain.Vleresimi", b =>
                 {
                     b.Property<Guid>("VleresimiId")
@@ -965,6 +987,15 @@ namespace Persistence.Migrations
                     b.Navigation("Lenda");
                 });
 
+            modelBuilder.Entity("Domain.Lenda", b =>
+                {
+                    b.HasOne("Domain.Syllabusi", "Syllabusi")
+                        .WithMany("Lendet")
+                        .HasForeignKey("SyllabusiId");
+
+                    b.Navigation("Syllabusi");
+                });
+
             modelBuilder.Entity("Domain.Libri", b =>
                 {
                     b.HasOne("Domain.Lenda", "Lenda")
@@ -1137,6 +1168,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Salla", b =>
                 {
                     b.Navigation("Klasa");
+                });
+
+            modelBuilder.Entity("Domain.Syllabusi", b =>
+                {
+                    b.Navigation("Lendet");
                 });
 #pragma warning restore 612, 618
         }
