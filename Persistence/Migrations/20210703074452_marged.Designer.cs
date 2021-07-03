@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210702160002_test12")]
-    partial class test12
+    [Migration("20210703074452_marged")]
+    partial class marged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,6 +215,40 @@ namespace Persistence.Migrations
                     b.HasKey("LendaId");
 
                     b.ToTable("Lendet");
+                });
+
+            modelBuilder.Entity("Domain.Libri", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Autori")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Klasa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("LendaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LendaString")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Linku")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Pershkrimi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Titulli")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LendaId");
+
+                    b.ToTable("Librat");
                 });
 
             modelBuilder.Entity("Domain.Njoftimi", b =>
@@ -843,6 +877,17 @@ namespace Persistence.Migrations
                     b.Navigation("Lenda");
                 });
 
+            modelBuilder.Entity("Domain.Libri", b =>
+                {
+                    b.HasOne("Domain.Lenda", "Lenda")
+                        .WithMany("Librat")
+                        .HasForeignKey("LendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lenda");
+                });
+
             modelBuilder.Entity("Domain.Pajisja", b =>
                 {
                     b.HasOne("Domain.Laburatiori", "Laburatiori")
@@ -964,6 +1009,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Lenda", b =>
                 {
                     b.Navigation("Laburatoret");
+
+                    b.Navigation("Librat");
 
                     b.Navigation("Profesoret");
                 });

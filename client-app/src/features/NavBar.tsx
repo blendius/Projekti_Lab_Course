@@ -42,6 +42,7 @@ export default observer(function NavBar() {
           to="/adminPage/pajisjet"
           name="Pajisjet"
         />
+        <Menu.Item as={NavLink} to="/adminPage/librat" name='Librat' />
         <Menu.Item position="right">
           <Image
             src={user?.image || "/assets/user.png"}

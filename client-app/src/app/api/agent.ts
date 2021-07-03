@@ -20,6 +20,7 @@ import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
 import { Njoftimi } from "../models/njoftimi";
 import { Pajisja } from "../models/pajisja";
+import { Libri } from "../models/libri";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -72,7 +73,8 @@ const requests = {
 const Profesoret = {
   list: () => requests.get<Professor[]>("/profesori"),
   details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
-  create: (profesori: Professor, EmriLendes: string) => axios.post<void>(`/profesori/${EmriLendes}`, profesori),
+  create: (profesori: Professor, EmriLendes: string) =>
+    axios.post<void>(`/profesori/${EmriLendes}`, profesori),
   update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
@@ -150,11 +152,14 @@ const AccountPrindi = {
 };
 
 const FeedbackToNxenesit = {
-  listProf: (id: string | undefined) => requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/${id}`),
-  listNxenesi: (email: string | undefined) => requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/nxenesi/${email}`),
-  create: (feedback: FeedbackToNxenesi) => axios.post<void>(`/FeedbackToNxenesit/`, feedback),
-  delete: (id: string) => axios.delete<void>(`/FeedbackToNxenesit/${id}`)
-}
+  listProf: (id: string | undefined) =>
+    requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/${id}`),
+  listNxenesi: (email: string | undefined) =>
+    requests.get<FeedbackToNxenesi[]>(`/FeedbackToNxenesit/nxenesi/${email}`),
+  create: (feedback: FeedbackToNxenesi) =>
+    axios.post<void>(`/FeedbackToNxenesit/`, feedback),
+  delete: (id: string) => axios.delete<void>(`/FeedbackToNxenesit/${id}`),
+};
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
@@ -232,6 +237,15 @@ const Vleresimet = {
   delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`),
 };
 
+const Librat = {
+  list: () => requests.get<Libri[]>("/libri"),
+  details: (id: string) => requests.get<Libri>(`/libri/${id}`),
+  create: (libri: Libri, EmriLendes: string) =>
+    axios.post<void>(`/libri/${EmriLendes}`, libri),
+  update: (libri: Libri) => axios.put<void>(`/libri/${libri.id}`, libri),
+  delete: (id: string) => axios.delete<void>(`/libri/${id}`),
+};
+
 const agent = {
   Profesoret,
   Oraret,
@@ -252,6 +266,7 @@ const agent = {
   Klasat,
   Vleresimet,
   Pajisjet,
+  Librat,
 };
 
 export default agent;

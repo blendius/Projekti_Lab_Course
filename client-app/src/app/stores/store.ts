@@ -19,6 +19,7 @@ import ParaleljaStore from "./paraleljaStore";
 import KlasaStore from "./klasaStore";
 import VlersimiStore from "./vlersimiStore";
 import PajisjaStore from "./pajisjetStore";
+import LibriStore from "./libriStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
@@ -32,7 +33,7 @@ interface Store {
   prindiStore: PrindiStore;
   nxenesiStore: nxenesiStore;
   prindStoreAccount: PrindStoreAccount;
-  feedbackStore:FeedbackStore;
+  feedbackStore: FeedbackStore;
   njoftimiStore: NjoftimiStore;
   laburatoriStore: LaburatoriStore;
   kontaktiStore: KontaktiStore;
@@ -40,6 +41,7 @@ interface Store {
   paraleljaStore: ParaleljaStore;
   klasaStore: KlasaStore;
   vleresimiStore: VlersimiStore;
+  libriStore: LibriStore;
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
@@ -52,7 +54,7 @@ export const store: Store = {
   commonStore: new CommonStore(),
   prindiStore: new PrindiStore(),
   prindStoreAccount: new PrindStoreAccount(),
-  feedbackStore:new FeedbackStore(),
+  feedbackStore: new FeedbackStore(),
   njoftimiStore: new NjoftimiStore(),
   laburatoriStore: new LaburatoriStore(),
   kontaktiStore: new KontaktiStore(),
@@ -61,6 +63,7 @@ export const store: Store = {
   klasaStore: new KlasaStore(),
   vleresimiStore: new VlersimiStore(),
   pajisjetStore: new PajisjaStore(),
+  libriStore: new LibriStore(),
 };
 
 export const StoreContext = createContext(store);
