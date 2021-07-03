@@ -42,7 +42,7 @@ export default observer(function VlersimiDetais() {
                     </Table.Header>
                     <TableBody>
                         <Table.Row>
-                            <TableCell >{nxenesiStore.getEmriById(vlersimi.nxenesiId)}</TableCell>
+                            <TableCell >{nxenesiStore.getEmriNxenesitById(vlersimi.nxenesiId)}</TableCell>
                             <TableCell>{vlersimi.lenda}</TableCell>
                             <TableCell>{vlersimi.nota}</TableCell>
                             <TableCell>{vlersimi.gjysemvjetori}</TableCell>

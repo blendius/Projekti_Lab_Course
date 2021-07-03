@@ -20,7 +20,7 @@ useEffect(() => {
             {vlersimietByDate.map(vlersimi => (
                 <List.Item key={vlersimi.vleresimiId} >
                         <List.Content  >
-                            <List.Header as='a'>{nxenesiStore.getEmriById(vlersimi.nxenesiId)}</List.Header>
+                            <List.Header as='a'>{nxenesiStore.getEmriNxenesitById(vlersimi.nxenesiId)}</List.Header>
                             <div className="data" ><label>Nota:  </label>  {vlersimi.nota}</div>
                             <div className="data" ><label>Lenda:  </label>  {vlersimi.lenda}</div>
                         </List.Content>
