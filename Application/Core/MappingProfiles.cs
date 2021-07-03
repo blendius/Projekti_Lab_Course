@@ -24,6 +24,7 @@ namespace Application.Core
             CreateMap<Pajisja,Pajisja>();
             CreateMap<Libri, Libri>();
             CreateMap<Aktiviteti,Aktiviteti>();
+            CreateMap<Autobusi,Autobusi>();
         }
     }
 }
