@@ -13,7 +13,6 @@ const {laburatoriByDate}=laburatoriStore;
         <List divided relaxed inverted>
             {laburatoriByDate.map(laburatori => (
                 <List.Item key={laburatori.id}>
-                        <List.Icon name='address card' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='a'>{laburatori.lloji}</List.Header>
                             <div className="data" ><label>Lenda:  </label>  {laburatori.EmriLendes}</div>

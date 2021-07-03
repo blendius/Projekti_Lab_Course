@@ -14,14 +14,16 @@ export default observer( function KontaktiDashboard() {
     const { selectedKontakti, editMode } = kontaktiStore
     return (
         <Grid>
-            <Grid.Column width='6'>
+                        <Grid.Column width='1'></Grid.Column>
+
+            <Grid.Column width='7'>
                 <KontaktiList />
                 <Button onClick={() => kontaktiStore.openForm()} positive content="Dergo nje Mesazhe" />
 
 
             </Grid.Column>
             <Grid.Column width='2'></Grid.Column>
-            <Grid.Column width='8'>
+            <Grid.Column width='6'>
                 {selectedKontakti && !editMode &&
                     <KontaktiDetails />}
                 {editMode &&

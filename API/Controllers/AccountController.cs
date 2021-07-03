@@ -62,7 +62,7 @@ namespace API.Controllers
             {
                 return new ProfDto
                 {
-                    DisplayName = prof.Name,
+                    Name = prof.Name,
                     Image = null,
                     Token = _tokenService.CreateTokenProf(prof),
                     UserName = prof.UserName,
@@ -139,7 +139,7 @@ namespace API.Controllers
             return new ProfDto
             {
                 Id = prof.Id,
-                DisplayName = prof.Name,
+                Name = prof.Name,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
                 UserName = prof.UserName,
@@ -156,7 +156,7 @@ namespace API.Controllers
             return new ProfDto
             {
                 Id = prof.Id,
-                DisplayName = prof.Name,
+                Name = prof.Name,
                 Email = prof.Email,
                 Image = null,
                 Token = _tokenService.CreateTokenProf(prof),
