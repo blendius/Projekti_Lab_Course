@@ -109,7 +109,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Domain.Autobusi", b =>
                 {
                     b.Property<Guid>("AutobusiId")
@@ -131,7 +130,8 @@ namespace Persistence.Migrations
                     b.HasKey("AutobusiId");
 
                     b.ToTable("Autobusat");
-=======
+                });
+
             modelBuilder.Entity("Domain.Familja", b =>
                 {
                     b.Property<Guid>("FamiljaId")
@@ -151,7 +151,6 @@ namespace Persistence.Migrations
                     b.HasIndex("PrindiId");
 
                     b.ToTable("Familjet");
->>>>>>> origin/Erina
                 });
 
             modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>

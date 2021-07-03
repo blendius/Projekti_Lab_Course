@@ -9,13 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.Designer.cs
-    [Migration("20210703150306_Test")]
-    partial class Test
-=======
-    [Migration("20210703141155_Familja")]
-    partial class Familja
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.Designer.cs
+    [Migration("20210703170943_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,7 +111,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.Designer.cs
             modelBuilder.Entity("Domain.Autobusi", b =>
                 {
                     b.Property<Guid>("AutobusiId")
@@ -138,7 +132,8 @@ namespace Persistence.Migrations
                     b.HasKey("AutobusiId");
 
                     b.ToTable("Autobusat");
-=======
+                });
+
             modelBuilder.Entity("Domain.Familja", b =>
                 {
                     b.Property<Guid>("FamiljaId")
@@ -158,7 +153,6 @@ namespace Persistence.Migrations
                     b.HasIndex("PrindiId");
 
                     b.ToTable("Familjet");
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>

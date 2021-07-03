@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.cs
-    public partial class Test : Migration
-=======
-    public partial class Familja : Migration
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.cs
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -378,7 +374,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.cs
                 name: "Librat",
                 columns: table => new
                 {
@@ -403,10 +398,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kontaktet",
-=======
                 name: "Familjet",
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.cs
                 columns: table => new
                 {
                     FamiljaId = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -753,11 +745,10 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.cs
                 name: "Autobusat");
-=======
+
+            migrationBuilder.DropTable(
                 name: "Familjet");
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.cs
 
             migrationBuilder.DropTable(
                 name: "FeedbackToNxenesit");
@@ -781,15 +772,9 @@ namespace Persistence.Migrations
                 name: "Postimet");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:Persistence/Migrations/20210703150306_Test.cs
-                name: "PrindiNxenesi");
-
-            migrationBuilder.DropTable(
                 name: "ProfesoriKlasa");
 
             migrationBuilder.DropTable(
-=======
->>>>>>> origin/Erina:Persistence/Migrations/20210703141155_Familja.cs
                 name: "Vleresimi");
 
             migrationBuilder.DropTable(
