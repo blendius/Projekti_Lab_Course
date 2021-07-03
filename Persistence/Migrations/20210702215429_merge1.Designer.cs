@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210702215429_merge1")]
+    partial class merge1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Pershkrimi")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("SallaId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("AktivitetiId");
+
+                    b.HasIndex("SallaId");
 
                     b.ToTable("Aktivitetet");
                 });
@@ -783,6 +790,15 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.Aktiviteti", b =>
+                {
+                    b.HasOne("Domain.Salla", "Salla")
+                        .WithMany("Aktivitetet")
+                        .HasForeignKey("SallaId");
+
+                    b.Navigation("Salla");
+                });
+
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
                     b.HasOne("Domain.Paralelja", "Paralelja")
@@ -963,6 +979,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Salla", b =>
                 {
+                    b.Navigation("Aktivitetet");
+
                     b.Navigation("Klasa");
                 });
 #pragma warning restore 612, 618

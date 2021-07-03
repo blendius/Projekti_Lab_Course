@@ -8,5 +8,6 @@ namespace Domain
         public Guid SallaId { get; set; }
         public string EmriSalles { get; set; }
         public Klasa Klasa { get; set; }
+      
     }
 }

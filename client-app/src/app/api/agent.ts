@@ -19,6 +19,7 @@ import { Klasa } from "../models/klasa";
 import { Vleresimi } from "../models/Vleresimi";
 import { Njoftimi } from "../models/njoftimi";
 import { Pajisja } from "../models/pajisja";
+import { Aktiviteti } from "../models/Aktiviteti";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -83,6 +84,15 @@ const Oraret = {
   update: (orari: Orari) =>
     requests.put<void>(`/oraret/${orari.orariId}`, orari),
   delete: (id: string) => axios.delete<void>(`/oraret/${id}`),
+};
+const Aktivitetet = {
+  list: () => requests.get<Aktiviteti[]>("/aktivitetet"),
+  details: (id: string) => requests.get<Aktiviteti>(`/aktivitetet/${id}`),
+  create: (aktiviteti: Aktiviteti) =>
+    requests.post<void>(`/aktivitetet`, aktiviteti),
+  update: (aktiviteti: Aktiviteti) =>
+    requests.put<void>(`/aktivitetet/${aktiviteti.AktivitetiId}`, aktiviteti),
+  delete: (id: string) => axios.delete<void>(`/aktivitetet/${id}`),
 };
 const Postimet = {
   list: () => requests.get<Postimi[]>("/Postimet"),
@@ -243,6 +253,7 @@ const agent = {
   Klasat,
   Vleresimet,
   Pajisjet,
+  Aktivitetet,
 };
 
 export default agent;

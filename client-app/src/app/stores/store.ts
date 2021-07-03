@@ -17,9 +17,11 @@ import ParaleljaStore from "./paraleljaStore";
 import KlasaStore from "./klasaStore";
 import VlersimiStore from "./vlersimiStore";
 import PajisjaStore from "./pajisjetStore";
+import AktivitetiStore from "./aktivitetiStore";
 
 interface Store {
   profesoriStore: ProfesoriStore;
+  aktivitetiStore: AktivitetiStore;
   orariStore: OrariStore;
   postimiStore: PostimiStore;
   lendaStore: lendaStore;
@@ -40,6 +42,7 @@ interface Store {
 }
 export const store: Store = {
   profesoriStore: new ProfesoriStore(),
+  aktivitetiStore: new AktivitetiStore(),
   orariStore: new OrariStore(),
   postimiStore: new PostimiStore(),
   lendaStore: new lendaStore(),

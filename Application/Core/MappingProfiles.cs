@@ -21,6 +21,7 @@ namespace Application.Core
             CreateMap<Vleresimi, Vleresimi>();
             CreateMap<Njoftimi, Njoftimi>();
             CreateMap<Pajisja,Pajisja>();
+            CreateMap<Aktiviteti,Aktiviteti>();
         }
     }
 }
