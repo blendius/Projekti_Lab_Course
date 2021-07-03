@@ -1,23 +1,23 @@
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { Button, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
-import MySelectInput from '../../app/common/form/MySelectInput';
-import MyTextInput from '../../app/common/form/MyTextInput';
-import { gjysemvjetoriOpt } from '../../app/common/form/options';
-import { Vleresimi } from '../../app/models/Vleresimi';
-import { useStore } from '../../app/stores/store';
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import MyTextInput from '../../../app/common/form/MyTextInput';
+import { gjysemvjetoriOpt } from '../../../app/common/form/options';
+import { Vleresimi } from '../../../app/models/Vleresimi';
+import { useStore } from '../../../app/stores/store';
 
 
 
 export default observer(function VlersimiForm() {
 
     const { vleresimiStore, lendaStore, nxenesiStore, profesoriStore } = useStore();
-    const { selectedVlersimi, closeForm, loading, updateVlersimi, createVlersimi } = vleresimiStore;
+    const { selectedVlersimi, closeForm, loading, updateVlersimi, createVlersimi , selectedNxenesi} = vleresimiStore;
     const { lendaRegistry, lendetByDate } = lendaStore;
     const { nxenesiRegistry, nxenesitByDate } = nxenesiStore;
-    const { professorRegistry, profesoretByDate } = profesoriStore;
+    const { professorRegistry, profesoretByDate, prof } = profesoriStore;
 
     useEffect(() => {
         profesoriStore.loadProfesoret();
@@ -51,9 +51,8 @@ export default observer(function VlersimiForm() {
     const [vlersimi, setVlersimi] = useState(initialState);
 
     function handleFormSubmit(vlersimi: Vleresimi) {
-        vlersimi.vleresimiId ? updateVlersimi(vlersimi, vlersimi.profId, vlersimi.nxenesiId) : createVlersimi(vlersimi, vlersimi.profId, vlersimi.nxenesiId);
+        vlersimi.vleresimiId ? updateVlersimi(vlersimi, prof?.id, selectedNxenesi?.id) : createVlersimi(vlersimi, prof?.id, selectedNxenesi?.id);
     }
-    console.log(nxenesitByDate)
 
     return (
         <Segment clearing>
@@ -62,6 +61,22 @@ export default observer(function VlersimiForm() {
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                        {prof?.id ==undefined &&
+                        <>
+                            <MyTextInput type='text' placeholder='' name='profId' value={prof?.id} />
+
+                            <MySelectInput options=
+                            {
+                                nxenesitByDate.map(nxensi => (
+                                    {
+                                        key: nxensi.id,
+                                        text: nxensi.fullName,
+                                        value: nxensi.id
+                                    }
+                                ))
+                            } placeholder='Nxenesi' name='nxenesiId' />
+                            </>
+                        }
                         <MySelectInput options=
                             {
                                 lendetByDate.map(lenda => (
@@ -73,7 +88,7 @@ export default observer(function VlersimiForm() {
                                     }
                                 ))
                             } placeholder='Lenda' name='lenda' />
-                        <MySelectInput options=
+                        {/* <MySelectInput options=
                             {
                                 nxenesitByDate.map(nxensi => (
                                     {
@@ -82,17 +97,8 @@ export default observer(function VlersimiForm() {
                                         value: nxensi.id
                                     }
                                 ))
-                            } placeholder='Nxenesi' name='nxenesiId' />
-                        <MySelectInput options=
-                            {
-                                profesoretByDate.map(prof => (
-                                    {
-                                        key: prof.id,
-                                        text: prof.displayName,
-                                        value: prof.id
-                                    }
-                                ))
-                            } placeholder='Prof' name='profId' />
+                            } placeholder='Nxenesi' name='nxenesiId' /> */}
+
 
                         <MySelectInput options={gjysemvjetoriOpt} placeholder='Nota' name='nota' />
                         <MySelectInput options={gjysemvjetoriOpt} placeholder='Gjysemvjetori' name='gjysemvjetori' />

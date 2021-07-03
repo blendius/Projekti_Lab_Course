@@ -1,14 +1,12 @@
 import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { Button, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
 
 import MySelectInput from '../../../app/common/form/MySelectInput';
-import MyTextInput from '../../../app/common/form/MyTextInput';
-import { gradaOptions, lendaOptions } from '../../../app/common/form/options';
-import { Professor } from '../../../app/models/professor';
+import { Klasa } from '../../../app/models/klasa';
 import { ProfKlasa } from '../../../app/models/profKlasa';
 import { useStore } from '../../../app/stores/store';
 
@@ -23,7 +21,8 @@ export default observer(function AddKlasaForm() {
     const { getNumriParalelesById } = paraleljaStore;
     useEffect(() => {
         klasaStore.loadKlasat();
-    }, [klasaStore])
+        paraleljaStore.loadParalelet();
+    }, [klasaStore, paraleljaStore])
 
 
     const initialState = {
@@ -42,11 +41,11 @@ export default observer(function AddKlasaForm() {
         profesoriKlasa.profId = selectedProfessor?.id
         createProfKlasa(profesoriKlasa, profesoriKlasa.profId, profesoriKlasa.klasaId);
 
-        console.log(profesoriKlasa.profId, profesoriKlasa.klasaId)
     }
-    console.log(selectedProfessor?.id)
 
-    //   var emriKlases = { klasa.viti } , { getNumriParalelesById(klasa.paraleljaId)};
+    function EmriKlases(klasa:Klasa){
+        return klasa.viti +'/'+  getNumriParalelesById(klasa.paraleljaId)
+    }
 
     return (
     <Segment clearing>
@@ -59,9 +58,9 @@ export default observer(function AddKlasaForm() {
                     <MySelectInput options={ 
                          klasatByVit.map(klasa => (
                             {
-                                key: klasa.sallaId,
-                                text: klasa.klasaId,
-                                value: klasa.sallaId
+                                key: klasa.klasaId,
+                                text: EmriKlases(klasa),
+                                value: klasa.klasaId
                             }
                         ))
                     }

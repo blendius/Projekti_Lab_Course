@@ -125,4 +125,6 @@ export default class KlasaStore {
     private getKlasa = (id: string) => {
         return this.klasatRegistry.get(id);
     };
+
+    
 }

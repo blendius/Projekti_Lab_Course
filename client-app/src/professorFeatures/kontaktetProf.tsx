@@ -17,7 +17,7 @@ console.log(prof?.email);
     kontaktiStore.loadKontaktetProf(prof?.email);
   }, [kontaktiStore]) 
 
-  if (kontaktiStore.loadingInitial) return <LoadingComponent content='Loading app' />
+  //if (kontaktiStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
   return (
     <Fragment>

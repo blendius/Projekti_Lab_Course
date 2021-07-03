@@ -43,7 +43,9 @@ body{
   font-size: 4em;
   font-weight: normal;
 }
-
+a .header{
+  color: black !important;
+}
 .masthead h2 {
   font-size: 1.7em;
   font-weight: normal;

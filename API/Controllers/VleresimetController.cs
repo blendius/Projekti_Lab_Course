@@ -11,10 +11,10 @@ namespace API.Controllers
     [AllowAnonymous]
     public class VleresimetController : BaseApiController
     {
-        [HttpGet]
-        public async Task<ActionResult<List<Vleresimi>>> GetVlersimet()
+        [HttpGet("prof/{profId}")]
+        public async Task<ActionResult<List<Vleresimi>>> GetVlersimet(string profId)
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query{profId=profId});
         }
 
         [HttpGet("{id}")]

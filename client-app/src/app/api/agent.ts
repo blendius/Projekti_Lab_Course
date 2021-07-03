@@ -113,7 +113,9 @@ const Nxenesit = {
   create: (nxenesi: Nxenesi) => axios.post<void>(`/nxenesi`, nxenesi),
   update: (nxenesi: Nxenesi) => { console.log("nxenesi inside:", nxenesi); return axios.put<void>(`/nxenesi/${nxenesi.id}`, nxenesi) },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
+  listNxensitByKlasa: (emriKlases: string) => requests.get<Nxenesi[]>(`/nxenesi/klasa&${emriKlases}`)
 };
+
 const Account = {
   current: () => requests.get<Admin>("/account"),
   login: (user: AdminFormValues) =>
@@ -187,10 +189,10 @@ const Klasat = {
 
 
 const Vleresimet = {
-  list: () => requests.get<Vleresimi[]>('/Vleresimet'),
+  list: (profId:string |undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
   details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
-  create: (vlersimi: Vleresimi, profID: string, nxensiId: string) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
-  update: (vlersimi: Vleresimi, profID: string, nxensiId: string) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),
+  create: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
+  update: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),
   delete: (id: string) => axios.delete<void>(`/Vleresimet/${id}`)
 }
 

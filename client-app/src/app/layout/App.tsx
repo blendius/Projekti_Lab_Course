@@ -32,7 +32,7 @@ import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
 import ShowKontaktet from "../../prindiFeatures/kontaktet";
-import kontaktetProf from "../../professorFeatures/kontaktetProf";
+import ShowKontaktetProf from "../../professorFeatures/kontaktetProf";
 import PrindProfileDashboard from "../../features/prinderit/prindProfile/PrindProfileDashboard";
 import kontaktet from "../../prindiFeatures/kontaktet";
 import NavBarNxenesi from "../../nxenesiFeatures/NavBarNxenesi";
@@ -86,7 +86,7 @@ function App() {
       <ModalContainer />
       <Route exact path="/" component={HomePage} />
 
-      <Route path="/professorPage" component={ProfessorPage} />
+      {/* <Route path="/professorPage" component={ProfessorPage} />
       <Route
         path={"/professorPage/(.+)"}
         render={() => (
@@ -107,7 +107,7 @@ function App() {
             </Container>
           </>
         )}
-      />
+      /> */}
 
       <Route path="/professorPage" component={ProfessorPage} />
       <Route
@@ -125,6 +125,10 @@ function App() {
                 <Route
                   path="/professorPage/Vlersimet"
                   component={ShowVlersimet}
+                />
+                <Route
+                  path="/professorPage/Kontaktet"
+                  component={ShowKontaktetProf}
                 />
               </Switch>
             </Container>

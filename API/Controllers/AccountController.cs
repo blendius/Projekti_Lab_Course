@@ -124,6 +124,7 @@ namespace API.Controllers
         {
             return new ProfDto
             {
+                Id=prof.Id,
                 DisplayName = prof.Name,
                 Email=prof.Email,
                 Image = null,
