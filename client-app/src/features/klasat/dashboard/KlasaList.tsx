@@ -6,8 +6,8 @@ import { useStore } from "../../../app/stores/store";
 export default observer(function KlasaList() {
     const { klasaStore, sallaStore, paraleljaStore } = useStore();
     const { deleteKlasa, loading, klasatByVit } = klasaStore;
-    const{getEmriSallesById} = sallaStore;
-    const{getNumriParalelesById} = paraleljaStore;
+    const { getEmriSallesById } = sallaStore;
+    const { getNumriParalelesById } = paraleljaStore;
     const [target, setTarget] = useState('');
 
     function handleKlasaDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
@@ -32,20 +32,23 @@ export default observer(function KlasaList() {
                             <TableRow key={klasat.klasaId}>
                                 <TableCell >{klasat.viti}/{getNumriParalelesById(klasat.paraleljaId)}</TableCell>
                                 <TableCell >{getEmriSallesById(klasat.sallaId)}</TableCell>
-                                <TableCell>
+                                <TableCell width='2'>
                                     <Button
                                         onClick={() => klasaStore.selectKlasa(klasat.klasaId)}
                                         floated='right'
                                         content='Shiko'
-                                        color='blue' />
+                                        color='blue'
+                                    />
                                 </TableCell>
-                                <TableCell>
+                                <TableCell width='2' >
                                     <Button
                                         name={klasat.paraleljaId}
                                         loading={loading && target === klasat.klasaId}
                                         onClick={(e) => handleKlasaDelete(e, klasat.klasaId)}
                                         floated='right'
-                                        content='Fshij' color='red' />
+                                        content='Fshij'
+                                        color='red'
+                                    />
                                 </TableCell>
                             </TableRow>
                         ))}

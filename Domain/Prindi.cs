@@ -9,12 +9,7 @@ namespace Domain
     {
         public string DisplayName { get; set; }
         public DateTime DataLindjes { get; set; }
-
         public ICollection<Kontakti> Kontaktet { get; set; }
-        // [ForeignKey("KontaktiId")]
-        // public Kontakti Kontakti { get; set; }
-        // public Guid KontaktiId { get; set; }
-
-        public ICollection<PrindiNxenesi> PrinderitNxenesit {get; set;}
+        public ICollection<Familja> Familjet {get; set;}
     }
 }

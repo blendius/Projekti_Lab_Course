@@ -168,7 +168,8 @@ export default class NxenesiStore {
         }
     }
 
-    public getEmriById = (id: string) => {
+    public getEmriNxenesitById = (id: string) => {
         return this.nxenesiRegistry.get(id)?.fullName;
     };
+
 }

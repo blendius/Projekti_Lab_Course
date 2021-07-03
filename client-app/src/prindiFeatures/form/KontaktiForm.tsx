@@ -45,7 +45,7 @@ export default observer(function KontaktiForm() {
                         <MyTextInput type='text' name='profEmail' placeholder='Email e profesorit'></MyTextInput>
                         <MyTextInput type='text' placeholder='Subjekti' name='subjekti' />
                         <MyTextInput type='text' placeholder='Mesazhi' name='mesazhi' />
-                        <MyTextInput type='date' placeholder='Data e Dergimit' name='dataEDergimit'  />
+                        <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit'  />
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />

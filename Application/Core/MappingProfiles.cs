@@ -12,6 +12,7 @@ namespace Application.Core
             CreateMap<Lenda,Lenda>();
             CreateMap<Prindi, Prindi>();
             CreateMap<Nxenesi, Nxenesi>();
+            CreateMap<Familja, Familja>();
             CreateMap<FeedbackToNxenesi, FeedbackToNxenesi>();
             CreateMap<Laburatiori, Laburatiori>(); 
             CreateMap<Kontakti, Kontakti>(); 

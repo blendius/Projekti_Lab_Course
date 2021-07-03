@@ -6,9 +6,6 @@ import KontaktiDetails from '../details/KontaktiDetails';
 import KontaktiForm from '../form/KontaktiForm';
 import KontaktiList from './KontaktiList';
 
-
-
-
 export default observer( function KontaktiDashboard() {
     const { kontaktiStore } = useStore();
     const { selectedKontakti, editMode } = kontaktiStore
@@ -16,8 +13,7 @@ export default observer( function KontaktiDashboard() {
         <Grid>
             <Grid.Column width='6'>
                 <KontaktiList />
-                <Button onClick={() => kontaktiStore.openForm()} positive content="Dergo nje Mesazhe" />
-
+                <Button onClick={() => kontaktiStore.openForm()} positive content="Dërgo një mesazh" />
 
             </Grid.Column>
             <Grid.Column width='2'></Grid.Column>
@@ -26,8 +22,6 @@ export default observer( function KontaktiDashboard() {
                     <KontaktiDetails />}
                 {editMode &&
                     <KontaktiForm />}
-                
-
             </Grid.Column>
         </Grid>
     )
