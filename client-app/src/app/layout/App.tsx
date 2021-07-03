@@ -51,6 +51,8 @@ import LibriDashboard from "../../features/librat/dashboart/LibriDashboard";
 import DashboardLibri from "../../features/librat/libratViewFromNxenesi/DashboardLibri";
 import AktivitetetDashboard from "../../features/aktivitetet/dashboard/AktivitetetDashboard";
 import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDashboards";
+import FamiljaDetails from "../../features/familjet/FamiljaDetails";
+import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
 
 
 
@@ -262,6 +264,13 @@ function App() {
                   component={LibriDashboard}
                 />
                 <Route path="/adminPage/klasat/:id" component={KlasaDetails} />
+
+                <Route
+                  exact
+                  path="/adminPage/familjet"
+                  component={FamiljaDashboard}
+                />
+                <Route path="/adminPage/familjet/:id" component={FamiljaDetails} />
               </Switch>
             </Container>
           </>

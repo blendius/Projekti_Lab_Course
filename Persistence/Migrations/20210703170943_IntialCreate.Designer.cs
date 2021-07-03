@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210703150306_Test")]
-    partial class Test
+    [Migration("20210703170943_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,6 +132,27 @@ namespace Persistence.Migrations
                     b.HasKey("AutobusiId");
 
                     b.ToTable("Autobusat");
+                });
+
+            modelBuilder.Entity("Domain.Familja", b =>
+                {
+                    b.Property<Guid>("FamiljaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NxenesiId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrindiId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FamiljaId");
+
+                    b.HasIndex("NxenesiId");
+
+                    b.HasIndex("PrindiId");
+
+                    b.ToTable("Familjet");
                 });
 
             modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
@@ -611,21 +632,6 @@ namespace Persistence.Migrations
                     b.ToTable("Prinderit");
                 });
 
-            modelBuilder.Entity("Domain.PrindiNxenesi", b =>
-                {
-                    b.Property<string>("PrindiId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NxenesiId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PrindiId", "NxenesiId");
-
-                    b.HasIndex("NxenesiId");
-
-                    b.ToTable("PrindiNxenesi");
-                });
-
             modelBuilder.Entity("Domain.Profesori", b =>
                 {
                     b.Property<string>("Id")
@@ -896,6 +902,21 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.Familja", b =>
+                {
+                    b.HasOne("Domain.Nxenesi", "Nxenesi")
+                        .WithMany("Familjet")
+                        .HasForeignKey("NxenesiId");
+
+                    b.HasOne("Domain.Prindi", "Prindi")
+                        .WithMany("Familjet")
+                        .HasForeignKey("PrindiId");
+
+                    b.Navigation("Nxenesi");
+
+                    b.Navigation("Prindi");
+                });
+
             modelBuilder.Entity("Domain.FeedbackToNxenesi", b =>
                 {
                     b.HasOne("Domain.Profesori", "Profesori")
@@ -964,25 +985,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Laburatiori");
-                });
-
-            modelBuilder.Entity("Domain.PrindiNxenesi", b =>
-                {
-                    b.HasOne("Domain.Nxenesi", "Nxenesi")
-                        .WithMany("PrinderitNxenesit")
-                        .HasForeignKey("NxenesiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Prindi", "Prindi")
-                        .WithMany("PrinderitNxenesit")
-                        .HasForeignKey("PrindiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Nxenesi");
-
-                    b.Navigation("Prindi");
                 });
 
             modelBuilder.Entity("Domain.Profesori", b =>
@@ -1106,7 +1108,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Nxenesi", b =>
                 {
-                    b.Navigation("PrinderitNxenesit");
+                    b.Navigation("Familjet");
 
                     b.Navigation("Vleresimet");
                 });
@@ -1118,9 +1120,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Prindi", b =>
                 {
-                    b.Navigation("Kontaktet");
+                    b.Navigation("Familjet");
 
-                    b.Navigation("PrinderitNxenesit");
+                    b.Navigation("Kontaktet");
                 });
 
             modelBuilder.Entity("Domain.Profesori", b =>

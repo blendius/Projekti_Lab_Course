@@ -24,6 +24,7 @@ import { Libri } from "../models/libri";
 import { Aktiviteti } from "../models/Aktiviteti";
 import { Autobusi } from "../models/Autobusi";
 import { ProfKlasa } from "../models/profKlasa";
+import { Familja } from "../models/familja";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -150,6 +151,18 @@ const Nxenesit = {
   },
   delete: (id: string) => axios.delete<void>(`/nxenesi/${id}`),
   listNxensitByKlasa: (emriKlases: string) => requests.get<Nxenesi[]>(`/nxenesi/klasa&${emriKlases}`)
+};
+const Familjet = {
+  list: () => requests.get<Familja[]>("/Familjet"),
+  details: (id: string) => requests.get<Familja>(`/Familjet/${id}`),
+  create: (familja: Familja, prindiId: string, nxenesiId: string) =>
+    axios.post<void>(`/Familjet/${prindiId}&${nxenesiId}`, familja),
+  update: (familja: Familja, prindiId: string, nxenesiId: string) =>
+    axios.put<void>(
+      `/Familjet/${familja.familjaId}/${prindiId}&${nxenesiId}`,
+      familja
+    ),
+  delete: (id: string) => axios.delete<void>(`/Familjet/${id}`),
 };
 const Njoftimet = {
   list: () => requests.get<Njoftimi[]>("/njoftimet"),
@@ -295,6 +308,7 @@ const agent = {
   Librat,
   Aktivitetet,
   Autobusat,
+  Familjet
 };
 
 export default agent;

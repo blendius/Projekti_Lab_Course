@@ -106,6 +106,9 @@ export default class PrindiStore {
       runInAction(() => {
         this.loading = false;
       });
-    }
+    }    
   };
+  public getEmriPrinditById = (id: string) => {
+    return this.prindiRegistry.get(id)?.displayName;
+  }
 }

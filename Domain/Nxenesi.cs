@@ -20,9 +20,7 @@ namespace Domain
         //public DateTime DateOfBirth {get; set; }
         public int YearOfRegistration { get; set; }
         //public string PhoneNumber{ get; set; }
-        public ICollection<PrindiNxenesi> PrinderitNxenesit { get; set; }
+        public ICollection<Familja> Familjet { get; set; }
         public ICollection<Vleresimi> Vleresimet { get; set; }
-
-
     }
 }

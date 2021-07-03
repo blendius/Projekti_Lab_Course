@@ -7,6 +7,8 @@ export interface Parent {
     token: string;
     image?: string;
     dataLindjes?:string;
+    nrTel: string;
+    email: string;
 }
 
 export interface ParentFormValues{

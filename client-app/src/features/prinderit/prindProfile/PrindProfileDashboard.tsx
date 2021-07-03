@@ -10,7 +10,6 @@ export default observer(function PrindProfileDashboard() {
 
     const [open, setOpen] = React.useState(false)
     const Prindi = prindStoreAccount.prindi;
-
     return (
         <>
             <Segment>
