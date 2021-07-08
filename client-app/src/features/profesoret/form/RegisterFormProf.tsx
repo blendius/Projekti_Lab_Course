@@ -47,8 +47,8 @@ export default observer(function RegisterFormProf() {
             }
             onSubmit={(values, { setErrors }) => profesoriStore.register(values, values.LendaId).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
-                displayName: Yup.string().required("DisplayName eshte i nevojshem!"),
-                username: Yup.string().required("Username eshte i nevojshem!"),
+                name: Yup.string().required("DisplayName eshte i nevojshem!"),
+                userName: Yup.string().required("Username eshte i nevojshem!"),
                 email: Yup.string().required("Email eshte i nevojshem!").email(),
                 password: Yup.string().required("Passwordi eshte i nevojshem!").matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -63,7 +63,7 @@ export default observer(function RegisterFormProf() {
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name='email' placeholder='Email' />
                     <MyTextInput name='name' placeholder='Display Name' />
-                    <MyTextInput name='username' placeholder='Username' />
+                    <MyTextInput name='userName' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
                     <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
                     <MySelectInput options=
@@ -81,7 +81,7 @@ export default observer(function RegisterFormProf() {
 
                     <MyTextInput name='dataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
-                    <Button disabled={!isValid|| !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
+                    <Button  positive content='Register' type='submit' fluid />
                 </Form>
             )}
         </Formik>
