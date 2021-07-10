@@ -20,7 +20,7 @@ export default observer(function ProfesoriDetais() {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header>{profesori.name}</Card.Header>
+                <Card.Header>{profesori.displayName}</Card.Header>
                 <Card.Meta>
                     <span>{profesori.dataRegjistrimit!}</span>
                 </Card.Meta>

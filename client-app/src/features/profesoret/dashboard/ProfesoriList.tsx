@@ -36,7 +36,7 @@ export default observer(function ProfesoriList() {
                     <TableBody>
                         {profesoretByDate.map(profesori => (
                             <TableRow key={profesori.id}>
-                                <TableCell >{profesori.name}</TableCell>
+                                <TableCell >{profesori.displayName}</TableCell>
                                 <TableCell>{profesori.gradaAkademike}</TableCell>
                                 <TableCell>{profesori.dataRegjistrimit}</TableCell>
                                 <TableCell>{profesori.email}</TableCell>

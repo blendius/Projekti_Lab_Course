@@ -74,23 +74,41 @@ namespace Persistence
                 {
                     new Profesori{Name = "prof", UserName="p1", Email = "prof@test.com",Lenda = new Lenda
                     {
-                        LendaId = lenda1,
+                        LendaId = lenda2,
                         EmriLendes = "Lenda Seed 1",
-                        Pershkrimi = "Pershkrimi Seed lenda 1"
+                        Pershkrimi = "Pershkrimi Seed lenda 1",
+                        Syllabusi = new Syllabusi{
+                            SyllabusiId = new Guid(),
+                            EmriSyllabusit = "Syllabusi 1",
+                            LinkuISyllabusit = "www.google.com",
+                            DataEKrijimit = DateTime.Now
+                        }
 
                     }},
                     new Profesori{Name = "prof2", UserName="p2", Email = "prof2@test.com",Lenda = new Lenda
                     {
                         LendaId = lenda1,
                         EmriLendes = "Lenda Seed 2",
-                        Pershkrimi = "Pershkrimi Seed lenda 2"
+                        Pershkrimi = "Pershkrimi Seed lenda 2",
+                        Syllabusi = new Syllabusi{
+                            SyllabusiId = new Guid(),
+                            EmriSyllabusit = "Syllabusi 2",
+                            LinkuISyllabusit = "www.google.com",
+                            DataEKrijimit = DateTime.Now
+                        }
 
                     }},
                     new Profesori{Name = "prof3", UserName="p3", Email = "prind3@test.com",Lenda = new Lenda
                     {
                         LendaId = lenda1,
                         EmriLendes = "Lenda Seed 3",
-                        Pershkrimi = "Pershkrimi Seed lenda 3"
+                        Pershkrimi = "Pershkrimi Seed lenda 3",
+                        Syllabusi = new Syllabusi{
+                            SyllabusiId = new Guid(),
+                            EmriSyllabusit = "Syllabusi 3",
+                            LinkuISyllabusit = "www.google.com",
+                            DataEKrijimit = DateTime.Now
+                        }
 
                     }}
                 };

@@ -25,9 +25,9 @@ namespace API.Controllers
             return await Mediator.Send(new Details.Query{LendaId = id});
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateLenda(Lenda lenda){
-            return Ok(await Mediator.Send(new Create.Command {Lenda  = lenda}));
+        [HttpPost("{syllabusiID}")]
+        public async Task<IActionResult> CreateLenda(Lenda lenda,Guid syllabusiID){
+            return Ok(await Mediator.Send(new Create.Command {Lenda  = lenda , Syllabusi = syllabusiID }));
         }
 
         [HttpPut("{id}")]

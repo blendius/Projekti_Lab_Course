@@ -11,44 +11,34 @@ import { gradaOptions } from '../../../app/common/form/options';
 
 
 export default observer(function RegisterFormProf() {
-    const { profesoriStore ,lendaStore} = useStore();
+    const { profesoriStore, lendaStore } = useStore();
     const { lendaRegistry, lendetByDate } = lendaStore;
-
     useEffect(() => {
         lendaStore.loadLendet();
     }, [lendaStore])
 
-    // var lenda = lendetByDate;
-    // var arr: any = [];
-    // var len = lendetByDate.length;
-    // for (var i = 0; i < len; i++) {
-    //     arr.push({
-    //         text: lenda[i].emriLendes,
-    //         value: lenda[i].lendaId
-    //     });
-    // }
-    
+
     return (
         <Formik
             initialValues={
                 {
-                id:'', 
-                name: '', 
-                userName: '', 
-                email: '', 
-                password: '',
-                gradaAkademike:'',
-                dataRegjistrimit:'', 
-                token:'',
-                error: null,
-                LendaId: ''
-            }
-            
+                    id: '',
+                    displayName: '',
+                    userName: '',
+                    email: '',
+                    password: '',
+                    gradaAkademike: '',
+                    dataRegjistrimit: '',
+                    token: '',
+                    error: null,
+                    LendaId: ''
+                }
+
             }
             onSubmit={(values, { setErrors }) => profesoriStore.register(values, values.LendaId).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
                 displayName: Yup.string().required("DisplayName eshte i nevojshem!"),
-                username: Yup.string().required("Username eshte i nevojshem!"),
+                userName: Yup.string().required("Username eshte i nevojshem!"),
                 email: Yup.string().required("Email eshte i nevojshem!").email(),
                 password: Yup.string().required("Passwordi eshte i nevojshem!").matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -59,11 +49,11 @@ export default observer(function RegisterFormProf() {
             })}
         >
 
-            {({ handleSubmit, isSubmitting, errors , isValid,dirty}) => (
+            {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput name='email' placeholder='Email' />
-                    <MyTextInput name='name' placeholder='Display Name' />
-                    <MyTextInput name='username' placeholder='Username' />
+                    <MyTextInput name='email' placeholder='Email' type='email' />
+                    <MyTextInput name='displayName' placeholder='Display Name' />
+                    <MyTextInput name='userName' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
                     <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
                     <MySelectInput options=
@@ -73,15 +63,14 @@ export default observer(function RegisterFormProf() {
                                     key: lenda.lendaId,
                                     text: lenda.emriLendes,
                                     value: lenda.lendaId,
-                                    
+
                                 }
-                                
                             ))
                         } placeholder='LendaId' name='LendaId' />
 
                     <MyTextInput name='dataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
-                    <Button disabled={!isValid|| !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
+                    <Button disabled={!isValid || !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
                 </Form>
             )}
         </Formik>

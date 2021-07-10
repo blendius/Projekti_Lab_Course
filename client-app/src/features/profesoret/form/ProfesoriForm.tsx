@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import MySelectInput from '../../../app/common/form/MySelectInput';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { gradaOptions, lendaOptions } from '../../../app/common/form/options';
-import { Professor } from '../../../app/models/professor';
+import { Professor, ProfFormValues } from '../../../app/models/professor';
 import { useStore } from '../../../app/stores/store';
 
 
@@ -29,7 +29,7 @@ export default observer(function ProfesoriForm() {
         dataRegjistrimit: '',
         token: '',
         EmriLendes: '',
-        lendaId: '', 
+        LendaId: '', 
         userName: '', 
         normalizedUserName: ''
 
@@ -45,7 +45,7 @@ export default observer(function ProfesoriForm() {
 
     const [profesori] = useState(initialState);
 
-    function handleFormSubmit(profesori: Professor) {
+    function handleFormSubmit(profesori: ProfFormValues) {
         updateProfessor(profesori);
     }
     console.log(prof?.dataRegjistrimit)

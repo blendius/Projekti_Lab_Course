@@ -9,11 +9,7 @@ namespace Application.Lendet
         {
             RuleFor(x => x.EmriLendes).NotEmpty();
             RuleFor(x => x.Pershkrimi).NotEmpty();
-            RuleFor(x => x.Syllabusi).NotEmpty();
             RuleFor(x => x.DataEShtimit).NotEmpty();
-
-            RuleFor(x => x.EmriLendes).NotEmpty();
-            RuleFor(x => x.EmriLendes).NotEmpty();
         }
     }
 }

@@ -1,8 +1,10 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Lendet
@@ -12,6 +14,8 @@ namespace Application.Lendet
         public class Command : IRequest
         {
             public Lenda Lenda { get; set; }
+            public Guid Syllabusi{get ;set;}
+            
         }
 
 
@@ -33,7 +37,11 @@ namespace Application.Lendet
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Lendet.Add(request.Lenda);
+                var syllabusi = await _context.Syllabuset.FirstOrDefaultAsync(x => x.SyllabusiId == request.Syllabusi);
+
+                 request.Lenda.Syllabusi = syllabusi;
+
+                 _context.Lendet.Add(request.Lenda);
                 await _context.SaveChangesAsync();
 
                 return Unit.Value;

@@ -8,9 +8,9 @@ import CommonStore from "./commonStore";
 import { ProfKlasa } from "../models/profKlasa";
 
 export default class ProfesoriStore {
-    prof: Professor | null = null;
-    professorRegistry = new Map<string, Professor>();
-    selectedProfessor: Professor | undefined = undefined;
+    prof: ProfFormValues | null = null;
+    professorRegistry = new Map<string, ProfFormValues>();
+    selectedProfessor: ProfFormValues | undefined = undefined;
     klasaMode = false;
     editMode = false;
     loading = false;
@@ -73,7 +73,7 @@ export default class ProfesoriStore {
         }
     }
 
-    updateProfessor = async (profesori: Professor) => {
+    updateProfessor = async (profesori: ProfFormValues) => {
         this.loading = true;
         try {
             await agent.Profesoret.update(profesori);
@@ -138,7 +138,7 @@ export default class ProfesoriStore {
         // }
     }
     
-    private setProfesori = (profesor: Professor) => {
+    private setProfesori = (profesor: ProfFormValues) => {
         profesor.dataRegjistrimit = profesor.dataRegjistrimit!;
         this.professorRegistry.set(profesor.id, profesor);
     }

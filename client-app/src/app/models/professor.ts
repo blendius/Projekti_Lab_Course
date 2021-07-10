@@ -17,12 +17,13 @@ export interface Professor {
 export interface ProfFormValues {
     id: string;
     userName: string;
-    name: string;
+    displayName: string;
     email: string;
     token: string;
     image?: string;
     gradaAkademike: string;
     dataRegjistrimit: string;
     LendaId?: string;
+
 
 }

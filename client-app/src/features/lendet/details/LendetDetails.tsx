@@ -32,7 +32,7 @@ export default observer(function LendetDetails() {
                     <div>
 
                     </div>
-                    {lenda.syllabusi}
+                    {lenda.syllabusiId}
                 </Card.Description>
                 
             </Card.Content>

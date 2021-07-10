@@ -76,11 +76,11 @@ const requests = {
 };
 
 const Profesoret = {
-  list: () => requests.get<Professor[]>("/profesori"),
-  details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
-  create: (profesori: Professor, EmriLendes: string) =>
+  list: () => requests.get<ProfFormValues[]>("/profesori"),
+  details: (id: string) => requests.get<ProfFormValues>(`/profesori/${id}`),
+  create: (profesori: ProfFormValues, EmriLendes: string) =>
     axios.post<void>(`/profesori/${EmriLendes}`, profesori),
-  update: (profesori: Professor) =>
+  update: (profesori: ProfFormValues) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
   createKlasa: (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => axios.post<void>(`/profesori/${profId}&${klasaId}`, profesoriKlasa),
@@ -129,7 +129,7 @@ const Postimet = {
 const Lendet = {
   list: () => requests.get<Lenda[]>("/lendet"),
   details: (id: string) => requests.get<Lenda>(`/lendet/${id}`),
-  create: (lenda: Lenda) => axios.post<void>(`/lendet/`, lenda),
+  create: (lenda: Lenda, syllabusiId: string) => axios.post<void>(`/lendet/${syllabusiId}`, lenda),
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
 };
@@ -187,12 +187,12 @@ const Account = {
 };
 
 const AccountProf = {
-  currentProf: () => requests.get<Professor>("/account/currentProf"),
+  currentProf: () => requests.get<ProfFormValues>("/account/currentProf"),
 
   login: (prof: ProfFormValues) =>
-    requests.post<Professor>("/account/loginProf", prof),
+    requests.post<ProfFormValues>("/account/loginProf", prof),
   register: (prof: ProfFormValues, id: string) =>
-    requests.post<Professor>(`/account/registerProf/${id}`, prof),
+    requests.post<ProfFormValues>(`/account/registerProf/${id}`, prof),
 };
 const AccountPrindi = {
   current: () => requests.get<Parent>("/PrindAccount"),

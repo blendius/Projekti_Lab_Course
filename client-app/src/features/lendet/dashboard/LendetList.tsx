@@ -36,7 +36,7 @@ export default observer(function LendetList() {
                             <TableRow key={lendet.lendaId}>
                                 <TableCell >{lendet.emriLendes}</TableCell>
                                 <TableCell>{lendet.pershkrimi}</TableCell>
-                                <TableCell>{lendet.syllabusi}</TableCell>
+                                <TableCell>{lendet.syllabusiId}</TableCell>
                                 <TableCell>{format(lendet.dataEShtimit!, 'dd MMM yyyy ')}</TableCell>
                                 <TableCell>
                                     <Button

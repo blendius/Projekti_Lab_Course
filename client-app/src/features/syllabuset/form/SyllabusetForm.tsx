@@ -46,13 +46,12 @@ export default observer(function SyllabusiForm() {
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={syllabusi} onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MyTextInput name='emriSyllabusit' placeholder='EmriLendes' />
-                        <MyTextInput label='linkuSyllabusit' placeholder='Pershkrimi' name='linkuISyllabusit' />
+                        <MyTextInput name='emriSyllabusit' placeholder='Emri Syllabusit' />
+                        <MyTextInput label='linkuSyllabusit' placeholder='Linku i Syllabusit' name='linkuISyllabusit' />
                         <MyDataInput
                             placeholderText='Data'
                             name='dataEKrijimit'
                             dateFormat='MMMM d, yyyy '
-                            
                         />
 
 
