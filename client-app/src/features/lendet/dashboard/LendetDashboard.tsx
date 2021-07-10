@@ -12,7 +12,7 @@ import LendetList from './LendetList';
 
 
 export default observer(function LendetDashboard() {
-    const { lendaStore } = useStore();
+    const { lendaStore,syllabusiStore } = useStore();
     const { selectedLenda, editMode, openForm, lendetByDate } = lendaStore;
 
 
@@ -21,6 +21,7 @@ export default observer(function LendetDashboard() {
 
     useEffect(() => {
         lendaStore.loadLendet();
+        syllabusiStore.loadSyllabuset();
 
     }, [lendaStore])
 

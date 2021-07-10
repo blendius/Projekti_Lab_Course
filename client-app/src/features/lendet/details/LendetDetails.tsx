@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 
 
 export default observer(function LendetDetails() {
-    const { lendaStore } = useStore();
+    const { lendaStore,syllabusiStore } = useStore();
     const { selectedLenda: lenda, loadLenda, loadingInitial, cancelSelectedLenda, openForm } = lendaStore;
     const { id } = useParams<{ id: string }>();
 
@@ -32,7 +32,7 @@ export default observer(function LendetDetails() {
                     <div>
 
                     </div>
-                    {lenda.syllabusiId}
+                    {syllabusiStore.getSyllabusiEmri(lenda.syllabusiId)}
                 </Card.Description>
                 
             </Card.Content>

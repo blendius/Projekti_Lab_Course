@@ -16,7 +16,9 @@ export default class SyllabusiStore {
     constructor() {
         makeAutoObservable(this)
     }
-
+    public  getSyllabusiEmri = (id: string) => {
+        return this.syllabusiRegistry.get(id)?.emriSyllabusit;
+    }
     get syllabusetCount(){
         return this.syllabusiRegistry.size;
     }
