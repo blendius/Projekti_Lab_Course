@@ -23,18 +23,24 @@ export default observer(function SyllabusetDetails() {
         <Card fluid>
             {/* <Image src={`/assets/categoryImages/food.jpg`} /> */}
             <Card.Content>
-                <Card.Header>{syllabusi.syllabusiId}</Card.Header>
+                <Card.Header>{syllabusi.emriSyllabusit}</Card.Header>
                 <Card.Meta>
                     <span>{format(syllabusi.dataEKrijimit!, 'dd MMM yyyy')}</span>
                 </Card.Meta>
                 <Card.Description>
-                    {syllabusi.emriSyllabusit}
+                    <Card.Meta>
+                        Syllabusi ID
+                    </Card.Meta>
+                    {syllabusi.syllabusiId}
                     <div>
 
                     </div>
-                    {syllabusi.linkuISyllabusit}
+                    <Card.Meta>
+                        Linku I Syllabusit 
+                    </Card.Meta>
+                    <a href={`${syllabusi.linkuISyllabusit}`}>{syllabusi.linkuISyllabusit}</a>
                 </Card.Description>
-                
+
             </Card.Content>
             <Card.Content extra>
                 <Button.Group widths='2'>.
