@@ -23,6 +23,7 @@ export default observer(function RegisterFormProf() {
             initialValues={
                 {
                     id: '',
+                    name:'',
                     displayName: '',
                     userName: '',
                     email: '',

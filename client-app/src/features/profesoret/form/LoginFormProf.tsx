@@ -13,6 +13,7 @@ export default observer(function LoginFormProf() {
             initialValues={
                 {
                     id: '',
+                    name:'',
                     displayName: '',
                     userName: '',
                     email: '',

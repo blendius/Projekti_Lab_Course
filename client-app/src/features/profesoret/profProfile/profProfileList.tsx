@@ -20,7 +20,7 @@ export default function ProfProfileList() {
                 </Grid.Row>
                
                 <Grid.Row>
-                    <p className='profileData'> Username:{prof?.userName}     </p>
+                    <p className='profileData'> Username:{prof?.name}     </p>
                 </Grid.Row>
                 <Grid.Row>
                     <p className='profileData'> Email:{prof?.email}     </p>

@@ -16,6 +16,7 @@ export interface Professor {
 
 export interface ProfFormValues {
     id: string;
+    name:string;
     userName: string;
     displayName: string;
     email: string;
