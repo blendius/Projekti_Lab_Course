@@ -78,11 +78,11 @@ export default class KontaktiStore {
         this.editMode = false;
     }
 
-    createKontakti = async (kontakti: Kontakti) => {
+    createKontakti = async (kontakti: Kontakti, profEmail: string | undefined) => {
         this.loading = true;
         kontakti.kontaktiId = uuid();
         try {
-            await agent.Kontaktet.create(kontakti);
+            await agent.Kontaktet.create(kontakti, profEmail);
             runInAction(() => {
                 this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti)
                 this.selectedKontakti = kontakti;

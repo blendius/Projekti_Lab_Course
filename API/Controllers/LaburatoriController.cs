@@ -26,10 +26,10 @@ namespace API.Controllers
             return await Mediator.Send(new Details.Query { Id = id });
         }
 
-        [HttpPost("{EmriLendes}")]
-        public async Task<IActionResult> CreateLaburatori(Laburatiori laburatiori, string EmriLendes)
+        [HttpPost("{LendaId}")]
+        public async Task<IActionResult> CreateLaburatori(Laburatiori laburatiori, Guid LendaId)
         {
-            return Ok(await Mediator.Send(new Create.Command { Laburatiori = laburatiori, LendaEmri=EmriLendes }));
+            return Ok(await Mediator.Send(new Create.Command { Laburatiori = laburatiori, lendaId=LendaId }));
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> EditLaburatori(Guid id, Laburatiori laburatiori)

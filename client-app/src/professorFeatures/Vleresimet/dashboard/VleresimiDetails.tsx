@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { Button, Card, Image, List, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import { Button, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 

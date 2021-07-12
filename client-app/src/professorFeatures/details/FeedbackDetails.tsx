@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import React, { SyntheticEvent, useState } from 'react';
-import { Button, Card, Image, List } from 'semantic-ui-react';
+import { SyntheticEvent, useState } from 'react';
+import { Button, Card, List } from 'semantic-ui-react';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 
@@ -9,7 +9,7 @@ export default observer(function FeedbackDetails() {
     const { feedbackStore } = useStore();
     const { deleteFeedback, loading } = feedbackStore
 
-    const { selectedFeedback: feedback, openForm, cancelSelectedFeedback } = feedbackStore;
+    const { selectedFeedback: feedback,  cancelSelectedFeedback } = feedbackStore;
 
     const [target, setTarget] = useState('');
 

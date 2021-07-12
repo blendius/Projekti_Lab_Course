@@ -5,7 +5,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
 export default observer(function LaburatoriDetais() {
-    const { laburatoriStore } = useStore();
+    const { laburatoriStore, lendaStore } = useStore();
     const { deleteLaburatori, loading } = laburatoriStore
 
     const { selectedLaburatori: laburatori, openForm, cancelSelectedLaburatori } = laburatoriStore;
@@ -36,7 +36,7 @@ export default observer(function LaburatoriDetais() {
                 <TableBody>
                     <Table.Row>
                         <TableCell >{laburatori.lloji}</TableCell>
-                        <TableCell> {laburatori.EmriLendes}</TableCell>
+                        <TableCell> {lendaStore.getEmriLendestById(laburatori.lendaId)}</TableCell>
                         <TableCell> {laburatori.nrPaisjeve}</TableCell>
                         <TableCell>{laburatori.dataEKrijimit}</TableCell>
                         <TableCell>

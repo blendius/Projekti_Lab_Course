@@ -13,7 +13,7 @@ namespace Application.Laburatori
         public class Command : IRequest
         {
             public Laburatiori Laburatiori { get; set; }
-            public string LendaEmri { get; set; }
+            public Guid lendaId { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -26,7 +26,7 @@ namespace Application.Laburatori
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var lenda =await _context.Lendet.FirstOrDefaultAsync(x => x.EmriLendes == request.LendaEmri);
+                var lenda =await _context.Lendet.FirstOrDefaultAsync(x => x.LendaId == request.lendaId);
 
                 request.Laburatiori.Lenda= lenda;
 

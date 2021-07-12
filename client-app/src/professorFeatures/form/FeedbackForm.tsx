@@ -1,6 +1,5 @@
 import { Formik, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
 import { Button, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
 import MyTextInput from '../../app/common/form/MyTextInput';
@@ -30,7 +29,6 @@ export default observer(function FeedbackForm() {
         nxenesiEmail: Yup.string().required("Email duhet te plotesohet!").email('Shkruani nje email valide')
     })
 
-    const [feedback, setFeedback] = useState(initialState);
 
     function handleFormSubmit(feedback: FeedbackToNxenesi) {
         createFeedback(feedback);
@@ -39,7 +37,7 @@ export default observer(function FeedbackForm() {
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
-                enableReinitialize initialValues={feedback}
+                enableReinitialize initialValues={initialState}
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>

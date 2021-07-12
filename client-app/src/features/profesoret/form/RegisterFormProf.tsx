@@ -1,12 +1,11 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Label } from 'semantic-ui-react';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { useStore } from '../../../app/stores/store';
 import * as Yup from 'yup';
 import MySelectInput from '../../../app/common/form/MySelectInput';
-import { values } from 'mobx';
 import { gradaOptions } from '../../../app/common/form/options';
 
 

@@ -21,7 +21,7 @@ export default observer(function LaburatoriForm() {
         id: '',
         lloji: '',
         dataEKrijimit: '',
-        EmriLendes: '',
+        lendaId: '',
         nrPaisjeve: 0
     }
     const validationSchema = Yup.object({
@@ -34,7 +34,7 @@ export default observer(function LaburatoriForm() {
     const [laburatori, setLaburatori] = useState(initialState);
 
     function handleFormSubmit(laburatori: Laburatori) {
-        laburatori.id ? updateLaburatori(laburatori) : createLaburatori(laburatori, laburatori.EmriLendes);
+        laburatori.id ? updateLaburatori(laburatori) : createLaburatori(laburatori, laburatori.lendaId);
     }
     // const lendaOpt = [
 
@@ -74,9 +74,9 @@ export default observer(function LaburatoriForm() {
                                     {
                                    key:lenda.lendaId,
                                     text:lenda.emriLendes,
-                                     value:lenda.emriLendes}
+                                     value:lenda.lendaId}
                                 ))
-                            } placeholder='Lenda' name='EmriLendes' />
+                            } placeholder='Lenda' name='lendaId' />
 
                         <MyTextInput type='text' placeholder='Numri i Paisjeve' name='nrPaisjeve' />
                         <Button disabled={isSubmitting || !dirty || !isValid}

@@ -1,15 +1,15 @@
 import { observer } from 'mobx-react-lite';
-import React, { SyntheticEvent, useState } from 'react';
-import { Button, Card, Image, Label, List, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
+import { SyntheticEvent, useState } from 'react';
+import { Button, Card, Label } from 'semantic-ui-react';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 
 
 export default observer(function KontaktiDetais() {
-    const { kontaktiStore } = useStore();
-    const { deleteKotakti, loading } = kontaktiStore
+    const { kontaktiStore, profesoriStore } = useStore();
+    const { deleteKotakti } = kontaktiStore
 
-    const { selectedKontakti: kontakti, openForm, cancelSelectedKontakti } = kontaktiStore;
+    const { selectedKontakti: kontakti, loading } = kontaktiStore;
 
     const [target, setTarget] = useState('');
 
@@ -17,6 +17,7 @@ export default observer(function KontaktiDetais() {
         setTarget(e.currentTarget.name);
         deleteKotakti(id)
     }
+
 
     if (!kontakti) return <LoadingComponent />
 
@@ -31,8 +32,15 @@ export default observer(function KontaktiDetais() {
             </Label>
             <Card.Content description={kontakti.mesazhi} />
             <Card.Content extra textAlign='center'>
-                {kontakti.profEmail}  ,
+               
+                {profesoriStore.getEmriProfById(kontakti.profesoriId)}  ,
                 {kontakti.dataEDergimit}
+            </Card.Content>
+            <Card.Content extra textAlign='center' >
+            <Button name={kontakti.kontaktiId}
+                    loading={loading && target === kontakti.kontaktiId}
+                    onClick={(e) => handleKontaktiDelete(e, kontakti.kontaktiId)}
+                    content='Fshije' className='detailsbtn' color='google plus' />
             </Card.Content>
         </Card>
 

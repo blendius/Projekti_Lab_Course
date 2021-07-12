@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class initailCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -423,28 +423,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kontaktet",
-                columns: table => new
-                {
-                    KontaktiId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PrindiId = table.Column<string>(type: "TEXT", nullable: true),
-                    profEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    Subjekti = table.Column<string>(type: "TEXT", nullable: true),
-                    Mesazhi = table.Column<string>(type: "TEXT", nullable: true),
-                    DataEDergimit = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Kontaktet", x => x.KontaktiId);
-                    table.ForeignKey(
-                        name: "FK_Kontaktet_Prinderit_PrindiId",
-                        column: x => x.PrindiId,
-                        principalTable: "Prinderit",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Klasat",
                 columns: table => new
                 {
@@ -550,6 +528,34 @@ namespace Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_FeedbackToNxenesit_Profesoret_ProfesoriID",
                         column: x => x.ProfesoriID,
+                        principalTable: "Profesoret",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Kontaktet",
+                columns: table => new
+                {
+                    KontaktiId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PrindiId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProfesoriId = table.Column<string>(type: "TEXT", nullable: true),
+                    Subjekti = table.Column<string>(type: "TEXT", nullable: true),
+                    Mesazhi = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEDergimit = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kontaktet", x => x.KontaktiId);
+                    table.ForeignKey(
+                        name: "FK_Kontaktet_Prinderit_PrindiId",
+                        column: x => x.PrindiId,
+                        principalTable: "Prinderit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kontaktet_Profesoret_ProfesoriId",
+                        column: x => x.ProfesoriId,
                         principalTable: "Profesoret",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -677,6 +683,11 @@ namespace Persistence.Migrations
                 name: "IX_Kontaktet_PrindiId",
                 table: "Kontaktet",
                 column: "PrindiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Kontaktet_ProfesoriId",
+                table: "Kontaktet",
+                column: "ProfesoriId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Laburatioret_LendaId",

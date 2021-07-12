@@ -95,6 +95,17 @@ namespace Persistence
                 .HasOne(pn => pn.Klasa)
                 .WithMany(p => p.Profesoret)
                 .HasForeignKey(pn => pn.KlasaId);
+                
+            modelbuilder.Entity<Kontakti>()
+                .HasKey(pn => new { pn.KontaktiId });
+            modelbuilder.Entity<Kontakti>()
+                .HasOne(pn => pn.Prindi)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pn => pn.PrindiId);
+            modelbuilder.Entity<Kontakti>()
+                .HasOne(pn => pn.Profesori)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pn => pn.ProfesoriId);
         }
     }
 }

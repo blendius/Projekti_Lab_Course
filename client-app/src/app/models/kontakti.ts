@@ -1,6 +1,7 @@
 export interface Kontakti {
+    prindiId:string;
     kontaktiId: string;
-    profEmail: string;
+    profesoriId: string;
     subjekti: string;
     mesazhi: string;
     dataEDergimit: string;

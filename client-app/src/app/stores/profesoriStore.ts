@@ -25,7 +25,7 @@ export default class ProfesoriStore {
     get isLoggedIn() {
         return !!this.prof;
     }
-    get profesoriCount(){
+    get profesoriCount() {
         return this.professorRegistry.size;
     }
 
@@ -137,7 +137,7 @@ export default class ProfesoriStore {
         //     }
         // }
     }
-    
+
     private setProfesori = (profesor: Professor) => {
         profesor.dataRegjistrimit = profesor.dataRegjistrimit!;
         this.professorRegistry.set(profesor.id, profesor);
@@ -202,5 +202,9 @@ export default class ProfesoriStore {
                 this.loading = false;
             })
         }
-    }
+    };
+    public getEmriProfById = (id: string) => {
+        return this.professorRegistry.get(id)?.name;
+    };
+    
 }

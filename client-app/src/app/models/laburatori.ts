@@ -3,5 +3,5 @@ export interface Laburatori {
     lloji: string;
     nrPaisjeve: number;
     dataEKrijimit: string;
-    EmriLendes: string;
+    lendaId: string;
 }

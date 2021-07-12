@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Button, Grid, GridColumn, List } from 'semantic-ui-react';
+import { Grid, List } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
-import VlersimiStore from '../../../app/stores/vlersimiStore';
 import VleresimiDetails from './VleresimiDetails';
 import VlersimiForm from '../forms/VlersimiForm';
 import VlersimiList from './VlersimiList';

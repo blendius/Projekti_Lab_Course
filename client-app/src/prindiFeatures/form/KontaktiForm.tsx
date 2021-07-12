@@ -12,15 +12,16 @@ import { useStore } from '../../app/stores/store';
 
 export default observer(function KontaktiForm() {
 
-    const { kontaktiStore } = useStore();
+    const { kontaktiStore, profesoriStore } = useStore();
     const { selectedKontakti, closeForm, loading, createKontakti } = kontaktiStore;
 
     const initialState = selectedKontakti ?? {
+        prindiId:'',
         kontaktiId: '',
-        profEmail: '',
+        profesoriId: '',
         subjekti: '',
         mesazhi: '',
-        dataEDergimit:''
+        dataEDergimit: ''
     }
     const validationSchema = Yup.object({
         subjekti: Yup.string().required('Subjekti duhet te plotesohet !'),
@@ -32,7 +33,7 @@ export default observer(function KontaktiForm() {
     const [kontakti, setKontakti] = useState(initialState);
 
     function handleFormSubmit(kontakti: Kontakti) {
-         createKontakti(kontakti);
+            createKontakti(kontakti, kontakti.profesoriId);
     }
 
     return (
@@ -42,10 +43,10 @@ export default observer(function KontaktiForm() {
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MyTextInput type='text' name='profEmail' placeholder='Email e profesorit'></MyTextInput>
+                        <MyTextInput type='text' name='profesoriId' placeholder='Email e profesorit'></MyTextInput>
                         <MyTextInput type='text' placeholder='Subjekti' name='subjekti' />
                         <MyTextInput type='text' placeholder='Mesazhi' name='mesazhi' />
-                        <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit'  />
+                        <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit' />
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />

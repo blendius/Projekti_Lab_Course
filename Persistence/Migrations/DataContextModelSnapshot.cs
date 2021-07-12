@@ -221,15 +221,17 @@ namespace Persistence.Migrations
                     b.Property<string>("PrindiId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Subjekti")
+                    b.Property<string>("ProfesoriId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("profEmail")
+                    b.Property<string>("Subjekti")
                         .HasColumnType("TEXT");
 
                     b.HasKey("KontaktiId");
 
                     b.HasIndex("PrindiId");
+
+                    b.HasIndex("ProfesoriId");
 
                     b.ToTable("Kontaktet");
                 });
@@ -949,7 +951,13 @@ namespace Persistence.Migrations
                         .WithMany("Kontaktet")
                         .HasForeignKey("PrindiId");
 
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("Kontaktet")
+                        .HasForeignKey("ProfesoriId");
+
                     b.Navigation("Prindi");
+
+                    b.Navigation("Profesori");
                 });
 
             modelBuilder.Entity("Domain.Laburatiori", b =>
@@ -1128,6 +1136,8 @@ namespace Persistence.Migrations
                     b.Navigation("FeedbackToNxenesit");
 
                     b.Navigation("Klaset");
+
+                    b.Navigation("Kontaktet");
 
                     b.Navigation("Vleresimet");
                 });

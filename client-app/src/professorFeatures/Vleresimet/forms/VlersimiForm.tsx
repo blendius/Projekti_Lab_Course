@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { Button, Segment } from 'semantic-ui-react';
@@ -15,9 +15,9 @@ export default observer(function VlersimiForm() {
 
     const { vleresimiStore, lendaStore, nxenesiStore, profesoriStore } = useStore();
     const { selectedVlersimi, closeForm, loading, updateVlersimi, createVlersimi , selectedNxenesi} = vleresimiStore;
-    const { lendaRegistry, lendetByDate } = lendaStore;
-    const { nxenesiRegistry, nxenesitByDate } = nxenesiStore;
-    const { professorRegistry, profesoretByDate, prof } = profesoriStore;
+    const { lendetByDate } = lendaStore;
+    const { nxenesitByDate } = nxenesiStore;
+    const { prof } = profesoriStore;
 
     useEffect(() => {
         profesoriStore.loadProfesoret();
@@ -62,7 +62,7 @@ export default observer(function VlersimiForm() {
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        {prof?.id ==undefined &&
+                        {prof?.id ===undefined &&
                         <>
                             <MyTextInput type='text' placeholder='' name='profId' value={prof?.id} />
 
