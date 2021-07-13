@@ -54,6 +54,7 @@ import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDas
 import FamiljaDetails from "../../features/familjet/FamiljaDetails";
 import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
 import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
+import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
 
 
 
@@ -191,7 +192,7 @@ function App() {
                 <Route
                   exact
                   path="/adminPage/Profili"
-                  component={NxenesiDashboard}
+                  component={AdminProfileDashboard}
                 />
                 <Route
                   path="/adminPage/profesoret"
