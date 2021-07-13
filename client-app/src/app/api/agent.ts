@@ -240,6 +240,7 @@ const Kontaktet = {
 const AccountNxenesi = {
   currentNxenesi: () =>
     requests.get<Nxenesiuser>("/NxenesiAccount/currentNxenesi"),
+    
   login: (nxenesi: NxenesiuserFormValues) =>
     requests.post<Nxenesiuser>("/NxenesiAccount/loginNxenesi", nxenesi),
   register: (nxenesi: NxenesiuserFormValues) =>

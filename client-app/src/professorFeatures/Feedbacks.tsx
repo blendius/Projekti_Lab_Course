@@ -11,6 +11,7 @@ function ShowFeedbacks() {
 
 
     useEffect(() => {
+        
         feedbackStore.loadFeedbacksProf(prof?.id);
     }, [feedbackStore, prof?.id])
 

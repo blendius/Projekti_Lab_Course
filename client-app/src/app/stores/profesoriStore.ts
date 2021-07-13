@@ -60,7 +60,7 @@ export default class ProfesoriStore {
         console.log(id)
         return this.professorRegistry.get(id);
     }
-
+    
     register = async (creds: ProfFormValues, id: string) => {
         try {
             await agent.AccountProf.register(creds, id);
@@ -116,8 +116,11 @@ export default class ProfesoriStore {
     }
 
     loadProfesori = async (id: string) => {
-        let profesori = this.getProfFromId(id);
-        console.log(profesori);
+        // let profesori = this.getProfFromId(id);
+        // console.log(profesori);
+        let profesori = await agent.Profesoret.details(id);
+        //this.setProfesori(profesori)
+        return profesori;
         // if (profesori) {
         //     this.selectedProfessor = profesori;
         //     return profesori;

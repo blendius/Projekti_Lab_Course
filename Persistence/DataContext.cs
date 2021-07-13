@@ -39,10 +39,11 @@ namespace Persistence
         {
             base.OnModelCreating(modelbuilder);
 
-            modelbuilder.Entity<FeedbackToNxenesi>()
-                .HasOne(p => p.Profesori)
-                .WithMany(p => p.FeedbackToNxenesit)
-                .HasForeignKey(pp => pp.ProfesoriID);
+             modelbuilder.Entity<FeedbackToNxenesi>()
+             .HasOne(p => p.Profesori)
+             .WithMany(f => f.FeedbackToNxenesit)
+             .HasForeignKey(f => f.ProfesoriId);
+
 
             modelbuilder.Entity<Kontakti>()
             .HasOne(p => p.Prindi)
@@ -50,8 +51,8 @@ namespace Persistence
              .HasForeignKey(pp => pp.PrindiId);
 
             modelbuilder.Entity<Laburatiori>()
-          .HasOne(p => p.Lenda)
-          .WithMany(p => p.Laburatoret)
+            .HasOne(p => p.Lenda)
+            .WithMany(p => p.Laburatoret)
            .HasForeignKey(pp => pp.LendaId);
 
             modelbuilder.Entity<Lenda>()

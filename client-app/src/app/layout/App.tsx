@@ -55,6 +55,7 @@ import FamiljaDetails from "../../features/familjet/FamiljaDetails";
 import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
 import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
 import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
+import NxenesiFeedbacks from "../../nxenesiFeatures/dashboard/NxenesiFeedbacks";
 
 
 
@@ -173,6 +174,10 @@ function App() {
                 <Route
                   path="/nxenesiPage/librat/"
                   component={DashboardLibri}
+                />
+                <Route
+                  path="/nxenesiPage/feedbacks"
+                  component={NxenesiFeedbacks}
                 />
               </Switch>
             </Container>

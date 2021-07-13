@@ -71,7 +71,7 @@ namespace API.Controllers
             return BadRequest("Pati probleme gjate regjistrimit");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("currentNxenesi")]
         public async Task<ActionResult<NxenesiDto>> GetCurrentNxenesin()
         {

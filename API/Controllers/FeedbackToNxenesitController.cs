@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class FeedbackToNxenesit : BaseApiController
+    public class FeedbackToNxenesitController : BaseApiController
     {
            [HttpGet("{Id}")]
         public async Task<ActionResult<List<FeedbackToNxenesi>>> GetFeedbackProfesori(Guid id)
         {
-            return await Mediator.Send(new ListProf.Query{Id=id});
+            return await Mediator.Send(new ListProf.Query{ProfId=id});
         }
           [HttpGet("nxenesi/{email}")]
         public async Task<ActionResult<List<FeedbackToNxenesi>>> GetFeedbackNxenesi(string email)
