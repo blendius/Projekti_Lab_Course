@@ -83,6 +83,10 @@ const Profesoret = {
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
   createKlasa: (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => axios.post<void>(`/profesori/${profId}&${klasaId}`, profesoriKlasa),
+  listKlaset: (id: string | undefined) =>
+    requests.get<ProfKlasa[]>(`/profesori/klasat/${id}`),
+  deleteKlasa: (id: string | undefined) => axios.delete<void>(`/profesori/profKlasa/${id}`),
+
 };
 const Oraret = {
   list: () => requests.get<Orari[]>("/oraret"),

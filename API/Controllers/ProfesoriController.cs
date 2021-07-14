@@ -23,6 +23,12 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
+        [HttpGet("klasat/{id}")]
+        public async Task<ActionResult<List<ProfesoriKlasa>>> GetProfessorKlasat(string id)
+        {
+            return await Mediator.Send(new ListProfKlasa.Query{Id = id});
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Profesori>> GetProfessor(string id)
         {

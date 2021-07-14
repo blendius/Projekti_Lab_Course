@@ -26,6 +26,7 @@ export default observer(function AddKlasaForm() {
 
 
     const initialState = {
+        
         profId: '',
         klasaId: ''
     }
@@ -67,7 +68,6 @@ export default observer(function AddKlasaForm() {
                         placeholder='Klasa' name='klasaId' />
                     <Button disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} floated='right' positive type='submit' content='Submit' />
-                    <Button onClick={closeAddKlasaForm} floated='right' type='button' content='Cancel' />
                 </Form>
             )}
         </Formik>
