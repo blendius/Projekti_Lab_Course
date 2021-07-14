@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Prindi } from "../models/prindi";
 import { v4 as uuid } from "uuid";
+import { Parent } from "../models/parent";
 
 export default class PrindiStore {
   prindiRegistry = new Map<string, Prindi>();
@@ -74,7 +75,7 @@ export default class PrindiStore {
     }
   };
 
-  updatePrindi = async (prindi: Prindi) => {
+  updatePrindi = async (prindi: Prindi ) => {
     this.loading = true;
     try {
       await agent.Prinderit.update(prindi);

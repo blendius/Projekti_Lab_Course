@@ -21,6 +21,9 @@ export default observer(function SallaList() {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell >Salla</Table.HeaderCell>
+                            <Table.HeaderCell >Kati</Table.HeaderCell>
+                            <Table.HeaderCell >Numri i Uleseve</Table.HeaderCell>
+                            <Table.HeaderCell >Projektor</Table.HeaderCell>
                             <Table.HeaderCell>Shiko</Table.HeaderCell>
                             <Table.HeaderCell>Fshije</Table.HeaderCell>
                         </Table.Row>
@@ -29,6 +32,9 @@ export default observer(function SallaList() {
                         {sallatByName.map(sallat => (
                             <TableRow key={sallat.sallaId}>
                                 <TableCell >{sallat.emriSalles}</TableCell>
+                                <TableCell >{sallat.kati}</TableCell>
+                                <TableCell >{sallat.nrUleseve}</TableCell>
+                                <TableCell >{sallat.hasProjector  }</TableCell>
                                 <TableCell width='2'>
                                     <Button
                                         onClick={() => sallaStore.selectSalla(sallat.sallaId)}

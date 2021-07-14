@@ -128,4 +128,8 @@ export default class ParaleljaStore {
     public getNumriParalelesById = (id: string) => {
         return this.paraleletRegistry.get(id)?.numri;
     };
+
+    public getParaleljaById = (id: string) => {
+        return this.paraleletRegistry.get(id);
+    };
 }

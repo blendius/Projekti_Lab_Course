@@ -20,12 +20,11 @@ function PrindModal(props: ModalProps) {
       <Modal.Header>Edito te dhenat</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-         <PrindiForm  />
-
+          <PrindiForm />
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-   
+
       </Modal.Actions>
     </Modal>
   );

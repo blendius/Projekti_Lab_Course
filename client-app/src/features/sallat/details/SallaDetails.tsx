@@ -19,6 +19,9 @@ export default observer(function SallaDetails() {
         <Card fluid>
             <Card.Content>
                 <Card.Header>{salla.emriSalles}</Card.Header>                
+                <Card.Header>{salla.kati}</Card.Header>                
+                <Card.Header>{salla.nrUleseve}</Card.Header>                
+                <Card.Header>{salla.hasProjector}</Card.Header>                
             </Card.Content>
             <Card.Content extra>
                 <Button.Group widths='2'>

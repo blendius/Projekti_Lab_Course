@@ -21,6 +21,9 @@ export default observer(function ParaleljaDetails() {
                 <Card.Header>{paralelja.numri}</Card.Header>  
                 <Card.Meta>
                     <span>{paralelja.kapacitetiMax}</span>
+                </Card.Meta> 
+                <Card.Meta>
+                    <span>{paralelja.kapacitetiMin}</span>
                 </Card.Meta>              
             </Card.Content>
             <Card.Content extra>

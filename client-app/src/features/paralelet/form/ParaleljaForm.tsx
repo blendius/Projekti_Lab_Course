@@ -14,7 +14,8 @@ export default observer(function ParaleljaForm() {
     const initialState = selectedParalelja ?? ({
         paraleljaId: '',
         numri: 0,
-        kapacitetiMax: 0
+        kapacitetiMax: 0,
+        kapacitetiMin: 0
     });
     const validationSchema = Yup.object({
         numri: Yup.number().required('Numri i paraleles eshte i nevojshem').min(1),
@@ -22,7 +23,11 @@ export default observer(function ParaleljaForm() {
     const [paralelja] = useState(initialState);
 
     function handleFormSubmit(paralelja: Paralelja) {
-        paralelja.paraleljaId ? updateParalelja(paralelja) : createParalelja(paralelja);
+        if (paralelja?.kapacitetiMax > 35 && paralelja?.kapacitetiMin < 8) {
+            alert("Duhet te jete ne mes te 35 dhe 8")
+        } else {
+            paralelja.paraleljaId ? updateParalelja(paralelja) : createParalelja(paralelja);
+        }
     }
 
     return (
@@ -33,6 +38,7 @@ export default observer(function ParaleljaForm() {
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MyTextInput name='numri' placeholder='Numri' />
                         <MyTextInput name='kapacitetiMax' placeholder='Kapaciteti Maksimal' />
+                        <MyTextInput name='kapacitetiMin' placeholder='Kapaciteti Minimal' />
                         <Button disabled={isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>

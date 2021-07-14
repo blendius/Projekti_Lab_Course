@@ -4,6 +4,6 @@ export interface Prindi {
     email: string;
     password: string;
     dataLindjes: string;
-    username: string;
-    nrTel: number;
+    userName: string;
+    phoneNumber: number;
 }

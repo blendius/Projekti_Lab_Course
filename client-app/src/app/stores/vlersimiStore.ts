@@ -8,6 +8,7 @@ import { Familja } from "../models/familja";
 export default class VlersimiStore {
 
     vlersimiRegistry = new Map<string, Vleresimi>();
+    vlersimiNgaPrindiRegistry = new Map<string, Vleresimi>();
     nxenesiRegistry = new Map<string, Nxenesi>();
     familjaRegistry = new Array();
     selectedVlersimi: Vleresimi | undefined = undefined;
@@ -24,6 +25,10 @@ export default class VlersimiStore {
 
     get vlersimietByDate() {
         return Array.from(this.vlersimiRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
+    }
+
+    get vlersimiNgaPrindi() {
+        return Array.from(this.vlersimiNgaPrindiRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
     }
 
     loadVleresimet = async (ProfId: string | undefined) => {
@@ -151,10 +156,10 @@ export default class VlersimiStore {
             const vlersimet = await agent.Vleresimet.listNxenesi(nxenesiId);
             console.log(vlersimet);
             vlersimet.forEach(vleresimi => {
-                this.vlersimiRegistry.set(vleresimi.vleresimiId, vleresimi);
+                this.vlersimiNgaPrindiRegistry.set(vleresimi.vleresimiId, vleresimi);
             })
             this.setLoadingInitial(false);
-        }
+        }   
 
         catch (error) {
             console.log(error);
@@ -165,7 +170,7 @@ export default class VlersimiStore {
 
     loadNxenesiByPrindi = async (prindiId: string | undefined) => {
         const nxenesit = await agent.Vleresimet.listNxenesiByPrindi(prindiId);
-
+        console.log(nxenesit)
         for (var i = 0; i < nxenesit.length; i++) {
             this.familjaRegistry[i] = nxenesit[i];
         }

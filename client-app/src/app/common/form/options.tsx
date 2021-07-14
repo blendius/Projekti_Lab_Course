@@ -85,4 +85,13 @@ export const vitiOptions = [
             text: '3',
             value: '3'
         }]
-    
+        export const TrueFalse = [
+            {
+                text: 'Po',
+                value: 'Po'
+            },
+            {
+                text: 'Jo',
+                value: 'Jo'
+            },
+            ]

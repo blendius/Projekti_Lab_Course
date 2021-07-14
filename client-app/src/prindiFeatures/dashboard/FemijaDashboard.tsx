@@ -6,13 +6,15 @@ import VlersimiStore from '../../app/stores/vlersimiStore';
 
 export default observer(function FemijaDashboard() {
     const { vleresimiStore, profesoriStore, prindStoreAccount: { prindi } } = useStore();
-    const { vlersimietByDate, editMode, familjaRegistry, loadNxenesiByPrindi } = vleresimiStore;
+    const { vlersimiNgaPrindi, editMode, vlersimiNgaPrindiRegistry, loadNxenesiByPrindi } = vleresimiStore;
     const { getEmriProfiById } = profesoriStore;
     console.log(prindi?.id)
     useEffect(() => {
-        vleresimiStore.loadNxenesiByPrindi(prindi?.id);
-        var femija1 = vleresimiStore.loadVleresimetByNxenesi(familjaRegistry[0]?.nxenesiId);
+        //get vlersimet e nxenesit 
+      vleresimiStore.loadVleresimetByNxenesi(vlersimiNgaPrindi[0]?.nxenesiId);
     }, [vleresimiStore])
+    console.log(vlersimiNgaPrindi[0]?.nxenesiId)
+
     return (
         <Segment.Group>
             <Segment className='femijetList'>
@@ -26,7 +28,7 @@ export default observer(function FemijaDashboard() {
                         </Table.Row>
                     </Table.Header>
                     <TableBody>
-                        {vlersimietByDate.map(vleresimet => (
+                        {vlersimiNgaPrindi.map(vleresimet => (
                             <TableRow key={vleresimet.vleresimiId}>
                                 <TableCell width="5">{getEmriProfiById(vleresimet.profId)}</TableCell>
                                 <TableCell width="2">{vleresimet.nota}</TableCell>

@@ -15,7 +15,7 @@ export default function PrindProfileList() {
                 </Grid.Row>
                
                 <Grid.Row>
-                    <p className='profileData'> Username:{prindi?.username}</p>
+                    <p className='profileData'> Username:{prindi?.userName}</p>
                 </Grid.Row>
                
                 <Grid.Row>

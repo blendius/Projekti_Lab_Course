@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace API.DTOs
@@ -13,8 +14,8 @@ namespace API.DTOs
         //[RegularExpression("(?=.\\d)(?=.[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = "Password duhet te jete kompleks!")]
         public string Password { get; set; }
         [Required]
-        public string Username { get; set; }
-        public string DataLindjes { get; set; }
-        public int NrTel { get; set; }
+        public string UserName { get; set; }
+        public DateTime DataLindjes { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

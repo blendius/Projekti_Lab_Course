@@ -137,7 +137,7 @@ const Prinderit = {
   list: () => requests.get<Prindi[]>("/prinderit"),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
   create: (profesori: Prindi) => axios.post<void>("/prinderit", profesori),
-  update: (profesori: Prindi) =>
+  update: (profesori: Prindi | Parent) =>
     axios.put<void>(`/prinderit/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/prinderit/${id}`),
 };
