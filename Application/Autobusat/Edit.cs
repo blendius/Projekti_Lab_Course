@@ -27,7 +27,7 @@ namespace Application.Autobusat
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var autobusi = await _context.Autobusat.FindAsync(request.Autobusi.targatId);
+                var autobusi = await _context.Autobusat.FindAsync(request.Autobusi.AutobusiId);
 
                 _mapper.Map(request.Autobusi, autobusi);
 

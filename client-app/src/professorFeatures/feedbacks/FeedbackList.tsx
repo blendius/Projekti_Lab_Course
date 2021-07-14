@@ -6,17 +6,16 @@ import { useStore } from '../../app/stores/store';
 
 
 export default observer(function FeedbackList() {
-    const { feedbackStore } = useStore();
+    const { feedbackStore, profesoriStore } = useStore();
     const { feedbackByDate } = feedbackStore;
-
     return (
-        <List divided relaxed inverted>
+        <List divided relaxed >
             {feedbackByDate.map(feedback => (
                 <List.Item key={feedback.feedbackID}>
-                    <List.Icon name='address card' size='large' verticalAlign='middle' />
+                    <List.Icon name='envelope' size='large' verticalAlign='middle' />
                     <List.Content>
-                        <List.Header as='a'><label>Titulli:  </label> {feedback.subject}</List.Header>
-                        <div className="data" ><label>Nxenesi:  </label>  {feedback.nxenesiEmail}</div>
+                        <List.Header as='a'>{feedback.subject}</List.Header>
+                        <div className="data" ><label>Profesori:  </label>  {profesoriStore.getEmriProfById(feedback.profesoriId)}</div>
                     </List.Content>
                     <Item.Extra>
                         <Button onClick={() => feedbackStore.selectFeedback(feedback.feedbackID)} floated='right' content='Shiko Detajet' color='blue' />

@@ -15,7 +15,7 @@ export default function AktivitetetDetails() {
             <Card.Content>
                 <Card.Header>{autobusi.brendi}</Card.Header>
                 <Card.Description>
-                    <div><label>Targat: </label>{autobusi.targatId}</div>
+                    <div><label>Targat: </label>{autobusi.targat}</div>
                 </Card.Description>
                 <Card.Meta>
                     <span>Data: {autobusi.vitiProdhimit}</span>
@@ -23,7 +23,7 @@ export default function AktivitetetDetails() {
             </Card.Content>
             <Card.Content extra>
                 <ButtonGroup widths='2'>
-                    <Button onClick={() => openForm(autobusi.AutobusiId)} basic color='blue' content='Edito' />
+                    <Button onClick={() => openForm(autobusi.autobusiId)} basic color='blue' content='Edito' />
                     <Button onClick={cancelSelectedAutobusi} basic color='grey' content='Anulo' />
                 </ButtonGroup>
             </Card.Content>

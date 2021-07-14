@@ -1,7 +1,8 @@
 export interface Autobusi {
-  AutobusiId: string;
-  targatId: string;
+  autobusiId: string;
+  targat: string;
   brendi: string;
   vitiProdhimit: string;
   nrPasagjereve: number;
+  oraNisjes:string;
 }

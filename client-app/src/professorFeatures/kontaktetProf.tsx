@@ -19,8 +19,7 @@ function ShowKontaktetProf() {
     <Fragment>
       <div>
 
-        <KontaktiProfDashboard
-        />
+        <KontaktiProfDashboard/>
       </div>
 
 

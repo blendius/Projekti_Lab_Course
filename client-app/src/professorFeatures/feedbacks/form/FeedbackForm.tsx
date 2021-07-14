@@ -1,45 +1,45 @@
 import { Formik, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { Button, Rating, Segment, TextArea } from 'semantic-ui-react';
+import { Button, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
-import MySelectInput from '../../app/common/form/MySelectInput';
-import MyTextInput from '../../app/common/form/MyTextInput';
-import { FeedbackToNxenesi } from '../../app/models/feedbackToNxenesi';
-import { useStore } from '../../app/stores/store';
-
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import MyTextArea from '../../../app/common/form/MyTextArea';
+import MyTextInput from '../../../app/common/form/MyTextInput';
+import { FeedbackToNxenesi } from '../../../app/models/feedbackToNxenesi';
+import { useStore } from '../../../app/stores/store';
 
 
 
 export default observer(function FeedbackForm() {
 
-    const { feedbackStore, nxenesiStore ,profesoriStore} = useStore();
-    const { selectedFeedback, closeForm, loading, createFeedback } = feedbackStore;
-    
+    const { feedbackStore, profesoriStore, nxenesiStore } = useStore();
+    const { selectedFeedback, closeForm, loading, createFeedback, cancelSelectedFeedback } = feedbackStore;
     const { nxenesitByDate } = nxenesiStore;
 
 
     useEffect(() => {
         nxenesiStore.loadNxenesit();
     }, [])
-    const initialState = selectedFeedback ?? {
 
+    const initialState = selectedFeedback ?? {
         feedbackID: '',
+        profesoriId: '',
         nxenesiEmail: '',
         subject: '',
         message: '',
         messageSentDate: '',
         rating: 0,
-        profesoriId : ''
+        isReply : false,
     }
     const validationSchema = Yup.object({
         subject: Yup.string().required('Subjekti duhet te plotesohet !'),
         message: Yup.string().required('Mesazhi duhet te plotesohet!'),
-        messageSentDate: Yup.string().required('Data duhet te plotesohet!'),
-        nxenesiEmail: Yup.string().required("Email duhet te plotesohet!").email('Shkruani nje email valide'),
-        rating: Yup.number().required("Vlersimi i nevojshem")
+        dataEDergimit: Yup.string().required('Data duhet te plotesohet!'),
+        nxenesiEmail: Yup.string().email('Shkruani nje email valide')
     })
 
+    const [feedback, setKontakti] = useState(initialState);
 
     function handleFormSubmit(feedback: FeedbackToNxenesi) {
         createFeedback(feedback);
@@ -48,13 +48,13 @@ export default observer(function FeedbackForm() {
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
-                enableReinitialize initialValues={initialState}
+                enableReinitialize initialValues={feedback}
                 onSubmit={values => handleFormSubmit(values)}>
-                {({ handleSubmit, isSubmitting, dirty }) => (
+                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MySelectInput options=
                             {
-                            nxenesitByDate.map(nxenesi => (
+                                nxenesitByDate.map(nxenesi => (
                                     {
                                         key: nxenesi.id,
                                         text: nxenesi.fullName,
@@ -62,14 +62,12 @@ export default observer(function FeedbackForm() {
                                     }
                                 ))
                             } placeholder='Nxenesi' name='nxenesiEmail' />
-                        <MyTextInput type='text' placeholder='Titulli' name='subject' />
-                        <TextArea type='text' placeholder='Mesazhi' name='message' /><br /><br/>
-                        <label>Vlersimi </label>
-                        <Rating icon='star' defaultRating={5} maxRating={5} name='vlersimi'  />
-                        {/* <MyTextInput type='date' placeholder='Data e Dergimit' name='messageSentDate' /> */}
-                        <Button disabled={isSubmitting || !dirty }
+                        <MyTextInput type='text' placeholder='Subjekti' name='subject' />
+                        <MyTextArea rows={4} type='text' placeholder='Mesazhi' name='message' />
+                        {/* <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit' /> */}
+                        <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
-                        <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
+                        <Button onClick={cancelSelectedFeedback} floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
             </Formik>

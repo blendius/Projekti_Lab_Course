@@ -18,17 +18,18 @@ export default observer(function AutobusatList() {
         <Segment>
             <Item.Group divided>
                 {getAutobusat.map(autobusi => (
-                    <Item key={autobusi.AutobusiId}>
+                    <Item key={autobusi.autobusiId}>
                         <Item.Content>
-                            <Item.Header as='a'>Targa: {autobusi.AutobusiId}</Item.Header>
-                            <Item.Header>{autobusi.brendi}</Item.Header>
+                            <Item.Header as='a'>Targat: {autobusi.targat}</Item.Header>
+                            <Item.Meta>Brendi : {autobusi.brendi}</Item.Meta>
                             <Item.Meta>Prodhuar ne daten: {autobusi.vitiProdhimit}</Item.Meta>
+                            <Item.Meta>Ora e nisjes : {autobusi.oraNisjes}</Item.Meta>
 
                             <Item.Extra>
-                                <Button onClick={() => autobusiStore.selectAutobusi(autobusi.AutobusiId)} floated='right' content='Shiko detajet' color='blue' />
+                                <Button onClick={() => autobusiStore.selectAutobusi(autobusi.autobusiId)} floated='right' content='Shiko detajet' color='blue' />
                                 <Button
-                                    name={autobusi.AutobusiId}
-                                    loading={loading && target === autobusi.AutobusiId}
+                                    name={autobusi.autobusiId}
+                                    loading={loading && target === autobusi.autobusiId}
                                     onClick={(e) => setOpenConfirm(true)}
                                     floated='right'
                                     content='Fshij'
@@ -38,7 +39,7 @@ export default observer(function AutobusatList() {
                                     open={openConfirm}
                                     onCancel={() => setOpenConfirm(false)}
                                     onConfirm={(e) => {
-                                        handleAktivitetiDelete(e, autobusi.AutobusiId);
+                                        handleAktivitetiDelete(e, autobusi.autobusiId);
                                         setOpenConfirm(false);
                                     }}
                                 />

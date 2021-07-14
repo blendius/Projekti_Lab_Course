@@ -19,11 +19,11 @@ export default observer(function OrariiForm() {
     const { selectedPajisja, closeForm, createPajisja, updatePajisja, loading } = pajisjetStore;
 
     const initialState = selectedPajisja ?? {
-        PajisjaId: '',
+        pajisjaId: '',
         kodiProduktit: '',
         emriPajisjes: '',
         dataEShtimit: '',
-        LaburatioriId: '',
+        laburatioriId: '',
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default observer(function OrariiForm() {
         });
     }
     function handleSubmit(pajisja: Pajisja) {
-        pajisja.PajisjaId ? updatePajisja(pajisja) : createPajisja(pajisja, pajisja.LaburatioriId);
+        pajisja.pajisjaId ? updatePajisja(pajisja) : createPajisja(pajisja, pajisja.laburatioriId);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -60,7 +60,7 @@ export default observer(function OrariiForm() {
                         <MyTextInput type='text' placeholder='Kodi Produktit' name='kodiProduktit' />
                         <MyTextInput type='text' placeholder='Emri Produktit' name='emriPajisjes' />
                         <MyTextInput type='date' placeholder='Data e shtimit' name='dataEShtimit' />
-                        <MySelectInput options={arr} placeholder='LaburatioriId' name='LaburatioriId' />
+                        <MySelectInput options={arr} placeholder='LaburatioriId' name='laburatioriId' />
                         <Button
                             // disabled={isSubmitting || !dirty || !isValid}
                             loading={loading}

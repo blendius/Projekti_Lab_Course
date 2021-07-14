@@ -103,7 +103,7 @@ const Aktivitetet = {
   create: (aktiviteti: Aktiviteti) =>
     requests.post<void>(`/aktivitetet`, aktiviteti),
   update: (aktiviteti: Aktiviteti) =>
-    requests.put<void>(`/aktivitetet/${aktiviteti.AktivitetiId}`, aktiviteti),
+    requests.put<void>(`/aktivitetet/${aktiviteti.aktivitetiId}`, aktiviteti),
   delete: (id: string) => axios.delete<void>(`/aktivitetet/${id}`),
 };
 const Autobusat = {
@@ -111,7 +111,7 @@ const Autobusat = {
   details: (id: string) => requests.get<Autobusi>(`/autobusat/${id}`),
   create: (autobusi: Autobusi) => requests.post<void>(`/autobusat`, autobusi),
   update: (autobusi: Autobusi) =>
-    requests.put<void>(`/autobusat/${autobusi.AutobusiId}`, autobusi),
+    requests.put<void>(`/autobusat/${autobusi.autobusiId}`, autobusi),
   delete: (id: string) => axios.delete<void>(`/autobusat/${id}`),
 };
 // const Autobusat = {
@@ -230,7 +230,7 @@ const Pajisjet = {
   create: (pajisja: Pajisja, LabId: string) =>
     axios.post<void>(`/pajisjet/${LabId}`, pajisja),
   update: (pajisja: Pajisja) =>
-    axios.put<void>(`/pajisjet/${pajisja.PajisjaId}`, pajisja),
+    axios.put<void>(`/pajisjet/${pajisja.pajisjaId}`, pajisja),
   delete: (id: string) => axios.delete<void>(`/pajisjet/${id}`),
 };
 const Kontaktet = {

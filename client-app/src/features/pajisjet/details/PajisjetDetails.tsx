@@ -26,17 +26,17 @@ export default observer(function PajisjetDetais() {
                     <Card.Description className='teDhena'>
                         <Card.Header className='Emri'>{pajisja.emriPajisjes}</Card.Header>
                         <div className="data"><label >Pajisja Kodi:  </label>  {pajisja.kodiProduktit}</div>
-                        <div className="data"><label >LaboratoriId:  </label>  {pajisja.LaburatioriId}</div>
+                        <div className="data"><label >LaboratoriId:  </label>  {pajisja.laburatioriId}</div>
                         <div className="data"><label>Data e shtimit: :</label> {pajisja.dataEShtimit}</div>
                     </Card.Description>
                 </Card.Content>
             </div>
             <Card.Content extra>
 
-                <Button onClick={() => openForm(pajisja.PajisjaId)} primary content='Edit' className='detailsbtn' />
-                <Button name={pajisja.PajisjaId}
-                    loading={loading && target === pajisja.PajisjaId}
-                    onClick={(e) => handleLaburatoriDelete(e, pajisja.PajisjaId)}
+                <Button onClick={() => openForm(pajisja.pajisjaId)} primary content='Edit' className='detailsbtn' />
+                <Button name={pajisja.pajisjaId}
+                    loading={loading && target === pajisja.pajisjaId}
+                    onClick={(e) => handleLaburatoriDelete(e, pajisja.pajisjaId)}
                     content='Fshije' className='detailsbtn' color='red' />
                 <Button onClick={cancelselectedPajisja} color='grey' content='cancel' className='detailsbtn' />
 

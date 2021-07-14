@@ -1,7 +1,7 @@
 export interface Pajisja {
-  PajisjaId: string;
+  pajisjaId: string;
   kodiProduktit: string;
   emriPajisjes: string;
   dataEShtimit: string;
-  LaburatioriId: string;
+  laburatioriId: string;
 }

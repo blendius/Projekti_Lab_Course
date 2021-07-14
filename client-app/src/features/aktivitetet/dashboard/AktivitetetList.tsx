@@ -18,17 +18,17 @@ export default observer(function AktivitetetList() {
         <Segment>
             <Item.Group divided>
                 {getAktivitetet.map(aktiviteti => (
-                    <Item key={aktiviteti.AktivitetiId}>
+                    <Item key={aktiviteti.aktivitetiId}>
                         <Item.Content>
-                            <Item.Header as='a'>Emri: {aktiviteti.Emri}</Item.Header>
-                            <Item.Description>{aktiviteti.Pershkrimi}</Item.Description>
-                            <Item.Meta>Data: {aktiviteti.DataMbajtjes}</Item.Meta>
+                            <Item.Header as='a'>Emri: {aktiviteti.emri}</Item.Header>
+                            <Item.Description>{aktiviteti.pershkrimi}</Item.Description>
+                            <Item.Meta>Data: {aktiviteti.dataMbajtjes}</Item.Meta>
 
                             <Item.Extra>
-                                <Button onClick={() => aktivitetiStore.selectAktiviteti(aktiviteti.AktivitetiId)} floated='right' content='Shiko detajet' color='blue' />
+                                <Button onClick={() => aktivitetiStore.selectAktiviteti(aktiviteti.aktivitetiId)} floated='right' content='Shiko detajet' color='blue' />
                                 <Button
-                                    name={aktiviteti.AktivitetiId}
-                                    loading={loading && target === aktiviteti.AktivitetiId}
+                                    name={aktiviteti.aktivitetiId}
+                                    loading={loading && target === aktiviteti.aktivitetiId}
                                     onClick={(e) => setOpenConfirm(true)}
                                     floated='right'
                                     content='Fshij'
@@ -38,7 +38,7 @@ export default observer(function AktivitetetList() {
                                     open={openConfirm}
                                     onCancel={() => setOpenConfirm(false)}
                                     onConfirm={(e) => {
-                                        handleAktivitetiDelete(e, aktiviteti.AktivitetiId);
+                                        handleAktivitetiDelete(e, aktiviteti.aktivitetiId);
                                         setOpenConfirm(false);
                                     }}
                                 />

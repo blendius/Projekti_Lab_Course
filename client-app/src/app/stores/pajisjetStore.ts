@@ -26,7 +26,7 @@ export default class PajisjaStore {
 
       pajisjet.forEach((pajisja) => {
         pajisja.dataEShtimit = pajisja.dataEShtimit.split("T")[0];
-        this.pajisjaRegistry.set(pajisja.PajisjaId, pajisja);
+        this.pajisjaRegistry.set(pajisja.pajisjaId, pajisja);
       });
       this.setLoadingInitial(false);
     } catch (error) {
@@ -56,11 +56,11 @@ export default class PajisjaStore {
 
   createPajisja = async (pajisja: Pajisja, LabId: string) => {
     this.loading = true;
-    pajisja.PajisjaId = uuid();
+    pajisja.pajisjaId = uuid();
     try {
       await agent.Pajisjet.create(pajisja, LabId);
       runInAction(() => {
-        this.pajisjaRegistry.set(pajisja.LaburatioriId, pajisja);
+        this.pajisjaRegistry.set(pajisja.laburatioriId, pajisja);
         this.selectedPajisja = pajisja;
         this.editMode = false;
         this.loading = false;
@@ -78,7 +78,7 @@ export default class PajisjaStore {
     try {
       await agent.Pajisjet.update(pajisja);
       runInAction(() => {
-        this.pajisjaRegistry.set(pajisja.LaburatioriId, pajisja);
+        this.pajisjaRegistry.set(pajisja.laburatioriId, pajisja);
         this.selectedPajisja = pajisja;
         this.editMode = false;
         this.loading = false;
@@ -96,7 +96,7 @@ export default class PajisjaStore {
       await agent.Pajisjet.delete(id);
       runInAction(() => {
         this.pajisjaRegistry.delete(id);
-        if (this.selectedPajisja?.PajisjaId === id)
+        if (this.selectedPajisja?.pajisjaId === id)
           this.cancelselectedPajisja();
         this.loading = false;
       });
