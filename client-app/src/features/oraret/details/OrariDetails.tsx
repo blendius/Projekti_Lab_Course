@@ -6,13 +6,17 @@ import { useStore } from "../../../app/stores/store";
 export default function OrariDetails() {
   const { orariStore } = useStore();
   const { selectedOrari: orari, openForm, cancelSelectedOrari } = orariStore;
+  // const { klasaStore } = useStore();
+  // const { klasatByVit, getKlasaID } = klasaStore;
+  // const { paraleljaStore } = useStore();
+  // const { getParaleljaNumribyId } = paraleljaStore;
 
   if (!orari) return <LoadingComponent />;
 
   return (
     <Card>
       <Card.Content>
-        <Card.Header>{orari.emriOrarit}</Card.Header>
+        <Card.Header>{orari.klasaId}</Card.Header>
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">

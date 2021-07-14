@@ -14,13 +14,17 @@ export default observer(function OrariiForm() {
   const { orariStore } = useStore();
   const { lendaStore } = useStore();
   const { lendetByDate, loadLendet } = lendaStore;
+  const { klasaStore } = useStore();
+  const { klasatByVit, loadKlasat } = klasaStore;
+  const { paraleljaStore } = useStore();
+  const { loadParalelet, getParaleljaNumribyId } = paraleljaStore;
 
   const { selectedOrari, closeForm, createOrari, updateOrari, loading } =
     orariStore;
 
   const initialState = selectedOrari ?? {
     orariId: "",
-    emriOrarit: "",
+    klasaId: "",
     hene1: "",
     hene2: "",
     hene3: "",
@@ -55,6 +59,8 @@ export default observer(function OrariiForm() {
 
   useEffect(() => {
     loadLendet();
+    loadKlasat();
+    loadParalelet();
   }, []);
   const [orari, setOrari] = useState(initialState);
   var lenda = lendetByDate;
@@ -66,6 +72,16 @@ export default observer(function OrariiForm() {
       value: lenda[i].emriLendes,
     });
   }
+  var klaset = klasatByVit;
+  var arr2: any = [];
+  var len = klasatByVit.length;
+  for (var i = 0; i < len; i++) {
+    arr2.push({
+      text: klaset[i].viti + "-" + getParaleljaNumribyId(klaset[i].paraleljaId),
+      value: klaset[i].klasaId,
+    });
+  }
+
   function handleSubmit(orari: Orari) {
     orari.orariId ? updateOrari(orari) : createOrari(orari);
   }
@@ -96,8 +112,12 @@ export default observer(function OrariiForm() {
       >
         {({ handleSubmit, isValid, isSubmitting, dirty }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-            <MyTextInput name="emriOrarit" placeholder="Emri i Orarit" />
-
+            <MySelectInput
+              label="Klasa"
+              options={arr2}
+              placeholder="Klasa"
+              name="klasaId"
+            />
             <MySelectInput
               label="E Hene Ora 1"
               options={arr}
@@ -249,34 +269,34 @@ export default observer(function OrariiForm() {
               name="premte1"
             />
             <MySelectInput
-              label="E Enjte Ora 2"
+              label="E Premte Ora 2"
               options={arr}
               placeholder="Lenda"
-              name="enjte2"
+              name="premte2"
             />
             <MySelectInput
-              label="E Enjte Ora 3"
+              label="E Premte Ora 3"
               options={arr}
               placeholder="Lenda"
-              name="enjte3"
+              name="premte3"
             />
             <MySelectInput
-              label="E Enjte Ora 4"
+              label="E Premte Ora 4"
               options={arr}
               placeholder="Lenda"
-              name="enjte4"
+              name="premte4"
             />
             <MySelectInput
-              label="E Enjte Ora 5"
+              label="E Premte Ora 5"
               options={arr}
               placeholder="Lenda"
-              name="enjte5"
+              name="premte5"
             />
             <MySelectInput
-              label="E Enjte Ora 6"
+              label="E Premte Ora 6"
               options={arr}
               placeholder="Lenda"
-              name="enjte6"
+              name="premte6"
             />
             <Button
               // disabled={isSubmitting || !dirty || !isValid}

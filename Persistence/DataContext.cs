@@ -44,29 +44,40 @@ namespace Persistence
                 .HasForeignKey(pp => pp.ProfesoriID);
 
             modelbuilder.Entity<Kontakti>()
-            .HasOne(p => p.Prindi)
-            .WithMany(p => p.Kontaktet)
-             .HasForeignKey(pp => pp.PrindiId);
+                .HasOne(p => p.Prindi)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pp => pp.PrindiId);
 
             modelbuilder.Entity<Laburatiori>()
-          .HasOne(p => p.Lenda)
-          .WithMany(p => p.Laburatoret)
-           .HasForeignKey(pp => pp.LendaId);
+                .HasOne(p => p.Lenda)
+                .WithMany(p => p.Laburatoret)
+                .HasForeignKey(pp => pp.LendaId);
+
+            modelbuilder.Entity<Orari>()
+                .HasKey(pk => new { pk.OrariId });
+            modelbuilder.Entity<Orari>()
+                .HasOne(p => p.Klasa)
+                .WithMany(p => p.Oraret)
+                .HasForeignKey(pp => pp.KlasaID);
 
             modelbuilder.Entity<Pajisja>()
-           .HasOne(p => p.Laburatiori)
-           .WithMany(p => p.Pajisjet)
-            .HasForeignKey(pp => pp.LaburatioriId);
+                .HasOne(p => p.Laburatiori)
+                .WithMany(p => p.Pajisjet)
+                .HasForeignKey(pp => pp.LaburatioriId);
 
             modelbuilder.Entity<Klasa>()
-            .HasOne(p => p.Paralelja)
-            .WithMany(k => k.Klasa)
-            .HasForeignKey(kp => kp.ParaleljaId);
+                .HasOne(p => p.Paralelja)
+                .WithMany(k => k.Klasa)
+                .HasForeignKey(kp => kp.ParaleljaId);
 
             modelbuilder.Entity<Salla>()
-            .HasOne(s => s.Klasa)
-            .WithOne(k => k.Salla)
-            .HasForeignKey<Klasa>(k => k.SallaId);
+                .HasOne(k => k.Klasa)
+                .WithOne(k => k.Salla)
+                .HasForeignKey<Klasa>(k => k.SallaId);
+
+            
+
+            
 
             modelbuilder.Entity<Familja>()
                 .HasKey(pn => new { pn.FamiljaId });
