@@ -7,7 +7,6 @@ export default class FeedbackStore {
     profId: string | null = null;
     feedbackRegistry = new Map<string, FeedbackToNxenesi>();
     feedbackRegistryReplay = new Map<string, FeedbackToNxenesi>();
-
     selectedFeedback: FeedbackToNxenesi | undefined = undefined;
     editMode = false;
     loading = false;

@@ -8,16 +8,16 @@ import { useStore } from '../../app/stores/store';
 
 
 export default observer(function NxenesiFeedbacks() {
-    const { feedbackStore, nxenesiStore ,profesoriStore} = useStore();
+    const { feedbackStore, nxenesiStore, profesoriStore } = useStore();
     const { feedbackByDate, deleteFeedback, loading } = feedbackStore;
-    const {loadProfesori} = profesoriStore;
+    const { loadProfesori } = profesoriStore;
     const [target, setTarget] = useState('');
     const [openConfirm, setOpenConfirm] = useState(false)
-    const { nxenesi } = nxenesiStore;
-
+    const { nxenesiSelected: nxenesi } = nxenesiStore;
+    console.log(nxenesi?.email)
     useEffect(() => {
 
-        
+
         //nxenesiStore.getNxenesi();
 
         feedbackStore.loadFeedbacksNxenesi(nxenesi?.email);
@@ -40,15 +40,15 @@ export default observer(function NxenesiFeedbacks() {
 
                                 <div><label>Email: </label>{feedback.nxenesiEmail}</div>
                                 <div><label>Title: </label>{feedback.subject}</div>
-                                
+
                                 <div>
                                     <label >Rating :</label>
                                     <Rating disabled maxRating={5} defaultRating={feedback.rating}></Rating>
                                 </div>
                                 <div><label>Date Sent: </label>{feedback.messageSentDate}</div>
 
-                                <TextArea disabled rows="4"  value={feedback.message.length <= 0 ? feedback.message : "No Message has been provided" }>
-                                    
+                                <TextArea disabled rows="4" value={feedback.message}>
+
                                 </TextArea>
                             </Item.Description>
                             <Item.Extra>

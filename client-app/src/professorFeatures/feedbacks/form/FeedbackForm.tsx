@@ -42,6 +42,7 @@ export default observer(function FeedbackForm() {
     const [feedback, setKontakti] = useState(initialState);
 
     function handleFormSubmit(feedback: FeedbackToNxenesi) {
+        console.log("here")
         createFeedback(feedback);
     }
 
@@ -65,7 +66,7 @@ export default observer(function FeedbackForm() {
                         <MyTextInput type='text' placeholder='Subjekti' name='subject' />
                         <MyTextArea rows={4} type='text' placeholder='Mesazhi' name='message' />
                         {/* <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit' /> */}
-                        <Button disabled={isSubmitting || !dirty || !isValid}
+                        <Button 
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={cancelSelectedFeedback} floated='right' type='button' content='Cancel' />
                     </Form>

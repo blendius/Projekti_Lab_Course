@@ -8,6 +8,7 @@ import { useStore } from '../../app/stores/store';
 export default observer(function FeedbackList() {
     const { feedbackStore, profesoriStore } = useStore();
     const { feedbackByDate } = feedbackStore;
+    
     return (
         <List divided relaxed >
             {feedbackByDate.map(feedback => (
