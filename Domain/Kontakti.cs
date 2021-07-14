@@ -16,5 +16,6 @@ namespace Domain
         public string Subjekti { get; set; }
         public string Mesazhi { get; set; }
         public DateTime DataEDergimit { get; set; } = DateTime.Now;
+        public bool IsReply { get; set; }
     }
 }

@@ -5,28 +5,25 @@ import { useStore } from '../app/stores/store';
 import KontaktiProfDashboard from './Kontaktet/dashboard/KontaktiProfDashboard';
 // import KontaktiDashboardProf from '../Kontaktet/dashboard/KontaktiDashboardProf';
 
- function ShowKontaktetProf() {
+function ShowKontaktetProf() {
 
-  const{kontaktiStore, profesoriStore}=useStore();
-  const{ prof}=profesoriStore;
-
-console.log(prof?.email);
+  const { kontaktiStore, profesoriStore, prindiStore } = useStore();
+  const { prof } = profesoriStore;
 
   useEffect(() => {
     kontaktiStore.loadKontaktetProf(prof?.id);
-  }, [kontaktiStore,prof?.id]) 
-
-  //if (kontaktiStore.loadingInitial) return <LoadingComponent content='Loading app' />
+    prindiStore.loadPrinderit();
+  }, [kontaktiStore, prof?.id, prindiStore])
 
   return (
     <Fragment>
       <div>
-        
-          <KontaktiProfDashboard
-          />
+
+        <KontaktiProfDashboard
+        />
       </div>
 
-     
+
     </Fragment>
   )
 }

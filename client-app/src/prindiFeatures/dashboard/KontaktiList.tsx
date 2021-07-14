@@ -8,18 +8,17 @@ import { useStore } from '../../app/stores/store';
 export default observer(function KontaktiList() {
 const {kontaktiStore, profesoriStore}= useStore();
 const {kontaktetByDate}=kontaktiStore;
-
     return (
         <List divided relaxed >
             {kontaktetByDate.map(kontakti => (
                 <List.Item key={kontakti.kontaktiId}>
-                        <List.Icon name='inbox' size='large' verticalAlign='middle' />
+                        <List.Icon name='envelope' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='a'>{kontakti.subjekti}</List.Header>
                             <div className="data" ><label>Profesori:  </label>  {profesoriStore.getEmriProfById(kontakti.profesoriId)}</div>
                         </List.Content>
                         <Item.Extra>
-                            <Button onClick={() => kontaktiStore.selectKontakti(kontakti.kontaktiId)} floated='right' content='Shiko Detajet' color='blue' />
+                            <Button onClick={() => kontaktiStore.selectKontakti(kontakti.kontaktiId)} floated='right' content='Shiko Detajet' color='blue'  />
                             
                         </Item.Extra>
 

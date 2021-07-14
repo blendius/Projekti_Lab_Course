@@ -4,5 +4,6 @@ export interface Kontakti {
     profesoriId: string;
     subjekti: string;
     mesazhi: string;
-    dataEDergimit: string;
+    dataEDergimit: string|any;
+    isReply: boolean;
 }

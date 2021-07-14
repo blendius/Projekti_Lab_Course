@@ -6,6 +6,7 @@ import { useStore } from "./store";
 
 export default class KontaktiStore {
     prindiId: string | null = null;
+    kontaktiRegistryReply = new Map<string, Kontakti>();
     kontaktiRegistry = new Map<string, Kontakti>();
     selectedKontakti: Kontakti | undefined = undefined;
     editMode = false;
@@ -20,6 +21,9 @@ export default class KontaktiStore {
     get kontaktetByDate() {
         return Array.from(this.kontaktiRegistry.values()).sort((a, b) => Date.parse(a.dataEDergimit) - Date.parse(b.dataEDergimit))
     }
+    get kontaktetReplyByDate() {
+        return Array.from(this.kontaktiRegistryReply.values()).sort((a, b) => Date.parse(a.dataEDergimit) - Date.parse(b.dataEDergimit))
+    }
 
     loadKontaktetPrindi = async (id: string | undefined) => {
         try {
@@ -27,7 +31,12 @@ export default class KontaktiStore {
 
             kontaketet.forEach(kontakti => {
                 kontakti.dataEDergimit = kontakti.dataEDergimit.split('T')[0];
-                this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti);
+                
+                if (kontakti.isReply) {
+                    this.kontaktiRegistryReply.set(kontakti.kontaktiId, kontakti);
+                } else {
+                    this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti);
+                }
             })
             this.setLoadingInitial(false);
         }
@@ -47,7 +56,13 @@ export default class KontaktiStore {
 
             kontaketet.forEach(kontakti => {
                 kontakti.dataEDergimit = kontakti.dataEDergimit.split('T')[0];
-                this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti);
+
+                if (kontakti.isReply) {
+                    this.kontaktiRegistryReply.set(kontakti.kontaktiId, kontakti);
+                } else {
+                    this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti);
+                }
+
             })
             this.setLoadingInitial(false);
         }
@@ -65,6 +80,9 @@ export default class KontaktiStore {
     }
     selectKontakti = (id: string) => {
         this.selectedKontakti = this.kontaktiRegistry.get(id);
+    }
+    selectKontaktiReply = (id: string) => {
+        this.selectedKontakti = this.kontaktiRegistryReply.get(id);
     }
 
     cancelSelectedKontakti = () => {
@@ -84,7 +102,12 @@ export default class KontaktiStore {
         try {
             await agent.Kontaktet.create(kontakti, profEmail);
             runInAction(() => {
-                this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti)
+                
+                if (kontakti.isReply) {
+                    this.kontaktiRegistryReply.set(kontakti.kontaktiId, kontakti);
+                } else {
+                    this.kontaktiRegistry.set(kontakti.kontaktiId, kontakti);
+                }
                 this.selectedKontakti = kontakti;
                 this.editMode = false;
                 this.loading = false
