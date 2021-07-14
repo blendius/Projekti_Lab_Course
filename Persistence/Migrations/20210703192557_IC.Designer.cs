@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210703170943_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20210703192557_IC")]
+    partial class IC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

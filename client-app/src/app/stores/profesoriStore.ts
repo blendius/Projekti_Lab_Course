@@ -203,4 +203,8 @@ export default class ProfesoriStore {
             })
         }
     }
+
+    public getEmriProfiById = (id:string)=>{
+        return this.professorRegistry.get(id)?.name;
+    }
 }

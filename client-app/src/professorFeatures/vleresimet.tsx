@@ -24,10 +24,8 @@ function ShowVlersimet() {
 
   return (
     <Fragment>
-
         <VleresimiDashboard
         />
- 
     </Fragment>
   )
 }

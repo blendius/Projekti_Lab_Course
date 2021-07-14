@@ -268,8 +268,11 @@ const Klasat = {
 };
 
 const Vleresimet = {
-  
-  list: (profId:string |undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
+  list: (profId: string | undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
+  listNxenesi: (nxenesiId: string | undefined) =>
+    requests.get<Vleresimi[]>(`/Vleresimet/nxenesi/${nxenesiId}`),
+  listNxenesiByPrindi: (prindiId: string | undefined) =>
+    requests.get<Familja[]>(`/Vleresimet/prindi/${prindiId}`),
   details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
   create: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
   update: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),

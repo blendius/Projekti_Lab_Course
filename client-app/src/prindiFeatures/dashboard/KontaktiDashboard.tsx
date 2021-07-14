@@ -6,12 +6,12 @@ import KontaktiDetails from '../details/KontaktiDetails';
 import KontaktiForm from '../form/KontaktiForm';
 import KontaktiList from './KontaktiList';
 
-export default observer( function KontaktiDashboard() {
+export default observer(function KontaktiDashboard() {
     const { kontaktiStore } = useStore();
     const { selectedKontakti, editMode } = kontaktiStore
     return (
         <Grid>
-                        <Grid.Column width='1'></Grid.Column>
+            <Grid.Column width='1'></Grid.Column>
 
             <Grid.Column width='7'>
                 <KontaktiList />

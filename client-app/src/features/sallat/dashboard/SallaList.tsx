@@ -29,14 +29,14 @@ export default observer(function SallaList() {
                         {sallatByName.map(sallat => (
                             <TableRow key={sallat.sallaId}>
                                 <TableCell >{sallat.emriSalles}</TableCell>
-                                <TableCell>
+                                <TableCell width='2'>
                                     <Button
                                         onClick={() => sallaStore.selectSalla(sallat.sallaId)}
                                         floated='right'
                                         content='Shiko'
                                         color='blue' />
                                 </TableCell>
-                                <TableCell>
+                                <TableCell width='2'>
                                     <Button
                                         name={sallat.sallaId}
                                         loading={loading && target === sallat.sallaId}
