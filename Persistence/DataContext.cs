@@ -41,7 +41,9 @@ namespace Persistence
             modelbuilder.Entity<FeedbackToNxenesi>()
                 .HasOne(p => p.Profesori)
                 .WithMany(p => p.FeedbackToNxenesit)
-                .HasForeignKey(pp => pp.ProfesoriID);
+                .HasForeignKey(pp => pp.ProfesoriID)
+                .OnDelete(DeleteBehavior.Cascade);
+            ;
 
             modelbuilder.Entity<Kontakti>()
             .HasOne(p => p.Prindi)
@@ -90,12 +92,15 @@ namespace Persistence
             modelbuilder.Entity<ProfesoriKlasa>()
                 .HasOne(pn => pn.Profesori)
                 .WithMany(p => p.Klaset)
-                .HasForeignKey(pn => pn.ProfId);
+                .HasForeignKey(pn => pn.ProfId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelbuilder.Entity<ProfesoriKlasa>()
                 .HasOne(pn => pn.Klasa)
                 .WithMany(p => p.Profesoret)
-                .HasForeignKey(pn => pn.KlasaId);
-                
+                .HasForeignKey(pn => pn.KlasaId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelbuilder.Entity<Kontakti>()
                 .HasKey(pn => new { pn.KontaktiId });
             modelbuilder.Entity<Kontakti>()
@@ -105,7 +110,9 @@ namespace Persistence
             modelbuilder.Entity<Kontakti>()
                 .HasOne(pn => pn.Profesori)
                 .WithMany(p => p.Kontaktet)
-                .HasForeignKey(pn => pn.ProfesoriId);
+                .HasForeignKey(pn => pn.ProfesoriId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

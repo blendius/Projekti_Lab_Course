@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210714150441_delete")]
+    partial class delete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -924,8 +926,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Profesori", "Profesori")
                         .WithMany("FeedbackToNxenesit")
-                        .HasForeignKey("ProfesoriID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProfesoriID");
 
                     b.Navigation("Profesori");
                 });
@@ -957,8 +958,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Profesori", "Profesori")
                         .WithMany("Kontaktet")
-                        .HasForeignKey("ProfesoriId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProfesoriId");
 
                     b.Navigation("Prindi");
 

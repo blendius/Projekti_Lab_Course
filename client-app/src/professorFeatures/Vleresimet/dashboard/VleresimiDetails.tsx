@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { Button, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
+import { Button, Confirm, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
@@ -15,9 +15,10 @@ export default observer(function VlersimiDetais() {
     const { selectedVlersimi: vlersimi, openForm, cancelSelectedVlersimi } = vleresimiStore;
 
     const [target, setTarget] = useState('');
+    const [openConfirm, setOpenConfirm] = useState(false)
 
-    function handleVlersimiDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-        setTarget(e.currentTarget.name);
+
+    function handleVlersimiDelete(id: string) {
         deleteVlersimi(id)
     }
 
@@ -53,9 +54,18 @@ export default observer(function VlersimiDetais() {
                             </TableCell>
                             <TableCell>
                                 <Button name={vlersimi.vleresimiId}
+                                    onClick={() => setOpenConfirm(true)}
                                     loading={loading && target === vlersimi.vleresimiId}
-                                    onClick={(e) => handleVlersimiDelete(e, vlersimi.vleresimiId)}
                                     content='Fshije' className='detailsbtn' color='red' />
+                                <Confirm
+                                    content='A jeni i sigurt se doni ta fshini?'
+                                    open={openConfirm}
+                                    onCancel={() => setOpenConfirm(false)}
+                                    onConfirm={() => {
+                                        handleVlersimiDelete(vlersimi.vleresimiId);
+                                        setOpenConfirm(false);
+                                    }}
+                                />
                             </TableCell>
                         </Table.Row>
                     </TableBody>

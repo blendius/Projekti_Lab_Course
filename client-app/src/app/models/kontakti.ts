@@ -1,9 +1,9 @@
 export interface Kontakti {
-    prindiId:string;
+    prindiId: string;
     kontaktiId: string;
     profesoriId: string;
     subjekti: string;
     mesazhi: string;
-    dataEDergimit: string|any;
+    dataEDergimit: string | any;
     isReply: boolean;
 }

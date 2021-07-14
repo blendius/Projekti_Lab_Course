@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { SyntheticEvent, useState } from 'react';
-import { Button, Card, Image, List, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
+import { Button, Card, Confirm, Image, List, Segment, Table, TableBody, TableCell } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
@@ -11,9 +11,9 @@ export default observer(function LaburatoriDetais() {
     const { selectedLaburatori: laburatori, openForm, cancelSelectedLaburatori } = laburatoriStore;
 
     const [target, setTarget] = useState('');
+    const [openConfirm, setOpenConfirm] = useState(false)
 
-    function handleLaburatoriDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-        setTarget(e.currentTarget.name);
+    function handleLaburatoriDelete( id: string) {
         deleteLaburatori(id)
     }
 
@@ -45,8 +45,17 @@ export default observer(function LaburatoriDetais() {
                         <TableCell>
                             <Button name={laburatori.id}
                                 loading={loading && target === laburatori.id}
-                                onClick={(e) => handleLaburatoriDelete(e, laburatori.id)}
-                                content='Fshije' className='detailsbtn' color='red' />
+                                onClick={() => setOpenConfirm(true)}
+                                content='Fshije' color='google plus' />
+                            <Confirm
+                                content='A jeni i sigurt se doni ta fshini?'
+                                open={openConfirm}
+                                onCancel={() => setOpenConfirm(false)}
+                                onConfirm={() => {
+                                    handleLaburatoriDelete(laburatori.id);
+                                    setOpenConfirm(false);
+                                }}
+                            />
                         </TableCell>
                     </Table.Row>
                 </TableBody>

@@ -8,11 +8,12 @@ import ProfesoriStore from '../../app/stores/profesoriStore';
 
  function ShowProfessors() {
 
-  const{profesoriStore,klasaStore}=useStore();
+  const{profesoriStore,klasaStore,lendaStore}=useStore();
 
 
   useEffect(() => {
     profesoriStore.loadProfesoret();
+    lendaStore.loadLendet();
     klasaStore.loadKlasat();
     profesoriStore.loadProfesoriKlaset(profesoriStore.selectedProfessor?.id);
   }, [profesoriStore]) 

@@ -20,7 +20,7 @@ export default observer(function ReplyForm() {
         prindiId: selectedKontakti?.prindiId ?? '',
         kontaktiId: '',
         profesoriId: prof?.id ?? '',
-        subjekti: selectedKontakti?.subjekti ??'',
+        subjekti: selectedKontakti?.subjekti +"-Reply" ??'',
         mesazhi: '',
         dataEDergimit: new Date().toString,
         isReply: true

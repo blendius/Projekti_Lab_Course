@@ -10,7 +10,7 @@ import KontaktiListReply from './KontaktiListReply';
 
 export default observer(function KontaktiDashboard() {
     const { kontaktiStore, modalStore } = useStore();
-    const { selectedKontakti, editMode } = kontaktiStore
+    const { selectedKontakti, modalMode } = kontaktiStore
     return (
         <Grid>
             {/* <Grid.Column width='1'></Grid.Column> */}
@@ -31,10 +31,11 @@ export default observer(function KontaktiDashboard() {
                 <hr></hr>
                 <KontaktiListReply />
             </Grid.Column>
-                <>
-                    {modalStore.openModal(<KontaktiDetails />)}
+            <>
+                {modalMode &&
+                    modalStore.openModal(<KontaktiDetails />)}
 
-                </>
+            </>
         </Grid>
     )
 })

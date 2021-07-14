@@ -10,7 +10,7 @@ export default observer(function NxenesiByKlasa() {
     const { vleresimiStore } = useStore();
     const {  NxenesiSortByEmri } = vleresimiStore
     return (
-        <List divided relaxed inverted >
+        <List divided relaxed >
             {NxenesiSortByEmri.map(nxenesi => (
                 <List.Item key={nxenesi.id}>
                     <List.Content>

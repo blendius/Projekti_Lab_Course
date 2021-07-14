@@ -6,5 +6,5 @@ export interface Vleresimi{
     gjysemvjetori: string;
     viti:string;
     lenda:string;
-    dataRegjistrimit:string;
+    dataRegjistrimit:string | any;
 }

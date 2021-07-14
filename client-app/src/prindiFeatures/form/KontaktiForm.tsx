@@ -14,7 +14,7 @@ import { useStore } from '../../app/stores/store';
 export default observer(function KontaktiForm() {
 
     const { kontaktiStore, profesoriStore } = useStore();
-    const { selectedKontakti, closeForm, loading, createKontakti } = kontaktiStore;
+    const { selectedKontakti, closeForm, loading, createKontakti,cancelSelectedKontakti } = kontaktiStore;
 
     const data = new Date();
 
@@ -53,7 +53,7 @@ export default observer(function KontaktiForm() {
                         {/* <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit' /> */}
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
-                        <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
+                        <Button onClick={cancelSelectedKontakti} floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
             </Formik>

@@ -26,7 +26,7 @@ export default observer(function LaburatoriForm() {
     }
     const validationSchema = Yup.object({
         lloji: Yup.string().required('Lloji duhet te plotesohet !'),
-        EmriLendes: Yup.string().required('Lenda duhet te plotesohet!'),
+        lendaId: Yup.string().required('Lenda duhet te plotesohet!'),
         dataEKrijimit: Yup.string().required('Data duhet te plotesohet!'),
         nrPaisjeve: Yup.string().required('Roli duhet te plotesohet!')
     })
@@ -79,7 +79,7 @@ export default observer(function LaburatoriForm() {
                             } placeholder='Lenda' name='lendaId' />
 
                         <MyTextInput type='text' placeholder='Numri i Paisjeve' name='nrPaisjeve' />
-                        <Button disabled={isSubmitting || !dirty || !isValid}
+                        <Button
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>

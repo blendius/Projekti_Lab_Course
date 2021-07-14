@@ -12,6 +12,7 @@ export default class KontaktiStore {
     editMode = false;
     loading = false;
     loadingInitial = true;
+    modalMode=false;
 
 
     constructor() {
@@ -80,19 +81,24 @@ export default class KontaktiStore {
     }
     selectKontakti = (id: string) => {
         this.selectedKontakti = this.kontaktiRegistry.get(id);
+        this.modalMode=true;
     }
     selectKontaktiReply = (id: string) => {
         this.selectedKontakti = this.kontaktiRegistryReply.get(id);
+        this.modalMode=true;
     }
 
     cancelSelectedKontakti = () => {
         this.selectedKontakti = undefined;
+        this.modalMode=false;
+        window.location.reload();
     }
     openForm = (id?: string) => {
         id ? this.selectKontakti(id) : this.cancelSelectedKontakti();
         this.editMode = true;
     }
     closeForm = () => {
+        this.modalMode=false;
         this.editMode = false;
     }
 

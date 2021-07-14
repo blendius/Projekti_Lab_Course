@@ -5,7 +5,7 @@ import { Button, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
 import MySelectInput from '../../../app/common/form/MySelectInput';
 import MyTextInput from '../../../app/common/form/MyTextInput';
-import { gjysemvjetoriOpt } from '../../../app/common/form/options';
+import { gjysemvjetoriOpt, notaOpt } from '../../../app/common/form/options';
 import { Vleresimi } from '../../../app/models/Vleresimi';
 import { useStore } from '../../../app/stores/store';
 
@@ -30,7 +30,9 @@ export default observer(function VlersimiForm() {
         lendaStore.loadLendet();
     }, [lendaStore])
 
-    const initialState = selectedVlersimi ?? {
+    const data = new Date();
+
+    const initialState = selectedVlersimi?? {
         vleresimiId: '',
         profId: '',
         nxenesiId: '',
@@ -38,7 +40,7 @@ export default observer(function VlersimiForm() {
         gjysemvjetori: '',
         viti: '',
         lenda: '',
-        dataRegjistrimit: ''
+        dataRegjistrimit: data
     }
     const validationSchema = Yup.object({
         nota: Yup.string().required('Emri duhet te plotesohet !'),
@@ -101,10 +103,9 @@ export default observer(function VlersimiForm() {
                             } placeholder='Nxenesi' name='nxenesiId' /> */}
 
 
-                        <MySelectInput options={gjysemvjetoriOpt} placeholder='Nota' name='nota' />
+                        <MySelectInput options={notaOpt} placeholder='Nota' name='nota' />
                         <MySelectInput options={gjysemvjetoriOpt} placeholder='Gjysemvjetori' name='gjysemvjetori' />
                         <MySelectInput options={gjysemvjetoriOpt} placeholder='Viti' name='viti' />
-                        <MyTextInput type='date' placeholder='Data e Regjistrimit' name='dataRegjistrimit' />
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />

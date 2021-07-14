@@ -12,8 +12,6 @@ export default observer(function ProfKlasaList() {
     useEffect(() => {
         profesoriStore.loadProfesoriKlaset(selectedProfessor?.id);
     }, [profesoriStore])
-    { console.log(profesoretKlasaByDate) }
-    { console.log(selectedProfessor?.id) }
 
     function getEmriKlases(id: string) {
         const klasa = klasatRegistry.get(id);
@@ -23,7 +21,7 @@ export default observer(function ProfKlasaList() {
     }
     const [target, setTarget] = useState('');
 
-    function handleProfKlasaDelete(e: SyntheticEvent<HTMLButtonElement>, id: string |undefined ) {
+    function handleProfKlasaDelete(e: SyntheticEvent<HTMLButtonElement>, id: string | undefined) {
         setTarget(e.currentTarget.name);
         deleteKlasaProfessor(id);
 
@@ -52,5 +50,5 @@ export default observer(function ProfKlasaList() {
 
 
         </List>
-     )
+    )
 })

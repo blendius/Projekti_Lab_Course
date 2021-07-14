@@ -74,7 +74,7 @@ export const vitiOptions = [
 
     export const gjysemvjetoriOpt = [
         {
-            text: '1.',
+            text: '1',
             value: '1'
         },
         {
@@ -85,4 +85,26 @@ export const vitiOptions = [
             text: '3',
             value: '3'
         }]
+
+        export const notaOpt = [
+            {
+                text: '1',
+                value: '1'
+            },
+            {
+                text: '2',
+                value: '2'
+            },
+            {
+                text: '3',
+                value: '3'
+            },
+            {
+                text: '4',
+                value: '4'
+            },
+            {
+                text: '5',
+                value: '5'
+            }]
     
