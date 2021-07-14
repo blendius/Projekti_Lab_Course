@@ -7,8 +7,10 @@ import { useStore } from '../../../app/stores/store';
 
 
 export default observer(function LendetList() {
-    const { lendaStore } = useStore();
+    const { lendaStore,syllabusiStore } = useStore();
     const { deleteLenda, lendetByDate, loading } = lendaStore;
+    const { getSyllabusiEmri} = syllabusiStore;
+
     const [target, setTarget] = useState('');
 
     function handleLendaDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
@@ -36,7 +38,7 @@ export default observer(function LendetList() {
                             <TableRow key={lendet.lendaId}>
                                 <TableCell >{lendet.emriLendes}</TableCell>
                                 <TableCell>{lendet.pershkrimi}</TableCell>
-                                <TableCell>{lendet.syllabusi}</TableCell>
+                                <TableCell>{getSyllabusiEmri(lendet.syllabusiId)}</TableCell>
                                 <TableCell>{format(lendet.dataEShtimit!, 'dd MMM yyyy ')}</TableCell>
                                 <TableCell>
                                     <Button

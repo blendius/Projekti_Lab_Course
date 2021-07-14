@@ -22,6 +22,10 @@ namespace Application.Oraret
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+                var klasa =await _context.Klasat.FindAsync(request.Orari.KlasaID);
+
+                request.Orari.Klasa= klasa;
+
                 _context.Oraret.Add(request.Orari);
                 await _context.SaveChangesAsync();
 

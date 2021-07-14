@@ -28,15 +28,15 @@ export default observer(function FeedbackDetails() {
                         <Card.Header >{feedback.subject}</Card.Header>
                         <div className="data"><label >Mesaxhi:  </label>  {feedback.message}</div>
                         <div className="data"><label >Email i profesorit:  </label>  {feedback.nxenesiEmail}</div>
-                        <div className="data"><label >Data e dergimit:</label> {feedback.dataEDergimit}</div>
+                        <div className="data"><label >Data e dergimit:</label> {feedback.messageSentDate}</div>
                     </Card.Description>
                 </Card.Content>
             </div>
             <Card.Content extra>
 
-                <Button name={feedback.feedbackId}
-                    loading={loading && target === feedback.feedbackId}
-                    onClick={(e) => handleFeedbackDelete(e, feedback.feedbackId)}
+                <Button name={feedback.feedbackID}
+                    loading={loading && target === feedback.feedbackID}
+                    onClick={(e) => handleFeedbackDelete(e, feedback.feedbackID)}
                     content='Fshije' className='detailsbtn' color='red' />
                 <Button onClick={cancelSelectedFeedback} color='grey' content='cancel' className='detailsbtn' />
 

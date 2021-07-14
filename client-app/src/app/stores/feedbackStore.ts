@@ -16,14 +16,14 @@ export default class FeedbackStore {
     }
 
     get feedbackByDate() {
-        return Array.from(this.feedbackRegistry.values()).sort((a, b) => Date.parse(a.dataEDergimit) - Date.parse(b.dataEDergimit));
+        return Array.from(this.feedbackRegistry.values()).sort((a, b) => Date.parse(a.messageSentDate) - Date.parse(b.messageSentDate));
     }
     loadFeedbacksProf = async (id: string | undefined) => {
         try {
             const feedbacks = await agent.FeedbackToNxenesit.listProf(id);
             feedbacks.forEach(feedback => {
-                feedback.dataEDergimit = feedback.dataEDergimit.split('T')[0];
-                this.feedbackRegistry.set(feedback.feedbackId, feedback)
+                feedback.messageSentDate = feedback.messageSentDate.split('T')[0];
+                this.feedbackRegistry.set(feedback.feedbackID, feedback)
             })
             this.setLoadingInitial(false);
         }
@@ -36,13 +36,17 @@ export default class FeedbackStore {
         }
     }
 
+   
+    
+
     loadFeedbacksNxenesi = async (email:string | undefined)=>{
         try{
             const feedbacks = await agent.FeedbackToNxenesit.listNxenesi(email);
-
+            
             feedbacks.forEach(feedback=>{
-                feedback.dataEDergimit = feedback.dataEDergimit.split('T')[0];
-                this.feedbackRegistry.set(feedback.feedbackId,feedback);
+                feedback.messageSentDate = feedback.messageSentDate.split('T')[0];
+                this.feedbackRegistry.set(feedback.feedbackID,feedback);
+                
             })
             this.setLoadingInitial(false);
         }
@@ -77,11 +81,11 @@ export default class FeedbackStore {
 
     createFeedback = async (feedback: FeedbackToNxenesi) => {
         this.loading = true;
-        feedback.feedbackId = uuid();
+        feedback.feedbackID = uuid();
         try {
             await agent.FeedbackToNxenesit.create(feedback);
             runInAction(() => {
-                this.feedbackRegistry.set(feedback.feedbackId, feedback)
+                this.feedbackRegistry.set(feedback.feedbackID, feedback)
                 this.selectedFeedback = feedback;
                 this.editMode = false;
                 this.loading = false;
@@ -100,7 +104,7 @@ export default class FeedbackStore {
             await agent.FeedbackToNxenesit.delete(id);
             runInAction(() => {
                 this.feedbackRegistry.delete(id);
-                if (this.selectedFeedback?.feedbackId === id) this.cancelSelectedFeedback();
+                if (this.selectedFeedback?.feedbackID === id) this.cancelSelectedFeedback();
                 this.loading = false;
             })
         }

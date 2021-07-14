@@ -10,7 +10,7 @@ import { gradaOptions } from '../../../app/common/form/options';
 
 
 export default observer(function RegisterFormProf() {
-    const { profesoriStore ,lendaStore} = useStore();
+    const { profesoriStore, lendaStore } = useStore();
     const { lendaRegistry, lendetByDate } = lendaStore;
 
     useEffect(() => {
@@ -26,23 +26,23 @@ export default observer(function RegisterFormProf() {
     //         value: lenda[i].lendaId
     //     });
     // }
-    
+
     return (
         <Formik
             initialValues={
                 {
-                id:'', 
-                name: '', 
-                userName: '', 
-                email: '', 
-                password: '',
-                gradaAkademike:'',
-                dataRegjistrimit:'', 
-                token:'',
-                error: null,
-                LendaId: ''
-            }
-            
+                    id: '',
+                    name: '',
+                    userName: '',
+                    email: '',
+                    password: '',
+                    gradaAkademike: '',
+                    dataRegjistrimit: '',
+                    token: '',
+                    error: null,
+                    LendaId: ''
+                }
+
             }
             onSubmit={(values, { setErrors }) => profesoriStore.register(values, values.LendaId).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
@@ -58,7 +58,7 @@ export default observer(function RegisterFormProf() {
             })}
         >
 
-            {({ handleSubmit, isSubmitting, errors , isValid,dirty}) => (
+            {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name='email' placeholder='Email' />
                     <MyTextInput name='name' placeholder='Display Name' />
@@ -72,15 +72,15 @@ export default observer(function RegisterFormProf() {
                                     key: lenda.lendaId,
                                     text: lenda.emriLendes,
                                     value: lenda.lendaId,
-                                    
+
                                 }
-                                
+
                             ))
                         } placeholder='LendaId' name='LendaId' />
 
                     <MyTextInput name='dataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
-                    <Button  positive content='Register' type='submit' fluid />
+                    <Button positive content='Register' type='submit' fluid />
                 </Form>
             )}
         </Formik>

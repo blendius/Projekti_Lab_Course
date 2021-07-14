@@ -8,7 +8,7 @@ namespace Domain
     {
         public string Name { get; set; }
         public string GradaAkademike { get; set; }
-        public DateTime DataRegjistrimit { get; set; }
+        public DateTime DataRegjistrimit { get; set; } = DateTime.Now;
         public Guid LendaId { get; set; }
         public Lenda Lenda { get; set; }
        

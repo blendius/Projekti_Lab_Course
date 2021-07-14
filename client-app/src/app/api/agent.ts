@@ -25,6 +25,7 @@ import { Aktiviteti } from "../models/Aktiviteti";
 import { Autobusi } from "../models/Autobusi";
 import { ProfKlasa } from "../models/profKlasa";
 import { Familja } from "../models/familja";
+import { Syllabusi } from "../models/syllabusi";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -132,9 +133,16 @@ const Postimet = {
 const Lendet = {
   list: () => requests.get<Lenda[]>("/lendet"),
   details: (id: string) => requests.get<Lenda>(`/lendet/${id}`),
-  create: (lenda: Lenda) => axios.post<void>(`/lendet/`, lenda),
+  create: (lenda: Lenda, syllabusiId: string) => axios.post<void>(`/lendet/${syllabusiId}`, lenda),
   update: (lenda: Lenda) => axios.put<void>(`/lendet/${lenda.lendaId}`, lenda),
   delete: (id: string) => axios.delete<void>(`/lendet/${id}`),
+};
+const Syllabuset = {
+  list: () => requests.get<Syllabusi[]>("/syllabuset"),
+  details: (id: string) => requests.get<Syllabusi>(`/syllabuset/${id}`),
+  create: (syllabusi: Syllabusi) => axios.post<void>(`/syllabuset/`, syllabusi),
+  update: (syllabusi: Syllabusi) => axios.put<void>(`/syllabuset/${syllabusi.syllabusiId}`, syllabusi),
+  delete: (id: string) => axios.delete<void>(`/syllabuset/${id}`),
 };
 
 const Prinderit = {
@@ -236,6 +244,7 @@ const Kontaktet = {
 const AccountNxenesi = {
   currentNxenesi: () =>
     requests.get<Nxenesiuser>("/NxenesiAccount/currentNxenesi"),
+    
   login: (nxenesi: NxenesiuserFormValues) =>
     requests.post<Nxenesiuser>("/NxenesiAccount/loginNxenesi", nxenesi),
   register: (nxenesi: NxenesiuserFormValues) =>
@@ -305,6 +314,7 @@ const agent = {
   Kontaktet,
   AccountNxenesi,
   Sallat,
+  Syllabuset,
   Paralelet,
   Klasat,
   Vleresimet,

@@ -16,6 +16,7 @@ namespace Persistence
         public DbSet<Profesori> Profesoret { get; set; }
         public DbSet<Lenda> Lendet { get; set; }
         public DbSet<Prindi> Prinderit { get; set; }
+        public DbSet<Syllabusi> Syllabuset { get; set; }
         public DbSet<Nxenesi> Nxenesit { get; set; }
         public DbSet<Familja> Familjet { get; set; }
         public DbSet<Laburatiori> Laburatioret { get; set; }
@@ -38,37 +39,52 @@ namespace Persistence
         {
             base.OnModelCreating(modelbuilder);
 
-            modelbuilder.Entity<FeedbackToNxenesi>()
-                .HasOne(p => p.Profesori)
-                .WithMany(p => p.FeedbackToNxenesit)
-                .HasForeignKey(pp => pp.ProfesoriID)
-                .OnDelete(DeleteBehavior.Cascade);
-            ;
+             modelbuilder.Entity<FeedbackToNxenesi>()
+             .HasOne(p => p.Profesori)
+             .WithMany(f => f.FeedbackToNxenesit)
+             .HasForeignKey(f => f.ProfesoriId);
+
 
             modelbuilder.Entity<Kontakti>()
-            .HasOne(p => p.Prindi)
-            .WithMany(p => p.Kontaktet)
-             .HasForeignKey(pp => pp.PrindiId);
+                .HasOne(p => p.Prindi)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pp => pp.PrindiId);
 
             modelbuilder.Entity<Laburatiori>()
-          .HasOne(p => p.Lenda)
-          .WithMany(p => p.Laburatoret)
-           .HasForeignKey(pp => pp.LendaId);
+                .HasOne(p => p.Lenda)
+                .WithMany(p => p.Laburatoret)
+                .HasForeignKey(pp => pp.LendaId);
+
+            modelbuilder.Entity<Orari>()
+                .HasKey(pk => new { pk.OrariId });
+            modelbuilder.Entity<Orari>()
+                .HasOne(p => p.Klasa)
+                .WithMany(p => p.Oraret)
+                .HasForeignKey(pp => pp.KlasaID);
+
+            modelbuilder.Entity<Lenda>()
+           .HasOne(p => p.Syllabusi)
+           .WithMany(p => p.Lendet)
+            .HasForeignKey(pp => pp.SyllabusiId);
 
             modelbuilder.Entity<Pajisja>()
-           .HasOne(p => p.Laburatiori)
-           .WithMany(p => p.Pajisjet)
-            .HasForeignKey(pp => pp.LaburatioriId);
+                .HasOne(p => p.Laburatiori)
+                .WithMany(p => p.Pajisjet)
+                .HasForeignKey(pp => pp.LaburatioriId);
 
             modelbuilder.Entity<Klasa>()
-            .HasOne(p => p.Paralelja)
-            .WithMany(k => k.Klasa)
-            .HasForeignKey(kp => kp.ParaleljaId);
+                .HasOne(p => p.Paralelja)
+                .WithMany(k => k.Klasa)
+                .HasForeignKey(kp => kp.ParaleljaId);
 
             modelbuilder.Entity<Salla>()
-            .HasOne(s => s.Klasa)
-            .WithOne(k => k.Salla)
-            .HasForeignKey<Klasa>(k => k.SallaId);
+                .HasOne(k => k.Klasa)
+                .WithOne(k => k.Salla)
+                .HasForeignKey<Klasa>(k => k.SallaId);
+
+            
+
+            
 
             modelbuilder.Entity<Familja>()
                 .HasKey(pn => new { pn.FamiljaId });

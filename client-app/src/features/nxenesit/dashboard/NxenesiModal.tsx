@@ -30,7 +30,7 @@ function NxenesiModal(props: ModalProps) {
   const { open, setOpen, nxenesi } = props;
 // console.log("nxenesi:", nxenesi)
 // console.log("nxenesi id:", nxenesi.id)
-console.log("nxenesi edna:", nxenesiSelected)
+//console.log("nxenesi edna:", nxenesiSelected)
   const [currentData, setCurrentData] = useState({
     ...nxenesi,
     // currentPassword: "",

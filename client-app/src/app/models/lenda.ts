@@ -2,7 +2,7 @@ export interface Lenda {
     lendaId: string;
     emriLendes: string;
     pershkrimi: string;
-    syllabusi: string;
+    syllabusiId: string;
     dataEShtimit: Date | null;//date
 
 }

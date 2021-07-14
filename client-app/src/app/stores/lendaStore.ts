@@ -100,12 +100,12 @@ export default class lendaStore {
     closeForm = () => {
         this.editMode = false;
     }
-    createLenda = async (lenda: Lenda) => {
+    createLenda = async (lenda: Lenda,syllabusiId :string) => {
         
         this.loading = true;
         lenda.lendaId = uuid();
         try {
-            await agent.Lendet.create(lenda);
+            await agent.Lendet.create(lenda,syllabusiId);
             runInAction(() => {
                 this.lendaRegistry.set(lenda.lendaId, lenda);
                 this.selectedLenda = lenda;

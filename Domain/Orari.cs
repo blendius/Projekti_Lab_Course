@@ -5,7 +5,8 @@ namespace Domain
     public class Orari
     {
         public Guid OrariId { get; set; }
-        public string EmriOrarit { get; set; }
+        public Guid KlasaID { get; set; }
+        public Klasa Klasa { get; set; }
         public string Hene1 { get; set; }
         public string Hene2 { get; set; }
         public string Hene3 { get; set; }

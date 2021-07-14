@@ -3,6 +3,8 @@ export interface Admin{
     displayName:string;
     token:string;
     image?:string;
+    email: string;
+
 }
 export interface AdminFormValues{
     email:string;

@@ -1,6 +1,6 @@
 export interface Orari {
   orariId: string;
-  emriOrarit: string;
+  klasaId: string;
   hene1: string;
   hene2: string;
   hene3: string;

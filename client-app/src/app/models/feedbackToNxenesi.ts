@@ -1,8 +1,10 @@
-export interface FeedbackToNxenesi{
-    feedbackId:string;
-    nxenesiEmail:string;
-    subject:string;
-    message:string;
-    dataEDergimit:string;
+export interface FeedbackToNxenesi {
+    feedbackID: string;
+    profesoriId:string;
+    nxenesiEmail: string;
+    subject: string;
+    message: string;
+    messageSentDate: string;
+    rating: number;
 
 }

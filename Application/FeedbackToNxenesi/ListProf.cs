@@ -7,6 +7,7 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
+using static Microsoft.EntityFrameworkCore.EF;
 
 namespace Application.FeedbackToNxenesit
 {
@@ -14,7 +15,7 @@ namespace Application.FeedbackToNxenesit
     {
         public class Query : IRequest<List<FeedbackToNxenesi>>
         {
-            public Guid Id { get; set; }
+            public Guid ProfId { get; set; }
         }
         public class Handler : IRequestHandler<Query, List<FeedbackToNxenesi>>
         {
@@ -26,7 +27,7 @@ namespace Application.FeedbackToNxenesit
 
             public async Task<List<FeedbackToNxenesi>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.FeedbackToNxenesit.Where(k => k.ProfesoriID.Equals(request.Id)).ToListAsync();
+                return await _context.FeedbackToNxenesit.Where(k => Property<Guid>(k,"ProfesoriId") == request.ProfId).ToListAsync();
             }
         }
     }

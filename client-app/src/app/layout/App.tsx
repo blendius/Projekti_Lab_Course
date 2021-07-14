@@ -53,6 +53,10 @@ import AktivitetetDashboard from "../../features/aktivitetet/dashboard/Aktivitet
 import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDashboards";
 import FamiljaDetails from "../../features/familjet/FamiljaDetails";
 import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
+import NxenesiFeedbacks from "../../nxenesiFeatures/dashboard/NxenesiFeedbacks";
+import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
+import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
+
 
 
 
@@ -172,6 +176,10 @@ function App() {
                   path="/nxenesiPage/librat/"
                   component={DashboardLibri}
                 />
+                <Route
+                  path="/nxenesiPage/feedbacks"
+                  component={NxenesiFeedbacks}
+                />
               </Switch>
             </Container>
           </>
@@ -190,7 +198,7 @@ function App() {
                 <Route
                   exact
                   path="/adminPage/Profili"
-                  component={NxenesiDashboard}
+                  component={AdminProfileDashboard}
                 />
                 <Route
                   path="/adminPage/profesoret"
@@ -226,6 +234,10 @@ function App() {
                 <Route
                   path="/adminPage/laburatoret"
                   component={ShowLaburatoret}
+                />
+                <Route
+                  path="/adminPage/syllabuset"
+                  component={SyllabusetDashboard}
                 />
                 <Route
                   path="/adminPage/pajisjet"

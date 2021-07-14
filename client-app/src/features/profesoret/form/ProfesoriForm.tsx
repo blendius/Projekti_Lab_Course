@@ -27,8 +27,8 @@ export default observer(function ProfesoriForm() {
         dataRegjistrimit: '',
         token: '',
         EmriLendes: '',
-        lendaId: '', 
-        userName: '', 
+        lendaId: '',
+        userName: '',
         normalizedUserName: ''
 
     }
@@ -47,7 +47,7 @@ export default observer(function ProfesoriForm() {
     }
     return (
         <Segment clearing>
-            <Formik 
+            <Formik
                 enableReinitialize initialValues={profesori}
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
@@ -67,7 +67,7 @@ export default observer(function ProfesoriForm() {
                                 ))
                             } placeholder='Lenda' name='EmriLendes' />
                         <MyTextInput name='dataRegjistrimit' placeholder='dataRegjistrimit' type='date' />
-                        <Button disabled={isSubmitting || !dirty }
+                        <Button disabled={isSubmitting || !dirty}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>

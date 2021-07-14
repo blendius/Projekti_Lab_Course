@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Header, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
 
@@ -13,22 +13,27 @@ import { useStore } from '../../../app/stores/store';
 
 
 export default observer(function LendaForm() {
-    const { lendaStore } = useStore();
+    const { lendaStore ,syllabusiStore} = useStore();
     const { selectedLenda, createLenda, updateLenda, closeForm, loading } = lendaStore;
+
+    const { syllabusetByDate} = syllabusiStore;
     //const { id } = useParams<{ id: string }>();
 
     const initialState = selectedLenda ?? ({
         lendaId: '',
         emriLendes: '',
         pershkrimi: '',
-        syllabusi: '',
+        syllabusiId:'',
         dataEShtimit: null
     });
+    useEffect(() => {
+        syllabusiStore.loadSyllabuset();
+    }, [syllabusiStore])
     const validationSchema = Yup.object({
         emriLendes: Yup.string().required('Emri i lendes eshte i nevojeshem').min(3),
         pershkrimi: Yup.string().required('pershkrimi i lendes eshte i nevojshem').min(3),
         dataEShtimit: Yup.string().required('dataEShtimit i lendes eshte i nevojshem').nullable(),
-        syllabusi: Yup.string().required('syllabusi i lendes eshte i nevojshem'),
+        syllabusiId: Yup.string().required('syllabusi i lendes eshte i nevojshem'),
     })
     const [lenda] = useState(initialState);
     // useEffect(() =>{
@@ -36,7 +41,7 @@ export default observer(function LendaForm() {
     // },[id,loadLenda])
 
     function handleFormSubmit(lenda: Lenda) {
-        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda);
+        lenda.lendaId ? updateLenda(lenda) : createLenda(lenda, lenda.syllabusiId);
     }
 
     const options = [
@@ -47,7 +52,8 @@ export default observer(function LendaForm() {
     return (
         <Segment clearing>
             <Header content='Lendet Detajet' sub color='teal' />
-            <Formik validationSchema={validationSchema} enableReinitialize initialValues={lenda} onSubmit={values => handleFormSubmit(values)}>
+            <Formik validationSchema={validationSchema} enableReinitialize initialValues={lenda} 
+            onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MyTextInput name='emriLendes' placeholder='EmriLendes' />
@@ -61,9 +67,17 @@ export default observer(function LendaForm() {
                         />
                         <MySelectInput
                             label='Syllabusi'
-                            options={options}
+                            options={
+                                syllabusetByDate.map(syllabusi =>(
+                                    {
+                                    key: syllabusi.syllabusiId,
+                                    text: syllabusi.emriSyllabusit,
+                                    value: syllabusi.syllabusiId
+                                    }
+                                ))
+                            }
                             placeholder='Syllabusi'
-                            name='syllabusi' />
+                            name='syllabusiId' />
 
 
                         <Button disabled={isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />

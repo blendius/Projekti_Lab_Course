@@ -8,6 +8,8 @@ import FeedbackList from "./FeedbackList";
 export default observer(function FeedbackDashboard() {
     const { feedbackStore } = useStore();
     const { selectedFeedback, editMode } = feedbackStore
+
+    
     return (
         <Grid>
             <Grid.Column width='6'>

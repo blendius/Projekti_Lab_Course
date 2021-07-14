@@ -8,6 +8,7 @@ import { store } from "./store";
 import { history } from "../..";
 
 export default class NxenesiStore {
+    nxenesi: Nxenesiuser | null = null;
     nxenesiSelected: Nxenesiuser | null = null;
     nxenesiRegistry = new Map<String, Nxenesi>();
     selectedNxenesi: Nxenesi | undefined = undefined;
@@ -16,7 +17,7 @@ export default class NxenesiStore {
     loadingInitial = true;
 
     constructor() {
-        //console.log("here1")
+        //this.getNxenesi();
         makeAutoObservable(this)
     }
     get isLoggedIn() {
@@ -45,6 +46,14 @@ export default class NxenesiStore {
         history.push('/');
     }
 
+    getNxenesi = async () => {
+        try {
+            const nxenesi = await agent.AccountNxenesi.currentNxenesi();
+            runInAction(() => this.nxenesi = nxenesi);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     getNxenesin = async () => {
       //  console.log("here6")
 
@@ -105,6 +114,29 @@ export default class NxenesiStore {
         this.editMode = false;
     }
 
+    registerNxenesi = async (nxenesi : NxenesiuserFormValues) =>{
+        try {
+            await agent.AccountNxenesi.register(nxenesi);
+            // store.commonStore.setToken(prof.token)
+            // runInAction(() => this.prof = prof);
+            // history.push('/lendet')
+            // store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    register = async (creds: NxenesiuserFormValues) => {
+        try {
+            await agent.AccountNxenesi.register(creds);
+            // store.commonStore.setToken(prof.token)
+            // runInAction(() => this.prof = prof);
+            // history.push('/lendet')
+            store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }
     createNxenesin = async (nxenesi: Nxenesi) => {
         this.loading = true;
         nxenesi.id = uuid();
@@ -129,7 +161,6 @@ export default class NxenesiStore {
 
     updateNxenesin = async (nxenesi: Nxenesi) => {
         this.loading = true;
-        console.log("nx", nxenesi)
         try {
             await agent.Nxenesit.update(nxenesi);
             console.log("nxenesi para update", nxenesi)
