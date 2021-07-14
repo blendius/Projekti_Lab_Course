@@ -79,6 +79,7 @@ export default class VlersimiStore {
                 this.selectedVlersimi = vlersimi;
                 this.editMode = false;
                 this.loading = false
+                window.location.reload();   
             })
         } catch (error) {
             console.log(error);

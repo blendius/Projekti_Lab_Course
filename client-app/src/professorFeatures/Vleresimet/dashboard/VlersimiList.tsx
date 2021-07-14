@@ -1,18 +1,16 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Item, List, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
-import VlersimiStore from '../../../app/stores/vlersimiStore';
-import VleresimiDetails from './VleresimiDetails';
 
 
 
 export default observer(function VlersimiList() {
-const {vleresimiStore, profesoriStore,modalStore,nxenesiStore}= useStore();
+const {vleresimiStore, profesoriStore,nxenesiStore}= useStore();
 const {vlersimietByDate}=vleresimiStore;
 useEffect(() => {
     vleresimiStore.loadVleresimet(profesoriStore.prof?.id);
-  }, [vleresimiStore])
+  }, [vleresimiStore,profesoriStore.prof?.id])
 
     return (
         <Segment >   

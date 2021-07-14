@@ -17,5 +17,5 @@ export default observer(function ProfessorPage() {
 
     
 
-    return <h6></h6>
+    return <h6>  </h6>
 })

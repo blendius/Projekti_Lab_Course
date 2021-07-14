@@ -222,21 +222,26 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DataEDergimit")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsReply")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Mesazhi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrindiId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Subjekti")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ProfesoriId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("profEmail")
+                    b.Property<string>("Subjekti")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("KontaktiId");
 
                     b.HasIndex("PrindiId");
+
+                    b.HasIndex("ProfesoriId");
 
                     b.ToTable("Kontaktet");
                 });
@@ -983,7 +988,14 @@ namespace Persistence.Migrations
                         .WithMany("Kontaktet")
                         .HasForeignKey("PrindiId");
 
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("Kontaktet")
+                        .HasForeignKey("ProfesoriId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Prindi");
+
+                    b.Navigation("Profesori");
                 });
 
             modelBuilder.Entity("Domain.Laburatiori", b =>
@@ -1068,7 +1080,8 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Profesori", "Profesori")
                         .WithMany("Klaset")
-                        .HasForeignKey("ProfId");
+                        .HasForeignKey("ProfId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Klasa");
 
@@ -1186,6 +1199,8 @@ namespace Persistence.Migrations
                     b.Navigation("FeedbackToNxenesit");
 
                     b.Navigation("Klaset");
+
+                    b.Navigation("Kontaktet");
 
                     b.Navigation("Vleresimet");
                 });

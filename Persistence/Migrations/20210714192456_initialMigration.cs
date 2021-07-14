@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class test12 : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,48 +121,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nxenesit", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Oraret",
-                columns: table => new
-                {
-                    OrariId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmriOrarit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hene6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Marte6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Merkure6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enjte6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Premte6 = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Oraret", x => x.OrariId);
                 });
 
             migrationBuilder.CreateTable(
@@ -377,28 +335,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kontaktet",
-                columns: table => new
-                {
-                    KontaktiId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PrindiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    profEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Subjekti = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Mesazhi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DataEDergimit = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Kontaktet", x => x.KontaktiId);
-                    table.ForeignKey(
-                        name: "FK_Kontaktet_Prinderit_PrindiId",
-                        column: x => x.PrindiId,
-                        principalTable: "Prinderit",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Klasat",
                 columns: table => new
                 {
@@ -442,6 +378,54 @@ namespace Persistence.Migrations
                         column: x => x.SyllabusiId,
                         principalTable: "Syllabuset",
                         principalColumn: "SyllabusiId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Oraret",
+                columns: table => new
+                {
+                    OrariId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    KlasaID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Hene1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hene2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hene3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hene4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hene5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hene6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marte6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Merkure6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Enjte6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Premte6 = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Oraret", x => x.OrariId);
+                    table.ForeignKey(
+                        name: "FK_Oraret_Klasat_KlasaID",
+                        column: x => x.KlasaID,
+                        principalTable: "Klasat",
+                        principalColumn: "KlasaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -558,21 +542,51 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     FeedbackID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProfesoriID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ProfesoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     NxenesiEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     MessageSentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FeedbackToNxenesit", x => x.FeedbackID);
                     table.ForeignKey(
-                        name: "FK_FeedbackToNxenesit_Profesoret_ProfesoriID",
-                        column: x => x.ProfesoriID,
+                        name: "FK_FeedbackToNxenesit_Profesoret_ProfesoriId",
+                        column: x => x.ProfesoriId,
                         principalTable: "Profesoret",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Kontaktet",
+                columns: table => new
+                {
+                    KontaktiId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PrindiId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ProfesoriId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Subjekti = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Mesazhi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataEDergimit = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsReply = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kontaktet", x => x.KontaktiId);
+                    table.ForeignKey(
+                        name: "FK_Kontaktet_Prinderit_PrindiId",
+                        column: x => x.PrindiId,
+                        principalTable: "Prinderit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Kontaktet_Profesoret_ProfesoriId",
+                        column: x => x.ProfesoriId,
+                        principalTable: "Profesoret",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -597,7 +611,7 @@ namespace Persistence.Migrations
                         column: x => x.ProfId,
                         principalTable: "Profesoret",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -680,9 +694,9 @@ namespace Persistence.Migrations
                 column: "PrindiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FeedbackToNxenesit_ProfesoriID",
+                name: "IX_FeedbackToNxenesit_ProfesoriId",
                 table: "FeedbackToNxenesit",
-                column: "ProfesoriID");
+                column: "ProfesoriId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Klasat_ParaleljaId",
@@ -701,6 +715,11 @@ namespace Persistence.Migrations
                 column: "PrindiId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Kontaktet_ProfesoriId",
+                table: "Kontaktet",
+                column: "ProfesoriId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Laburatioret_LendaId",
                 table: "Laburatioret",
                 column: "LendaId");
@@ -714,6 +733,11 @@ namespace Persistence.Migrations
                 name: "IX_Librat_LendaId",
                 table: "Librat",
                 column: "LendaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Oraret_KlasaID",
+                table: "Oraret",
+                column: "KlasaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pajisjet_LaburatioriId",

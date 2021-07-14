@@ -1,34 +1,40 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Button, Grid, Item, List } from 'semantic-ui-react';
+import { Grid, List } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
+import KontaktetProfDetails from '../KontaktetProfDetails';
+import KontaktiProfList from '../KontaktiProfList';
+import ReplyForm from '../ReplyForm';
+import ReplyList from '../ReplyList';
 
-
-
-
-
-export default observer(function KontaktiProfDashboard() {
-    const { kontaktiStore } = useStore();
-    const { kontaktetByDate, editMode } = kontaktiStore
+export default observer(function KontaktiDashboard() {
+    const { kontaktiStore ,modalStore} = useStore();
+    const { selectedKontakti, editMode, modalMode } = kontaktiStore
     return (
-        <List divided relaxed inverted>
-            {kontaktetByDate.map(kontakti => (
-                <List.Item key={kontakti.kontaktiId}>
-                    <List.Icon name='address card' size='large' verticalAlign='middle' />
-                    <List.Content>
-                        <List.Header as='a'>{kontakti.subjekti}</List.Header>
-                        <div className="data" ><label>Profesori:  </label>  {kontakti.profEmail}</div>
-                    </List.Content>
-                    <Item.Extra>
-                        <Button onClick={() => kontaktiStore.selectKontakti(kontakti.kontaktiId)} floated='right' content='Shiko Detajet' color='blue' />
+        <Grid>
 
-                    </Item.Extra>
+            <Grid.Column width='6'>
+                <hr></hr>
+                <List.Header as='a'>Kontaktet e pranuara: </List.Header>
+                <hr></hr>
+                <KontaktiProfList />
+            </Grid.Column>
 
-                </List.Item>
+            <Grid.Column width='4'></Grid.Column>
 
+            <Grid.Column width='6'>
+                <hr></hr>
+                <List.Header as='a'>Kontaktet e derguara nga ju: </List.Header>
+                <hr></hr>
+                <ReplyList />
+            </Grid.Column>
 
-            ))}
-
-        </List>
+            {modalMode &&
+                    modalStore.openModal(<KontaktetProfDetails />)}
+           
+           
+                {editMode &&
+                  modalStore.openModal(<ReplyForm />)}
+          
+        </Grid>
     )
 })

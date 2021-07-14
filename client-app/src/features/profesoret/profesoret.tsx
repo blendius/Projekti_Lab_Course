@@ -3,33 +3,27 @@ import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import ProfesoriDashboard from './dashboard/ProfesoriDashboard';
+import ProfesoriStore from '../../app/stores/profesoriStore';
 
 
  function ShowProfessors() {
 
-  const{profesoriStore,commonStore}=useStore();
+  const{profesoriStore,klasaStore,lendaStore}=useStore();
 
-    
-
- 
 
   useEffect(() => {
     profesoriStore.loadProfesoret();
+    lendaStore.loadLendet();
+    klasaStore.loadKlasat();
+    profesoriStore.loadProfesoriKlaset(profesoriStore.selectedProfessor?.id);
   }, [profesoriStore]) 
 
- 
-  // const [profMode, setProfMode] = useState(false);
-  // function handleSetProfMode() {
-  //   setProfMode(true)
 
-  // }
   if (profesoriStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
   return (
     <Fragment>
       <div>
-        {/* {
-           profMode && */}
           <ProfesoriDashboard 
           />
       </div>

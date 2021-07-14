@@ -1,30 +1,38 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Label } from 'semantic-ui-react';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import { useStore } from '../../../app/stores/store';
 import * as Yup from 'yup';
 import MySelectInput from '../../../app/common/form/MySelectInput';
-import { values } from 'mobx';
 import { gradaOptions } from '../../../app/common/form/options';
 
 
 export default observer(function RegisterFormProf() {
     const { profesoriStore, lendaStore } = useStore();
     const { lendaRegistry, lendetByDate } = lendaStore;
+
     useEffect(() => {
         lendaStore.loadLendet();
     }, [lendaStore])
 
+    // var lenda = lendetByDate;
+    // var arr: any = [];
+    // var len = lendetByDate.length;
+    // for (var i = 0; i < len; i++) {
+    //     arr.push({
+    //         text: lenda[i].emriLendes,
+    //         value: lenda[i].lendaId
+    //     });
+    // }
 
     return (
         <Formik
             initialValues={
                 {
                     id: '',
-                    name:'',
-                    displayName: '',
+                    name: '',
                     userName: '',
                     email: '',
                     password: '',
@@ -38,7 +46,7 @@ export default observer(function RegisterFormProf() {
             }
             onSubmit={(values, { setErrors }) => profesoriStore.register(values, values.LendaId).catch(error => setErrors({ error: 'Invalid email or password' }))}
             validationSchema={Yup.object({
-                displayName: Yup.string().required("DisplayName eshte i nevojshem!"),
+                name: Yup.string().required("DisplayName eshte i nevojshem!"),
                 userName: Yup.string().required("Username eshte i nevojshem!"),
                 email: Yup.string().required("Email eshte i nevojshem!").email(),
                 password: Yup.string().required("Passwordi eshte i nevojshem!").matches(
@@ -52,8 +60,8 @@ export default observer(function RegisterFormProf() {
 
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                    <MyTextInput name='email' placeholder='Email' type='email' />
-                    <MyTextInput name='displayName' placeholder='Display Name' />
+                    <MyTextInput name='email' placeholder='Email' />
+                    <MyTextInput name='name' placeholder='Display Name' />
                     <MyTextInput name='userName' placeholder='Username' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
                     <MySelectInput options={gradaOptions} name='gradaAkademike' placeholder='GradaAkademike' />
@@ -66,12 +74,13 @@ export default observer(function RegisterFormProf() {
                                     value: lenda.lendaId,
 
                                 }
+
                             ))
                         } placeholder='LendaId' name='LendaId' />
 
                     <MyTextInput name='dataRegjistrimit' placeholder='DataRegjistrimit' type='date' />
                     <ErrorMessage name='error' render={() => <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
-                    <Button disabled={!isValid || !dirty || isSubmitting} loading={isSubmitting} positive content='Register' type='submit' fluid />
+                    <Button positive content='Register' type='submit' fluid />
                 </Form>
             )}
         </Formik>

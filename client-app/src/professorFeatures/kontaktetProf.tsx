@@ -1,33 +1,29 @@
-import React, { Fragment, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../app/stores/store';
-import LoadingComponent from '../app/layout/LoadingComponent';
 import KontaktiProfDashboard from './Kontaktet/dashboard/KontaktiProfDashboard';
 // import KontaktiDashboardProf from '../Kontaktet/dashboard/KontaktiDashboardProf';
 
- function ShowKontaktetProf() {
+function ShowKontaktetProf() {
 
-  const{kontaktiStore, profesoriStore}=useStore();
-  const{ prof}=profesoriStore;
-
-console.log(prof?.email);
+  const { kontaktiStore, profesoriStore, prindiStore } = useStore();
+  const { prof } = profesoriStore;
 
   useEffect(() => {
-    kontaktiStore.loadKontaktetProf(prof?.email);
-  }, [kontaktiStore]) 
-
-  //if (kontaktiStore.loadingInitial) return <LoadingComponent content='Loading app' />
+    kontaktiStore.loadKontaktetProf(prof?.id);
+    prindiStore.loadPrinderit();
+  }, [kontaktiStore, prof?.id, prindiStore])
 
   return (
     <Fragment>
       <div>
-        
-          <KontaktiProfDashboard
-          />
+
+        <KontaktiProfDashboard
+        />
       </div>
 
-     
+
     </Fragment>
   )
 }

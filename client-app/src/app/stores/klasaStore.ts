@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { v4 as uuid } from "uuid";
 import { Klasa } from "../models/klasa";
+import ParaleljaStore from "./paraleljaStore";
 
 export default class KlasaStore {
   klasatRegistry = new Map<string, Klasa>();
@@ -124,16 +125,12 @@ export default class KlasaStore {
     this.klasatRegistry.set(klasa.klasaId, klasa);
   };
 
-  private getKlasa = (id: string) => {
-    return this.klasatRegistry.get(id);
-  };
+    public getKlasa = (id: string) => {
+        return this.klasatRegistry.get(id);
+    };
+    // public getEmriKlases = (id: string) => {
+    //     return this.klasatRegistry.get(id)?.viti + "/" + this.klasatRegistry.get(id)?.paraleljaId
+    // }
 
-  public getKlasaID = (id: string) => {
-    let klasa = this.klasatRegistry.get(id)?.klasaId;
-    return klasa;
-  };
-  public getKlasaViti = (id: string) => {
-    let viti = this.klasatRegistry.get(id)?.viti;
-    return viti;
-  };
-}
+};
+

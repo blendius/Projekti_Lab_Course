@@ -21,12 +21,12 @@ export default observer(function LaburatoriForm() {
         id: '',
         lloji: '',
         dataEKrijimit: '',
-        EmriLendes: '',
+        lendaId: '',
         nrPaisjeve: 0
     }
     const validationSchema = Yup.object({
         lloji: Yup.string().required('Lloji duhet te plotesohet !'),
-        EmriLendes: Yup.string().required('Lenda duhet te plotesohet!'),
+        lendaId: Yup.string().required('Lenda duhet te plotesohet!'),
         dataEKrijimit: Yup.string().required('Data duhet te plotesohet!'),
         nrPaisjeve: Yup.string().required('Roli duhet te plotesohet!')
     })
@@ -34,7 +34,7 @@ export default observer(function LaburatoriForm() {
     const [laburatori, setLaburatori] = useState(initialState);
 
     function handleFormSubmit(laburatori: Laburatori) {
-        laburatori.id ? updateLaburatori(laburatori) : createLaburatori(laburatori, laburatori.EmriLendes);
+        laburatori.id ? updateLaburatori(laburatori) : createLaburatori(laburatori, laburatori.lendaId);
     }
     // const lendaOpt = [
 
@@ -74,12 +74,12 @@ export default observer(function LaburatoriForm() {
                                     {
                                    key:lenda.lendaId,
                                     text:lenda.emriLendes,
-                                     value:lenda.emriLendes}
+                                     value:lenda.lendaId}
                                 ))
-                            } placeholder='Lenda' name='EmriLendes' />
+                            } placeholder='Lenda' name='lendaId' />
 
                         <MyTextInput type='text' placeholder='Numri i Paisjeve' name='nrPaisjeve' />
-                        <Button disabled={isSubmitting || !dirty || !isValid}
+                        <Button
                             loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>

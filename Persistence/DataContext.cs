@@ -108,11 +108,27 @@ namespace Persistence
             modelbuilder.Entity<ProfesoriKlasa>()
                 .HasOne(pn => pn.Profesori)
                 .WithMany(p => p.Klaset)
-                .HasForeignKey(pn => pn.ProfId);
+                .HasForeignKey(pn => pn.ProfId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelbuilder.Entity<ProfesoriKlasa>()
                 .HasOne(pn => pn.Klasa)
                 .WithMany(p => p.Profesoret)
-                .HasForeignKey(pn => pn.KlasaId);
+                .HasForeignKey(pn => pn.KlasaId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelbuilder.Entity<Kontakti>()
+                .HasKey(pn => new { pn.KontaktiId });
+            modelbuilder.Entity<Kontakti>()
+                .HasOne(pn => pn.Prindi)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pn => pn.PrindiId);
+            modelbuilder.Entity<Kontakti>()
+                .HasOne(pn => pn.Profesori)
+                .WithMany(p => p.Kontaktet)
+                .HasForeignKey(pn => pn.ProfesoriId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

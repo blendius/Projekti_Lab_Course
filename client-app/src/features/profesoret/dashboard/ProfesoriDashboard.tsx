@@ -1,18 +1,22 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import ProfesoriDetais from '../details/ProfesoriDetails';
 import ProfesoriForm from '../form/ProfesoriForm';
 import ProfesoriList from './ProfesoriList';
 import RegisterFormProf from '../form/RegisterFormProf';
-import LoadingComponent from '../../../app/layout/LoadingComponent';
-import AddKlasaForm from '../form/AddKlasaForm';
+import ProfKlasa from './ProfKlasa';
+import "../prof-style.css";
 
 
 export default observer(function ProfesoriDashboard() {
     const { profesoriStore, modalStore } = useStore();
-    const { selectedProfessor, editMode , klasaMode} = profesoriStore
+    const { selectedProfessor, editMode, klasaMode } = profesoriStore
+
+    useEffect(() => {
+        profesoriStore.loadProfesoriKlaset(selectedProfessor?.id);
+    }, [profesoriStore])
 
     return (
         <Grid>
@@ -32,7 +36,8 @@ export default observer(function ProfesoriDashboard() {
                     <ProfesoriForm />}
 
                 {klasaMode &&
-                    <AddKlasaForm />}
+                    modalStore.openModal(<ProfKlasa />)
+                }
 
 
             </Grid.Column>

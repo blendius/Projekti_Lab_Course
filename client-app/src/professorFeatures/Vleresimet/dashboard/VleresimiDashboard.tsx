@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Button, Grid, GridColumn, List } from 'semantic-ui-react';
+import { Grid, List } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
-import VlersimiStore from '../../../app/stores/vlersimiStore';
 import VleresimiDetails from './VleresimiDetails';
 import VlersimiForm from '../forms/VlersimiForm';
 import VlersimiList from './VlersimiList';
@@ -28,21 +26,21 @@ export default observer(function VleresimiDashboard() {
                 </Grid.Column>
                 <Grid.Column width='2'></Grid.Column>
                 <Grid.Column width='6'>
-                    
-                    
+
+
                     {nxensiMode &&
-                    <>
-                    <List.Header as='a'> Nxenesit e klases: </List.Header>
-                        <NxenesiByKlasa />
+                        <>
+                            <List.Header as='a'> Nxenesit e klases: </List.Header>
+                            <NxenesiByKlasa />
                         </>
                     }
                 </Grid.Column>
 
                 <Grid.Column width='4' >
-                  
-                 
-                    {editMode &&  <>
-                     <List.Header as='a'>Vendos vleresimin: </List.Header>
+
+
+                    {editMode && <>
+                        <List.Header as='a'>Vendos vleresimin: </List.Header>
                         <VlersimiForm /> </>}
                 </Grid.Column>
             </Grid.Row>
@@ -55,12 +53,14 @@ export default observer(function VleresimiDashboard() {
                 </Grid.Column>
 
                 <Grid.Column width='11'>
-                    <hr></hr>
-                    <List.Header as='a'>Detajet: </List.Header>
+
                     {selectedVlersimi &&
+                        <>
+                            <hr></hr>
+                            <List.Header as='a'>Detajet: </List.Header>
 
-
-                        <VleresimiDetails />}
+                            <VleresimiDetails />
+                        </>}
 
                 </Grid.Column>
             </Grid.Row>

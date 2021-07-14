@@ -6,7 +6,7 @@ import { useStore } from "../app/stores/store";
 
 export default observer(function NavBarProf() {
 
-  const { profesoriStore: { prof, logoutProf } } = useStore();
+  const { profesoriStore: {  logoutProf } } = useStore();
   return (
     <Menu inverted fixed="top">
       <Container>

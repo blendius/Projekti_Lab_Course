@@ -12,7 +12,7 @@ namespace Application.Kontaktet
     public class ListProf
     {
         public class Query : IRequest<List<Kontakti>> {
-            public string Email { get; set; }
+            public string profId { get; set; }
          }
         public class Handler : IRequestHandler<Query, List<Kontakti>>
         {
@@ -24,7 +24,7 @@ namespace Application.Kontaktet
 
             public async Task<List<Kontakti>> Handle(Query request, CancellationToken cancellationToken)
             {
-             return await _context.Kontaktet.Where(k=>k.profEmail==request.Email).ToListAsync();
+             return await _context.Kontaktet.Where(k=>k.ProfesoriId==request.profId).ToListAsync();
             }
         }
     }

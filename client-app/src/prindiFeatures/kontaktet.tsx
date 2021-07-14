@@ -6,28 +6,29 @@ import LoadingComponent from '../app/layout/LoadingComponent';
 import KontaktiDashboard from './dashboard/KontaktiDashboard';
 
 
- function ShowKontaktet() {
+function ShowKontaktet() {
 
-  const{kontaktiStore, prindStoreAccount}=useStore();
-  const{ prindi}=prindStoreAccount;
+  const { kontaktiStore, prindStoreAccount, profesoriStore } = useStore();
+  const { prindi } = prindStoreAccount;
 
 
 
   useEffect(() => {
     kontaktiStore.loadKontaktetPrindi(prindi?.id);
-  }, [kontaktiStore, prindi?.id]) 
+    profesoriStore.loadProfesoret();
+  }, [kontaktiStore, prindi?.id, profesoriStore])
 
   if (kontaktiStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
   return (
     <Fragment>
       <div>
-        
-          <KontaktiDashboard 
-          />
+
+        <KontaktiDashboard
+        />
       </div>
 
-     
+
     </Fragment>
   )
 }

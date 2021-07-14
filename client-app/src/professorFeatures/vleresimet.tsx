@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../app/stores/store';
-import LoadingComponent from '../app/layout/LoadingComponent';
 import VleresimiDashboard from './Vleresimet/dashboard/VleresimiDashboard';
 
 
@@ -13,7 +12,7 @@ function ShowVlersimet() {
 
   useEffect(() => {
     vleresimiStore.loadVleresimet(profesoriStore.prof?.id);
-  }, [vleresimiStore])
+  }, [vleresimiStore, profesoriStore.prof?.id])
 
   useEffect(() => {
     klasaStore.loadKlasat();

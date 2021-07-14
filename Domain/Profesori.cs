@@ -16,5 +16,7 @@ namespace Domain
         public Klasa KlasaKujdestari { get; set; } // lex. Kujdestari me i te theksuar (as in Profi ka per detyre kujdestarinë e nje klase)
         public ICollection<Vleresimi> Vleresimet  { get; set; } 
         public ICollection<ProfesoriKlasa> Klaset  { get; set; } 
+        
+        public ICollection<Kontakti> Kontaktet  { get; set; } 
     }
 }

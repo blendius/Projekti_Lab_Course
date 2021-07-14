@@ -157,4 +157,7 @@ export default class lendaStore {
             })
         }
     }
+    public getEmriLendestById = (id: string) => {
+        return this.lendaRegistry.get(id)?.emriLendes;
+    };
 }

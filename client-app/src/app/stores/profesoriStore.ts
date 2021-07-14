@@ -8,9 +8,10 @@ import CommonStore from "./commonStore";
 import { ProfKlasa } from "../models/profKlasa";
 
 export default class ProfesoriStore {
-    prof: ProfFormValues | null = null;
-    professorRegistry = new Map<string, ProfFormValues>();
-    selectedProfessor: ProfFormValues | undefined = undefined;
+    prof: Professor | null = null;
+    professorRegistry = new Map<string, Professor>();
+    professorKlasaRegistry = new Map<string, ProfKlasa>();
+    selectedProfessor: Professor | undefined = undefined;
     klasaMode = false;
     editMode = false;
     loading = false;
@@ -25,7 +26,7 @@ export default class ProfesoriStore {
     get isLoggedIn() {
         return !!this.prof;
     }
-    get profesoriCount(){
+    get profesoriCount() {
         return this.professorRegistry.size;
     }
 
@@ -60,7 +61,7 @@ export default class ProfesoriStore {
         console.log(id)
         return this.professorRegistry.get(id);
     }
-    
+
     register = async (creds: ProfFormValues, id: string) => {
         try {
             await agent.AccountProf.register(creds, id);
@@ -73,7 +74,7 @@ export default class ProfesoriStore {
         }
     }
 
-    updateProfessor = async (profesori: ProfFormValues) => {
+    updateProfessor = async (profesori: Professor) => {
         this.loading = true;
         try {
             await agent.Profesoret.update(profesori);
@@ -95,7 +96,9 @@ export default class ProfesoriStore {
     get profesoretByDate() {
         return Array.from(this.professorRegistry.values()).sort((a, b) => Date.parse(a.dataRegjistrimit) - Date.parse(b.dataRegjistrimit))
     }
-
+    get profesoretKlasaByDate() {
+        return Array.from(this.professorKlasaRegistry.values())
+    }
 
     loadProfesoret = async () => {
         try {
@@ -115,12 +118,27 @@ export default class ProfesoriStore {
 
     }
 
+    loadProfesoriKlaset = async (id: string | undefined) => {
+        try {
+            const klaset = await agent.Profesoret.listKlaset(id);
+
+            klaset.forEach(klasa => {
+                this.professorKlasaRegistry.set(klasa.klasaId, klasa);
+            })
+            this.setLoadingInitial(false);
+        }
+
+        catch (error) {
+            console.log(error);
+
+            this.setLoadingInitial(false);
+        }
+
+    }
+
     loadProfesori = async (id: string) => {
-        // let profesori = this.getProfFromId(id);
-        // console.log(profesori);
-        let profesori = await agent.Profesoret.details(id);
-        //this.setProfesori(profesori)
-        return profesori;
+        let profesori = this.getProfFromId(id);
+        console.log(profesori);
         // if (profesori) {
         //     this.selectedProfessor = profesori;
         //     return profesori;
@@ -140,8 +158,8 @@ export default class ProfesoriStore {
         //     }
         // }
     }
-    
-    private setProfesori = (profesor: ProfFormValues) => {
+
+    private setProfesori = (profesor: Professor) => {
         profesor.dataRegjistrimit = profesor.dataRegjistrimit!;
         this.professorRegistry.set(profesor.id, profesor);
     }
@@ -170,7 +188,10 @@ export default class ProfesoriStore {
     }
 
     closeAddKlasaForm = () => {
+
         this.klasaMode = false;
+        window.location.reload();
+
     }
 
     createProfKlasa = async (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => {
@@ -205,5 +226,27 @@ export default class ProfesoriStore {
                 this.loading = false;
             })
         }
-    }
+    };
+
+
+    deleteKlasaProfessor = async (id: any) => {
+        this.loading = true;
+        try {
+            await agent.Profesoret.deleteKlasa(id);
+            runInAction(() => {
+                this.professorKlasaRegistry.delete(id);
+                if (this.selectedProfessor?.id === id) this.cancelSelectedProfessor();
+                this.loading = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+    };
+    public getEmriProfById = (id: string) => {
+        return this.professorRegistry.get(id)?.name;
+    };
+
 }

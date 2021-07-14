@@ -13,14 +13,17 @@ import { useStore } from '../../app/stores/store';
 
 export default observer(function FeedbackForm() {
 
-    const { feedbackStore, nxenesiStore } = useStore();
+    const { feedbackStore, nxenesiStore ,profesoriStore} = useStore();
     const { selectedFeedback, closeForm, loading, createFeedback } = feedbackStore;
+    
     const { nxenesitByDate } = nxenesiStore;
+
 
     useEffect(() => {
         nxenesiStore.loadNxenesit();
     }, [])
     const initialState = selectedFeedback ?? {
+
         feedbackID: '',
         nxenesiEmail: '',
         subject: '',
@@ -37,7 +40,6 @@ export default observer(function FeedbackForm() {
         rating: Yup.number().required("Vlersimi i nevojshem")
     })
 
-    const [feedback, setFeedback] = useState(initialState);
 
     function handleFormSubmit(feedback: FeedbackToNxenesi) {
         createFeedback(feedback);
@@ -46,7 +48,7 @@ export default observer(function FeedbackForm() {
     return (
         <Segment clearing>
             <Formik validationSchema={validationSchema}
-                enableReinitialize initialValues={feedback}
+                enableReinitialize initialValues={initialState}
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>

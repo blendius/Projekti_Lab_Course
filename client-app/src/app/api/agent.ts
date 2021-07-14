@@ -76,14 +76,18 @@ const requests = {
 };
 
 const Profesoret = {
-  list: () => requests.get<ProfFormValues[]>("/profesori"),
-  details: (id: string) => requests.get<ProfFormValues>(`/profesori/${id}`),
-  create: (profesori: ProfFormValues, EmriLendes: string) =>
+  list: () => requests.get<Professor[]>("/profesori"),
+  details: (id: string) => requests.get<Professor>(`/profesori/${id}`),
+  create: (profesori: Professor, EmriLendes: string) =>
     axios.post<void>(`/profesori/${EmriLendes}`, profesori),
-  update: (profesori: ProfFormValues) =>
+  update: (profesori: Professor) =>
     axios.put<void>(`/profesori/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/profesori/${id}`),
   createKlasa: (profesoriKlasa: ProfKlasa, profId: string | undefined, klasaId: string) => axios.post<void>(`/profesori/${profId}&${klasaId}`, profesoriKlasa),
+  listKlaset: (id: string | undefined) =>
+    requests.get<ProfKlasa[]>(`/profesori/klasat/${id}`),
+  deleteKlasa: (id: string | undefined) => axios.delete<void>(`/profesori/profKlasa/${id}`),
+
 };
 const Oraret = {
   list: () => requests.get<Orari[]>("/oraret"),
@@ -187,12 +191,12 @@ const Account = {
 };
 
 const AccountProf = {
-  currentProf: () => requests.get<ProfFormValues>("/account/currentProf"),
+  currentProf: () => requests.get<Professor>("/account/currentProf"),
 
   login: (prof: ProfFormValues) =>
-    requests.post<ProfFormValues>("/account/loginProf", prof),
+    requests.post<Professor>("/account/loginProf", prof),
   register: (prof: ProfFormValues, id: string) =>
-    requests.post<ProfFormValues>(`/account/registerProf/${id}`, prof),
+    requests.post<Professor>(`/account/registerProf/${id}`, prof),
 };
 const AccountPrindi = {
   current: () => requests.get<Parent>("/PrindAccount"),
@@ -214,8 +218,8 @@ const FeedbackToNxenesit = {
 const Laburatoret = {
   list: () => requests.get<Laburatori[]>("/laburatori"),
   details: (id: string) => requests.get<Laburatori>(`/laburatori/${id}`),
-  create: (laburatori: Laburatori, EmriLendes: string) =>
-    axios.post<void>(`/laburatori/${EmriLendes}`, laburatori),
+  create: (laburatori: Laburatori, LendaId: string) =>
+    axios.post<void>(`/laburatori/${LendaId}`, laburatori),
   update: (laburatori: Laburatori) =>
     axios.put<void>(`/laburatori/${laburatori.id}`, laburatori),
   delete: (id: string) => axios.delete<void>(`/laburatori/${id}`),
@@ -234,7 +238,7 @@ const Kontaktet = {
     requests.get<Kontakti[]>(`/kontakti/${id}`),
   listProf: (email: string | undefined) =>
     requests.get<Kontakti[]>(`/kontakti/prof/${email}`),
-  create: (kontakti: Kontakti) => axios.post<void>(`/kontakti/`, kontakti),
+  create: (kontakti: Kontakti, profEmail: string | undefined) => axios.post<void>(`/kontakti/${profEmail}`, kontakti),
   delete: (id: string) => axios.delete<void>(`/kontakti/${id}`),
 };
 const AccountNxenesi = {
@@ -277,8 +281,8 @@ const Klasat = {
 };
 
 const Vleresimet = {
-  
-  list: (profId:string |undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
+
+  list: (profId: string | undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
   details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
   create: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
   update: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),

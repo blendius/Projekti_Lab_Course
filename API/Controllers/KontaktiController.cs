@@ -13,16 +13,16 @@ namespace API.Controllers
         {
             return await Mediator.Send(new ListPrindi.Query{Id=id});
         }
-          [HttpGet("prof/{email}")]
-        public async Task<ActionResult<List<Kontakti>>> GetKontaktProf(string email)
+          [HttpGet("prof/{profId}")]
+        public async Task<ActionResult<List<Kontakti>>> GetKontaktProf(string profId)
         {
-            return await Mediator.Send(new ListProf.Query{Email=email});
+            return await Mediator.Send(new ListProf.Query{profId=profId});
         }
         
-        [HttpPost]
-        public async Task<IActionResult> CreateKontakti(Kontakti kontakti)
+        [HttpPost("{profEmail}")]
+        public async Task<IActionResult> CreateKontakti(Kontakti kontakti, string profEmail )
         {
-            return Ok(await Mediator.Send(new Create.Command { Kontakti = kontakti }));
+            return Ok(await Mediator.Send(new Create.Command { Kontakti = kontakti, ProfEmail=profEmail }));
         }
         [HttpDelete("{id}")]
         public async Task <IActionResult> DeleteKontakti(Guid id)

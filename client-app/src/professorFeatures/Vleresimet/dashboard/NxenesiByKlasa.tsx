@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { Button, Grid, Item, List } from 'semantic-ui-react';
+import { Button, Item, List } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
-import VlersimiStore from '../../../app/stores/vlersimiStore';
 
 
 
@@ -10,9 +8,9 @@ import VlersimiStore from '../../../app/stores/vlersimiStore';
 
 export default observer(function NxenesiByKlasa() {
     const { vleresimiStore } = useStore();
-    const { editMode, NxenesiSortByEmri } = vleresimiStore
+    const {  NxenesiSortByEmri } = vleresimiStore
     return (
-        <List divided relaxed inverted >
+        <List divided relaxed >
             {NxenesiSortByEmri.map(nxenesi => (
                 <List.Item key={nxenesi.id}>
                     <List.Content>

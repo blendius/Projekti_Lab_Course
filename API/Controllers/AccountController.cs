@@ -74,7 +74,7 @@ namespace API.Controllers
             return Unauthorized();
 
         }
-        [HttpPost("registerProf/{Lendaid}")]
+        [HttpPost("registerProf/{LendaId}")]
         public async Task<ActionResult<ProfDto>> RegisterProf(RegisterDto registerDto, Guid LendaId)
         {
             if (await _userManagerProf.Users.AnyAsync(x => x.Email == registerDto.Email))
@@ -88,7 +88,7 @@ namespace API.Controllers
 
             var prof = new Profesori
             {
-                Name = registerDto.DisplayName,
+                Name = registerDto.Name,
                 Email = registerDto.Email,
                 UserName = registerDto.Username,
                 GradaAkademike = registerDto.GradaAkademike,

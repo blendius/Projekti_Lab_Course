@@ -5,11 +5,11 @@ import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useStore } from '../../app/stores/store';
 
 
-export default observer(function KontaktiDetais() {
-    const { kontaktiStore, profesoriStore } = useStore();
+export default observer(function KontaktiProfDetails() {
+    const { kontaktiStore, profesoriStore, prindiStore } = useStore();
     const { deleteKotakti } = kontaktiStore
 
-    const { selectedKontakti: kontakti, loading, cancelSelectedKontakti } = kontaktiStore;
+    const { selectedKontakti: kontakti, loading } = kontaktiStore;
 
     const [target, setTarget] = useState('');
     const [openConfirm, setOpenConfirm] = useState(false)
@@ -33,7 +33,7 @@ export default observer(function KontaktiDetais() {
             <Card.Content description={kontakti.mesazhi} />
             <Card.Content extra textAlign='center'>
 
-                {profesoriStore.getEmriProfById(kontakti.profesoriId)}  ,
+                {prindiStore.getEmriPrinditById(kontakti.prindiId)}  ,
                 {kontakti.dataEDergimit}
             </Card.Content>
             <Card.Content extra textAlign='center' >
@@ -41,6 +41,7 @@ export default observer(function KontaktiDetais() {
                     loading={loading && target === kontakti.kontaktiId}
                     onClick={() => setOpenConfirm(true)}
                     content='Fshije' className='detailsbtn' color='google plus' />
+                <Button onClick={() => kontaktiStore.openForm(kontakti.kontaktiId)} color='instagram' content="Reply" />
                 <Confirm
                     content='A jeni i sigurt se doni ta fshini?'
                     open={openConfirm}
@@ -50,8 +51,6 @@ export default observer(function KontaktiDetais() {
                         setOpenConfirm(false);
                     }}
                 />
-                <Button onClick={cancelSelectedKontakti} color='grey' content='cancel' className='detailsbtn' />
-
             </Card.Content>
         </Card>
 

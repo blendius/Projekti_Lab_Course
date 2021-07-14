@@ -11,21 +11,19 @@ import { useStore } from '../../app/stores/store';
 
 
 
-export default observer(function KontaktiForm() {
+export default observer(function ReplyForm() {
 
-    const { kontaktiStore, profesoriStore } = useStore();
-    const { selectedKontakti, closeForm, loading, createKontakti,cancelSelectedKontakti } = kontaktiStore;
+    const { kontaktiStore, profesoriStore: { prof } } = useStore();
+    const { selectedKontakti, closeForm, loading, createKontakti } = kontaktiStore;
 
-    const data = new Date();
-
-    const initialState = selectedKontakti ?? {
-        prindiId: '',
+    const initialState = {
+        prindiId: selectedKontakti?.prindiId ?? '',
         kontaktiId: '',
-        profesoriId: '',
-        subjekti: '',
+        profesoriId: prof?.id ?? '',
+        subjekti: selectedKontakti?.subjekti +"-Reply" ??'',
         mesazhi: '',
-        dataEDergimit: data.toString,
-        isReply: false
+        dataEDergimit: new Date().toString,
+        isReply: true
     }
     const validationSchema = Yup.object({
         subjekti: Yup.string().required('Subjekti duhet te plotesohet !'),
@@ -47,13 +45,13 @@ export default observer(function KontaktiForm() {
                 onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MyTextInput type='text' name='profesoriId' placeholder='Email e profesorit'></MyTextInput>
+                        {/* <MyTextInput type='text' name='profesoriId' placeholder='Email e profesorit'></MyTextInput> */}
                         <MyTextInput type='text' placeholder='Subjekti' name='subjekti' />
                         <MyTextArea rows={4} type='text' placeholder='Mesazhi' name='mesazhi' />
                         {/* <MyTextInput type='date' placeholder='Data e Dërgimit' name='dataEDergimit' /> */}
                         <Button disabled={isSubmitting || !dirty || !isValid}
                             loading={loading} floated='right' positive type='submit' content='Submit' />
-                        <Button onClick={cancelSelectedKontakti} floated='right' type='button' content='Cancel' />
+                        <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
                     </Form>
                 )}
             </Formik>

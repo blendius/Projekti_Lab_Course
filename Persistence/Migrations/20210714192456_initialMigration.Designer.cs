@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210713204902_FeedbackRating2")]
-    partial class FeedbackRating2
+    [Migration("20210714192456_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,21 +224,26 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DataEDergimit")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsReply")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Mesazhi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrindiId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Subjekti")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ProfesoriId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("profEmail")
+                    b.Property<string>("Subjekti")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("KontaktiId");
 
                     b.HasIndex("PrindiId");
+
+                    b.HasIndex("ProfesoriId");
 
                     b.ToTable("Kontaktet");
                 });
@@ -423,9 +428,6 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("EmriOrarit")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Enjte1")
                         .HasColumnType("nvarchar(max)");
 
@@ -461,6 +463,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Hene6")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("KlasaID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Marte1")
                         .HasColumnType("nvarchar(max)");
@@ -517,6 +522,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrariId");
+
+                    b.HasIndex("KlasaID");
 
                     b.ToTable("Oraret");
                 });
@@ -983,7 +990,14 @@ namespace Persistence.Migrations
                         .WithMany("Kontaktet")
                         .HasForeignKey("PrindiId");
 
+                    b.HasOne("Domain.Profesori", "Profesori")
+                        .WithMany("Kontaktet")
+                        .HasForeignKey("ProfesoriId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Prindi");
+
+                    b.Navigation("Profesori");
                 });
 
             modelBuilder.Entity("Domain.Laburatiori", b =>
@@ -1017,6 +1031,17 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Lenda");
+                });
+
+            modelBuilder.Entity("Domain.Orari", b =>
+                {
+                    b.HasOne("Domain.Klasa", "Klasa")
+                        .WithMany("Oraret")
+                        .HasForeignKey("KlasaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Klasa");
                 });
 
             modelBuilder.Entity("Domain.Pajisja", b =>
@@ -1057,7 +1082,8 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Profesori", "Profesori")
                         .WithMany("Klaset")
-                        .HasForeignKey("ProfId");
+                        .HasForeignKey("ProfId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Klasa");
 
@@ -1132,6 +1158,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Klasa", b =>
                 {
+                    b.Navigation("Oraret");
+
                     b.Navigation("Profesoret");
                 });
 
@@ -1173,6 +1201,8 @@ namespace Persistence.Migrations
                     b.Navigation("FeedbackToNxenesit");
 
                     b.Navigation("Klaset");
+
+                    b.Navigation("Kontaktet");
 
                     b.Navigation("Vleresimet");
                 });

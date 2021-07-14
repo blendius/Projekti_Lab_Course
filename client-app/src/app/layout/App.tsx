@@ -53,9 +53,10 @@ import AktivitetetDashboard from "../../features/aktivitetet/dashboard/Aktivitet
 import AutobusatDashboards from "../../features/autobusat/dashboard/AutobusatDashboards";
 import FamiljaDetails from "../../features/familjet/FamiljaDetails";
 import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
-import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
-import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
 import NxenesiFeedbacks from "../../nxenesiFeatures/dashboard/NxenesiFeedbacks";
+import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
+import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
+
 
 
 

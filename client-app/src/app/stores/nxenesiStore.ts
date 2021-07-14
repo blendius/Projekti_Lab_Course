@@ -17,7 +17,7 @@ export default class NxenesiStore {
     loadingInitial = true;
 
     constructor() {
-        this.getNxenesi();
+        //this.getNxenesi();
         makeAutoObservable(this)
     }
     get isLoggedIn() {
@@ -126,6 +126,17 @@ export default class NxenesiStore {
         }
     }
 
+    register = async (creds: NxenesiuserFormValues) => {
+        try {
+            await agent.AccountNxenesi.register(creds);
+            // store.commonStore.setToken(prof.token)
+            // runInAction(() => this.prof = prof);
+            // history.push('/lendet')
+            store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }
     createNxenesin = async (nxenesi: Nxenesi) => {
         this.loading = true;
         nxenesi.id = uuid();

@@ -17,7 +17,8 @@ export default observer(function NxenesiFeedbacks() {
 
     useEffect(() => {
 
-        nxenesiStore.getNxenesi();
+        
+        //nxenesiStore.getNxenesi();
 
         feedbackStore.loadFeedbacksNxenesi(nxenesi?.email);
         profesoriStore.loadProfesoret();

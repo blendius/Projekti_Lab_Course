@@ -1,18 +1,19 @@
 import { observer } from 'mobx-react-lite';
 import { format } from 'date-fns';
 import React, { SyntheticEvent, useState } from 'react';
-import { Button, Item, List, Segment, Table, TableBody, TableCell, TableRow } from 'semantic-ui-react';
+import { Button, Confirm, Item, List, Segment, Table, TableBody, TableCell, TableRow } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 
 
 
 export default observer(function ProfesoriList() {
-    const { profesoriStore } = useStore();
+    const { profesoriStore, lendaStore } = useStore();
     const { profesoretByDate, deleteProfessor, selectProfessor, loading } = profesoriStore;
     const [target, setTarget] = useState('');
-    
-    function handleProfesoriDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-        setTarget(e.currentTarget.name);
+    const [openConfirm, setOpenConfirm] = useState(false)
+
+
+    function handleProfesoriDelete(id: string) {
         deleteProfessor(id);
 
     }
@@ -36,11 +37,11 @@ export default observer(function ProfesoriList() {
                     <TableBody>
                         {profesoretByDate.map(profesori => (
                             <TableRow key={profesori.id}>
-                                <TableCell >{profesori.displayName}</TableCell>
+                                <TableCell >{profesori.name}</TableCell>
                                 <TableCell>{profesori.gradaAkademike}</TableCell>
-                                <TableCell>{profesori.dataRegjistrimit}</TableCell>
+                                <TableCell>{profesori.dataRegjistrimit.split('T')[0]}</TableCell>
                                 <TableCell>{profesori.email}</TableCell>
-                                <TableCell>Lenda Not implemented yet</TableCell>
+                                <TableCell>{lendaStore.getEmriLendestById(profesori.lendaId)}</TableCell>
                                 <TableCell>
                                     <Button
                                         onClick={() => profesoriStore.selectProfessor(profesori.id)}
@@ -52,9 +53,18 @@ export default observer(function ProfesoriList() {
                                     <Button
                                         name={profesori.id}
                                         loading={loading && target === profesori.id}
-                                        onClick={(e) => handleProfesoriDelete(e, profesori.id)}
+                                        onClick={() => setOpenConfirm(true)}
                                         floated='right'
                                         content='Delete' color='red' />
+                                    <Confirm
+                                        content='A jeni i sigurt se doni ta fshini?'
+                                        open={openConfirm}
+                                        onCancel={() => setOpenConfirm(false)}
+                                        onConfirm={() => {
+                                            handleProfesoriDelete(profesori.id);
+                                            setOpenConfirm(false);
+                                        }}
+                                    />
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -63,7 +73,7 @@ export default observer(function ProfesoriList() {
             </Segment>
 
         </Segment.Group>
-            
-       
+
+
     )
 })
