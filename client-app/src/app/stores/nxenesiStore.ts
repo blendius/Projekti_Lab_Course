@@ -114,6 +114,18 @@ export default class NxenesiStore {
         this.editMode = false;
     }
 
+    registerNxenesi = async (nxenesi : NxenesiuserFormValues) =>{
+        try {
+            await agent.AccountNxenesi.register(nxenesi);
+            // store.commonStore.setToken(prof.token)
+            // runInAction(() => this.prof = prof);
+            // history.push('/lendet')
+            // store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }
+
     createNxenesin = async (nxenesi: Nxenesi) => {
         this.loading = true;
         nxenesi.id = uuid();
