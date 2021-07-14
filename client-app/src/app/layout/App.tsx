@@ -56,6 +56,8 @@ import NxenesiFeedbacks from "../../nxenesiFeatures/dashboard/NxenesiFeedbacks";
 import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
 import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
 import ShowFeedbacks from "../../professorFeatures/feedbacks/ShowFeedbacks";
+import OraretDashboardStudenti from "../../features/oraret/OraretDashboardStudenti";
+
 
 
 
@@ -179,6 +181,10 @@ function App() {
                 <Route
                   path="/nxenesiPage/feedbacks"
                   component={NxenesiFeedbacks}
+                />
+                <Route
+                  path="/nxenesiPage/oraret"
+                  component={OraretDashboardStudenti}
                 />
               </Switch>
             </Container>
