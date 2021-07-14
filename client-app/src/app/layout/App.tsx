@@ -57,6 +57,8 @@ import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
 import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
 import ShowFeedbacks from "../../professorFeatures/feedbacks/ShowFeedbacks";
 import OraretDashboardStudenti from "../../features/oraret/OraretDashboardStudenti";
+import AktivitetetDashboardStudenti from "../../features/aktivitetet/AktivitetetDashboardStudenti";
+import AutobusatDashboardStudenti from "../../features/autobusat/AutobusatDashboardStudenti";
 
 
 
@@ -185,6 +187,14 @@ function App() {
                 <Route
                   path="/nxenesiPage/oraret"
                   component={OraretDashboardStudenti}
+                />
+                <Route
+                  path="/nxenesiPage/autobusatOrari"
+                  component={AutobusatDashboardStudenti}
+                />
+                <Route
+                  path="/nxenesiPage/aktivitetet"
+                  component={AktivitetetDashboardStudenti}
                 />
               </Switch>
             </Container>
