@@ -12,5 +12,6 @@ namespace Domain
         public Guid SallaId {get; set;}
         public Salla Salla {get; set;}
         public ICollection<ProfesoriKlasa> Profesoret { get; set; }
+        public ICollection<Orari> Oraret { get; set; }
     }
 }
