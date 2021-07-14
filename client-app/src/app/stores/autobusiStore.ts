@@ -49,11 +49,11 @@ export default class AutobusiStore {
   };
   createAutobusi = async (autobusi: Autobusi) => {
     this.loading = true;
-    autobusi.AutobusiId = uuid();
+    autobusi.autobusiId = uuid();
     try {
       await agent.Autobusat.create(autobusi);
       runInAction(() => {
-        this.autobusatRegistry.set(autobusi.AutobusiId, autobusi);
+        this.autobusatRegistry.set(autobusi.autobusiId, autobusi);
         this.selectedAutobusi = autobusi;
         this.editMode = false;
         this.loading = false;
@@ -70,7 +70,7 @@ export default class AutobusiStore {
     try {
       await agent.Autobusat.update(autobusi);
       runInAction(() => {
-        this.autobusatRegistry.set(autobusi.AutobusiId, autobusi);
+        this.autobusatRegistry.set(autobusi.autobusiId, autobusi);
         this.selectedAutobusi = autobusi;
         this.editMode = false;
         this.loading = false;
@@ -88,7 +88,7 @@ export default class AutobusiStore {
       await agent.Autobusat.delete(id);
       runInAction(() => {
         this.autobusatRegistry.delete(id);
-        if (this.selectedAutobusi?.AutobusiId === id)
+        if (this.selectedAutobusi?.autobusiId === id)
           this.cancelSelectedAutobusi();
         this.loading = false;
       });
@@ -117,7 +117,7 @@ export default class AutobusiStore {
   };
 
   private setAutobusi = (autobusi: Autobusi) => {
-    this.autobusatRegistry.set(autobusi.AutobusiId, autobusi);
+    this.autobusatRegistry.set(autobusi.autobusiId, autobusi);
   };
 
   private getAutobusi = (id: string) => {

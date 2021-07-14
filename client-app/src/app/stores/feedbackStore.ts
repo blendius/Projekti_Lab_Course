@@ -6,13 +6,20 @@ import { v4 as uuid } from 'uuid';
 export default class FeedbackStore {
     profId: string | null = null;
     feedbackRegistry = new Map<string, FeedbackToNxenesi>();
+    feedbackRegistryReplay = new Map<string, FeedbackToNxenesi>();
+
     selectedFeedback: FeedbackToNxenesi | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = true;
+    modalMode = false;
+
 
     constructor() {
         makeAutoObservable(this)
+    }
+    get feedbackReplyByDate() {
+        return Array.from(this.feedbackRegistryReplay.values()).sort((a, b) => Date.parse(a.messageSentDate) - Date.parse(b.messageSentDate))
     }
 
     get feedbackByDate() {
@@ -21,9 +28,15 @@ export default class FeedbackStore {
     loadFeedbacksProf = async (id: string | undefined) => {
         try {
             const feedbacks = await agent.FeedbackToNxenesit.listProf(id);
-            feedbacks.forEach(feedback => {
-                feedback.messageSentDate = feedback.messageSentDate.split('T')[0];
-                this.feedbackRegistry.set(feedback.feedbackID, feedback)
+
+            feedbacks.forEach(feedbacks => {
+                feedbacks.messageSentDate = feedbacks.messageSentDate.split('T')[0];
+
+                if (feedbacks.isReply) {
+                    this.feedbackRegistryReplay.set(feedbacks.feedbackID, feedbacks);
+                } else {
+                    this.feedbackRegistry.set(feedbacks.feedbackID, feedbacks);
+                }
             })
             this.setLoadingInitial(false);
         }
@@ -32,9 +45,26 @@ export default class FeedbackStore {
             console.log(error);
 
             this.setLoadingInitial(false);
-
         }
+
     }
+    // loadFeedbacksProf = async (id: string | undefined) => {
+    //     try {
+    //         const feedbacks = await agent.FeedbackToNxenesit.listProf(id);
+    //         feedbacks.forEach(feedback => {
+    //             feedback.messageSentDate = feedback.messageSentDate.split('T')[0];
+    //             this.feedbackRegistry.set(feedback.feedbackID, feedback)
+    //         })
+    //         this.setLoadingInitial(false);
+    //     }
+
+    //     catch (error) {
+    //         console.log(error);
+
+    //         this.setLoadingInitial(false);
+
+    //     }
+    // }
 
    
     
@@ -56,7 +86,10 @@ export default class FeedbackStore {
             
         }
     }
-
+    selectFeedbackReplay = (id: string) => {
+        this.selectedFeedback = this.feedbackRegistryReplay.get(id);
+        this.modalMode = true;
+    }
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
     }

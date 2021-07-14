@@ -1,7 +1,7 @@
 export interface Aktiviteti {
-  AktivitetiId: string;
-  Emri: string;
-  Pershkrimi: string;
-  DataMbajtjes: string;
-  EmriSalles: string;
+  aktivitetiId: string;
+  emri: string;
+  pershkrimi: string;
+  dataMbajtjes: string;
+  emriSalles: string;
 }

@@ -13,17 +13,17 @@ export default function AktivitetetDetails() {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header>{aktiviteti.Emri}</Card.Header>
+                <Card.Header>{aktiviteti.emri}</Card.Header>
                 <Card.Description>
-                    <div><label>Pershkrimi: </label>{aktiviteti.Pershkrimi}</div>
+                    <div><label>Pershkrimi: </label>{aktiviteti.pershkrimi}</div>
                 </Card.Description>
                 <Card.Meta>
-                    <span>Data: {aktiviteti.DataMbajtjes}</span>
+                    <span>Data: {aktiviteti.dataMbajtjes}</span>
                 </Card.Meta>
             </Card.Content>
             <Card.Content extra>
                 <ButtonGroup widths='2'>
-                    <Button onClick={() => openForm(aktiviteti.AktivitetiId)} basic color='blue' content='Edito' />
+                    <Button onClick={() => openForm(aktiviteti.aktivitetiId)} basic color='blue' content='Edito' />
                     <Button onClick={cancelSelectedAktiviteti} basic color='grey' content='Anulo' />
                 </ButtonGroup>
             </Card.Content>

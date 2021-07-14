@@ -28,7 +28,6 @@ import NavBar from "../../features/NavBar";
 import adminPage from "../../features/adminPage";
 import NavBarProf from "../../professorFeatures/NavBarProf";
 import PrindiPage from "../../prindiFeatures/PrindiPage";
-import ShowFeedbacks from "../../professorFeatures/Feedbacks";
 import NavBarPrindi from "../../prindiFeatures/NavBarPrindi";
 import ShowKontaktet from "../../prindiFeatures/kontaktet";
 import ShowKontaktetProf from "../../professorFeatures/kontaktetProf";
@@ -56,6 +55,7 @@ import FamiljaDashboard from "../../features/familjet/FamiljaDashboard";
 import NxenesiFeedbacks from "../../nxenesiFeatures/dashboard/NxenesiFeedbacks";
 import AdminProfileDashboard from "../../features/admin/AdminProfileDashboard";
 import SyllabusetDashboard from "../../features/syllabuset/dashboard/SyllabusetDashboard";
+import ShowFeedbacks from "../../professorFeatures/feedbacks/ShowFeedbacks";
 
 
 

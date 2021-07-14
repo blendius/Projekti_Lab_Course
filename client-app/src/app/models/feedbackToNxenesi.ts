@@ -6,5 +6,6 @@ export interface FeedbackToNxenesi {
     message: string;
     messageSentDate: string;
     rating: number;
+    isReply: boolean;
 
 }

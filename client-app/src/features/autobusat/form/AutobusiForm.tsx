@@ -18,15 +18,16 @@ export default observer(function OrariiForm() {
     const { selectedAutobusi, closeForm, createAutobusi, updateAutobusi, loading } = autobusiStore;
 
     const initialState = selectedAutobusi ?? {
-        AutobusiId: '',
-        targatId: '',
+        autobusiId: '',
+        targat: '',
         brendi: '',
         vitiProdhimit: '',
         nrPasagjereve: 0,
+        oraNisjes:'',
     }
     const [autobusi, setAutobusi] = useState(initialState);
     function handleSubmit(autobusi: Autobusi) {
-        autobusi.AutobusiId ? updateAutobusi(autobusi) : createAutobusi(autobusi);
+        autobusi.autobusiId ? updateAutobusi(autobusi) : createAutobusi(autobusi);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -43,10 +44,11 @@ export default observer(function OrariiForm() {
             >
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-                        <MyTextInput type='text' placeholder='targa' name='targatId' />
+                        <MyTextInput type='text' placeholder='targa' name='targat' />
                         <MyTextInput type='text' placeholder='brend' name='brendi' />
                         <MyTextInput type='date' placeholder='viti prodhimit' name='vitiProdhimit' />
                         <MyTextInput type='number' placeholder='nr pasa' name='nrPasagjereve' />
+                        <MyTextInput type='time' placeholder='Ora nisjes' name='oraNisjes' />
 
 
                         <Button

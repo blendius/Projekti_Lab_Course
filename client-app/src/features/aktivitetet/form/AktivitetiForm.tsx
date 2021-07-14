@@ -19,11 +19,11 @@ export default observer(function AktivitetiForm() {
     const { selectedAktiviteti, closeForm, createAktiviteti, updateAktiviteti, loading } = aktivitetiStore;
 
     const initialState = selectedAktiviteti ?? {
-        AktivitetiId: '',
-        Emri: '',
-        Pershkrimi: '',
-        DataMbajtjes: '',
-        EmriSalles: '',
+        aktivitetiId: '',
+        emri: '',
+        pershkrimi: '',
+        dataMbajtjes: '',
+        emriSalles: '',
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default observer(function AktivitetiForm() {
         });
     }
     function handleSubmit(aktiviteti: Aktiviteti) {
-        aktiviteti.AktivitetiId ? updateAktiviteti(aktiviteti) : createAktiviteti(aktiviteti);
+        aktiviteti.aktivitetiId ? updateAktiviteti(aktiviteti) : createAktiviteti(aktiviteti);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -57,10 +57,10 @@ export default observer(function AktivitetiForm() {
             >
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-                        <MyTextInput type='text' placeholder='Emri Aktivitetit' name='Emri' />
-                        <MyTextInput type='text' placeholder='Pershkrimi' name='Pershkrimi' />
-                        <MyTextInput type='date' placeholder='DataMbajtjes' name='DataMbajtjes' />
-                        <MySelectInput options={arr} placeholder='EmriSalles' name='EmriSalles' />
+                        <MyTextInput type='text' placeholder='Emri Aktivitetit' name='emri' />
+                        <MyTextInput type='text' placeholder='Pershkrimi' name='pershkrimi' />
+                        <MyTextInput type='date' placeholder='DataMbajtjes' name='dataMbajtjes' />
+                        <MySelectInput options={arr} placeholder='EmriSalles' name='emriSalles' />
                         <Button
                             // disabled={isSubmitting || !dirty || !isValid}
                             loading={loading}

@@ -50,11 +50,11 @@ export default class AktivitetiStore {
   };
   createAktiviteti = async (aktiviteti: Aktiviteti) => {
     this.loading = true;
-    aktiviteti.AktivitetiId = uuid();
+    aktiviteti.aktivitetiId = uuid();
     try {
       await agent.Aktivitetet.create(aktiviteti);
       runInAction(() => {
-        this.aktivitetetRegistry.set(aktiviteti.AktivitetiId, aktiviteti);
+        this.aktivitetetRegistry.set(aktiviteti.aktivitetiId, aktiviteti);
         this.selectedAktiviteti = aktiviteti;
         this.editMode = false;
         this.loading = false;
@@ -71,7 +71,7 @@ export default class AktivitetiStore {
     try {
       await agent.Aktivitetet.update(aktiviteti);
       runInAction(() => {
-        this.aktivitetetRegistry.set(aktiviteti.AktivitetiId, aktiviteti);
+        this.aktivitetetRegistry.set(aktiviteti.aktivitetiId, aktiviteti);
         this.selectedAktiviteti = aktiviteti;
         this.editMode = false;
         this.loading = false;
@@ -89,7 +89,7 @@ export default class AktivitetiStore {
       await agent.Aktivitetet.delete(id);
       runInAction(() => {
         this.aktivitetetRegistry.delete(id);
-        if (this.selectedAktiviteti?.AktivitetiId === id)
+        if (this.selectedAktiviteti?.aktivitetiId === id)
           this.cancelSelectedAktiviteti();
         this.loading = false;
       });
@@ -118,7 +118,7 @@ export default class AktivitetiStore {
   };
 
   private setAktiviteti = (aktiviteti: Aktiviteti) => {
-    this.aktivitetetRegistry.set(aktiviteti.AktivitetiId, aktiviteti);
+    this.aktivitetetRegistry.set(aktiviteti.aktivitetiId, aktiviteti);
   };
 
   private getAktiviteti = (id: string) => {
