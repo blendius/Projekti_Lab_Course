@@ -6,6 +6,7 @@ import {v4 as uuid} from 'uuid';
 import {Nxenesiuser, NxenesiuserFormValues } from "../models/nxenesiuser";
 import { store } from "./store";
 import { history } from "../..";
+import { convertCompilerOptionsFromJson } from "typescript";
 
 export default class NxenesiStore {
     nxenesi: Nxenesiuser | null = null;
@@ -114,24 +115,11 @@ export default class NxenesiStore {
         this.editMode = false;
     }
 
-    registerNxenesi = async (nxenesi : NxenesiuserFormValues) =>{
-        try {
-            await agent.AccountNxenesi.register(nxenesi);
-            // store.commonStore.setToken(prof.token)
-            // runInAction(() => this.prof = prof);
-            // history.push('/lendet')
-            // store.modalStore.closeModal();
-        } catch (error) {
-            throw error;
-        }
-    }
-
     register = async (creds: NxenesiuserFormValues) => {
         try {
+            console.log("creds Nxenesi: ", creds);
             await agent.AccountNxenesi.register(creds);
-            // store.commonStore.setToken(prof.token)
-            // runInAction(() => this.prof = prof);
-            // history.push('/lendet')
+            //history.push('/adminPage/nxenesit');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

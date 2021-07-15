@@ -11,19 +11,9 @@ import './style.css'
 
 export default function NxenesiDashboard() {
     const {nxenesiStore: {nxenesiSelected}} = useStore();
-   // const {selectedNxenesi: nxenesit, loadingInitial} = nxenesiStore;
-    //console.log("nxenesiStore hoo:", nxenesit)
-    //console.log("nxenesiSelected bbbb:", nxenesiSelected)
     const [open, setOpen] = React.useState(false)
 
     const [nxenesi, setNxenesit] = useState<Nxenesi[]>([]);
-//    useEffect(()=>{
-//     axios.get<Nxenesi[]>("http://localhost:5000/api/Nxenesi").then(response =>{
-//         setNxenesit(response.data);
-//         console.log(response);
-//     })
-//     },[])
-   // const nxenesi = nxenesit[0] || {}
     return (
         <>
             <Segment>

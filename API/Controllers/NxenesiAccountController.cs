@@ -60,7 +60,10 @@ namespace API.Controllers
                 ParentName = registerDto.ParentName,
                 DateOfBirth = registerDto.DateOfBirth,
                 Class = registerDto.Class,
-                //YearOfRegistration = registerDto.YearOfRegistration
+                YearOfRegistration = registerDto.YearOfRegistration,
+                FullName = registerDto.FullName,
+                PhoneNumber = registerDto.PhoneNumber
+
             };
             //System.Diagnostics.Debug.WriteLine(nxenesi);
             var result = await _userManager.CreateAsync(nxenesi, registerDto.Password);
@@ -71,7 +74,7 @@ namespace API.Controllers
             return BadRequest("Pati probleme gjate regjistrimit");
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("currentNxenesi")]
         public async Task<ActionResult<NxenesiDto>> GetCurrentNxenesin()
         {
