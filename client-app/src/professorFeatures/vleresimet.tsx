@@ -6,9 +6,9 @@ import VleresimiDashboard from './Vleresimet/dashboard/VleresimiDashboard';
 
 function ShowVlersimet() {
 
-  const { vleresimiStore, paraleljaStore, klasaStore , profesoriStore, nxenesiStore} = useStore();
+  const { vleresimiStore, paraleljaStore, klasaStore , profesoriStore,prindStoreAccount:{prindi}, nxenesiStore} = useStore();
 
-
+ 
 
   useEffect(() => {
     vleresimiStore.loadVleresimet(profesoriStore.prof?.id);
@@ -23,10 +23,8 @@ function ShowVlersimet() {
 
   return (
     <Fragment>
-
         <VleresimiDashboard
         />
- 
     </Fragment>
   )
 }

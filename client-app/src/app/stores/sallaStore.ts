@@ -128,4 +128,8 @@ export default class SallaStore {
   public getEmriSallesById = (id: string) => {
     return this.sallatRegistry.get(id)?.emriSalles;
   };
+  
+  public getSallaaById = (id: string) => {
+    return this.sallatRegistry.get(id);
+};
 }

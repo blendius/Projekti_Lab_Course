@@ -61,6 +61,7 @@ import AktivitetetDashboardStudenti from "../../features/aktivitetet/Aktivitetet
 import AutobusatDashboardStudenti from "../../features/autobusat/AutobusatDashboardStudenti";
 
 
+import FemijaDashboard from "../../prindiFeatures/dashboard/FemijaDashboard";
 
 
 
@@ -148,6 +149,7 @@ function App() {
                   component={PrindProfileDashboard}
                 />
                 <Route path="/prindiPage/Kontaktet" component={kontaktet} />
+                <Route path="/prindiPage/Femija" component={FemijaDashboard} />
               </Switch>
             </Container>
           </>

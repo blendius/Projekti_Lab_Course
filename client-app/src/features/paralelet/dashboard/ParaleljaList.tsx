@@ -21,6 +21,7 @@ export default observer(function ParaleljaList() {
                         <Table.Row>
                             <Table.HeaderCell >Paralelja</Table.HeaderCell>
                             <Table.HeaderCell >Kapaciteti Maksimal</Table.HeaderCell>
+                            <Table.HeaderCell >Kapaciteti Minimal</Table.HeaderCell>
                             <Table.HeaderCell>Shiko</Table.HeaderCell>
                             <Table.HeaderCell>Fshije</Table.HeaderCell>
                         </Table.Row>
@@ -30,6 +31,7 @@ export default observer(function ParaleljaList() {
                             <TableRow key={paralelet.numri}>
                                 <TableCell >{paralelet.numri}</TableCell>
                                 <TableCell >{paralelet.kapacitetiMax}</TableCell>
+                                <TableCell >{paralelet.kapacitetiMin}</TableCell>
                                 <TableCell>
                                     <Button
                                         onClick={() => paraleljaStore.selectParalelja(paralelet.paraleljaId)}

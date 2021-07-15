@@ -249,4 +249,5 @@ export default class ProfesoriStore {
         return this.professorRegistry.get(id)?.name;
     };
 
+    
 }

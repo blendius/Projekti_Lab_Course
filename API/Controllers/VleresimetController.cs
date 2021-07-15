@@ -16,12 +16,24 @@ namespace API.Controllers
         {
             return await Mediator.Send(new List.Query{profId=profId});
         }
-
+        [HttpGet("nxenesi/{nxenesiId}")]
+        public async Task<ActionResult<List<Vleresimi>>> GetVleresimetByNxenesi(string nxenesiId)
+        {
+            return await Mediator.Send(new ListByNxenesi.Query{nxenesiId=nxenesiId});
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<Vleresimi>> GetVlersimet(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
         }
+        [HttpGet("prindi/{prindiId}")]
+
+        //get array of students from parent id
+        public async Task<ActionResult<Familja[]>> GetNxenesiByPrindi(string prindiId)
+        {
+            return await Mediator.Send(new GetNxenesiById.Query{prindiId=prindiId});
+        }
+        
         [HttpPost("{ProfId}&{NxenesiId}")]
 
         public async Task<IActionResult> CreateVlersimi(Vleresimi vleresimi, string ProfId, string NxenesiId)
@@ -40,6 +52,5 @@ namespace API.Controllers
             vleresimi.VleresimiId = id;
             return Ok(await Mediator.Send(new Edit.Command { Vleresimi = vleresimi }));
         }
-
     }
 }

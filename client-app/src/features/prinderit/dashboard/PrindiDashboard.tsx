@@ -9,11 +9,13 @@ import PrindiList from './PrindiList';
 
 export default observer(function PrindiDashboard() {
 
-    const { prindiStore, modalStore, commonStore, prindStoreAccount } = useStore();
+    const { prindiStore, modalStore, commonStore, prindStoreAccount:{prindi},vleresimiStore } = useStore();
     const { selectedPrindi, editMode, closeForm, openForm } = prindiStore;
-
-
-
+    useEffect(() => {
+        vleresimiStore.loadNxenesiByPrindi(prindi?.id);
+     
+    }, [vleresimiStore])
+ console.log(vleresimiStore.familjaRegistry[0]?.nxenesiId)
     return (
         <Grid>
             <Grid.Column width='12'>

@@ -7,7 +7,11 @@ import { observer } from 'mobx-react-lite';
 import PrindiDashboard from './dashboard/PrindiDashboard';
 
 function ShowPrinderit() {
-  const {prindiStore} = useStore();
+  const {prindiStore, vleresimiStore, prindStoreAccount:{prindi}} = useStore();
+  useEffect(() => {
+    vleresimiStore.loadNxenesiByPrindi(prindi?.id);
+    // var femija1 = vleresimiStore.loadVleresimetByNxenesi(vleresimiStore.familjaRegistry[0]?.nxenesiId);
+}, [vleresimiStore])
   
   useEffect(() => {
    prindiStore.loadPrinderit();

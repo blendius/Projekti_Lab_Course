@@ -125,14 +125,14 @@ export default class ParaleljaStore {
     this.paraleletRegistry.set(paralelja.paraleljaId, paralelja);
   };
 
-  private getParalelja = (id: string) => {
-    return this.paraleletRegistry.get(id);
-  };
-  public getNumriParalelesById = (id: string) => {
-    return this.paraleletRegistry.get(id)?.numri;
-  };
-  public getParaleljaNumribyId = (id: string) => {
-    let paralejla = this.paraleletRegistry.get(id)?.numri;
-    return paralejla;
-  };
+    private getParalelja = (id: string) => {
+        return this.paraleletRegistry.get(id);
+    };
+    public getNumriParalelesById = (id: string) => {
+        return this.paraleletRegistry.get(id)?.numri;
+    };
+
+    public getParaleljaById = (id: string) => {
+        return this.paraleletRegistry.get(id);
+    };
 }

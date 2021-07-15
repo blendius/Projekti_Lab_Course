@@ -31,7 +31,6 @@ export default observer(function KlasaForm() {
         paraleljaId: Yup.string().required('Paralelja eshte e nevojesheme').min(1),
     })
     const [klasa] = useState(initialState);
-
     function handleFormSubmit(klasa: Klasa) {
         klasa.klasaId ? updateKlasa(klasa, klasa.paraleljaId, klasa.sallaId) : createKlasa(klasa, klasa.paraleljaId, klasa.sallaId);
     }

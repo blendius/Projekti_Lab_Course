@@ -149,7 +149,7 @@ const Prinderit = {
   list: () => requests.get<Prindi[]>("/prinderit"),
   details: (id: string) => requests.get<Prindi>(`/prinderit/${id}`),
   create: (profesori: Prindi) => axios.post<void>("/prinderit", profesori),
-  update: (profesori: Prindi) =>
+  update: (profesori: Prindi | Parent) =>
     axios.put<void>(`/prinderit/${profesori.id}`, profesori),
   delete: (id: string) => axios.delete<void>(`/prinderit/${id}`),
 };
@@ -281,8 +281,11 @@ const Klasat = {
 };
 
 const Vleresimet = {
-
   list: (profId: string | undefined) => requests.get<Vleresimi[]>(`/Vleresimet/prof/${profId}`),
+  listNxenesi: (nxenesiId: string | undefined) =>
+    requests.get<Vleresimi[]>(`/Vleresimet/nxenesi/${nxenesiId}`),
+  listNxenesiByPrindi: (prindiId: string | undefined) =>
+    requests.get<Familja[]>(`/Vleresimet/prindi/${prindiId}`),
   details: (id: string) => requests.get<Vleresimi>(`/Vleresimet/${id}`),
   create: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.post<void>(`/Vleresimet/${profID}&${nxensiId}`, vlersimi),
   update: (vlersimi: Vleresimi, profID: string | undefined, nxensiId: string | undefined) => axios.put<void>(`/Vleresimet/${vlersimi.vleresimiId}/${profID}&${nxensiId}`, vlersimi),

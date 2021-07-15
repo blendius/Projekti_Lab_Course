@@ -59,10 +59,10 @@ namespace API.Controllers
                 DisplayName = prindi.DisplayName,
                 Image = null,
                 Token = _tokenService.CreateTokenPrind(prindi),
-                Username = prindi.UserName,
+                UserName = prindi.UserName,
                 Email = prindi.Email,
                 DataLindjes = prindi.DataLindjes,
-                NrTel = prindi.PhoneNumber
+                PhoneNumber = prindi.PhoneNumber
             };
         }
 
@@ -75,7 +75,7 @@ namespace API.Controllers
                 return BadRequest("Email e zene!");
             }
 
-            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
+            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
             {
                 return BadRequest("Username i zene!");
             }
@@ -83,8 +83,12 @@ namespace API.Controllers
             var prind = new Prindi
             {
                 DisplayName = registerDto.DisplayName,
+                // Token = _tokenService.CreateTokenPrind(prindi),
+                UserName = registerDto.UserName,
                 Email = registerDto.Email,
-                UserName = registerDto.Username
+                DataLindjes = registerDto.DataLindjes,
+                PhoneNumber = registerDto.PhoneNumber
+               
             };
 
             var result = await _userManager.CreateAsync(prind, registerDto.Password);

@@ -19,7 +19,7 @@ export default observer(function NavBarPrindi() {
           <Link to="/">Gjimnazi</Link>
         </Menu.Item>
 
-        <Menu.Item content="Prindi Page" />
+        <Menu.Item as={NavLink} to="/prindiPage/Femija" name="Fëmijët" />
         <Menu.Item as={NavLink} to="/prindiPage/Kontaktet" name="Kontaktet" />
         <Menu.Item position="right">
         <Dropdown pointing="top right" text={prindi?.displayName}>
