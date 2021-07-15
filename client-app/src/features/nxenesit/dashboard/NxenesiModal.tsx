@@ -15,13 +15,14 @@ interface ModalProps {
   nxenesi: any;
 }
 
+
 const options_Class = [
-  { key: "X1", text: "X/1", value: "X/1" },
-  { key: "X2", text: "X/2", value: "X/2" },
-  { key: "XI1", text: "XI/1", value: "XI/1" },
-  { key: "XI2", text: "XI/2", value: "XI/2" },
-  { key: "XII1", text: "XII/1", value: "XII/1" },
-  { key: "XII2", text: "XII/2", value: "XII/2" },
+  { key: "10-1", text: "10-1", value: "10-1" },
+  { key: "10-2", text: "10-2", value: "10-2" },
+  { key: "11-1", text: "11-1", value: "11-1" },
+  { key: "11-2", text: "11-2", value: "11-2" },
+  { key: "12-1", text: "12-1", value: "12-1" },
+  { key: "12-2", text: "12-2", value: "12-2" },
 ];
 const options_Registration = [
   { key: "1", text: 2018, value: 2018 },
