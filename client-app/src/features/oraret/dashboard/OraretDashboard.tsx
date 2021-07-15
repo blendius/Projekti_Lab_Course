@@ -8,11 +8,12 @@ import OrariForm from "../form/OrariForm";
 import OraretList from "./OraretList";
 
 export default observer(function OraretDashboard() {
-  const { orariStore } = useStore();
+  const { orariStore ,paraleljaStore} = useStore();
   const { selectedOrari, editMode } = orariStore;
 
   useEffect(() => {
     orariStore.loadOraret();
+    paraleljaStore.loadParalelet();
   }, [orariStore]);
 
   if (orariStore.loadingInitial) {

@@ -119,6 +119,9 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("OraNisjes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("brendi")
                         .HasColumnType("nvarchar(max)");
 
@@ -561,7 +564,7 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("KapacitetiMin")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("Numri")
                         .HasColumnType("int");
@@ -750,14 +753,14 @@ namespace Persistence.Migrations
                     b.Property<string>("EmriSalles")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("HasProjector")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("HasProjector")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Kati")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NrUleseve")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("SallaId");
 

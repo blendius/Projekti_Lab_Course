@@ -135,4 +135,9 @@ export default class ParaleljaStore {
     public getParaleljaById = (id: string) => {
         return this.paraleletRegistry.get(id);
     };
+
+    public getParaleljaNumribyId = (id: string) => {
+      let paralejla = this.paraleletRegistry.get(id)?.numri;
+      return paralejla;
+    };
 }

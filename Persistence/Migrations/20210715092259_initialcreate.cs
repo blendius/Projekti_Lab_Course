@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-<<<<<<< HEAD:Persistence/Migrations/20210714192456_initialMigration.cs
-    public partial class initialMigration : Migration
-=======
-    public partial class IC : Migration
->>>>>>> Erina:Persistence/Migrations/20210703192557_IC.cs
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,10 +68,11 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     AutobusiId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    targatId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    targat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     brendi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     vitiProdhimit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nrPasagjereve = table.Column<int>(type: "int", nullable: false)
+                    nrPasagjereve = table.Column<int>(type: "int", nullable: false),
+                    OraNisjes = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,7 +130,8 @@ namespace Persistence.Migrations
                 {
                     ParaleljaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Numri = table.Column<int>(type: "int", nullable: false),
-                    KapacitetiMax = table.Column<int>(type: "int", nullable: false)
+                    KapacitetiMax = table.Column<int>(type: "int", nullable: false),
+                    KapacitetiMin = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,7 +184,10 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     SallaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmriSalles = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    EmriSalles = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Kati = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NrUleseve = table.Column<int>(type: "int", nullable: false),
+                    HasProjector = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

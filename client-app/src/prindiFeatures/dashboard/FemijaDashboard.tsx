@@ -7,7 +7,7 @@ import VlersimiStore from '../../app/stores/vlersimiStore';
 export default observer(function FemijaDashboard() {
     const { vleresimiStore, profesoriStore, prindStoreAccount: { prindi } } = useStore();
     const { vlersimiNgaPrindi, editMode, vlersimiNgaPrindiRegistry, loadNxenesiByPrindi } = vleresimiStore;
-    const { getEmriProfiById } = profesoriStore;
+    const { getEmriProfById } = profesoriStore;
     console.log(prindi?.id)
     useEffect(() => {
         //get vlersimet e nxenesit 
@@ -30,7 +30,7 @@ export default observer(function FemijaDashboard() {
                     <TableBody>
                         {vlersimiNgaPrindi.map(vleresimet => (
                             <TableRow key={vleresimet.vleresimiId}>
-                                <TableCell width="5">{getEmriProfiById(vleresimet.profId)}</TableCell>
+                                <TableCell width="5">{getEmriProfById(vleresimet.profId)}</TableCell>
                                 <TableCell width="2">{vleresimet.nota}</TableCell>
                                 <TableCell width="2">{vleresimet.gjysemvjetori}</TableCell>
                                 <TableCell width="2">{vleresimet.dataRegjistrimit}</TableCell>

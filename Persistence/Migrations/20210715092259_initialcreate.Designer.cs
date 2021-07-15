@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210714210441_initialMigration2")]
-    partial class initialMigration2
+    [Migration("20210715092259_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,6 +120,9 @@ namespace Persistence.Migrations
                     b.Property<Guid>("AutobusiId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("OraNisjes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("brendi")
                         .HasColumnType("nvarchar(max)");
@@ -562,6 +565,9 @@ namespace Persistence.Migrations
                     b.Property<int>("KapacitetiMax")
                         .HasColumnType("int");
 
+                    b.Property<int>("KapacitetiMin")
+                        .HasColumnType("int");
+
                     b.Property<int>("Numri")
                         .HasColumnType("int");
 
@@ -748,6 +754,15 @@ namespace Persistence.Migrations
 
                     b.Property<string>("EmriSalles")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HasProjector")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Kati")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NrUleseve")
+                        .HasColumnType("int");
 
                     b.HasKey("SallaId");
 
