@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import { Button, Form, Input, Modal } from 'semantic-ui-react';
+import MySelectInput from '../../../app/common/form/MySelectInput';
+import MyTextInput from '../../../app/common/form/MyTextInput';
+import { Nxenesi } from '../../../app/models/nxenesi';
 import { useStore } from '../../../app/stores/store';
 import { history } from '../../../index';
 
@@ -26,11 +30,8 @@ const options_Registration = [
 ];
 
 function NxenesiModal(props: ModalProps) {
-  const {nxenesiStore: {updateNxenesin, nxenesiSelected, logoutNxenesi } } = useStore();
+  const {nxenesiStore: {selectedNxenesi,updateNxenesin, loading, closeForm} } = useStore();
   const { open, setOpen, nxenesi } = props;
-// console.log("nxenesi:", nxenesi)
-// console.log("nxenesi id:", nxenesi.id)
-//console.log("nxenesi edna:", nxenesiSelected)
   const [currentData, setCurrentData] = useState({
     ...nxenesi,
     // currentPassword: "",
@@ -51,21 +52,36 @@ function NxenesiModal(props: ModalProps) {
       dateOfBirth: nxenesi?.dateOfBirth ? new Date(nxenesi.dateOfBirth) : "",
     });
   }
-  // function updateNxenesi(nxenesiId: any) {
-  //   axios
-  //     .put(`http://localhost:5000/api/nxenesi/${nxenesiId}`, currentData)
-  //     .then(() => {
-  //       window.location.reload();
-  //     })
-  //     .catch((err) => console.log(err));
-  //   resetCurrentData();
-  //   setOpen(false);
-  // }
- 
+  const initialState = selectedNxenesi ?? {
+      id: '',
+      fullName: '',
+      parentName: '',
+      email: '',
+      password: '',
+      dateOfBirth: '',
+      yearOfRegistration: 0,
+      class: '',
+      phoneNumber: ''
+};
+  const [errors, setErrors] = useState({nameError: false, parentError: false, 
+                                    emailError: false, phoneError: false,
+                                    dateError: false, yearError: false, classError: false})
+  const [submitClicked, setSubmitClicked] = useState(false)
 
-  useEffect(() => {
-    resetCurrentData();
-  }, [nxenesi]);
+  const [njoftimi, setNjoftimi] = useState(initialState);
+
+  useEffect(()=>{
+    if(submitClicked){
+      setErrors({nameError: !nxenesi.fullName.trim(),
+        parentError: !nxenesi.parentName.trim(),
+        emailError: !nxenesi.email.trim(),
+        dateError: !nxenesi.dateOfBirth,
+        yearError: !nxenesi.yearOfRegistration,
+        phoneError: !nxenesi.phoneNumber.trim(),
+        classError: !nxenesi.class.trim()
+        })
+    }
+  },[njoftimi])
 
   function handleInputChange(event: any) {
     const { name, value } = event.target;
@@ -84,6 +100,23 @@ function NxenesiModal(props: ModalProps) {
       dateOfBirth: data.value,
     });
   }
+
+  function handleSubmit(nxenesi: Nxenesi) {
+    setSubmitClicked(true)
+        setErrors({nameError: !nxenesi.fullName.trim(),
+            parentError: !nxenesi.parentName.trim(),
+            emailError: !nxenesi.email.trim(),
+            dateError: !nxenesi.dateOfBirth,
+            yearError: !nxenesi.yearOfRegistration,
+            phoneError: !nxenesi.phoneNumber.trim(),
+            classError: !nxenesi.class.trim()
+            })
+        if(nxenesi.fullName.trim() && nxenesi.parentName.trim() 
+        && nxenesi.phoneNumber.trim() && nxenesi.dateOfBirth 
+        && nxenesi.yearOfRegistration && nxenesi.class.trim() && nxenesi.email.trim())
+            updateNxenesin(currentData);
+
+}
   return (
     <Modal
       onClose={() => {
@@ -91,13 +124,51 @@ function NxenesiModal(props: ModalProps) {
         resetCurrentData();
       }}
       open={open}
+  
       autoComplete="off"
     >
+    {/* <Formik
+            enableReinitialize initialValues={nxenesi}
+            onSubmit={values => handleFormSubmit(values)}>
+            {({ handleSubmit, isValid, isSubmitting, dirty }) => (
+                <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                    <MyTextInput name='fullName' placeholder='Emri dhe mbiemri' />
+                    <MyTextInput name='parentName' placeholder='Emri i prindit' />
+                    <MyTextInput name='phoneNumber' placeholder='Numri i telefonit' />
+                    <MySelectInput options={options_Class} name='class' placeholder='Klasa' />
+                    <MySelectInput options={options_Registration} name='yearOfRegistration' placeholder='Viti i regjistrimit' />
+                    <MyTextInput name='dateOfBirth' placeholder='Datelindja' type='date' />
+                    <MyTextInput name='email' placeholder='Email' />
+                       <Modal.Actions>
+                    <Button disabled={isSubmitting || !dirty}
+                        loading={loading}   content="Edito"
+                        labelPosition="right"
+                        icon="checkmark"
+                        type="submit"
+                        onClick={() => {
+                          updateNxenesin(currentData)
+                          setOpen(false);
+                          window.location.reload();
+                          history.push("/nxenesiPage/Profili");
+                        }} />
+                    <Button onClick={() => {
+                           setOpen(false) }} color="black"> Anulo </Button>
+                            </Modal.Actions>
+                </Form>
+               
+            )}
+        </Formik>
+        </Modal.Description>
+      </Modal.Content> */}
+    
       <Modal.Header>Edito te dhenat</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
           <Form>
             <Form.Group widths="equal">
+              {
+                  errors.nameError && <span style={{color:"red"}}>Emri duhet te plotesohet!</span>
+              }
               <Form.Input
                 label="Emri dhe mbiemri"
                 placeholder="Emri"
@@ -105,7 +176,9 @@ function NxenesiModal(props: ModalProps) {
                 name="fullName"
                 onChange={(event) => handleInputChange(event)}
               />
-
+              {
+                  errors.parentError && <span style={{color:"red"}}>Emri i prindit duhet te plotesohet!</span>
+              }
               <Form.Input
                 label="Emri i prindit"
                 placeholder="Prindi"
@@ -115,6 +188,9 @@ function NxenesiModal(props: ModalProps) {
               />
             </Form.Group>
             <Form.Group widths="equal">
+              {
+                  errors.emailError && <span style={{color:"red"}}>Email duhet te plotesohet!</span>
+              }
               <Form.Input
                 label="Email"
                 placeholder="joe@schmoe.com"
@@ -122,7 +198,11 @@ function NxenesiModal(props: ModalProps) {
                 name="email"
                 onChange={handleInputChange}
               />
+
               <Form.Field>
+                {
+                    errors.phoneError && <span style={{color:"red"}}>Numri i telefonit duhet te plotesohet!</span>
+                }
                 <label>Numri i telefonit</label>
                 <Input
                   placeholder="(xxx)-xxx-xxx"
@@ -134,6 +214,9 @@ function NxenesiModal(props: ModalProps) {
             </Form.Group>
 
             <Form.Group widths="equal">
+            {
+                    errors.classError && <span style={{color:"red"}}>Klasa duhet te plotesohet!</span>
+                }
               <Form.Field>
                 <label>Klasa</label>
                 <Form.Select
@@ -144,6 +227,9 @@ function NxenesiModal(props: ModalProps) {
                   onChange={(e) => setSelectValues("class", e)}
                 />
               </Form.Field>
+              {
+                    errors.yearError && <span style={{color:"red"}}>Viti i regjistrimit duhet te plotesohet!</span>
+                }
               <Form.Field>
                 <label>Viti i regjistrimit</label>
                 <Form.Select
@@ -154,6 +240,9 @@ function NxenesiModal(props: ModalProps) {
                   onChange={(e) => setSelectValues("yearOfRegistration", e)}
                 />
               </Form.Field>
+              {
+                    errors.dateError && <span style={{color:"red"}}>Data duhet te plotesohet!</span>
+                }
               <Form.Field>
                 <label>Data e lindjes</label>
 
@@ -162,8 +251,12 @@ function NxenesiModal(props: ModalProps) {
                   onChange={onDateChange}
                 />
               </Form.Field>
-            </Form.Group>
-            {/* <Form.Group widths="equal">
+            </Form.Group> 
+
+
+
+
+             {/* <Form.Group widths="equal">
               <Form.Field>
                 <label>Passwordi aktual</label>
                 <Input
@@ -193,9 +286,9 @@ function NxenesiModal(props: ModalProps) {
                   name="confirmPassword"
                   onChange={handleInputChange}
                 />
-              </Form.Field> */}
-            {/* </Form.Group> */}
-          </Form>
+              </Form.Field> 
+             </Form.Group>  */}
+           </Form>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>

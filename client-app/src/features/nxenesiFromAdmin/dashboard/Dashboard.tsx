@@ -8,8 +8,9 @@ import NxenesiFrom from '../form/NxenesiFrom';
 import List from './List';
 
 
+
 export default observer(function Dashboard() {
-    const { nxenesiStore} = useStore();
+    const { nxenesiStore, modalStore} = useStore();
     const {nxenesiSelected,selectedNxenesi, editMode} = nxenesiStore
     useEffect(() => {
         nxenesiStore.loadNxenesit();
@@ -25,6 +26,7 @@ export default observer(function Dashboard() {
             </Grid.Column>
             <Grid.Column width='6'>
             <Button onClick={() => nxenesiStore.openForm2()} positive content="Shto Nxenesin" size='big'/>
+            {/* onClick={() => modalStore.openModal(<RegisterFromNxenesi />)} */}
 
                 {selectedNxenesi && !editMode &&
                     <NxenesiDetails
