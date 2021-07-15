@@ -29,7 +29,7 @@ export default observer(function OraretDashboard() {
         <Button
           onClick={() => orariStore.openForm()}
           positive
-          content="Shto Termin"
+          content="Shto Orar"
           size="big"
         />
         {selectedOrari && !editMode && <OrariDetails />}
