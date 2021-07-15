@@ -6,7 +6,7 @@ import { useStore } from '../../../app/stores/store';
 import NxenesiDetails from '../details/NxenesiDetails';
 import NxenesiFrom from '../form/NxenesiFrom';
 import List from './List';
-import RegisterFormNxenesi from '../form/RegisterFormNxenesi';
+
 
 
 export default observer(function Dashboard() {
