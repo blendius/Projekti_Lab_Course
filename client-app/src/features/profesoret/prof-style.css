@@ -1,8 +1,17 @@
 .ui.mini.modal {
-    width: 900px;
+    width: fit-content;
     margin: 0;
 }
 .klasa{ 
        margin-top: 10% !important;
        margin-left: 30% !important;
+}
+
+
+.ui.form .field>.selection.dropdown {
+    width: 50% !important;
+}
+
+.ui.list:first-child, ol.ui.list:first-child, ul.ui.list:first-child {
+    margin-top: 5%;
 }

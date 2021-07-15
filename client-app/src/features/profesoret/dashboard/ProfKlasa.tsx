@@ -16,15 +16,15 @@ export default observer(function ProfesoriDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width='5'>
-                <AddKlasaForm />
+            <Grid.Column width='16'>
+                <Grid.Row >
+                    <AddKlasaForm />
+                </Grid.Row>
+                <Grid.Row>
+                    <ProfKlasaList />
+                    <Button onClick={closeAddKlasaForm} size='small' floated='right' type='button' content='Cancel' />
+                </Grid.Row>
             </Grid.Column>
-            <Grid.Column width='2'></Grid.Column>
-            <Grid.Column width='9'>
-                <ProfKlasaList />
-                <Button onClick={closeAddKlasaForm} size='small' floated='right' type='button' content='Cancel' />
-            </Grid.Column>
-
         </Grid>
     )
 })
