@@ -20,7 +20,7 @@ export default observer(function PajisjetDashboard() {
         <Grid>
             <Grid.Column width='10'>
                 <PajisjetList />
-                <Button onClick={() => pajisjetStore.openForm()} positive content="Shto Laburatorin" />
+                <Button onClick={() => pajisjetStore.openForm()} positive content="Shto Pajisjen" />
 
 
             </Grid.Column>
