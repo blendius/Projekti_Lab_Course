@@ -18,13 +18,13 @@ export default observer(function ParaleljaDetails() {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header>{paralelja.numri}</Card.Header>  
-                <Card.Meta>
-                    <span>{paralelja.kapacitetiMax}</span>
-                </Card.Meta> 
-                <Card.Meta>
-                    <span>{paralelja.kapacitetiMin}</span>
-                </Card.Meta>              
+                <Card.Header>Numri: {paralelja.numri}</Card.Header>  
+                <Card.Description>
+                    <span>Kapaciteti Max: {paralelja.kapacitetiMax}</span>
+                </Card.Description> 
+                <Card.Description>
+                    <span>Kapaciteti Min: {paralelja.kapacitetiMin}</span>
+                </Card.Description>              
             </Card.Content>
             <Card.Content extra>
                 <Button.Group widths='2'>

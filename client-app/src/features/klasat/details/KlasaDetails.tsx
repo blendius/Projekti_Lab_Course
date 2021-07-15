@@ -25,8 +25,8 @@ export default observer(function Klasa() {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header>{klasa.viti}/{getNumriParalelesById(klasa.paraleljaId)}</Card.Header>  
-                <Card.Description>{getEmriSallesById(klasa.sallaId)}</Card.Description>              
+                <Card.Header>Klasa: {klasa.viti}/{getNumriParalelesById(klasa.paraleljaId)}</Card.Header>  
+                <Card.Description>Salla: {getEmriSallesById(klasa.sallaId)}</Card.Description>              
             </Card.Content>
             <Card.Content extra>
                 <Button.Group widths='2'>

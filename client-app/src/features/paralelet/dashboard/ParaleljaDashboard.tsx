@@ -20,7 +20,7 @@ export default observer(function ParaleljaDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width='7' >
+            <Grid.Column width='8' >
                 <ParaleljaList />
             </Grid.Column>
             <Grid.Column width='4'>
