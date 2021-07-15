@@ -18,10 +18,10 @@ export default observer(function SallaDetails() {
     return (
         <Card fluid>
             <Card.Content>
-                <Card.Header>{salla.emriSalles}</Card.Header>                
-                <Card.Header>{salla.kati}</Card.Header>                
-                <Card.Header>{salla.nrUleseve}</Card.Header>                
-                <Card.Header>{salla.hasProjector}</Card.Header>                
+                <Card.Header>Emri i sallës: {salla.emriSalles}</Card.Header>                
+                <Card.Description>Kati: {salla.kati}</Card.Description>                
+                <Card.Description>Numri i ulëseve: {salla.nrUleseve}</Card.Description>                
+                <Card.Description>A ka projektor?: {salla.hasProjector}</Card.Description>                
             </Card.Content>
             <Card.Content extra>
                 <Button.Group widths='2'>

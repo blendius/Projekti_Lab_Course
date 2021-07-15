@@ -20,7 +20,7 @@ export default observer(function SallaDashboard() {
 
     return (
         <Grid>
-            <Grid.Column width='7' >
+            <Grid.Column width='8' >
                 <SallaList />
             </Grid.Column>
             <Grid.Column width='4'>
